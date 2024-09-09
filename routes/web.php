@@ -2,6 +2,8 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\TMDBController;
+
 Route::get('/', function () {
     return view('welcome');
 });
@@ -21,4 +23,7 @@ Route::get('/myaccount', function() {
 Route::get('/about', function() {
     return view ('about');
 });
+
+# route for tmdb controller
+Route::get('/demo',[TMDBController::class, 'demo'])->name('demo');
 
