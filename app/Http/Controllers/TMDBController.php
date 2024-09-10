@@ -5,8 +5,68 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 
+use GuzzleHttp\Client;
+
+// to rememeber what is being called
+// TMDB_ENDPOINT=https://api.themoviedb.org/3/
+// TMDB_APP_KEY=ad75d64a140f409aac6dbdc4a867b626
+
 class TMDBController extends Controller
 {
+    // just to show the current popular movies
+    public function popularMovies(){ // works
+        // get http request as a json but then needs to be inputted as a json again to get the results
+        $popularMovies = Http::asJson()
+            ->get(config('services.tmdb.endpoint').'movie/popular'.'?api_key='.config('services.tmdb.api'))
+            ->json()['results'];
+
+        dd($popularMovies);
+    }
+
+    // testing to see if i can do now showing 
+    public function inTheatersMovies(){ // works
+        // get http request as a json but then needs to be inputted as a json again to get the results
+        $inTheatersMovies = Http::asJson()
+            ->get(config('services.tmdb.endpoint').'movie/now_playing'.'?api_key='.config('services.tmdb.api'))
+            ->json()['results'];
+
+        dd($inTheatersMovies);
+    }
+
+    // testing to see if i can look at top rated movies
+    public function topRatedMovies(){ // works
+        // get http request as a json but then needs to be inputted as a json again to get the results
+        $topRatedMovies = Http::asJson()
+            ->get(config('services.tmdb.endpoint').'movie/top_rated'.'?api_key='.config('services.tmdb.api'))
+            ->json()['results'];
+
+        dd($topRatedMovies);
+    }
+
+
+    // // just to show trending movies
+    // public function trendingMovies(){ // doesnt work
+    //     // get http request as a json but then needs to be inputted as a json again to get the results
+    //     $trendingMovies = Http::asJson()
+    //         ->get(config('services.tmdb.endpoint').'movie/trending'.'?api_key='.config('services.tmdb.api'))
+    //         ->json();
+
+    //     dd($trendingMovies);
+    // }
+
+
+    // to show
+
+
+
+
+
+    // search for movies function
+
+    // recommended movies ??? axel ??? also recomendations just off the thingy
+    //  aslo can sign into website and it gives recommendation just from using their shit
+
+
     public function demo(){
 
         $tmdb_id = 436270;
