@@ -25,5 +25,5 @@ Route::get('/about', function() {
 });
 
 # route for tmdb controller
-Route::get('/demo',[TMDBController::class, 'topRatedMovies'])->name('demo');
+Route::get('/movies',[TMDBController::class, 'mainMovieFunc'])->name('movies');
 
