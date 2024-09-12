@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="mt-28">
+    <div class="mt-14">
         <h1 class="text-center font-serif text-mega text-blue mb-10">Ready to dive in?</h1>
         <div class="flex flex-col justify-center">
             <div class="sm:mx-auto sm:w-full sm:max-w-sm">

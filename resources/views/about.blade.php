@@ -1,16 +1,41 @@
 <x-layout>
     <div class="pt-10">
-        <h1 class="text-blue text-mega font-serif text-center">About Us</h1>
-        <div class="grid grid-cols-5 p-10">
-            <!-- This paragraph about reservoir was written by Aiden Redmond & ChatGPT -->
-            <p class="text-white font-sans col-span-3 tracking-wide pr-5"> Reservoir is dedicated to being your go-to platform for organizing, 
-            tracking, and discovering the media you love. Our mission is to create a dynamic 
-            space where your favorite movies, shows, music and more come together in one seamless experience.
-            Reservoir goes beyond just storing your media; it curates and recommends content based on your unique tastes, 
-            ensuring that your collection is always evolving with new and exciting discoveries. Whether you're 
-            exploring something new or revisiting a beloved favorite, Reservoir is here to keep your media journey 
-            flowing effortlessly, providing a personalized experience that’s as dynamic as your interests.</p>
-            <p class="text-white font-sans col-span-2 text-center bg-white bg-opacity-25">sick animation here... logo?</p>
+        <h1 class="text-blue text-mega font-serif text-center">Meet the team</h1>
+    </div>
+    <div class="grid grid-cols-3 text-white text-center mt-20">
+        <x-about-me path="images/redmond.jpg" name="Aiden Redmond" title="UI/UX Designer & Full Stack Developer"></x-about-me>
+        <x-about-me path="images/wilson.jpg" name="Brandon Wilson" title="Database Engineer & Full Stack Developer"></x-about-me>
+        <x-about-me path="images/beaver.jpg" name="Axel Beaver" title="AI Engineer & Machine Learning Specialist"></x-about-me>
+    </div>
+
+
+    <div class="pt-20">
+        <h1 class="text-blue text-mega font-serif text-center">Want to learn more?</h1>
+    </div>
+    <div class="mt-10">
+        <div class="flex p-5 pl-8 border border-white border-opacity-25 rounded-md mx-96 items-center hover:border-aqua transition-all duration-500">
+            <div class="mr-5">
+                <img class="rounded-full size-36 max-w-max" src="images/wata.jpg" alt="">
+            </div>
+            <div class="text-white">
+                <a href="https://github.com/aredmondd/reservoirv2.1" target="_blank">
+                    <h3 class="text-title text-aqua">Reservoir Github Repo - v2.1</h3>
+                </a>
+                <p class="text-white opacity-50">Reservoir is a project created, designed, and developed by Aiden Redmond, Axel Beaver, and Brandon Wilson under the supervision..</p>
+            </div>
         </div>
     </div>
+
+
+    <div class="pt-20">
+        <h1 class="text-blue text-mega font-serif text-center">Reservoir's Future</h1>
+    </div>
+    <div class="text-white mt-20">
+        <div class="border border-white border-opacity-25 p-10 rounded-md mx-40 flex items-center">
+            <h3>Movies</h3>
+            <h3>Shows</h3>
+            <h3>Music</h3>
+        </div>
+    </div>
+    
 </x-layout>

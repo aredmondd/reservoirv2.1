@@ -11,13 +11,13 @@
     @endif
     <div class="flex text-center text-white text-body">
         @if (request()->is('/'))
-            <a href="#" onclick="scrollToTop(event)" class="grow transition-all duration-500 focus:outline-none focus:text-blue hover:text-blue">Home</a>
+            <a href="#" onclick="scrollToTop(event)" class="grow transition-colors duration-500 focus:outline-none focus:text-blue hover:text-blue">Home</a>
         @else
-            <a href="/" class="grow transition-all duration-500 focus:outline-none focus:text-blue hover:text-blue">Home</a>
+            <a href="/" class="grow transition-colors duration-500 focus:outline-none focus:text-blue hover:text-blue">Home</a>
         @endif
-        <a href="/register" class="grow transition-all duration-500 focus:outline-none focus:text-blue hover:text-blue">Register</a>
-        <a href="/signin" class="grow transition-all duration-500 focus:outline-none focus:text-blue hover:text-blue">Sign In</a>
-        <a href="/about" class="grow transition-all duration-500 focus:outline-none focus:text-blue hover:text-blue">About</a>
+        <a href="/register" class="grow transition-colors duration-500 focus:outline-none focus:text-blue hover:text-blue">Register</a>
+        <a href="/signin" class="grow transition-colors duration-500 focus:outline-none focus:text-blue hover:text-blue">Sign In</a>
+        <a href="/about" class="grow transition-colors duration-500 focus:outline-none focus:text-blue hover:text-blue">About</a>
     </div>
     <div class="flex flex-row-reverse">
         <a href="https://github.com/axbeaver" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="images/beaver.JPG" alt="axel beaver headshot"></a>

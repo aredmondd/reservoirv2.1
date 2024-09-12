@@ -1,7 +1,7 @@
 <x-layout>
     <div class="bg-hero bg-no-repeat bg-cover bg-center bg-fixed"></div>
-    <div class="mt-40">
-        <h1 class="text-center font-serif text-mega text-blue">Back to the Flow 🌊</h1>
+    <div class="mt-20">
+        <h1 class="text-center font-serif text-mega text-blue">Back to the flow</h1>
         <div class="flex min-h-full flex-col justify-center px-6 py-12 lg:px-8">
             <div class="mt-auto sm:mx-auto sm:w-full sm:max-w-sm">
                 <form class="space-y-6" action="#" method="POST">
