@@ -41,6 +41,14 @@ class TMDBController extends Controller
     }
 
     // search functions ?? 
+    // public function search(){
+    //     $search = Http::asJson()
+    //         ->get(config('services.tmdb.endpoint').)
+
+
+    // }
+
+
     // full list of movies ??
 
 }
