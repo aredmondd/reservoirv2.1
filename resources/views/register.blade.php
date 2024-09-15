@@ -10,7 +10,9 @@
                     <x-input-form name="name" type="email" placeholder="Email" autocomplete="Email"></x-input-form>
                     <x-input-form name="name" type="password" placeholder="Password" autocomplete="Password"></x-input-form>
 
-                    <button type="submit" class="flex w-full justify-center rounded-full bg-blue p-1.5 text-sm font-semibold leading-6 text-white shadow-sm focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">Register</button>
+                    <div class="text-center mt-15">
+                        <button class="text-midnight rounded-full bg-blue p-3 px-10 font-sans text-body bg-gradient-to-tl to-blue from-aqua from-10% bg-size-200 bg-pos-0 hover:bg-pos-100 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue transition-[background-position] duration-500">Register</button>
+                    </div>
                 </form>
                 <p class="mt-4 text-center text-small text-white text-opacity-75">
                 Already have an account?
