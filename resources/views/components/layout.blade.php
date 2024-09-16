@@ -12,7 +12,7 @@
         @vite('resources/css/app.css')
     </head>
     <body class="bg-midnight">
-        <x-navbar></x-navbar>
+        <x-new-navbar></x-new-navbar>
         {{ $slot }}
     </body>
     <x-footer></x-footer>
