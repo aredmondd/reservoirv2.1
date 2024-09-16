@@ -1,0 +1,1 @@
+<div class="card p-20 py-32 border rounded-md border-opacity-25 border-white hover:border-blue transition-border duration-500">{{ $slot }}</div>
