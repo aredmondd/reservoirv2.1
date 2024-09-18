@@ -3,23 +3,27 @@
 use Illuminate\Support\Facades\Route;
 use Illuminate\Http\Request;
 
-Route::get('/', function (Request $request) {
+Route::get('/', function () {
     return view('welcome');
 });
 
-Route::get('/register', function (Request $request) {
+Route::get('/register', function () {
     return view('register');
 });
 
-Route::get('/signin', function (Request $request) {
+Route::get('/signin', function () {
     return view('signin');
 });
 
-Route::get('/myaccount', function(Request $request) {
+Route::get('/myaccount', function() {
     return view ('myaccount');
 });
 
-Route::get('/about', function(Request $request) {
+Route::get('/about', function() {
     return view ('about');
+});
+
+Route::get('/movie', function() {
+    return view ('movie_description');
 });
 

@@ -5,9 +5,9 @@
 
 <div class="grid grid-cols-3 m-10 items-center">
     @if (request()->is('/'))
-        <a href="#" onclick="scrollToTop(event)"><h2 class="text-blue font-serif text-title">Reservoir</h2></a>
+        <a href="/" onclick="scrollToTop(event)" class="focus:outline-none bg-gradient-to-r from-blue to-aqua text-transparent bg-clip-text font-serif text-title">Reservoir</a> 
     @else
-        <a href="/"><h2 class="text-blue font-serif text-title">Reservoir</h2></a>
+        <a href="/" class="focus:outline-none bg-gradient-to-r from-blue to-aqua text-transparent bg-clip-text font-serif text-title">Reservoir</a> 
     @endif
     <div class="flex text-center text-white text-body">
         @if (request()->is('/'))
