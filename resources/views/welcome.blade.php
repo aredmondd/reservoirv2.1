@@ -4,7 +4,7 @@
     </div>
 
     <div class="grid grid-cols-2 grid-rows-2 mx-40 text-white">
-        <div class="border border-blue p-24">
+        <div class="border border-white p-24">
             Track movies you want to watch
         </div>
         <div class="border border-white">  
@@ -13,7 +13,7 @@
         <div class="border border-white">  
             Track your favorites
         </div>
-        <div class="border border-blue">  
+        <div class="border border-white">  
             Share with others
         </div>
     </div>
@@ -27,7 +27,7 @@
 
     <div class="my-20"></div>
 
-    <h1 class="text-white font-serif text-mega text-center">What people are watching</h1>
+    <h1 class="text-white font-serif text-mega text-center">Popular Movies</h1>
     <div class="flex flex-wrap justify-between items-center mx-28 mt-12 text-white">
         <x-movie-card>Movie Title</x-movie-card>
         <x-movie-card>Movie Title</x-movie-card>

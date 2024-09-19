@@ -1,1 +1,3 @@
-<div class="card p-20 py-32 border rounded-md border-opacity-25 border-white hover:border-blue transition-border duration-500">{{ $slot }}</div>
+<div class="w-40 mr-8">
+    <img src="{{ $img }}" class="border rounded-md"alt="">
+</div>
