@@ -2,6 +2,9 @@
 
 use Illuminate\Support\Facades\Route;
 
+use App\Http\Controllers\TMDBController;
+use App\Http\Controllers\SessionController;
+
 Route::get('/', function () {
     return view('new-welcome');
 });
@@ -26,3 +29,8 @@ Route::get('/about', function() {
     return view ('about');
 });
 
+# route for tmdb controller
+Route::get('/movies',[TMDBController::class, 'mainMovieFunc'])->name('movies');
+
+# search
+Route::get('/search',[TMDBController::class, 'search'])->name('search');
