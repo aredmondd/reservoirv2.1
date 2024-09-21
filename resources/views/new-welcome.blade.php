@@ -13,21 +13,29 @@
 
 <x-double-gap></x-double-gap>
 
+<h1 class="text-white font-serif text-mega text-center mb-12">How it works</h1>
+
+<div class="flex flex-row justify-around">
+    <div class="border border-aqua border-opacity-50 rounded-md p-24 text-aqua text-title">Track</div>
+    <div class="border border-aqua border-opacity-50 rounded-md p-24 text-aqua text-title">Discover</div>
+    <div class="border border-aqua border-opacity-50 rounded-md p-24 text-aqua text-title">Enjoy</div>
+</div>
+
+<x-gap></x-gap>
+
+<h1 class="text-white font-serif text-mega text-center mb-12">Meet Ripple</h1>
+<div class="border border-white border-opacity-25 p-10 rounded-md mx-40 flex items-center"></div>
+
+<x-gap></x-gap>
+
 <h1 class="text-white font-serif text-mega text-center mb-12">Popular Movies</h1>
 <x-card-scroller></x-card-scroller>
 
 <x-gap></x-gap>
 
 <h1 class="text-white font-serif text-mega text-center mb-12">Recently Released</h1>
-<x-card-scroller></x-card-scroller>
 
 <x-gap></x-gap>
-
-<h1 class="text-white font-serif text-mega text-center mb-12">How it works</h1>
-
-<x-gap></x-gap>
-
-<h1 class="text-white font-serif text-mega text-center mb-12">Meet Ripple</h1>
 
 <x-gap></x-gap>
 
