@@ -1,15 +1,18 @@
 <?php
 
 use Illuminate\Support\Facades\Route;
-use Illuminate\Http\Request;
 
 Route::get('/', function () {
     return view('new-welcome');
 });
 
-Route::get('/register', function () {
-    return view('register');
-});
+// added controller to control the sign in and out capabilities
+Route::get('/register', [SessionController::class, 'registerView'])->middleware('guest');
+Route::post('/register', [SessionController::class, 'store'])->middleware('guest');
+
+// Route::get('/register', function () {
+//     return view('register');
+// });
 
 Route::get('/signin', function () {
     return view('signin');
@@ -21,9 +24,5 @@ Route::get('/myaccount', function() {
 
 Route::get('/about', function() {
     return view ('about');
-});
-
-Route::get('/movie', function() {
-    return view ('movie_description');
 });
 

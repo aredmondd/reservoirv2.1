@@ -35,4 +35,10 @@ return [
         ],
     ],
 
+    // Brandon added for tmdb movie api
+    'tmdb' => [
+        'endpoint' => env('TMDB_ENDPOINT'),
+        'api' => env('TMDB_APP_KEY'),
+    ],
+
 ];
