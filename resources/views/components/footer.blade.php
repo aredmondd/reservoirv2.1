@@ -16,7 +16,7 @@
             <a href="/" class="grow transition-colors duration-500 focus:outline-none focus:text-blue hover:text-blue">Home</a>
         @endif
         <a href="/register" class="grow transition-colors duration-500 focus:outline-none focus:text-blue hover:text-blue">Register</a>
-        <a href="/signin" class="grow transition-colors duration-500 focus:outline-none focus:text-blue hover:text-blue">Sign In</a>
+        <a href="/login" class="grow transition-colors duration-500 focus:outline-none focus:text-blue hover:text-blue">Sign In</a>
         <a href="/about" class="grow transition-colors duration-500 focus:outline-none focus:text-blue hover:text-blue">About</a>
     </div>
     <div class="flex flex-row-reverse">

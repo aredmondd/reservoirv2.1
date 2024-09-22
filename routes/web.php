@@ -1,36 +1,24 @@
 <?php
 
+use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
-
-use App\Http\Controllers\TMDBController;
-use App\Http\Controllers\SessionController;
 
 Route::get('/', function () {
     return view('new-welcome');
 });
 
-// added controller to control the sign in and out capabilities
-Route::get('/register', [SessionController::class, 'registerView'])->middleware('guest');
-Route::post('/register', [SessionController::class, 'store'])->middleware('guest');
-
-// Route::get('/register', function () {
-//     return view('register');
-// });
-
-Route::get('/signin', function () {
-    return view('signin');
+Route::get('/about', function () {
+    return view('about');
 });
 
-Route::get('/myaccount', function() {
-    return view ('myaccount');
+Route::get('/dashboard', function () {
+    return view('dashboard');
+})->middleware(['auth', 'verified'])->name('dashboard');
+
+Route::middleware('auth')->group(function () {
+    Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
+    Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
+    Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/about', function() {
-    return view ('about');
-});
-
-# route for tmdb controller
-Route::get('/movies',[TMDBController::class, 'mainMovieFunc'])->name('movies');
-
-# search
-Route::get('/search',[TMDBController::class, 'search'])->name('search');
+require __DIR__.'/auth.php';

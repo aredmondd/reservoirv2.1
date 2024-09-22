@@ -6,7 +6,7 @@
         <div class="mr-4"></div>
         <a class="{{ request()->is('register') ? 'text-blue' : '' }} ml-5 text-right focus:outline-none focus:text-blue hover:text-blue transition-colors duration-500 text-body" href="/register">Register</a>
         <div class="mr-4"></div>
-        <a class="{{ request()->is('signin') ? 'text-blue' : '' }} mx-5 text-right focus:outline-none focus:text-blue hover:text-blue transition-colors duration-500 text-body" href="/signin">Sign In</a>
+        <a class="{{ request()->is('login') ? 'text-blue' : '' }} mx-5 text-right focus:outline-none focus:text-blue hover:text-blue transition-colors duration-500 text-body" href="/login">Login</a>
     </div>
   </div>
 </nav>
