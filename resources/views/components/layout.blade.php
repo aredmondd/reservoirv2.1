@@ -7,7 +7,7 @@
 
         <!-- Title & Favicon -->
         <link rel="icon" href="images/droplet.png" type="image/x-icon">
-        <title>Reservoir - App</title>
+        <title>{{ Auth::guest() ? 'Reservoir' : 'Reservoir - App' }}</title>
 
         <!-- Fonts -->
         <link rel="preconnect" href="https://fonts.googleapis.com">
@@ -19,9 +19,9 @@
     </head>
     <body class="bg-midnight">
         @if (Auth::guest())
-        <x-new-navbar></x-new-navbar>
+        <x-guest-nav />
         @else
-        @include('layouts.navigation')
+        <x-user-nav />
         @endif
 
         <!-- Page Content -->
