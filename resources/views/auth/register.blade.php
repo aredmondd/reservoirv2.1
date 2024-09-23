@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-layout>
     <form method="POST" action="{{ route('register') }}">
         <div class="mt-14">
             <h1 class="text-center font-serif text-mega text-blue mb-10">Ready to dive in?</h1>
@@ -53,4 +53,4 @@
         <a href="/login" class="underline">Sign in here</a>
         </p>
     </form>
-</x-guest-layout>
+</x-layout>

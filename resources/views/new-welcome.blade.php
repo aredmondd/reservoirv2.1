@@ -24,6 +24,7 @@
 <x-gap></x-gap>
 
 <h1 class="text-white font-serif text-mega text-center mb-12">Meet Ripple</h1>
+<p class="text-white text-center text-body mx-40">Ripple is Reservoir's AI-powered recommendation engine, designed to continuously adapt to your evolving tastes. As you interact with the platform—whether by liking, tracking, or discovering new content—Ripple creates subtle "ripples" that expand your media world, offering fresh suggestions based on your preferences. By understanding patterns in your choices, Ripple ensures you’re always exploring content that flows seamlessly with what you love, while introducing you to new gems you might have overlooked.</p>
 <div class="border border-white border-opacity-25 p-10 rounded-md mx-40 flex items-center"></div>
 
 <x-gap></x-gap>

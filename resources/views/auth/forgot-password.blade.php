@@ -1,4 +1,4 @@
-<x-guest-layout>
+<x-layout>
     <h1 class="text-white text-mega font-serif text-center mt-14">Forgot Password</h1>
     <p class="text-white text-sm text-opacity-50 text-center mb-14">Enter your email below to recieve a password reset email</p>
 
@@ -18,4 +18,4 @@
             <button class="bg-slate rounded-full bg-opacity-25 text-white px-6 py-3 hover:bg-opacity-50 transition-all duration-250">EMAIL PASSWORD RESET LINK</button>
         </div>
     </form>
-</x-guest-layout>
+</x-layout>
