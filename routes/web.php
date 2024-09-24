@@ -11,6 +11,14 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/movie-demo', function () {
+    return view('movie-api-demo');
+})->name('movie-api-demo');
+
+Route::get('/movie-description', function () {
+    return view('movie-description');
+})->name('movie-description');
+
 Route::get('/dashboard', function () {
     return view('dashboard');
 })->middleware('auth')->name('dashboard');
