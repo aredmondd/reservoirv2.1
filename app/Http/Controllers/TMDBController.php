@@ -32,7 +32,7 @@ class TMDBController extends Controller
             ->json()['results'];
 
         // passing all the api's calls into the view
-        return view('demo', [
+        return view('movie-api-demo', [
             'popularMovie' => $popularMovies,
             'inTheatersMovie' => $inTheatersMovies,
             'topRatedMovie' => $topRatedMovies,
