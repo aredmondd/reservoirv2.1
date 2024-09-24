@@ -13,7 +13,7 @@
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 
-                        <!-- Email Address -->
+                        <!-- Username -->
                         <div class="mt-4">
                             <x-text-input id="username" class="block mt-1 w-full" type="text" name="username" :value="old('username')" placeholder="Username" required autocomplete="username"/>
                             <x-input-error :messages="$errors->get('username')" class="mt-2" />

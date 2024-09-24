@@ -2,6 +2,7 @@
 
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
+use App\Http\Controllers\TMDBController;
 
 Route::get('/', function () {
     return view('index');
@@ -11,9 +12,11 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/movie-demo', function () {
-    return view('movie-api-demo');
-})->name('movie-api-demo');
+Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
+
+// Route::get('/movie-demo', function () {
+//     return view('movie-api-demo');
+// })->name('movie-api-demo');
 
 Route::get('/movie-description', function () {
     return view('movie-description');
@@ -28,5 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
+
+
 
 require __DIR__.'/auth.php';
