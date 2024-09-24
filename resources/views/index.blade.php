@@ -30,11 +30,14 @@
 <div class="mt-12"></div>
 
 <h1 class="text-white font-serif text-mega text-center mb-12">Popular Movies</h1>
-<x-card-scroller></x-card-scroller>
+<!-- sending the popular movie data into the component -->
+<x-card-scroller :movieData="$popularMovie"></x-card-scroller>
 
 <div class="mt-12"></div>
 
 <h1 class="text-white font-serif text-mega text-center mb-12">Recently Released</h1>
+<!-- sending the recently releaseds movie data into the component -->
+<x-card-scroller :movieData="$inTheatersMovie"></x-card-scroller>
 
 <div class="mt-12"></div>
 

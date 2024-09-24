@@ -4,9 +4,13 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TMDBController;
 
-Route::get('/', function () {
-    return view('index');
-});
+
+Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index');
+// Route::get('/', function () {
+//     return view('index');
+// });
+
+
 
 Route::get('/about', function () {
     return view('about');
@@ -18,9 +22,11 @@ Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-
 //     return view('movie-api-demo');
 // })->name('movie-api-demo');
 
-Route::get('/movie-description', function () {
-    return view('movie-description');
-})->name('movie-description');
+Route::get('/movie-description',[TMDBController::class, 'description'])->name('movie-description');
+
+// Route::get('/movie-description', function () {
+//     return view('movie-description');
+// })->name('movie-description');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
