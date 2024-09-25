@@ -42,7 +42,7 @@ class TMDBController extends Controller
 
     // placeholder until can figure out how to do 
     // dont yell at me aiden ik this is very ugly 
-    public function description(){
+    public function description($movieId){
         // get http request as a json but then needs to be inputted as a json again to get the results
         $popularMovies = Http::asJson()
         ->get(config('services.tmdb.endpoint').'movie/popular'.'?api_key='.config('services.tmdb.api'))
@@ -58,12 +58,24 @@ class TMDBController extends Controller
             ->get(config('services.tmdb.endpoint').'movie/top_rated'.'?api_key='.config('services.tmdb.api'))
             ->json()['results'];
 
-        // passing all the api's calls into the view
-        return view('movie-description', [
-            'popularMovie' => $popularMovies,
-            'inTheatersMovie' => $inTheatersMovies,
-            'topRatedMovie' => $topRatedMovies,
-        ]);
+            // Consolidate all movies into one array
+            $allMovies = array_merge($popularMovies, $inTheatersMovies, $topRatedMovies);
+
+            // Search for the movie with the given ID
+            foreach ($allMovies as $movie) {
+                if ($movie['id'] == $movieId) {
+                    // Get the details of the found movie
+                    $movieDetails = $movie; // Use the found movie directly
+                    return view('movie-description', ['movie' => $movieDetails]);
+                }
+            }
+            
+        // // passing all the api's calls into the view
+        // return view('movie-description', [
+        //     'popularMovie' => $popularMovies,
+        //     'inTheatersMovie' => $inTheatersMovies,
+        //     'topRatedMovie' => $topRatedMovies,
+        // ]);
 
     }
 

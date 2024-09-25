@@ -16,13 +16,9 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
+Route::get('/movie-description/{movie}',[TMDBController::class, 'description'])->name('movie-description');
 
-// Route::get('/movie-demo', function () {
-//     return view('movie-api-demo');
-// })->name('movie-api-demo');
 
-Route::get('/movie-description',[TMDBController::class, 'description'])->name('movie-description');
 
 // Route::get('/movie-description', function () {
 //     return view('movie-description');

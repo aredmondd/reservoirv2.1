@@ -1,3 +1,5 @@
+@props(['movieDetails'])
+
 <x-layout>
     <div class="mt-14"></div>
     <div class="mx-24 flex">
@@ -6,7 +8,7 @@
         <div>
             <div class="flex flex-row justify-between">
                 <div>
-                    <h1 class="text-mega text-white font-serif">Movie Title</h1>
+                    <h1 class="text-mega text-white font-serif"> {{ $movie['title'] }}</h1>
                     <h3 class="text-body text-white text-opacity-50 font-sans">Movie Release Date | Rating | Time</h3>
                 </div>
                 <div class="flex">
