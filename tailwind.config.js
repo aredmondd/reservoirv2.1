@@ -46,6 +46,9 @@ export default {
                   to: { transform: "translateX(-100%)" },
               },
             },
+            boxShadow: {
+                'glow': '0px 0px 25px 0px #6AE1EB',
+            }
         },
     },
 };

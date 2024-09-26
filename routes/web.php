@@ -12,6 +12,18 @@ Route::get('/about', function () {
     return view('about');
 })->name('about');
 
+Route::get('/my-reservoir', function () {
+    return view('my-reservoir');
+})->name('my-reservoir');
+
+Route::get('/discover', function () {
+    return view('ripple');
+})->name('discover');
+
+Route::get('/stacks', function () {
+    return view('stacks');
+})->name('stacks');
+
 Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
 
 // Route::get('/movie-demo', function () {
