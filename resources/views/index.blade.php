@@ -13,7 +13,7 @@
 
     <div class="mt-32"></div>
 
-    <!-- How it works -->
+    <!-- Track -->
     <h2 class="font-serif text-mega text-center text-white mb-6">Add & track your media</h2>
     <hr class="border-white border-opacity-25 mx-40 mb-12">
     <div class="rounded-md p-3">
@@ -24,23 +24,18 @@
         </div>
     </div>
 
-    <h2 class="rounded-md p-24 text-blue text-mega font-serif text-center">Rate & Organize</h2>
-    <h2 class="rounded-md p-24 text-blue text-mega font-serif text-center">Discover</h2>
+    <!-- Rate & Organize -->
+    <h2 class="font-serif text-mega text-center text-white mb-6">Rate & Organize</h2>
+    <hr class="border-white border-opacity-25 mx-40 mb-12">
 
-    <div class="mt-12"></div>
-
-    <!-- Meet Ripple -->
-    <h1 class="text-white font-serif text-mega text-center mb-12">Meet <span class="text-aqua">Ripple</span></h1>
-    <div class="border border-white border-opacity-25 p-10 rounded-md mx-40 flex items-center flex">
-        <p class="text-white text-center text-body">Ripple is Reservoir's AI recommendation engine that learns your tastes as you explore, offering personalized media suggestions that flow with what you love and uncover hidden gems.</p>
-        <div class="p-20"></div>
-        <img src="images/wata.jpg" class="w-96" alt="ripple logo">
-    </div>
+    <!-- Discover -->
+    <h2 class="font-serif text-mega text-center text-white mb-6">Discover with Ripple</h2>
+    <hr class="border-white border-opacity-25 mx-40 mb-12">
 
     <div class="mt-12"></div>
 
     <!-- Popular Movies Scroller -->
-    <h1 class="text-white font-serif text-mega text-center mb-12">Popular Movies</h1>
+    <h1 class="text-white font-serif text-mega text-center mb-12">Check out Popular Movies</h1>
 
     <div class="mt-12"></div>
 
