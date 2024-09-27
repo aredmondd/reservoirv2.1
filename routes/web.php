@@ -6,9 +6,6 @@ use App\Http\Controllers\TMDBController;
 
 
 Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index');
-// Route::get('/', function () {
-//     return view('index');
-// });
 
 Route::get('/movie-description/{movie}',[TMDBController::class, 'description'])->name('movie-description');
 
@@ -29,14 +26,6 @@ Route::get('/stacks', function () {
 })->middleware('auth')->name('stacks');
 
 Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
-
-// Route::get('/movie-demo', function () {
-//     return view('movie-api-demo');
-// })->name('movie-api-demo');
-
-Route::get('/movie-description', function () {
-    return view('movie-description');
-})->name('movie-description');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
