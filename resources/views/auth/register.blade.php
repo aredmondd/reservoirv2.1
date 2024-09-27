@@ -1,15 +1,15 @@
 <x-layout>
     <form method="POST" action="{{ route('register') }}">
         <div class="mt-14">
-            <h1 class="text-center font-serif text-mega text-blue mb-10">Ready to dive in?</h1>
+            <h1 class="text-center font-serif text-mega text-blue mb-6">Ready to dive in?</h1>
             <div class="flex flex-col justify-center">
                 <div class="sm:mx-auto sm:w-full sm:max-w-sm">
                     <form class="space-y-6" action="/register" method="POST">
                         @csrf
 
                         <!-- Name -->
-                        <div>
-                            <x-text-input id="name" class="block mt-1 w-full" type="text" name="name" :value="old('name')" placeholder="Name" required autofocus autocomplete="name" />
+                        <div class="mt-4">
+                            <x-text-input id="name" class="block w-full" type="text" name="name" :value="old('name')" placeholder="Name" required autofocus autocomplete="name" />
                             <x-input-error :messages="$errors->get('name')" class="mt-2" />
                         </div>
 

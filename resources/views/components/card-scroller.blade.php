@@ -39,16 +39,16 @@
             <x-movie-card img="images/movie_posters/TNBC.webp"></x-movie-card>
     </ul>
     <ul class="flex animate-loop-scroll group-hover:paused" aria-hidden="true">
-            <x-movie-card img="images/movie_posters/Lobster.jpg"></x-movie-card>
-            <x-movie-card img="images/movie_posters/IW.jpg"></x-movie-card>
-            <x-movie-card img="images/movie_posters/batman.png"></x-movie-card>
-            <x-movie-card img="images/movie_posters/jaws.jpg"></x-movie-card>
-            <x-movie-card img="images/movie_posters/joker.avif"></x-movie-card>
-            <x-movie-card img="images/movie_posters/opp.avif"></x-movie-card>
-            <x-movie-card img="images/movie_posters/polt.jpg"></x-movie-card>
-            <x-movie-card img="images/movie_posters/SOTL.jpg"></x-movie-card>
-            <x-movie-card img="images/movie_posters/swtfa.jpeg"></x-movie-card>
-            <x-movie-card img="images/movie_posters/TNBC.webp"></x-movie-card>
+            <x-movie-card img="images/movie_posters/Lobster.jpg" />
+            <x-movie-card img="images/movie_posters/IW.jpg" />
+            <x-movie-card img="images/movie_posters/batman.png" />
+            <x-movie-card img="images/movie_posters/jaws.jpg" />
+            <x-movie-card img="images/movie_posters/joker.avif" />
+            <x-movie-card img="images/movie_posters/opp.avif" />
+            <x-movie-card img="images/movie_posters/polt.jpg" />
+            <x-movie-card img="images/movie_posters/SOTL.jpg" />
+            <x-movie-card img="images/movie_posters/swtfa.jpeg" />
+            <x-movie-card img="images/movie_posters/TNBC.webp" />
     </ul>
 </div> -->
 

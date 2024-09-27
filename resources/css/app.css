@@ -3,7 +3,7 @@
 @tailwind utilities;
 
 @layer utilities {
-  .paused {
-    animation-play-state: paused;
-  }
+    .paused {
+        animation-play-state: paused;
+    }
 }

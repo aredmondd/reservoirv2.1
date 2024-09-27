@@ -1,6 +1,8 @@
 <x-layout>
     <div class="pt-10">
         <h1 class="text-blue text-mega font-serif text-center">Meet the team</h1>
+        <div class="mt-6"></div>
+        <p class="text-white text-opacity-50 text-body text-sans text-center mx-40">Reservoir was designed and developed to deliver a personalized, user-friendly media-tracking experience. <br>It’s the result of the hard work and dedication of the three creators below.</p>
     </div>
     <div class="grid grid-cols-3 text-white text-center mt-20">
         <x-about-me path="images/redmond.jpg" name="Aiden Redmond" title="UI/UX Designer & Full Stack Developer"></x-about-me>
@@ -13,7 +15,7 @@
         <h1 class="text-blue text-mega font-serif text-center">Want to learn more?</h1>
     </div>
     <div class="mt-10">
-        <div class="flex p-5 pl-8 border border-white border-opacity-25 rounded-md mx-96 items-center hover:border-aqua transition-all duration-500">
+        <div class="flex p-5 pl-8 border border-white border-opacity-25 rounded-md mx-96 items-center hover:border-aqua transition duration-150 ease-in-out'">
             <div class="mr-5">
                 <img class="rounded-full size-36 max-w-max" src="images/wata.jpg" alt="">
             </div>
@@ -23,18 +25,6 @@
                 </a>
                 <p class="text-white opacity-50">Reservoir is a project created, designed, and developed by Aiden Redmond, Axel Beaver, and Brandon Wilson under the supervision..</p>
             </div>
-        </div>
-    </div>
-    
-    
-    <div class="pt-20">
-        <h1 class="text-blue text-mega font-serif text-center">Reservoir's Future</h1>
-    </div>
-    <div class="text-white mt-20">
-        <div class="border border-white border-opacity-25 p-10 rounded-md mx-40 flex items-center">
-            <h3>Movies</h3>
-            <h3>Shows</h3>
-            <h3>Music</h3>
         </div>
     </div>
 </x-layout>

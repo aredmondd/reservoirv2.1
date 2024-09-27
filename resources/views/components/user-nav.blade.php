@@ -1,27 +1,40 @@
 <nav x-data="{ open: false }" class="bg-midnight">
     <!-- Primary Navigation Menu -->
-    <div class="max-w-7xl mx-auto sm:px-6 lg:px-8">
+    <div class="mx-12">
         <div class="flex justify-between h-16">
             <div class="flex">
                 <!-- Navigation Links -->
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden ml-8 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->is('dashboard')">
                         {{ __('Dashboard') }}
                     </x-nav-link>
                 </div>
+
                 <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="'/about'" :active="request()->is('about')">
-                        {{ __('About') }}
+                    <x-nav-link :href="route('my-reservoir')" :active="request()->is('my-reservoir')">
+                        {{ __('My Reservoir') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('stacks')" :active="request()->is('stacks')">
+                        {{ __('My Stacks') }}
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('discover')" :active="request()->is('discover')">
+                        {{ __('Discover') }}
                     </x-nav-link>
                 </div>
             </div>
 
             <!-- Settings Dropdown -->
-            <div class="hidden sm:flex sm:items-center sm:ms-6">
+            <div class="hidden sm:flex sm:items-center mr-8">
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
-                        <button class="inline-flex items-center px-3 py-2 text-sm text-white rounded-md border border-white border-opacity-50 focus:outline-none transition ease-in-out duration-150">
-                            <div>{{ Auth::user()->name }}</div>
+                        <button class="inline-flex items-center px-3 py-2 text-white focus:outline-none transition ease-in-out duration-150">
+                            <div><img src="images/settings.png" alt="" class="w-9"></div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">
@@ -34,7 +47,7 @@
 
                     <x-slot name="content">
                         <x-dropdown-link :href="route('profile.edit')">
-                            {{ __('Profile') }}
+                            {{ __('Edit Profile') }}
                         </x-dropdown-link>
 
                         <!-- Authentication -->

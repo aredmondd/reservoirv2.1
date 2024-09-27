@@ -10,19 +10,33 @@ Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index');
 //     return view('index');
 // });
 
-
+Route::get('/movie-description/{movie}',[TMDBController::class, 'description'])->name('movie-description');
 
 Route::get('/about', function () {
     return view('about');
 })->name('about');
 
-Route::get('/movie-description/{movie}',[TMDBController::class, 'description'])->name('movie-description');
+Route::get('/my-reservoir', function () {
+    return view('my-reservoir');
+})->middleware('auth')->name('my-reservoir');
 
+Route::get('/discover', function () {
+    return view('ripple');
+})->middleware('auth')->name('discover');
 
+Route::get('/stacks', function () {
+    return view('stacks');
+})->middleware('auth')->name('stacks');
 
-// Route::get('/movie-description', function () {
-//     return view('movie-description');
-// })->name('movie-description');
+Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
+
+// Route::get('/movie-demo', function () {
+//     return view('movie-api-demo');
+// })->name('movie-api-demo');
+
+Route::get('/movie-description', function () {
+    return view('movie-description');
+})->name('movie-description');
 
 Route::get('/dashboard', function () {
     return view('dashboard');
