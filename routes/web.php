@@ -14,21 +14,17 @@ Route::get('/about', function () {
 
 Route::get('/my-reservoir', function () {
     return view('my-reservoir');
-})->name('my-reservoir');
+})->middleware('auth')->name('my-reservoir');
 
 Route::get('/discover', function () {
     return view('ripple');
-})->name('discover');
+})->middleware('auth')->name('discover');
 
 Route::get('/stacks', function () {
     return view('stacks');
-})->name('stacks');
+})->middleware('auth')->name('stacks');
 
 Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
-
-// Route::get('/movie-demo', function () {
-//     return view('movie-api-demo');
-// })->name('movie-api-demo');
 
 Route::get('/movie-description', function () {
     return view('movie-description');
