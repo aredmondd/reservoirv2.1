@@ -3,10 +3,11 @@
 use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TMDBController;
+use App\Http\Controllers\StackController;
 use App\Models\Stack;
 
 
-Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index');
+Route::get('/',[TMDBController::class, 'mainMovieFunc'])->middleware('guest')->name('index');
 
 Route::get('/movie-description/{movie}',[TMDBController::class, 'description'])->name('movie-description');
 
@@ -42,9 +43,11 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
 });
 
-Route::get('/stack-test', function () {
-    dd(Stack::all()[0]->user->name);
+Route::get('/stack-test', [StackController::class, 'display'])->name('stack-test');
+Route::get('/new-stack', function () {
+    abort(404);
 });
+Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
 
 
 

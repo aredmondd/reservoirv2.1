@@ -6,8 +6,8 @@
     </div>
 
 
-    <x-modal name="new-stack" :show="$errors->userDeletion->isNotEmpty()" focusable>
-        <form method="post" action="{{ route('profile.destroy') }}" class="p-6 bg-midnight">
+    <x-modal name="new-stack" focusable>
+        <form method="POST" action="{{ route('new-stack') }}" class="p-6 bg-midnight">
             @csrf
 
             <h2 class="text-title font-medium text-white text-center">
@@ -35,7 +35,7 @@
             <div class="mt-6 flex justify-between items-center">
                 <button x-on:click="$dispatch('close')" class="text-midnight bg-white rounded-full px-4 p-2 font-medium tracking-wide">Cancel</button>
 
-                <button class="text-white bg-blue rounded-full px-4 p-2 font-medium tracking-wide">{{ __('Create new Stack') }}</button>
+                <button type="submit "class="text-white bg-blue rounded-full px-4 p-2 font-medium tracking-wide">{{ __('Create new Stack') }}</button>
             </div>
         </form>
     </x-modal>

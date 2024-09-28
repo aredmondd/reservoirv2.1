@@ -7,7 +7,7 @@ use Illuminate\Database\Eloquent\Model;
 
 class Stack extends Model {
 
-    protected $fillable = ['name', 'description'];
+    protected $fillable = ['name', 'description', 'user_id'];
 
     public function user() {
         return $this->belongsTo(User::class);
