@@ -2,7 +2,7 @@
     <!-- Primary Navigation Menu -->
     <div class="mx-12">
         <div class="flex justify-between h-16">
-            <div class="flex">
+            <div class="flex space-x-6">
                 <!-- Navigation Links -->
                 <div class="hidden ml-8 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->is('dashboard')">
@@ -10,19 +10,19 @@
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('my-reservoir')" :active="request()->is('my-reservoir')">
                         {{ __('My Reservoir') }}
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('stacks')" :active="request()->is('stacks')">
                         {{ __('My Stacks') }}
                     </x-nav-link>
                 </div>
 
-                <div class="hidden space-x-8 sm:-my-px sm:ms-10 sm:flex">
+                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('discover')" :active="request()->is('discover')">
                         {{ __('Discover') }}
                     </x-nav-link>
