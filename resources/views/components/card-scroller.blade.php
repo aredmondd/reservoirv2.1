@@ -6,7 +6,7 @@
 
 
 <!-- loop over all the movies per category -->
-<div class="w-full inline-flex flex-nowrap [mask-image:_linear-gradient(to_right,transparent_0,white,blue,transparent_100%)] group">
+<div class="w-full inline-flex flex-nowrap overflow-x-hidden [mask-image:_linear-gradient(to_right,transparent_0,white,blue,transparent_100%)] group">
     <ul class="flex animate-loop-scroll group-hover:paused">
         @foreach ($movieData as $movie) <!-- Renamed variable to $movie to avoid confusion -->
         <a href="{{ route('movie-description', ['movie' => $movie['id']]) }}">

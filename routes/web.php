@@ -25,6 +25,10 @@ Route::get('/stacks', function () {
     return view('stacks');
 })->middleware('auth')->name('stacks');
 
+Route::get('/stack', function () {
+    return view('stack-view');
+})->name('stack-view');
+
 Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
 
 Route::get('/dashboard', function () {
