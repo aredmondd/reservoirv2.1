@@ -16,8 +16,8 @@
 
             <div class="mt-6">
                 <x-text-input
-                    id="title"
-                    name="title"
+                    id="name"
+                    name="name"
                     type="text"
                     class="mt-1 block w-3/4 shadow-md mb-6"
                     placeholder="{{ __('Stack Name') }}"
