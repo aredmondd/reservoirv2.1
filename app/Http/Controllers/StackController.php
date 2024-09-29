@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use App\Models\Stack;
+use App\Models\Movie;
 use Illuminate\Http\Request;
 use Illuminate\Support\Facades\Auth;
 
@@ -28,6 +29,20 @@ class StackController extends Controller {
 
         return redirect('/stacks');
     }
+
+    public function movie(){
+        $attributes = request()->validate([
+            'title' => 'requried|max:255',
+            'poster_path' => 'requried|max:255',
+            'description' => 'requried',
+            'stack_id' => 'required|exists:stacks,id'
+        ]);
+
+        Movie::create($attributes);
+
+        return redirect('/stack');
+    }
+
 }
 
 ?>

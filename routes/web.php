@@ -32,6 +32,8 @@ Route::middleware('auth')->group(function () {
 
 // Make new stacks
 Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
+// Make new stacks for movies
+Route::post('/new-stack-movie', [StackController::class, 'movie'])->name('new-stack');
 
 // Error protection
 Route::get('/new-stack', function () { abort(404); });
