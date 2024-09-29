@@ -9,7 +9,11 @@ use Illuminate\Support\Facades\Auth;
 class StackController extends Controller {
     
     public function display(Request $request) {
-        dd(Stack::all());
+        $userId = Auth::id();
+    
+        $userStacks = Stack::where('user_id', $userId)->get();
+    
+        return response()->json($userStacks);
     }
 
     public function store() {
@@ -18,13 +22,11 @@ class StackController extends Controller {
             'description' => 'required|max:255',
         ]);
 
-        dd($attributes);
-
         $attributes['user_id'] = Auth::id();
 
         Stack::create($attributes);
 
-        return redirect('/stack-test');
+        return redirect('/stacks');
     }
 }
 
