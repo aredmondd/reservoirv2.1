@@ -40,11 +40,21 @@
         </form>
     </x-modal>
 
-    <!-- If the user has no stacks display: -->
+    @if($stacks->isEmpty())
     <div class="py-64 text-center text-white text-opacity-50 text-body">
         so empty... create a stack?
     </div>
+    @else
+    <div class="text-white text-center mt-12">
+        <ul>
+            @foreach ($stacks as $stack)
+                <li>{{ $stack->name }} - {{ $stack->description }}</li>
+            @endforeach
+        </ul>
+    </div>
+    @endif
 
-    <!-- If the user has 1 or more stacks display:  -->
+    
+
 
 </x-layout>

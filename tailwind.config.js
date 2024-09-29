@@ -18,7 +18,6 @@ export default {
                 'slate': '#1F4245',
                 'aqua': '#6AE1EB',
                 'transparent': 'transparent',
-                
             },
             fontFamily: {
                 sans: ['Inter', 'sans-serif'],

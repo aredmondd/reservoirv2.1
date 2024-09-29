@@ -18,10 +18,9 @@ Route::get('/about', function () { return view('about'); })->name('about');
 Route::middleware('auth')->group(function () {
     Route::get('/my-reservoir', function () { return view('my-reservoir'); })->name('my-reservoir');
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
-    Route::get('/stacks', function () { return view('stacks'); })->name('stacks');
+    Route::get('/stacks', [StackController::class, 'display'])->name('stacks');
     Route::get('/stack', function () { return view('stack-view'); })->name('stack-view');
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
-
 
     // profile stuff
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

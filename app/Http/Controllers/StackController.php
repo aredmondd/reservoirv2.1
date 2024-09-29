@@ -12,8 +12,8 @@ class StackController extends Controller {
         $userId = Auth::id();
     
         $userStacks = Stack::where('user_id', $userId)->get();
-    
-        return response()->json($userStacks);
+
+        return view('stacks', ['stacks' => $userStacks]);
     }
 
     public function store() {
