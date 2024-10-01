@@ -13,21 +13,38 @@ class StackController extends Controller {
         $userId = Auth::id();
     
         $userStacks = Stack::where('user_id', $userId)->get();
-    
-        return response()->json($userStacks);
+
+        return view('my-stacks', ['stacks' => $userStacks]);
     }
 
     public function store() {
         $attributes = request()->validate([
-            'name' => 'required|max:255',
-            'description' => 'required|max:255',
+            'name' => 'required|max:50',
+            'description' => 'required|max:90',
         ]);
 
         $attributes['user_id'] = Auth::id();
 
-        Stack::create($attributes);
+        $stack = Stack::create($attributes);
+        $stackUrl = '/stack?fresh=true&id=' . $stack->id ;
 
-        return redirect('/stacks');
+        return redirect($stackUrl);
+    }
+
+    public function getStack(Request $request) {
+        $stackId = request('id');
+
+        if ($stackId == null) {
+            abort(404);
+        }
+
+        $stack = Stack::find($stackId);
+
+        if ($stack->user_id != Auth::id()) {
+            abort(403);
+        }
+
+        return view('stack-view', ['stackTitle' => $stack->name, 'stackDescription' => $stack->description, 'fresh' => request('fresh') !== null ? true : false ]);
     }
 
     public function movie(){

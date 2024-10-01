@@ -18,10 +18,9 @@ Route::get('/about', function () { return view('about'); })->name('about');
 Route::middleware('auth')->group(function () {
     Route::get('/my-reservoir', function () { return view('my-reservoir'); })->name('my-reservoir');
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
-    Route::get('/stacks', function () { return view('stacks'); })->name('stacks');
-    Route::get('/stack', function () { return view('stack-view'); })->name('stack-view');
+    Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
+    Route::get('/stack', [StackController::class, 'getStack'])->name('stack-view');
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
-
 
     // profile stuff
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
@@ -35,7 +34,7 @@ Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
 // Make new stacks for movies
 Route::post('/new-stack-movie', [StackController::class, 'movie'])->name('new-stack');
 
-// Error protection
-Route::get('/new-stack', function () { abort(404); });
+// Catch all route
+Route::fallback(function () { abort(404); });
 
 require __DIR__.'/auth.php';

@@ -29,10 +29,10 @@
     <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Organize with <span class="text-aqua">Stacks</span></h2>
     <x-hr />
     <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">Create custom stacks to highlight your favorite movies by genre, decade, or any theme you choose, showcasing your unique cinematic tastes.</p>
-    <div class="flex justify-between mx-40">
-        <x-movie-stack />
-        <x-movie-stack />
-        <x-movie-stack />
+    <div class="grid grid-cols-3 gap-x-16 mx-32">
+        <x-movie-stack title="Best scary movies" author="Brandon Wilson" />
+        <x-movie-stack title="Films everyone should watch" author="Aiden Redmond" />
+        <x-movie-stack title="'Yellow' movies" author="Axel Beaver" />
     </div>
 
     <h1 class="text-white font-serif text-mega text-center mb-12 mt-32">Popular Movies</h1>

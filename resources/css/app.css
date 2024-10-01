@@ -6,4 +6,31 @@
     .paused {
         animation-play-state: paused;
     }
+    
+    @keyframes slideIn {
+        0% {
+            top: -100px; /* Start position outside the viewport */
+            opacity: 0;
+        }
+        100% {
+            top: 60px; /* Slide to desired position */
+            opacity: 1;
+        }
+    }
+    
+    @keyframes slideOut {
+        0% {
+            top: 60px; /* Start from the visible position */
+            opacity: 1;
+        }
+        100% {
+            top: -100px; /* Slide back to outside the viewport */
+            opacity: 0;
+        }
+    }
+    
+    .animate-slideIn {
+        animation: slideIn 0.5s ease forwards;
+    }
+    
 }
