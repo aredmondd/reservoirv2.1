@@ -32,6 +32,9 @@ Route::middleware('auth')->group(function () {
 // Make new stacks
 Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
 
+// Delete a stack
+Route::delete('/stack', [StackController::class, 'destroy']);
+
 // Catch all route
 Route::fallback(function () { abort(404); });
 

@@ -45,6 +45,16 @@ class StackController extends Controller {
 
         return view('stack-view', ['stackTitle' => $stack->name, 'stackDescription' => $stack->description, 'fresh' => request('fresh') !== null ? true : false ]);
     }
+
+    public function destroy() {
+        $stackId = request('id');
+
+        $stack = Stack::find($stackId);
+
+        $stack->delete();
+
+        return redirect('/stacks');
+    }
 }
 
 ?>

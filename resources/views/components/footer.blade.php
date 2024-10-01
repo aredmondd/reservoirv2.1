@@ -3,10 +3,10 @@
 
 <hr class="border-white border-opacity-25 mx-12 my-5">
 
-<div class="grid grid-cols-4 m-12 items-center">
+<div class="grid grid-cols-{{ Auth::guest() ? 3 : 4; }} m-12 items-center">
     <a href="/" class="focus:outline-none bg-gradient-to-r from-blue to-aqua text-transparent bg-clip-text font-serif text-title">Reservoir</a> 
 
-    <div class="flex text-center text-white text-body col-span-2">
+    <div class="flex text-center text-white text-body {{ Auth::guest() ? '' : 'col-span-2'; }}">
         @if(Auth::guest())
             <a href="/" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Home</a>
             <a href="/register" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Register</a>
@@ -19,7 +19,7 @@
         @endif
         <a href="/about" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">About</a>
     </div>
-    
+
     <div class="flex flex-row-reverse">
         <a href="https://github.com/axbeaver" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../images/beaver.JPG" alt="axel beaver headshot"></a>
         <a href="https://github.com/bdubbs11" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../images/wilson.JPG" alt="brandon wilson headshot"></a>

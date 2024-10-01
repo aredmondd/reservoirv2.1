@@ -14,8 +14,15 @@
         </div>
 
         <div class="flex space-x-4 mt-6">
-            <button class="border border-white rounded-full px-3 p-2 text-white">Edit Stack</button>
-            <button class="border border-white rounded-full px-3 p-2 text-white">Delete Stack</button>
+            <button class="px-3 p-2 text-white">Edit Stack</button>
+            <form action="/stack?id={{ request('id') }}" method="POST" class="inline">
+                @csrf
+                @method('DELETE')
+                <button type="submit" class="px-3 p-2 text-red-600">
+                    Delete Stack
+                </button>
+            </form>
+
         </div>
     </div>
 
