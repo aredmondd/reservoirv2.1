@@ -19,7 +19,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/my-reservoir', function () { return view('my-reservoir'); })->name('my-reservoir');
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
-    Route::get('/stack', [StackController::class, 'getStack'])->name('stack-view');
+    // was commented out getStack
+    Route::get('/stack', [StackController::class, 'testGetStack'])->name('stack-view');
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
 
     // profile stuff
@@ -31,8 +32,10 @@ Route::middleware('auth')->group(function () {
 
 // Make new stacks
 Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
+
 // Make new stacks for movies
-Route::post('/new-stack-movie', [StackController::class, 'movie'])->name('new-stack');
+Route::get('/edit-stack',[TMDBController::class, 'details'])->name('edit-stack');
+Route::post('/new-stack-movie', [StackController::class, 'movie'])->name('add-movie-stack');
 
 // Catch all route
 Route::fallback(function () { abort(404); });

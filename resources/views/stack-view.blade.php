@@ -21,21 +21,44 @@
 
     <div class="mt-24"></div>
 
-    <div class="flex space-x-8 justify-center">
-        <x-stack-movie-poster img="images/movie_posters/parasite.jpg" name="Parasite"/>
-        <x-stack-movie-poster img="images/movie_posters/batman.png" name="The Batman"/>
-        <x-stack-movie-poster img="images/movie_posters/Lobster.jpg" name="The Lobster"/>
-        <x-stack-movie-poster img="images/movie_posters/opp.avif" name="Oppenheimer"/>
-        <x-stack-movie-poster img="images/movie_posters/joker.jpeg" name="The Joker"/>
-    </div>
+    <!-- discover movie with random id's? -->
+    <div class="text-white text-center mt-6">
+        @if($flag)
+            @foreach($movies as $movie)
+                <x-stack-movie-poster img="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" name="{{ $movie['title'] }}" />
+            @endforeach
+        @else
+            <p>No movies??? Let's add some from our personal favorites</p>
+            @foreach($movies as $movie)
+            <form action="{{ route('add-movie-stack') }}" method="POST" class="inline">
+                @csrf
+                <input type="hidden" name="title" value="{{ $movie['title'] }}">
+                <input type="hidden" name="poster_path" value="{{ $movie['poster_path'] }}">
+                <input type="hidden" name="description" value="{{ $movie['overview'] }}">
+                <input type="hidden" name="stack_id" value="{{ $stackId }}">
 
-    <div class="flex space-x-8 justify-center">
-        <x-stack-movie-poster img="images/movie_posters/parasite.jpg" name="Parasite"/>
-        <x-stack-movie-poster img="images/movie_posters/batman.png" name="The Batman"/>
-        <x-stack-movie-poster img="images/movie_posters/Lobster.jpg" name="The Lobster"/>
-        <x-stack-movie-poster img="images/movie_posters/opp.avif" name="Oppenheimer"/>
-        <x-stack-movie-poster img="images/movie_posters/joker.jpeg" name="The Joker"/>
+                <button type="submit">
+                    <x-stack-movie-poster img="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" name="{{ $movie['title'] }}" />
+                </button>
+            </form>
+            @endforeach
+        @endif
     </div>
+        <!-- <div class="flex space-x-8 justify-center">
+            <x-stack-movie-poster img="images/movie_posters/parasite.jpg" name="Parasite"/>
+            <x-stack-movie-poster img="images/movie_posters/batman.png" name="The Batman"/>
+            <x-stack-movie-poster img="images/movie_posters/Lobster.jpg" name="The Lobster"/>
+            <x-stack-movie-poster img="images/movie_posters/opp.avif" name="Oppenheimer"/>
+            <x-stack-movie-poster img="images/movie_posters/joker.jpeg" name="The Joker"/>
+        </div>
+
+        <div class="flex space-x-8 justify-center">
+            <x-stack-movie-poster img="images/movie_posters/parasite.jpg" name="Parasite"/>
+            <x-stack-movie-poster img="images/movie_posters/batman.png" name="The Batman"/>
+            <x-stack-movie-poster img="images/movie_posters/Lobster.jpg" name="The Lobster"/>
+            <x-stack-movie-poster img="images/movie_posters/opp.avif" name="Oppenheimer"/>
+            <x-stack-movie-poster img="images/movie_posters/joker.jpeg" name="The Joker"/>
+        </div> -->
 </x-layout>
 
 <script>

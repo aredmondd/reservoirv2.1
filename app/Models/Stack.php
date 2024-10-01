@@ -13,7 +13,7 @@ class Stack extends Model {
         return $this->belongsTo(User::class);
     }
 
-    public function movieStack(){
+    public function movies(){
         return $this->hasMany(Movie::class);
     }
 

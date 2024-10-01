@@ -15,7 +15,7 @@ return new class extends Migration
             $table->id();
             $table->foreignIdfor(\App\Models\Stack::class);
             $table->string('title');
-            $table->string('posterpath');
+            $table->string('poster_path');
             $table->string('description')->nullable();
 
             $table->timestamps();
