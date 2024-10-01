@@ -9,13 +9,13 @@
 
     <div class="flex justify-between items-end mx-32">
         <div class="flex flex-col items-start">
-            <h1 class="text-blue text-mega font-serif mt-12 text-center">{{ $stackTitle }}</h1>
+            <h1 class="text-blue text-mega font-serif mt-12 text-center max-w-5xl">{{ $stackTitle }}</h1>
             <p class="text-white text-center text-body">{{ $stackDescription }}</p>
         </div>
 
-        <div class="space-x-4 mt-6">
-            <button class="border border-white rounded-full px-3 p-2 text-white">Gallery View</button>
-            <button class="border border-white rounded-full px-3 p-2 text-white">List View</button>
+        <div class="flex space-x-4 mt-6">
+            <button class="border border-white rounded-full px-3 p-2 text-white">Edit Stack</button>
+            <button class="border border-white rounded-full px-3 p-2 text-white">Delete Stack</button>
         </div>
     </div>
 

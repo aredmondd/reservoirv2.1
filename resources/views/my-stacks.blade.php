@@ -6,12 +6,12 @@
     </div>
 
 
-    <x-modal name="new-stack" focusable>
+    <x-modal name="new-stack" :show="$errors->isNotEmpty()" focusable>
         <form method="POST" action="{{ route('new-stack') }}" class="p-6 bg-midnight">
             @csrf
 
             <h2 class="text-title font-medium text-white text-center">
-                {{ __('Create a new Stack') }}
+                {{ __('Create new Stack') }}
             </h2>
 
             <div class="mt-6">
@@ -19,7 +19,7 @@
                     id="name"
                     name="name"
                     type="text"
-                    class="mt-1 block w-3/4 shadow-md mb-6"
+                    class="mt-1 block w-3/4 shadow-md"
                     placeholder="{{ __('Stack Name') }}"
                 />
 
@@ -27,14 +27,23 @@
                     id="description"
                     name="description"
                     type="text"
-                    class="mt-1 block w-3/4 shadow-md"
+                    class="mt-3 block w-3/4 shadow-md"
                     placeholder="{{ __('Description') }}"
                 />
+                
+                @if($errors->any())
+                    <div class="text-red-600">
+                        <ul>
+                            @foreach ($errors->all() as $error)
+                                <li>{{ $error }}</li>
+                            @endforeach
+                        </ul>
+                    </div>
+                @endif
             </div>
 
             <div class="mt-6 flex justify-between items-center">
-                <button x-on:click="$dispatch('close')" class="text-midnight bg-white rounded-full px-4 p-2 font-medium tracking-wide">Cancel</button>
-
+                <button type="button" x-on:click="$dispatch('close')" class="text-midnight bg-white rounded-full px-4 p-2 font-medium tracking-wide">Cancel</button>
                 <button type="submit "class="text-white bg-blue rounded-full px-4 p-2 font-medium tracking-wide">{{ __('Create new Stack') }}</button>
             </div>
         </form>

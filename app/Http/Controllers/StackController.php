@@ -18,8 +18,8 @@ class StackController extends Controller {
 
     public function store() {
         $attributes = request()->validate([
-            'name' => 'required|max:255',
-            'description' => 'required|max:255',
+            'name' => 'required|max:50',
+            'description' => 'required|max:90',
         ]);
 
         $attributes['user_id'] = Auth::id();
