@@ -1,7 +1,7 @@
 <x-layout>
-    <div class="pt-10">
-        <h1 class="text-blue text-mega font-serif text-center">Meet the team</h1>
-        <div class="mt-6"></div>
+    <div class="pt-20">
+        <h1 class="text-white text-mega font-serif text-center">Meet the team</h1>
+        <div class="mt-2"></div>
         <p class="text-white text-opacity-50 text-body text-sans text-center mx-40">Reservoir was designed and developed to deliver a personalized, user-friendly media-tracking experience. <br>It’s the result of the hard work and dedication of the three creators below.</p>
     </div>
     <div class="grid grid-cols-3 text-white text-center mt-20">
@@ -11,19 +11,19 @@
     </div>
     
     
-    <div class="pt-20">
-        <h1 class="text-blue text-mega font-serif text-center">Want to learn more?</h1>
+    <div class="pt-32">
+        <h1 class="text-white text-mega font-serif text-center">Want to learn more?</h1>
     </div>
     <div class="mt-10">
-        <div class="flex p-5 pl-8 border border-white border-opacity-25 rounded-md mx-96 items-center hover:border-aqua transition duration-150 ease-in-out'">
+        <div class="flex p-5 pl-8 border border-white border-opacity-25 rounded-md mx-96 items-center hover:border-aqua transition duration-500 ease-in-out">
             <div class="mr-5">
-                <img class="rounded-full size-36 max-w-max" src="images/wata.jpg" alt="">
+                <img class="rounded-full size-16 max-w-max" src="images/droplet.png" alt="">
             </div>
             <div class="text-white">
                 <a href="https://github.com/aredmondd/reservoirv2.1" target="_blank">
-                    <h3 class="text-title text-aqua">Reservoir Github Repo - v2.1</h3>
+                    <h3 class="text-title text-blue font-sans">Reservoir Github Repo - v2.1</h3>
                 </a>
-                <p class="text-white opacity-50">Reservoir is a project created, designed, and developed by Aiden Redmond, Axel Beaver, and Brandon Wilson under the supervision..</p>
+                <p class="text-white opacity-50">Reservoir is a project created, designed, and developed by Aiden Redmond, Axel Beaver, and Brandon Wilson under the supervision of Dr. Roberson at Florida...</p>
             </div>
         </div>
     </div>

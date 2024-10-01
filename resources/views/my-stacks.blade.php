@@ -48,7 +48,9 @@
     <div class="text-white text-center mt-12">
         <ul>
             @foreach ($stacks as $stack)
-                <li>{{ $stack->name }} - {{ $stack->description }}</li>
+                <a href="/stack?id={{ $stack->id }}">
+                    <li>{{ $stack->name }} - {{ $stack->description }}</li>
+                </a>
             @endforeach
         </ul>
     </div>

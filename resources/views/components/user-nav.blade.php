@@ -17,7 +17,7 @@
                 </div>
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('stacks')" :active="request()->is('stacks')">
+                    <x-nav-link :href="route('my-stacks')" :active="request()->is('stacks')">
                         {{ __('My Stacks') }}
                     </x-nav-link>
                 </div>

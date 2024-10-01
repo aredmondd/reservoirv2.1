@@ -20,9 +20,9 @@
         <a href="/about" class="grow transition duration-150 ease-in-out' focus:outline-none focus:text-blue hover:text-blue">About</a>
     </div>
     <div class="flex flex-row-reverse">
-        <a href="https://github.com/axbeaver" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="images/beaver.JPG" alt="axel beaver headshot"></a>
-        <a href="https://github.com/bdubbs11" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="images/wilson.JPG" alt="brandon wilson headshot"></a>
-        <a href="https://github.com/aredmondd" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="images/redmond.JPG" alt="aiden redmond headshot"></a>
+        <a href="https://github.com/axbeaver" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../images/beaver.JPG" alt="axel beaver headshot"></a>
+        <a href="https://github.com/bdubbs11" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../images/wilson.JPG" alt="brandon wilson headshot"></a>
+        <a href="https://github.com/aredmondd" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../images/redmond.JPG" alt="aiden redmond headshot"></a>
     </div>
 </div>
 

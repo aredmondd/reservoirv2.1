@@ -7,8 +7,8 @@
         </div>
     </div>
     <div class="flex mx-auto mt-6">
-        <p class="border border-blue rounded-full text-sm text-blue p-2 px-3">Add to Watchlist</p>
+        <p class="border border-blue rounded-full text-sm text-blue p-2 px-3 hover:cursor-pointer">Add to Watchlist</p>
         <div class="mr-6"></div>
-        <p class="border border-aqua rounded-full text-sm text-aqua p-2 px-3">Add to History</p>
+        <p class="border border-aqua rounded-full text-sm text-aqua p-2 px-3 hover:cursor-pointer">Add to History</p>
     </div>
 </div>

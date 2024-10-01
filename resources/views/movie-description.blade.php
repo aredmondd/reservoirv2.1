@@ -1,5 +1,4 @@
 <?php
-//   dd($movie)
     // movie genres from tmdb 
  $genres = [
     28 => 'Action',
@@ -27,9 +26,7 @@
 <x-layout>
     <div class="mt-14"></div>
     <div class="mx-24 flex">
-        <div class="border border-white border-opacity-25 rounded-md py-60 px-40">
-            <img src="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" alt="">
-        </div>
+        <img src="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" alt="" class="rounded-lg w-96">
         
         <div class="pl-12"></div>
         <div>
