@@ -47,6 +47,9 @@ export default {
             },
             boxShadow: {
                 'glow': '0px 0px 25px 0px #6AE1EB',
+            },
+            screens: {
+                '3xl' : '1900px',
             }
         },
     },
