@@ -22,7 +22,7 @@
     <div class="mt-24"></div>
 
     <!-- discover movie with random id's? -->
-    <div class="text-white text-center mt-6">
+    <div class="text-white text-center mt-6">,
         @if($flag)
             @foreach($movies as $movie)
                 <x-stack-movie-poster img="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" name="{{ $movie['title'] }}" />

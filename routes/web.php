@@ -9,7 +9,7 @@ use App\Models\Stack;
 
 // Get Routes
 Route::get('/',[TMDBController::class, 'mainMovieFunc'])->middleware('guest')->name('index');
-Route::get('/movie-description/{movie}',[TMDBController::class, 'description'])->name('movie-description');
+Route::get('/movie-description/{movie}',[TMDBController::class, 'movieDetails'])->name('movie-description');
 Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
 Route::get('/about', function () { return view('about'); })->name('about');
 
@@ -34,7 +34,7 @@ Route::middleware('auth')->group(function () {
 Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
 
 // Make new stacks for movies
-Route::get('/edit-stack',[TMDBController::class, 'details'])->name('edit-stack');
+// Route::get('/edit-stack',[TMDBController::class, 'details'])->name('edit-stack');
 Route::post('/new-stack-movie', [StackController::class, 'movie'])->name('add-movie-stack');
 
 // Catch all route
