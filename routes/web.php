@@ -4,6 +4,7 @@ use App\Http\Controllers\ProfileController;
 use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TMDBController;
 use App\Http\Controllers\StackController;
+use App\Http\Controllers\UserController;
 use App\Models\Stack;
 
 
@@ -13,6 +14,8 @@ Route::get('/movie-description/{movie}',[TMDBController::class, 'description'])-
 Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
 Route::get('/about', function () { return view('about'); })->name('about');
 
+Route::get('/search', [UserController::class, 'search'])->name('search');
+
 
 // Auth Routes
 Route::middleware('auth')->group(function () {
@@ -21,11 +24,13 @@ Route::middleware('auth')->group(function () {
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
     Route::get('/stack', [StackController::class, 'getStack'])->name('stack-view');
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
+    Route::get('/user/{username}', [UserController::class, 'display'])->name('display');
 
     // profile stuff
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
+    Route::put('/profile/update-visibility', [UserController::class, 'updateVisibility'])->name('profile.update-visibility');
 });
 
 
