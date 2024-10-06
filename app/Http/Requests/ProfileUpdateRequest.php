@@ -23,6 +23,10 @@ class ProfileUpdateRequest extends FormRequest
                 'max:255', 
                 Rule::unique(User::class)->ignore($this->user()->id) // Ignore the current user's username
             ],
+            'bio' => [
+                'string',
+                'max:255'
+            ],
             'email' => [
                 'required', 
                 'string', 

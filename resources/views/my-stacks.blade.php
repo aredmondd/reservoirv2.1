@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="flex justify-between items-end mx-20 mt-12">
+    <div class="flex justify-between items-end mx-20 mt-16">
         <h1 class="text-mega text-white font-serif">My Stacks</h1>
         
         <button class="text-white border border-blue rounded-full px-4 p-2 mb-6 hover:bg-blue transition ease-in-out duration-300" x-data="" x-on:click.prevent="$dispatch('open-modal', 'new-stack')">{{ __('Create new Stack') }}</button>

@@ -6,6 +6,7 @@ namespace App\Models;
 use Illuminate\Database\Eloquent\Factories\HasFactory;
 use Illuminate\Foundation\Auth\User as Authenticatable;
 use Illuminate\Notifications\Notifiable;
+use Illuminate\Support\Facades\Storage;
 
 class User extends Authenticatable
 {
@@ -16,7 +17,9 @@ class User extends Authenticatable
         'username',
         'email',
         'password',
-        'is_private', // Add this to allow mass assignment
+        'bio',
+        'profile_picture',
+        'is_private',
     ];
 
     protected $guarded = [];
@@ -36,6 +39,10 @@ class User extends Authenticatable
 
     public function stack() {
         return $this->hasMany(Stack::class);
+    }
+
+    public function getProfilePictureUrl(){
+        return $this->profile_picture ? Storage::url($this->profile_picture) : 'public/images/default.png';
     }
 }
 

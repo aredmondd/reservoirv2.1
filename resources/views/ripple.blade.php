@@ -1,5 +1,5 @@
 <x-layout>
-    <h1 class="text-white text-mega font-serif text-center mt-12">Discover</h1>
+    <h1 class="text-white text-mega font-serif text-center mt-12">Discover with <span class="text-aqua">Ripple</span></h1>
 
     <!-- If the user has not tracked enough media: -->
     <div class="py-32 text-center text-white text-opacity-50 text-body">

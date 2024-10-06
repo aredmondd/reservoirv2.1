@@ -1,10 +1,10 @@
 <?php
 
 use App\Http\Controllers\ProfileController;
-use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TMDBController;
 use App\Http\Controllers\StackController;
 use App\Http\Controllers\UserController;
+use Illuminate\Support\Facades\Route;
 use App\Models\Stack;
 
 
@@ -19,7 +19,6 @@ Route::get('/search', [UserController::class, 'search'])->name('search');
 
 // Auth Routes
 Route::middleware('auth')->group(function () {
-    Route::get('/my-reservoir', function () { return view('my-reservoir'); })->name('my-reservoir');
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
     Route::get('/stack', [StackController::class, 'getStack'])->name('stack-view');
@@ -33,6 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::put('/profile/update-visibility', [UserController::class, 'updateVisibility'])->name('profile.update-visibility');
 });
 
+// Profile picture stuff
+Route::middleware('auth')->group(function () {
+    Route::get('/profile/picture/edit', [ProfileController::class, 'editProfilePicture'])->name('profile.picture.edit');
+    Route::post('/profile/picture/update', [ProfileController::class, 'updateProfilePicture'])->name('profile.picture.update');
+});
 
 // Make new stacks
 Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
