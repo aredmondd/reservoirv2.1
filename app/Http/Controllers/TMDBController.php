@@ -29,11 +29,31 @@ class TMDBController extends Controller
         $inTheatersMovies = $this->fetchMovies('now_playing');
         $topRatedMovies = $this->fetchMovies('top_rated');
 
+
+        $leftMovieId = 496243;
+        $middleMovieId = 27205;
+        $rightMovieId = 254320;
+
+        $leftMovie = $movieDetails = Http::asJson()
+        ->get(config('services.tmdb.endpoint').'movie/' . $leftMovieId . '?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
+        ->json();
+
+        $middleMovie = $movieDetails = Http::asJson()
+        ->get(config('services.tmdb.endpoint').'movie/' . $middleMovieId . '?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
+        ->json();
+
+        $rightMovie = $movieDetails = Http::asJson()
+        ->get(config('services.tmdb.endpoint').'movie/' . $rightMovieId . '?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
+        ->json();
+
         // Pass all the API calls into the view
         return view('index', [
             'popularMovie' => $popularMovies,
             'inTheatersMovie' => $inTheatersMovies,
             'topRatedMovie' => $topRatedMovies,
+            'leftMovie' => $leftMovie,
+            'middleMovie' => $middleMovie,
+            'rightMovie' => $rightMovie
         ]);
 
     }

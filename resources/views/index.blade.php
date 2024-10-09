@@ -14,9 +14,9 @@
     <x-hr />
     <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">Discover your favorites, explore trending films, and dive into a world of <span class="text-aqua">cinematic gems</span>.</p>
     <div class="flex mx-36 justify-around 3xl:mx-56">
-        <x-add-movie-ad img="images/movie_posters/parasite.jpg" name="Parasite" desc="Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan."></x-add-movie-ad>
-        <x-add-movie-ad img="images/movie_posters/batman.png" name="The Batman" desc="When a sadistic serial killer begins murdering key political figures in Gotham, The Batman is forced to investigate the city's hidden corruption and question his family's involvement."></x-add-movie-ad>
-        <x-add-movie-ad img="images/movie_posters/Lobster.jpg" name="The Lobster" desc="In a dystopian near future, according to the laws of The City, single people are taken to The Hotel, where they are obliged to find a romantic partner in 45 days or they're transformed into beasts and sent off into The Woods."></x-add-movie-ad>
+        <x-add-movie-ad :movieData='$leftMovie'></x-add-movie-ad>
+        <x-add-movie-ad :movieData='$middleMovie'></x-add-movie-ad>
+        <x-add-movie-ad :movieData='$rightMovie'></x-add-movie-ad>
     </div>
 
     <!-- Discover -->

@@ -17,6 +17,9 @@ foreach ($movie['release_dates']['results'] as $result) {
             }
         }
     }
+    else {
+        $rating = 'NR';
+    }
 }
 
 ?>
