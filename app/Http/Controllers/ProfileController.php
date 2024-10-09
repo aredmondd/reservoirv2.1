@@ -94,4 +94,20 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('success', 'Profile picture updated successfully.');
     }
+
+    public function deleteProfilePicture(Request $request) {
+        $user = Auth::user();
+
+        if ($user->profile_picture) {
+            // Delete the profile picture from storage
+            Storage::disk('public')->delete($user->profile_picture);
+
+            // Remove the profile picture path from the user record
+            $user->update(['profile_picture' => null]);
+
+            return redirect()->back()->with('success', 'Profile picture deleted successfully.');
+        }
+
+        return redirect()->back()->with('error', 'No profile picture to delete.');
+    }
 }
