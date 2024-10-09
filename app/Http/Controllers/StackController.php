@@ -160,6 +160,16 @@ class StackController extends Controller {
         return redirect('/stacks');
     }
 
+
+    public function destroy() {
+        $stackId = request('id');
+
+        $stack = Stack::find($stackId);
+
+        $stack->delete();
+
+        return redirect('/stacks');
+    }
 }
 
 ?>

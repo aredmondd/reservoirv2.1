@@ -13,14 +13,14 @@
     <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Add & track your media</h2>
     <x-hr />
     <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">Discover your favorites, explore trending films, and dive into a world of <span class="text-aqua">cinematic gems</span>.</p>
-    <div class="flex mx-36 justify-around">
+    <div class="flex mx-36 justify-around 3xl:mx-56">
         <x-add-movie-ad img="images/movie_posters/parasite.jpg" name="Parasite" desc="Greed and class discrimination threaten the newly formed symbiotic relationship between the wealthy Park family and the destitute Kim clan."></x-add-movie-ad>
         <x-add-movie-ad img="images/movie_posters/batman.png" name="The Batman" desc="When a sadistic serial killer begins murdering key political figures in Gotham, The Batman is forced to investigate the city's hidden corruption and question his family's involvement."></x-add-movie-ad>
         <x-add-movie-ad img="images/movie_posters/Lobster.jpg" name="The Lobster" desc="In a dystopian near future, according to the laws of The City, single people are taken to The Hotel, where they are obliged to find a romantic partner in 45 days or they're transformed into beasts and sent off into The Woods."></x-add-movie-ad>
     </div>
 
     <!-- Discover -->
-    <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Discover more with <span class="text-aqua">Ripple</span></h2>
+    <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Discover more with <span class="text-blue">Ripple</span></h2>
     <x-hr />
     <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">As you rate movies, <span class="text-aqua">Ripple</span>, an advanced AI model, creates a personalized recommendation list based on what you like and dislike.</p>
     <x-baloons></x-baloons>
@@ -29,10 +29,12 @@
     <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Organize with <span class="text-aqua">Stacks</span></h2>
     <x-hr />
     <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">Create custom stacks to highlight your favorite movies by genre, decade, or any theme you choose, showcasing your unique cinematic tastes.</p>
-    <div class="grid grid-cols-3 gap-x-16 mx-32">
-        <x-movie-stack title="Best scary movies" author="Brandon Wilson" />
-        <x-movie-stack title="Films everyone should watch" author="Aiden Redmond" />
-        <x-movie-stack title="'Yellow' movies" author="Axel Beaver" />
+    <div class="flex justify-center">
+        <div class="grid grid-cols-3 gap-x-32">
+            <x-movie-stack title="Best scary movies" author="Brandon Wilson" />
+            <x-movie-stack title="Must Watch" author="Aiden Redmond" />
+            <x-movie-stack title="Worst Movies 2024" author="Axel Beaver" />
+        </div>
     </div>
 
     <h1 class="text-white font-serif text-mega text-center mb-12 mt-32">Popular Movies</h1>

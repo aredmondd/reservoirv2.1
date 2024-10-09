@@ -6,7 +6,7 @@
         <meta name="csrf-token" content="{{ csrf_token() }}">
 
         <!-- Title & Favicon -->
-        <link rel="icon" href="images/droplet.png" type="image/x-icon">
+        <link rel="icon" href="../images/droplet.png" type="image/x-icon">
         <title>{{ Auth::guest() ? 'Reservoir' : 'Reservoir - App' }}</title>
 
         <!-- Fonts -->

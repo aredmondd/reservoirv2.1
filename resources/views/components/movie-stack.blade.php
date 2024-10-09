@@ -6,7 +6,7 @@
         <img src="images/movie_posters/Lobster.jpg" class="rounded-md h-48 shadow-md z-20 mr-[-75px]">
         <img src="images/movie_posters/polt.jpg" class="rounded-md h-48 shadow-md z-10 mr-[-75px]">
     </div>
-    <p class="text-body text-blue font-medium mt-2">{{ $title }}</p>
+    <p class="text-title text-blue font-medium mt-2">{{ $title }}</p>
     <div class="flex">
         <p class="text-sm text-white text-opacity-50">By {{ $author }}</p>
         <div class="mr-48"></div>

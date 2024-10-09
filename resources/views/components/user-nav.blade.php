@@ -11,12 +11,6 @@
                 </div>
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('my-reservoir')" :active="request()->is('my-reservoir')">
-                        {{ __('My Reservoir') }}
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('my-stacks')" :active="request()->is('stacks')">
                         {{ __('My Stacks') }}
                     </x-nav-link>
@@ -27,6 +21,12 @@
                         {{ __('Discover') }}
                     </x-nav-link>
                 </div>
+
+                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('search')" :active="request()->is('search')">
+                        {{ __('Friends') }}
+                    </x-nav-link>
+                </div>
             </div>
 
             <!-- Settings Dropdown -->
@@ -34,7 +34,7 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 text-white focus:outline-none transition ease-in-out duration-150">
-                            <div><img src="images/settings.png" alt="" class="w-6"></div>
+                            <div><img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/default.png') }}" alt="" class="w-8 h-8 rounded-full"></div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

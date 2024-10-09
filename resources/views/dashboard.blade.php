@@ -5,4 +5,8 @@
 
     <div class="mt-12"></div>
 
+    <div class="flex">
+        <div class="bg-white p-24 rounded-full"></div>
+    </div>
+
 </x-layout>
