@@ -43,6 +43,9 @@ class RegisteredUserController extends Controller
             'password' => Hash::make($request->password),
         ]);
 
+        $user->backlog()->create();
+        $user->watchlist()->create();
+
         event(new Registered($user));
 
         Auth::login($user);
