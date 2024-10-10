@@ -1,8 +1,11 @@
 <x-layout>
-    <div class="flex justify-between items-end mx-20 mt-12">
-        <div>
-            <h1 class="text-blue text-mega font-serif">{{ $user->username }}</h1>
-            <p class="text-white text-opacity-50 font-sans text-body">{{ $user->username }}</p>
+    <div class="flex justify-between items-center mx-20 mt-12">
+        <div class="flex">
+            <img src="{{ $user->profile_picture != null ? asset('storage/' . $user->profile_picture) : asset('images/default.png') }}" class="w-32 rounded-full mr-12">
+            <div class="flex flex-col">
+                <h1 class="text-blue text-mega font-serif">{{ $user->name }}</h1>
+                <p class="text-white text-opacity-50 font-sans text-body">{{ $user->username }}</p>
+            </div>
         </div>
 
         <!-- if the current user is already friends with user they are viewing -->
@@ -14,19 +17,12 @@
     <div class="flex justify-around mx-20 mt-12">
         <div class="border border-white border-opacity-50 rounded-lg p-12">
             <h1 class="text-white font-sans text-title">Stacks:</h1>
-            @if ($stacks != null)
+            @if ($stacks == null)
+            <p class="text-white text-center text-opacity-50">user has no stacks yet!</p>
+            @else
             @foreach ($stacks as $stack)
                 <p class="text-white text-center font-sans text-body">{{$stack->name}}</p>
             @endforeach
-            @else
-                <p class="text-white text-center">user has no stacks yet!</p>
             @endif
-        </div>
-        <div class="border border-white border-opacity-50 rounded-lg p-12">
-            <h1 class="text-white font-sans text-title">Recently Watched:</h1>
-        </div>
-        <div class="border border-white border-opacity-50 rounded-lg p-12">
-            <h1 class="text-white font-sans text-title">Friends:</h1>
-        </div>
     </div>
 </x-layout>

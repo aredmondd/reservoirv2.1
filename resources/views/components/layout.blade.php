@@ -18,7 +18,7 @@
         <!-- Scripts -->
         @vite(['resources/css/app.css', 'resources/js/app.js'])
     </head>
-    <body class="bg-midnight">
+    <body class="bg-midnight min-h-screen flex flex-col">
         @if (Auth::guest())
         <x-guest-nav />
         @else
@@ -26,7 +26,7 @@
         @endif
 
         <!-- Page Content -->
-        <main>
+        <main class="flex-grow">
             {{ $slot }}
         </main>
 

@@ -3,8 +3,6 @@
         Welcome back, {{ Auth::user()->name }}
     </h2>
 
-    <p>{{ Auth::user()->backlog->id }}</p>
-
     <div class="mt-12"></div>
 
     <div class="flex">

@@ -44,7 +44,7 @@
     <x-card-scroller :movieData="$inTheatersMovie"></x-card-scroller>
 
     <!-- Ad #2 -->
-    <div class="px-40 mt-32 text-center">
+    <div class="px-40 my-32 text-center">
         <h1 class="text-mega font-serif text-white">Ready to dive in?</h1>
         <div class="mt-6"></div>
         <a href="/register"><button class="text-midnight rounded-full bg-blue p-3 px-16 font-sans text-body bg-gradient-to-tl to-blue from-aqua from-10% bg-size-200 bg-pos-0 hover:bg-pos-100 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue transition-[background-position] duration-500">Register</button></a>

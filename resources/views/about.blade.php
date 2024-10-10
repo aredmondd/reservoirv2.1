@@ -14,7 +14,7 @@
     <div class="pt-32">
         <h1 class="text-white text-mega font-serif text-center">Want to learn more?</h1>
     </div>
-    <div class="mt-10">
+    <div class="mt-10 mb-32">
         <div class="flex p-5 pl-8 border border-white border-opacity-25 rounded-md mx-96 items-center hover:border-aqua transition duration-500 ease-in-out 3xl:mx-[575px]">
             <div class="mr-5">
                 <img class="rounded-full size-16 max-w-max" src="images/droplet.png" alt="">

@@ -1,10 +1,9 @@
-<div class="pt-24"></div>
 <p class="text-center text-white opacity-50 font-sans text-sm mb-10">Reservoir is a project created, designed, and developed by Aiden Redmond, Brandon Wilson, and Axel Beaver under the supervision of Dr. Roberson at Florida Southern College for Senior Project 24-25.</p>
 
-<hr class="border-white border-opacity-25 mx-12 my-5">
+<hr class="border-white border-opacity-25 mx-12">
 
-<div class="grid {{ Auth::guest() ? 'grid-cols-3' : 'grid-cols-4'; }} m-12 items-center">
-    <a href="/" class="focus:outline-none bg-gradient-to-r from-blue to-aqua text-transparent bg-clip-text font-serif text-title">Reservoir</a> 
+<div class="grid {{ Auth::guest() ? 'grid-cols-3' : 'grid-cols-4'; }} mx-12 mb-12 mt-10 items-center">
+    <a href="/" class="focus:outline-none bg-gradient-to-r from-blue to-aqua text-transparent bg-clip-text font-serif text-title">Reservoir</a>
 
     <div class="{{ Auth::guest() ? '' : 'col-span-2'; }}">
         <div class="flex text-center text-white text-body">

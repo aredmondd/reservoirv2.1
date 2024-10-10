@@ -12,7 +12,7 @@
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('my-stacks')" :active="request()->is('stacks')">
-                        {{ __('My Stacks') }}
+                        {{ __('Stacks') }}
                     </x-nav-link>
                 </div>
 

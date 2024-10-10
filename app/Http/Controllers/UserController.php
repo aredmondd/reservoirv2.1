@@ -31,10 +31,11 @@ class UserController extends Controller
         }
 
         $users = User::where('is_private', false)
-                      ->where(function ($query) use ($searchTerm) {
-                          $query->where('name', 'LIKE', '%' . $searchTerm . '%')->orWhere('username', 'LIKE', '%' . $searchTerm . '%');
-                      })
-                      ->get();
+                    ->where('id', '!=', auth()->id())
+                    ->where(function ($query) use ($searchTerm) {
+                        $query->where('name', 'LIKE', '%' . $searchTerm . '%')->orWhere('username', 'LIKE', '%' . $searchTerm . '%');
+                    })
+                    ->get();
 
         return view('search', compact('users'));
     }
@@ -58,6 +59,10 @@ class UserController extends Controller
         }
 
         $userStacks = Stack::where('user_id', $user->id)->get();
+
+        if ($userStacks->isEmpty()) {
+            $userStacks = null;
+        }
 
         return view('user-profile', ['user' => $user, 'stacks' => $userStacks]);
     }
