@@ -5,6 +5,7 @@ use App\Http\Controllers\TMDBController;
 use App\Http\Controllers\StackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BacklogController;
+use App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Stack;
 
@@ -34,6 +35,8 @@ Route::middleware('auth')->group(function () {
 
     // add to backlog
     Route::post('/backlog', [BacklogController::class, 'add'])->name('backlog.add');
+    Route::post('/history', [HistoryController::class, 'add'])->name('history.add');
+
 });
 
 // Profile picture stuff

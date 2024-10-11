@@ -17,7 +17,7 @@ class Movie extends Model
         return $this->belongsTo(Backlog::class);
     }
 
-    public function watchlist() {
-        return $this->belongsTo(Watchlist::class);
+    public function history() {
+        return $this->belongsTo(History::class);
     }
 }

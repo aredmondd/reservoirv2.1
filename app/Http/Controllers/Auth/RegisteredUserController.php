@@ -44,7 +44,7 @@ class RegisteredUserController extends Controller
         ]);
 
         $user->backlog()->create();
-        $user->watchlist()->create();
+        $user->history()->create();
 
         event(new Registered($user));
 
