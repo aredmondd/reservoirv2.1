@@ -68,19 +68,17 @@ class TMDBController extends Controller
     }
 
     // search for a movie by its name
-    public function search($movieTitle){
-
-        // can i do mini calls as each letter gets typed?
-
-        // or can i search through our database?
-
+    public function search(Request $request)
+    {
+        $movieTitle = $request->input('query');
+    
         $movieDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint').'movie/search/movie?query='. $movieTitle . '&include_adult=false&language=en-US&page=1' . '?api_key='.config('services.tmdb.api'))
-        ->json()['results'];
+            ->get(config('services.tmdb.endpoint') . 'search/movie?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
+            ->json()['results'];
 
-        //  return to where the movie was being searched?
-
-
+        // need to filter these movies by profane language and words in movie titles
+    
+        return view('search', compact('movieDetails'));
     }
 
 

@@ -44,7 +44,7 @@ Route::middleware('auth')->group(function () {
 Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
 
 // Make new stacks for movies
-// Route::get('/edit-stack',[TMDBController::class, 'details'])->name('edit-stack');
+Route::get('/search/results', [TMDBController::class, 'search'])->name('search-results');
 Route::post('/new-stack-movie', [StackController::class, 'movie'])->name('add-movie-stack');
 
 // Delete a stack

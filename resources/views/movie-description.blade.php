@@ -7,12 +7,17 @@ $hours = floor($movie['runtime'] / 60);
 $minutes = $movie['runtime'] % 60;
 $runtime = "{$hours}h {$minutes}min";
 
+//dd($movie);
+$rating = 'NR';
 // movie rating
 foreach ($movie['release_dates']['results'] as $result) {
     if ($result['iso_3166_1'] === 'US') {
         foreach ($result['release_dates'] as $release) {  
             if (!empty($release['certification'])) { 
                 $rating = $release['certification'];
+                // if($rating == ''){
+                //     $rating = 'nr';
+                // };
                 break;
             }
         }
