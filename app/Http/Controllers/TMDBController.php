@@ -67,6 +67,38 @@ class TMDBController extends Controller
         return view('movie-description', ['movie' => $movieDetails]);
     }
 
+    // remove profane language from movie searches
+    private function filter($unfilteredMovies){
+        // list of profane words to block out of movie search
+        $profanewords = [
+            'sex', 'sexual', 'porn', 'pornography', 'nude', 'nudity', 
+            'erotic', 'xxx', 'boobs', 'breasts', 'tits', 'penis', 
+            'dick', 'vagina', 'pussy', 'anal', 'blowjob', 'masturbation', 
+            'orgasm', 'intercourse', 'fetish', 'bdsm', 'explicit', 
+            'slut', 'whore', 'stripper', 'escort', 'lust', 'genital', 
+            'incest', 'orgy'
+        ];
+        $filteredMovies = [];
+        //  dd($unfilteredMovies);
+        // go through each movie
+        foreach($unfilteredMovies as $movies){
+            $isProfane = false;
+            // go through each profane word
+            foreach($profanewords as $word){
+                if(str_contains(strtolower($movies['original_title']), strtolower($word)) || str_contains(strtolower($movies['title']), strtolower($word)) || str_contains(strtolower($movies['overview']), strtolower($word))){
+                    $isProfane = true;
+                    break;
+                }
+            }
+            if(!$isProfane){
+                $filteredMovies[] = $movies;
+            }
+
+        }
+        return $filteredMovies;
+
+    }
+
     // search for a movie by its name
     public function search(Request $request)
     {
@@ -77,8 +109,9 @@ class TMDBController extends Controller
             ->json()['results'];
 
         // need to filter these movies by profane language and words in movie titles
+        $filteredMovies = $this->filter($movieDetails);
     
-        return view('search', compact('movieDetails'));
+        return view('search-movies', compact('filteredMovies'));
     }
 
 
