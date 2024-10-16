@@ -4,6 +4,8 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TMDBController;
 use App\Http\Controllers\StackController;
 use App\Http\Controllers\UserController;
+use App\Http\Controllers\BacklogController;
+use App\Http\Controllers\HistoryController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Stack;
 
@@ -21,7 +23,6 @@ Route::get('/search', [UserController::class, 'search'])->name('search');
 Route::middleware('auth')->group(function () {
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
-    // was commented out getStack
     Route::get('/stack', [StackController::class, 'testGetStack'])->name('stack-view');
     Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
     Route::get('/user/{username}', [UserController::class, 'display'])->name('display');
@@ -31,6 +32,11 @@ Route::middleware('auth')->group(function () {
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/update-visibility', [UserController::class, 'updateVisibility'])->name('profile.update-visibility');
+
+    // add to backlog
+    Route::post('/backlog', [BacklogController::class, 'add'])->name('backlog.add');
+    Route::post('/history', [HistoryController::class, 'add'])->name('history.add');
+
 });
 
 // Profile picture stuff

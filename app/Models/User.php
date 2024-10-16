@@ -45,8 +45,8 @@ class User extends Authenticatable
         return $this->hasOne(Backlog::class);
     }
 
-    public function watchlist() {
-        return $this->hasOne(Watchlist::class);
+    public function history() {
+        return $this->hasOne(History::class);
     }
 
     public function getProfilePictureUrl(){

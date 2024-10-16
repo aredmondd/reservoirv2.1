@@ -10,7 +10,7 @@
                 </div>
                 <input type="text" name="query" value="{{ request('query') }}" class="pl-10 text-body text-white rounded-full w-full py-2 px-40 bg-white bg-opacity-25 placeholder:pl-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"/>
             </div>
-            <button type="submit" class="px-3 py-2 rounded-full bg-blue ml-4 font-sans focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">Search</button>
+            <button type="submit" class="px-4 py-2 rounded-full bg-blue ml-4 font-sans focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">Search</button>
         </form>
 
 

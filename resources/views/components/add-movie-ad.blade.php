@@ -10,8 +10,8 @@
             </div>
     </div>
     <div class="flex mx-auto mt-6">
-        <p class="border border-blue rounded-full text-sm text-blue p-2 px-3 hover:cursor-pointer">Add to Watchlist</p>
+        <x-add-to-backlog-button :id='$movieData["id"]'/>
         <div class="mr-6"></div>
-        <p class="border border-aqua rounded-full text-sm text-aqua p-2 px-3 hover:cursor-pointer">Add to History</p>
+        <x-add-to-history-button :id='$movieData["id"]'/>
     </div>
 </div>

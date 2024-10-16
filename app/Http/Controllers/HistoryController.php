@@ -5,26 +5,26 @@ namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
 
-class BacklogController extends Controller
+class HistoryController extends Controller
 {
     public function add(Request $request) {
         // Get user & movieId
         $user = Auth::user();
         $movieId = $request->input('id');
     
-        $backlog = $user->backlog;
+        $history = $user->history;
     
-        $movies = $backlog->backlog ?? [];
+        $movies = $history->history ?? [];
     
-        // Check if movie ID is already in the user's backlog
+        // Check if movie ID is already in the user's history
         if (!in_array($movieId, $movies)) {
             $movies[] = $movieId;
-            $backlog->backlog = $movies;
-            $backlog->save();
+            $history->history = $movies;
+            $history->save();
     
-            dump($backlog->backlog);
+            dump($history->history);
         } else {
-            dump("Movie ID {$movieId} is already in the backlog.");
+            dump("Movie ID {$movieId} is already in the history.");
         }
     }   
 }
