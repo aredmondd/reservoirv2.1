@@ -1,11 +1,4 @@
-<?php
-
-$backlog = Auth::user()->backlog->backlog;
-
-?>
-
 <x-layout>
-
     <h2 class="text-blue font-serif text-mega text-center mt-12">
         Welcome back, {{ Auth::user()->name }}
     </h2>
@@ -17,8 +10,8 @@ $backlog = Auth::user()->backlog->backlog;
             <x-search-bar />
         </form>
         <div class="flex items-center pb-2 space-x-4">
-            <x-primary-button>Watchlist</x-primary-button>
-            <x-primary-button>History</x-primary-button>
+            <button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150"><a href="/dashboard?view=watchlist">Watchlist</a></button>
+            <button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'history' ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150"><a href="/dashboard?view=history">History</a></button>
         </div>
     </div>
 
@@ -39,7 +32,7 @@ $backlog = Auth::user()->backlog->backlog;
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>
 
-    @foreach ($backlog as $content)
+    @foreach ($list as $content)
         <x-content-row :content='$content'/>
     @endforeach
 

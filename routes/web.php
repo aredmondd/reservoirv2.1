@@ -6,6 +6,7 @@ use App\Http\Controllers\StackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\BacklogController;
 use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Stack;
 
@@ -23,8 +24,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
     Route::get('/stack', [StackController::class, 'testGetStack'])->name('stack-view');
-    Route::get('/dashboard', function () { return view('dashboard'); })->name('dashboard');
     Route::get('/user/{username}', [UserController::class, 'display'])->name('display');
+
+    // dashboard stuff
+    Route::get('/dashboard', [DashboardController::class, 'display'])->name('dashboard');
 
     // profile stuff
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
