@@ -13,9 +13,9 @@
                 <a href="/login" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Sign In</a>
             @else
                 <a href="/dashboard" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Dashboard</a>
-                <a href="/my-reservoir" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">My Reservoir</a>
-                <a href="/stacks" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">My Stacks</a>
+                <a href="/stacks" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Stacks</a>
                 <a href="/discover" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Discover</a>
+                <a href="/search" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Friends</a>
             @endif
             <a href="/about" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">About</a>
         </div>
