@@ -31,7 +31,7 @@ foreach ($movie['release_dates']['results'] as $result) {
 
 
 <x-layout>
-    <div class="mt-14"></div>
+    <div class="mt-12"></div>
     <div class="mx-24 flex">
         <img src="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" alt="" class="rounded-lg w-96">
         

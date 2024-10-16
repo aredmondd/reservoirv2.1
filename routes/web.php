@@ -10,16 +10,15 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Stack;
 
 
-// Get Routes
-Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index');
-Route::get('/movie-description/{movie}',[TMDBController::class, 'movieDetails'])->name('movie-description');
-Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
-Route::get('/about', function () { return view('about'); })->name('about');
+// Basic Routes
 
-Route::get('/search', [UserController::class, 'search'])->name('search');
+Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index'); // home page
+Route::get('/movie-description/{movie}',[TMDBController::class, 'movieDetails'])->name('movie-description'); //movie description page
+Route::get('/about', function () { return view('about'); })->name('about'); //about page
 
 
 // Auth Routes
+
 Route::middleware('auth')->group(function () {
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
@@ -37,24 +36,20 @@ Route::middleware('auth')->group(function () {
     Route::post('/backlog', [BacklogController::class, 'add'])->name('backlog.add');
     Route::post('/history', [HistoryController::class, 'add'])->name('history.add');
 
-});
+    // friends stuff
+    Route::get('/search', [UserController::class, 'search'])->name('search');
 
-// Profile picture stuff
-Route::middleware('auth')->group(function () {
+    // profile picture stuff
     Route::get('/profile/picture/edit', [ProfileController::class, 'editProfilePicture'])->name('profile.picture.edit');
     Route::post('/profile/picture/update', [ProfileController::class, 'updateProfilePicture'])->name('profile.picture.update');
     Route::delete('/profile/picture/delete', [ProfileController::class, 'deleteProfilePicture'])->name('profile.picture.delete');
+
+    // Stacks
+    Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
+    Route::get('/search/results', [TMDBController::class, 'search'])->name('search-results');
+    Route::post('/new-stack-movie', [StackController::class, 'movie'])->name('add-movie-stack');
+    Route::delete('/stack', [StackController::class, 'destroy']);
 });
-
-// Make new stacks
-Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
-
-// Make new stacks for movies
-Route::get('/search/results', [TMDBController::class, 'search'])->name('search-results');
-Route::post('/new-stack-movie', [StackController::class, 'movie'])->name('add-movie-stack');
-
-// Delete a stack
-Route::delete('/stack', [StackController::class, 'destroy']);
 
 // Catch all route
 Route::fallback(function () { abort(404); });
