@@ -52,6 +52,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/search/results', [TMDBController::class, 'search'])->name('search-results');
     Route::post('/new-stack-movie', [StackController::class, 'movie'])->name('add-movie-stack');
     Route::delete('/stack', [StackController::class, 'destroy']);
+
+    Route::post('/add-content', [DashboardController::class, 'add'])->name('add-content');
 });
 
 // Catch all route

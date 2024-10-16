@@ -17,8 +17,11 @@ class HistoryController extends Controller
         $movies = $history->history ?? [];
     
         // Check if movie ID is already in the user's history
-        if (!in_array($movieId, $movies)) {
-            $movies[] = $movieId;
+        if (!in_array($movieId, array_column($movies, 'id'))) {
+            $movies[] = [
+                'id' => $movieId,
+                'added_at' => now()
+            ];
             $history->history = $movies;
             $history->save();
     

@@ -23,4 +23,8 @@ class DashboardController extends Controller
             abort(404);
         }
     }
+
+    public function add(Request $request) {
+        dd("made it!");
+    }
 }

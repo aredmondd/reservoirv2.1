@@ -16,12 +16,14 @@ class BacklogController extends Controller
     
         $movies = $backlog->backlog ?? [];
     
-        // Check if movie ID is already in the user's backlog
-        if (!in_array($movieId, $movies)) {
-            $movies[] = $movieId;
+        if (!in_array($movieId, array_column($movies, 'id'))) {
+            $movies[] = [
+                'id' => $movieId,
+                'added_at' => now()
+            ];
             $backlog->backlog = $movies;
             $backlog->save();
-    
+
             dump($backlog->backlog);
         } else {
             dump("Movie ID {$movieId} is already in the backlog.");

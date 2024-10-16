@@ -1,9 +1,9 @@
 <x-layout>
-    <h2 class="text-blue font-serif text-mega text-center mt-12">
+    <h2 class="text-white font-serif text-mega text-center mt-12">
         Welcome back, {{ Auth::user()->name }}
     </h2>
 
-    <div class="mt-6"></div>
+    <div class="mt-12"></div>
 
     <div class="flex justify-between mx-40 items-center">
         <form action="" class="text-white">
@@ -32,9 +32,15 @@
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>
 
-    @foreach ($list as $content)
-        <x-content-row :content='$content'/>
-    @endforeach
+    @if ($list == null)
+        <div class="py-32 text-center text-white text-opacity-50 text-body">
+            so empty...
+        </div>
+    @else
+        @foreach ($list as $content)
+            <x-content-row :content='$content'/>
+        @endforeach
+    @endif
 
     <div class="mb-24"></div>
 
