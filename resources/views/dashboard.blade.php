@@ -1,6 +1,6 @@
 <x-layout>
     <h2 class="text-white font-serif text-mega text-center mt-12">
-        Welcome back, {{ Auth::user()->name }}
+        My Reservoir
     </h2>
 
     <div class="mt-12"></div>
@@ -23,10 +23,6 @@
             <p class="col-span-2">content</p>
             <p>released</p>
             <p>runtime</p>
-        </div>
-        <div class="text-white flex justify-end space-x-5">
-            <p>like</p>
-            <p>edit</p>
         </div>
     </div>
 

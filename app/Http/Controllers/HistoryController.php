@@ -8,7 +8,6 @@ use Illuminate\Http\Request;
 class HistoryController extends Controller
 {
     public function add(Request $request) {
-        // Get user & movieId
         $user = Auth::user();
         $movieId = $request->input('id');
     
@@ -16,11 +15,11 @@ class HistoryController extends Controller
     
         $movies = $history->history ?? [];
     
-        // Check if movie ID is already in the user's history
         if (!in_array($movieId, array_column($movies, 'id'))) {
             $movies[] = [
                 'id' => $movieId,
-                'added_at' => now()
+                'time' => now(),
+                'liked' => false
             ];
             $history->history = $movies;
             $history->save();
@@ -29,5 +28,7 @@ class HistoryController extends Controller
         } else {
             dump("Movie ID {$movieId} is already in the history.");
         }
+
+        return redirect()->back();
     }   
 }

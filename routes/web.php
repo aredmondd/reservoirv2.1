@@ -24,7 +24,9 @@ Route::middleware('auth')->group(function () {
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
     Route::get('/stack', [StackController::class, 'testGetStack'])->name('stack-view');
-    Route::get('/user/{username}', [UserController::class, 'display'])->name('display');
+
+    // user stuff
+    Route::get('/user/{username}', [UserController::class, 'display'])->name('user-profile');
 
     // dashboard stuff
     Route::get('/dashboard', [DashboardController::class, 'display'])->name('dashboard');
@@ -54,6 +56,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/stack', [StackController::class, 'destroy']);
 
     Route::post('/add-content', [DashboardController::class, 'add'])->name('add-content');
+    Route::post('/favorite', [DashboardController::class, 'fav'])->name('favorite');
+    Route::post('/move-content', [DashboardController::class, 'move'])->name('move-content');
+    Route::delete('/delete-content', [DashboardController::class, 'delete'])->name('delete-content');
 });
 
 // Catch all route
