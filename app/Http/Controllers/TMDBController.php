@@ -20,6 +20,12 @@ class TMDBController extends Controller
         ->get(config('services.tmdb.endpoint').'movie/'.$category.'?api_key='.config('services.tmdb.api'))
         ->json()['results'];
     }
+    private function fetchTV($category){
+        // Make the API call for the provided category
+        return Http::asJson()
+        ->get(config('services.tmdb.endpoint').'tv/'.$category.'?api_key='.config('services.tmdb.api'))
+        ->json()['results'];
+    }
     // I am adding this here so we can make all the calls to the api in one function
     // and not seperate them for if we want to show all the shit yk dog
     public function mainMovieFunc(){
@@ -29,6 +35,9 @@ class TMDBController extends Controller
         $inTheatersMovies = $this->fetchMovies('now_playing');
         $topRatedMovies = $this->fetchMovies('top_rated');
 
+        //tvshows  which is actually going to be top rated lol
+        $topRatedTVShows = $this->fetchTV('top_rated');
+        // dd($topRatedTVShows);
 
         $leftMovieId = 496243;
         $middleMovieId = 27205;
@@ -46,6 +55,7 @@ class TMDBController extends Controller
         ->get(config('services.tmdb.endpoint').'movie/' . $rightMovieId . '?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
         ->json();
 
+        // dd($popularTVShows);
         // Pass all the API calls into the view
         return view('index', [
             'popularMovie' => $popularMovies,
@@ -53,18 +63,24 @@ class TMDBController extends Controller
             'topRatedMovie' => $topRatedMovies,
             'leftMovie' => $leftMovie,
             'middleMovie' => $middleMovie,
-            'rightMovie' => $rightMovie
+            'rightMovie' => $rightMovie,
+
+            'topRatedTVShows' => $topRatedTVShows
         ]);
 
     }
 
 // get full list of movie details
-    public function movieDetails($movieId){
+    public function movieDetails($movieId, $flag){
+        // to determine if movie or tv details need to be shown
+        $descriptor = $flag === 'movie' ? 'movie/' : 'tv/';
+        $append = $flag === 'movie' ? 'release_dates' : 'content_ratings';
+
         $movieDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint').'movie/' . $movieId .'?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
+        ->get(config('services.tmdb.endpoint'). $descriptor . $movieId .'?append_to_response=' . $append . '&api_key='.config('services.tmdb.api'))
         ->json();
         // edit stack for now for testing
-        return view('movie-description', ['movie' => $movieDetails]);
+        return view('movie-description', ['movie' => $movieDetails, 'flag' => $flag]);
     }
 
     // remove profane language from movie searches
@@ -76,7 +92,7 @@ class TMDBController extends Controller
             'dick', 'vagina', 'pussy', 'anal', 'blowjob', 'masturbation', 
             'orgasm', 'intercourse', 'fetish', 'bdsm', 'explicit', 
             'slut', 'whore', 'stripper', 'escort', 'lust', 'genital', 
-            'incest', 'orgy'
+            'incest', 'orgy' , 'Big Tit Monastery'
         ];
         $filteredMovies = [];
         //  dd($unfilteredMovies);

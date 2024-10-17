@@ -10,7 +10,7 @@ use App\Models\Stack;
 
 // Get Routes
 Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index');
-Route::get('/movie-description/{movie}',[TMDBController::class, 'movieDetails'])->name('movie-description');
+Route::get('/movie-description/{movie}/{flag}',[TMDBController::class, 'movieDetails'])->name('movie-description');
 Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
 Route::get('/about', function () { return view('about'); })->name('about');
 
