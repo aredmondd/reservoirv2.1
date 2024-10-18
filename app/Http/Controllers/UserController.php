@@ -65,11 +65,11 @@ class UserController extends Controller {
         }
         elseif ($profilePage == 'watchlist') {
 
-            return view('user-profile/watchlist', ['user' => $user]);
+            return view('user-profile/watchlist', ['user' => $user, 'watchlist' => $user->backlog->backlog]);
         }
         elseif ($profilePage == 'history') {
 
-            return view('user-profile/history', ['user' => $user]);
+            return view('user-profile/history', ['user' => $user, 'history' => $user->history->history]);
         }
         elseif ($profilePage == 'journal') {
 
