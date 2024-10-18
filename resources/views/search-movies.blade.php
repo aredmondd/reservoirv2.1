@@ -1,7 +1,3 @@
-<?php 
-// dd(request())
-?>
-
 <x-layout>
     <div class="container mx-auto p-8">
         <h1 class="text-white text-2xl mb-4">Search Results for "{{ request()->query('query'); }}"</h1>

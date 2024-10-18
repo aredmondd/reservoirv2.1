@@ -49,22 +49,6 @@
             @endforeach
         @endif
     </div>
-        <!-- <div class="flex space-x-8 justify-center">
-            <x-stack-movie-poster img="images/movie_posters/parasite.jpg" name="Parasite"/>
-            <x-stack-movie-poster img="images/movie_posters/batman.png" name="The Batman"/>
-            <x-stack-movie-poster img="images/movie_posters/Lobster.jpg" name="The Lobster"/>
-            <x-stack-movie-poster img="images/movie_posters/opp.avif" name="Oppenheimer"/>
-            <x-stack-movie-poster img="images/movie_posters/joker.jpeg" name="The Joker"/>
-        </div>
-    <x-hr class="mt-12" />
-
-        <div class="flex space-x-8 justify-center">
-            <x-stack-movie-poster img="images/movie_posters/parasite.jpg" name="Parasite"/>
-            <x-stack-movie-poster img="images/movie_posters/batman.png" name="The Batman"/>
-            <x-stack-movie-poster img="images/movie_posters/Lobster.jpg" name="The Lobster"/>
-            <x-stack-movie-poster img="images/movie_posters/opp.avif" name="Oppenheimer"/>
-            <x-stack-movie-poster img="images/movie_posters/joker.jpeg" name="The Joker"/>
-        </div> -->
 </x-layout>
 
 <script>
