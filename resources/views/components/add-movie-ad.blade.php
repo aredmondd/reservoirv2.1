@@ -10,7 +10,7 @@
             </div>
     </div>
     <div class="flex mx-auto mt-6">
-        <x-add-to-backlog-button :id='$movieData["id"]'/>
+        <x-add-to-watchlist-button :id='$movieData["id"]'/>
         <div class="mr-6"></div>
         <x-add-to-history-button :id='$movieData["id"]'/>
     </div>

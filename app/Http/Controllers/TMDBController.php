@@ -79,7 +79,6 @@ class TMDBController extends Controller
             'incest', 'orgy'
         ];
         $filteredMovies = [];
-        //  dd($unfilteredMovies);
         // go through each movie
         foreach($unfilteredMovies as $movies){
             $isProfane = false;

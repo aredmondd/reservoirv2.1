@@ -4,8 +4,7 @@ use App\Http\Controllers\ProfileController;
 use App\Http\Controllers\TMDBController;
 use App\Http\Controllers\StackController;
 use App\Http\Controllers\UserController;
-use App\Http\Controllers\BacklogController;
-use App\Http\Controllers\HistoryController;
+use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Stack;
@@ -41,9 +40,9 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/update-visibility', [UserController::class, 'updateVisibility'])->name('profile.update-visibility');
 
-    // add to backlog
-    Route::post('/backlog', [BacklogController::class, 'add'])->name('backlog.add');
-    Route::post('/history', [HistoryController::class, 'add'])->name('history.add');
+    // add to a list (watchlist or history)
+    Route::post('/watchlist', [ContentController::class, 'addTowatchlist'])->name('watchlist.add');
+    Route::post('/history', [ContentController::class, 'addToHistory'])->name('history.add');
 
     // friends stuff
     Route::get('/search', [UserController::class, 'search'])->name('search');

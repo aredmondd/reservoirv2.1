@@ -2,8 +2,6 @@
   <div class="flex flex-wrap items-center justify-between p-4">
     <a href="/" class="focus:outline-none bg-gradient-to-r from-blue to-aqua text-transparent bg-clip-text font-serif text-title">Reservoir</a> 
     <div class="flex items-center text-white">
-      <!-- delete this ugly ass shit later -->
-      
       <form action="{{ route('search-results') }}" method="GET" class="mr-4">
           <input 
               type="text" 

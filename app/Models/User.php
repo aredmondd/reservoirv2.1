@@ -41,8 +41,8 @@ class User extends Authenticatable
         return $this->hasMany(Stack::class);
     }
 
-    public function backlog() {
-        return $this->hasOne(Backlog::class);
+    public function watchlist() {
+        return $this->hasOne(Watchlist::class);
     }
 
     public function history() {

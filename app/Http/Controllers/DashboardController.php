@@ -11,13 +11,13 @@ class DashboardController extends Controller
         $view = $request->input('view');
 
         if ($view == 'watchlist') {
-            return view('dashboard', ['list' => Auth::user()->backlog->backlog]);
+            return view('dashboard', ['list' => Auth::user()->watchlist->watchlist]);
         }
         elseif ($view == 'history') {
             return view('dashboard', ['list' => Auth::user()->history->history]);
         }
         elseif ($view == null) {
-            return view('dashboard', ['list' => Auth::user()->backlog->backlog]);
+            return view('dashboard', ['list' => Auth::user()->watchlist->watchlist]);
         }
         else {
             abort(404);
@@ -35,8 +35,8 @@ class DashboardController extends Controller
         $listType = $request->input('list');
     
         if ($listType === 'watchlist') {
-            $backlog = $user->backlog;
-            $movies = $backlog->backlog ?? [];
+            $watchlist = $user->watchlist;
+            $movies = $watchlist->watchlist ?? [];
         } elseif ($listType === 'history') {
             $history = $user->history;
             $movies = $history->history ?? [];
@@ -56,8 +56,8 @@ class DashboardController extends Controller
     
         if ($movieFound) {
             if ($listType === 'watchlist') {
-                $backlog->backlog = $movies;
-                $backlog->save();
+                $watchlist->watchlist = $movies;
+                $watchlist->save();
             } elseif ($listType === 'history') {
                 $history->history = $movies;
                 $history->save();
@@ -77,8 +77,8 @@ class DashboardController extends Controller
         $listType = $request->input('list');
 
         if ($listType === 'watchlist') {
-            $backlog = $user->backlog;
-            $movies = $backlog->backlog ?? [];
+            $watchlist = $user->watchlist;
+            $movies = $watchlist->watchlist ?? [];
         } elseif ($listType === 'history') {
             $history = $user->history;
             $movies = $history->history ?? [];
@@ -93,8 +93,8 @@ class DashboardController extends Controller
 
         // Save the updated list 
         if ($listType === 'watchlist') {
-            $backlog->backlog = array_values($movies);
-            $backlog->save();
+            $watchlist->watchlist = array_values($movies);
+            $watchlist->save();
         } elseif ($listType === 'history') {
             $history->history = array_values($movies);
             $history->save();
@@ -108,14 +108,14 @@ class DashboardController extends Controller
         $movieId = $request->input('id');
         $contentToMove = null;
 
-        $backlog = $user->backlog;
+        $watchlist = $user->watchlist;
         $history = $user->history;
 
         $historyContent = $history->history ?? [];
-        $backlogContent = $backlog->backlog ?? [];
+        $watchlistContent = $watchlist->watchlist ?? [];
 
         // find the piece of content from the watchlist
-        foreach ($backlogContent as $content) {
+        foreach ($watchlistContent as $content) {
             if ($content['id'] == $movieId) {
                 $contentToMove = $content;
             }
@@ -138,13 +138,13 @@ class DashboardController extends Controller
             dd('Movie is already in history!');
         }
 
-        // delete the content from backlog
-        $backlogContent = array_filter($backlogContent, function ($movie) use ($movieId) {
+        // delete the content from watchlist
+        $watchlistContent = array_filter($watchlistContent, function ($movie) use ($movieId) {
             return $movie['id'] != $movieId; 
         });
 
-        $backlog->backlog = array_values($backlogContent);
-        $backlog->save();
+        $watchlist->watchlist = array_values($watchlistContent);
+        $watchlist->save();
 
         return redirect()->back();
     }
