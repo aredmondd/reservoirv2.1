@@ -27,6 +27,10 @@ Route::middleware('auth')->group(function () {
 
     // user stuff
     Route::get('/user/{username}', [UserController::class, 'display'])->name('user-profile');
+    Route::get('/user/{username}/watchlist', [UserController::class, 'display'])->name('user-watchlist');
+    Route::get('/user/{username}/history', [UserController::class, 'display'])->name('user-history');
+    Route::get('/user/{username}/stacks', [UserController::class, 'display'])->name('user-stacks');
+    Route::get('/user/{username}/journal', [UserController::class, 'display'])->name('user-diary');
 
     // dashboard stuff
     Route::get('/dashboard', [DashboardController::class, 'display'])->name('dashboard');

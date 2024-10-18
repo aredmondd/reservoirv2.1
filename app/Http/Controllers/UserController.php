@@ -6,10 +6,8 @@ use Illuminate\Support\Facades\Auth;
 use App\Models\User;
 use App\Models\Stack;
 
-class UserController extends Controller
-{
-    public function updateVisibility(Request $request)
-    {
+class UserController extends Controller {
+    public function updateVisibility(Request $request) {
         $request->validate([
             'visibility' => 'required|in:public,private',
         ]);
@@ -22,8 +20,7 @@ class UserController extends Controller
         return back()->with('status', 'visibility-updated');
     }
 
-    public function search(Request $request)
-    {
+    public function search(Request $request) {
         $searchTerm = $request->input('query');
 
         if (empty($searchTerm)) {
@@ -58,12 +55,42 @@ class UserController extends Controller
             return redirect('/dashboard');
         }
 
-        $userStacks = Stack::where('user_id', $user->id)->get();
+        $profilePage = request()->segment(3);
 
-        if ($userStacks->isEmpty()) {
-            $userStacks = null;
+        if ($profilePage == null) {
+            return view('user-profile/index', ['user' => $user]);
         }
+        elseif ($profilePage == 'stacks') {
+            return view('user-profile/stacks', ['user' => $user, 'stacks' => $user->stack->toArray()]);
+        }
+        elseif ($profilePage == 'watchlist') {
 
-        return view('user-profile', ['user' => $user, 'stacks' => $userStacks]);
+            return view('user-profile/watchlist', ['user' => $user]);
+        }
+        elseif ($profilePage == 'history') {
+
+            return view('user-profile/history', ['user' => $user]);
+        }
+        elseif ($profilePage == 'journal') {
+
+            return view('user-profile/journal', ['user' => $user]);
+        }
     }
+
+    public function watchlist(Request $request) {
+
+    }
+
+    public function history(Request $request) {
+        
+    }
+
+    public function stacks(Request $request) {
+        
+    }
+
+    public function diary(Request $request) {
+        
+    }
+
 }
