@@ -3,12 +3,6 @@
         My Reservoir
     </h2>
 
-    <div class="flex justify-around">
-        @foreach ($list as $content)
-            <x-favorite-content :content='$content' />
-        @endforeach
-    </div>
-
     <div class="mt-12"></div>
 
     <div class="flex justify-between mx-40 items-center">
