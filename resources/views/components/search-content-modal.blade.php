@@ -13,14 +13,14 @@
                 name="query"
                 type="text"
                 class="mt-1 block w-3/4 shadow-md"
-                placeholder="Search Movies, TV Shows, & more...'"
+                placeholder="Search Movies, TV Shows, & more..."
                 required
             />
         </div>
 
         <div class="mt-6 flex justify-between items-center">
             <button type="button" x-on:click="$dispatch('close')" class="text-midnight bg-white rounded-full px-4 p-2 font-medium tracking-wide focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">Cancel</button>
-            <button type="submit "class="text-white bg-blue rounded-full px-4 p-2 font-medium tracking-wide focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">{{ __('Create new Stack') }}</button>
+            <button type="submit "class="text-white bg-blue rounded-full px-4 p-2 font-medium tracking-wide focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">Search</button>
         </div>
     </form>
 </x-modal>
