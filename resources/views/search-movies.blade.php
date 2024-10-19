@@ -1,5 +1,5 @@
 <?php 
-// dd(request())
+//  dd($filteredMovies)
 ?>
 
 <x-layout>
@@ -8,11 +8,17 @@
         
         <div class="grid grid-cols-4 gap-6">
             @forelse($filteredMovies as $movie)
+            <?php 
+                // it is a movie
+                $flag = isset($movie['name']) ? 'tvshow' : 'movie';
+                $title = $movie['title'] ?? $movie['name'];
+                $releaseDate = $movie['release_date'] ?? $movie['first_air_date'];
+            ?>
                 <div class="bg-gray-800 p-4 rounded-lg">
-                    <a href="{{ route('movie-description', ['movie' => $movie['id']]) }}">
-                        <img src="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" alt="{{ $movie['title'] }}" class="rounded-lg mb-2">
-                        <h2 class="text-white text-lg">{{ $movie['title'] }}</h2>
-                        <p class="text-white text-opacity-50">{{ $movie['release_date'] }}</p>
+                    <a href="{{ route('movie-description', ['movie' => $movie['id'], 'flag' => $flag]) }}">
+                        <img src="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" alt="{{ $title }}" class="rounded-lg mb-2">
+                        <h2 class="text-white text-lg">{{ $title }}</h2>
+                        <p class="text-white text-opacity-50">{{ $releaseDate }}</p>
                     </a>
                 </div>
             @empty

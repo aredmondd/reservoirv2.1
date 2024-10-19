@@ -101,7 +101,10 @@ class TMDBController extends Controller
             $isProfane = false;
             // go through each profane word
             foreach($profanewords as $word){
-                if(str_contains(strtolower($movies['original_title']), strtolower($word)) || str_contains(strtolower($movies['title']), strtolower($word)) || str_contains(strtolower($movies['overview']), strtolower($word))){
+                if( str_contains(strtolower($movies['original_title'] ?? $movies['original_name']), strtolower($word)) ||
+                    str_contains(strtolower($movies['title'] ?? $movies['name']), strtolower($word)) ||
+                    str_contains(strtolower($movies['overview']), strtolower($word))
+                    ){
                     $isProfane = true;
                     break;
                 }
@@ -120,12 +123,24 @@ class TMDBController extends Controller
     {
         $movieTitle = $request->input('query');
     
+        // movie requests
         $movieDetails = Http::asJson()
             ->get(config('services.tmdb.endpoint') . 'search/movie?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
             ->json()['results'];
 
+        // tv show requests
+        $tvDetails = Http::asJson()
+            ->get(config('services.tmdb.endpoint') . 'search/tv?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
+            ->json()['results'];
+
+        $allResults = array_merge($movieDetails, $tvDetails);
         // need to filter these movies by profane language and words in movie titles
-        $filteredMovies = $this->filter($movieDetails);
+        // should sort this by vote count
+        $filteredMovies = $this->filter($allResults);
+        // Sort by vote count in descending order
+        usort($filteredMovies, function ($a, $b) {
+            return $b['vote_count'] <=> $a['vote_count'];
+        });
     
         return view('search-movies', compact('filteredMovies'));
     }

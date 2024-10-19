@@ -8,7 +8,7 @@
           <input 
               type="text" 
               name="query" 
-              placeholder="Search movies..." 
+              placeholder="Search..." 
               class="px-4 py-2 text-black rounded focus:outline-none"
               required
           />
