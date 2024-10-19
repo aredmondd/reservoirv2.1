@@ -10,11 +10,13 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Stack;
 
 
-// Basic Routes
+// Get Routes
+Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index');
+Route::get('/movie-description/{movie}',[TMDBController::class, 'movieDetails'])->name('movie-description');
+Route::get('/movie-demo',[TMDBController::class, 'mainMovieFunc'])->name('movie-api-demo');
+Route::get('/about', function () { return view('about'); })->name('about');
 
-Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index'); // home page
-Route::get('/movie-description/{movie}',[TMDBController::class, 'movieDetails'])->name('movie-description'); //movie description page
-Route::get('/about', function () { return view('about'); })->name('about'); //about page
+Route::get('/search', [UserController::class, 'search'])->name('search');
 
 
 // Auth Routes

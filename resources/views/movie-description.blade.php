@@ -1,4 +1,5 @@
 <?php
+// dd($movie);
 // vote average
 $percent = round($movie['vote_average'] * 10);
 
@@ -7,6 +8,7 @@ $hours = floor($movie['runtime'] / 60);
 $minutes = $movie['runtime'] % 60;
 $runtime = "{$hours}h {$minutes}min";
 
+//dd($movie);
 $rating = 'NR';
 // movie rating
 foreach ($movie['release_dates']['results'] as $result) {
@@ -21,10 +23,23 @@ foreach ($movie['release_dates']['results'] as $result) {
             }
         }
     }
-    else {
-        $rating = 'NR';
+} else {
+    $runtime = "{$movie['number_of_seasons']} Seasons";
+    $title = $movie['name'];
+    $releaseDate = $movie['first_air_date'];
+    $rating = 'NR';
+    // movie rating
+    foreach ($movie['content_ratings']['results'] as $result) {
+        if ($result['iso_3166_1'] === 'US') {
+            $rating = $result['rating'];
+            break; 
+        }
     }
 }
+
+
+//dd($movie);
+
 
 ?>
 
@@ -38,9 +53,9 @@ foreach ($movie['release_dates']['results'] as $result) {
         <div>
             <div class="flex flex-row justify-between">
                 <div>
-                    <h1 class="text-mega text-white font-serif"> {{ $movie['title'] }}</h1>
+                    <h1 class="text-mega text-white font-serif"> {{ $title }}</h1>
                     <!-- movie data - movie rating (pg/r) - how long movie is-->
-                    <h3 class="text-body text-white text-opacity-50 font-sans">{{ $movie['release_date'] }} | {{ $rating }} | {{ $runtime }} </h3>
+                    <h3 class="text-body text-white text-opacity-50 font-sans">{{ $releaseDate }} | {{ $rating }} | {{ $runtime }} </h3>
                 </div>
                 <div class="flex">
                     <div class="border border-white border-opacity-25 text-white p-12 rounded-md"> {{ $percent }}</div>

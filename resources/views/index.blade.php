@@ -38,10 +38,12 @@
     </div>
 
     <h1 class="text-white font-serif text-mega text-center mb-12 mt-32">Popular Movies</h1>
-    <x-card-scroller :movieData="$popularMovie"></x-card-scroller>
+    <x-card-scroller :movieData="$popularMovie" :flag=" 'movie' "></x-card-scroller>
 
-    <h1 class="text-white font-serif text-mega text-center mb-12 mt-32">Recently Released</h1>
-    <x-card-scroller :movieData="$inTheatersMovie"></x-card-scroller>
+    <h1 class="text-white font-serif text-mega text-center mb-12 mt-32">Popular TV Shows</h1>
+    <!-- in theater movies  -->
+    <x-card-scroller :movieData="$topRatedTVShows" :flag=" 'tvshow' "></x-card-scroller>
+   
 
     <!-- Ad #2 -->
     <div class="px-40 my-32 text-center">
