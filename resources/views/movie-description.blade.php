@@ -4,22 +4,22 @@
 $percent = round($movie['vote_average'] * 10);
 
 // runtime
-$hours = floor($movie['runtime'] / 60);
-$minutes = $movie['runtime'] % 60;
-$runtime = "{$hours}h {$minutes}min";
-
-//dd($movie);
-$rating = 'NR';
-// movie rating
-foreach ($movie['release_dates']['results'] as $result) {
-    if ($result['iso_3166_1'] === 'US') {
-        foreach ($result['release_dates'] as $release) {  
-            if (!empty($release['certification'])) { 
-                $rating = $release['certification'];
-                // if($rating == ''){
-                //     $rating = 'nr';
-                // };
-                break;
+if($flag == "movie"){
+    $hours = floor($movie['runtime'] / 60);
+    $minutes = $movie['runtime'] % 60;
+    $runtime = "{$hours}h {$minutes}min";
+    // bc of tv show 
+    $title = $movie['title'];
+    $releaseDate = $movie['release_date'];
+    $rating = 'NR';
+    // movie rating
+    foreach ($movie['release_dates']['results'] as $result) {
+        if ($result['iso_3166_1'] === 'US') {
+            foreach ($result['release_dates'] as $release) {  
+                if (!empty($release['certification'])) { 
+                    $rating = $release['certification'];
+                    break;
+                }
             }
         }
     }
@@ -45,7 +45,7 @@ foreach ($movie['release_dates']['results'] as $result) {
 
 
 <x-layout>
-    <div class="mt-12"></div>
+    <div class="mt-14"></div>
     <div class="mx-24 flex">
         <img src="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" alt="" class="rounded-lg w-96">
         
