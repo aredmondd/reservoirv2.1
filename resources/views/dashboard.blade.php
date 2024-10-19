@@ -3,6 +3,12 @@
         My Reservoir
     </h2>
 
+    <div class="flex justify-around">
+        @foreach ($list as $content)
+            <x-favorite-content :content='$content' />
+        @endforeach
+    </div>
+
     <div class="mt-12"></div>
 
     <div class="flex justify-between mx-40 items-center">
@@ -17,7 +23,11 @@
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>
 
+    @if (request()->input('view') == 'watchlist' || !request()->input('view'))
     <x-watchlist-header />
+    @else
+    <x-history-header />
+    @endif
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>
 

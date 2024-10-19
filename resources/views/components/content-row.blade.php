@@ -20,6 +20,9 @@ $releaseYear = Carbon::parse($details['release_date'])->year
         </div>
         <p>{{ $releaseYear }}</p>
         <p>{{ $runtime }}</p>
+        @if (request()->view == 'history')
+        <p>☆☆☆☆☆</p>
+        @endif
     </div>
     <div class="flex justify-end space-x-6 items-center">
         <form method="POST" action="/favorite?id={{ $content['id'] }}&list={{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'watchlist' : 'history' }}"> @csrf
@@ -31,9 +34,11 @@ $releaseYear = Carbon::parse($details['release_date'])->year
                 @endif
             </button>
         </form>
+        @if (request()->input('view') != 'history')
         <form method="POST" action="/move-content?id={{ $content['id'] }}"> @csrf
             <button type="submit" class="material-symbols-outlined hover:text-blue hover:cursor-pointer" title="Move content from watchlist to history">check_circle</button>
         </form>
+        @endif
         <form method="POST" action="/delete-content?id={{ $content['id'] }}&list={{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'watchlist' : 'history' }}"> @csrf @method('DELETE')
             <button type="submit" class="material-symbols-outlined text-opacity-100 hover:text-red-600 hover:cursor-pointer" title="Delete content">delete</button>
         </form>
