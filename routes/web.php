@@ -12,9 +12,9 @@ use App\Models\Stack;
 
 // Basic Routes
 
-Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index'); // home page
+Route::get('/',[TMDBController::class, 'mainMovieFunc'])->middleware('guest')->name('index'); 
 Route::get('/movie-description/{movie}/{flag}',[TMDBController::class, 'movieDetails'])->name('movie-description');
-Route::get('/about', function () { return view('about'); })->name('about'); //about page
+Route::get('/about', function () { return view('about'); })->name('about');
 
 
 // Auth Routes

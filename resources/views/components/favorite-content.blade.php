@@ -2,7 +2,7 @@
 
 <?php 
 
-$movie = Http::asJson()->get(config('services.tmdb.endpoint').'movie/' . $content['id'] .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
+$movie = Http::asJson()->get(config('services.tmdb.endpoint'). $content['contentType'] . '/' . $content['id'] .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
 
 ?>
 

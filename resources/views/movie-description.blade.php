@@ -37,10 +37,6 @@ if($flag == "movie"){
     }
 }
 
-
-//dd($movie);
-
-
 ?>
 
 

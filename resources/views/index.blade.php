@@ -42,7 +42,7 @@
 
     <h1 class="text-white font-serif text-mega text-center mb-12 mt-32">Popular TV Shows</h1>
     <!-- in theater movies  -->
-    <x-card-scroller :movieData="$topRatedTVShows" :flag=" 'tvshow' "></x-card-scroller>
+    <x-card-scroller :movieData="$topRatedTVShows" :flag=" 'tv' "></x-card-scroller>
    
 
     <!-- Ad #2 -->

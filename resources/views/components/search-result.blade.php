@@ -10,7 +10,7 @@
     <!-- if the current user is already friends with user they are viewing -->
 
     <!-- if the current user is not already friends with the user they are viewing -->
-    <button class="text-white border border-blue rounded-full px-6 p-2 hover:bg-blue transition ease-in-out duration-300">{{ __('Add Friend') }}</button>
+    <button class="text-white border border-blue rounded-full px-6 p-2 hover:bg-blue transition ease-in-out duration-300">Add Friend</button>
 </div>
 
 <hr class='border-white border-opacity-25 mx-12 my-6'>

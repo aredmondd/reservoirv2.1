@@ -10,22 +10,24 @@ class ContentController extends Controller
     public function addToWatchlist(Request $request) {
         // dd($request->all());
         $user = Auth::user();
-        $movieId = $request->input('id');
+        $contentId = $request->input('id');
+        $flag = $request->input('flag');
     
         $watchlist = $user->watchlist;
     
         $movies = $watchlist->watchlist ?? [];
     
-        if (!in_array($movieId, array_column($movies, 'id'))) {
+        if (!in_array($contentId, array_column($movies, 'id'))) {
             $movies[] = [
-                'id' => $movieId,
+                'id' => $contentId,
                 'time' => now(),
+                'contentType' => $flag,
                 'liked' => false
             ];
             $watchlist->watchlist = $movies;
             $watchlist->save();
         } else {
-            dump("Movie ID {$movieId} is already in the history.");
+            dump("Movie ID {$contentId} is already in the history.");
         }
 
         return redirect()->back();
@@ -33,22 +35,24 @@ class ContentController extends Controller
 
     public function addToHistory(Request $request) {
         $user = Auth::user();
-        $movieId = $request->input('id');
+        $contentId = $request->input('id');
+        $flag = $request->input('flag');
     
         $history = $user->history;
     
         $movies = $history->history ?? [];
     
-        if (!in_array($movieId, array_column($movies, 'id'))) {
+        if (!in_array($contentId, array_column($movies, 'id'))) {
             $movies[] = [
-                'id' => $movieId,
+                'id' => $contentId,
                 'time' => now(),
+                'contentType' => $flag,
                 'liked' => false
             ];
             $history->history = $movies;
             $history->save();
         } else {
-            dump("Movie ID {$movieId} is already in the history.");
+            dump("Movie ID {$contentId} is already in the history.");
         }
 
         return redirect()->back();
