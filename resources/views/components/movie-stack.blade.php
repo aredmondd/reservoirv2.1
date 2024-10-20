@@ -7,9 +7,5 @@
         <img src="images/movie_posters/polt.jpg" class="rounded-md h-48 shadow-md z-10 mr-[-75px]">
     </div>
     <p class="text-title text-blue font-medium mt-2">{{ $title }}</p>
-    <div class="flex">
-        <p class="text-sm text-white text-opacity-50">By {{ $author }}</p>
-        <div class="mr-48"></div>
-        <span class="material-symbols-outlined text-aqua hover:cursor-pointer">add</span>
-    </div>
+    <p class="text-sm text-white text-opacity-50">By {{ $author }}</p>
 </div>
