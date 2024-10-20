@@ -1,7 +1,3 @@
-<?php 
-//  dd($filteredMovies)
-?>
-
 <x-layout>
     <div class="container mx-auto p-8">
         <h1 class="text-white text-2xl mb-4">Search Results for "{{ request()->query('query'); }}"</h1>
@@ -10,7 +6,7 @@
             @forelse($filteredMovies as $movie)
             <?php 
                 // it is a movie
-                $flag = isset($movie['name']) ? 'tvshow' : 'movie';
+                $flag = isset($movie['name']) ? 'tv' : 'movie';
                 $title = $movie['title'] ?? $movie['name'];
                 $releaseDate = $movie['release_date'] ?? $movie['first_air_date'];
             ?>
@@ -20,8 +16,8 @@
                         <h2 class="text-white text-lg">{{ $title }}</h2>
                         <p class="text-white text-opacity-50">{{ $releaseDate }}</p>
                     <div class="flex items-center">
-                        <x-add-to-watchlist-button :id='$movie["id"]'/>
-                        <x-add-to-history-button :id='$movie["id"]'/>
+                        <x-add-to-watchlist-button :id='$movie["id"]' :flag='$flag'/>
+                        <x-add-to-history-button :id='$movie["id"]' :flag='$flag'/>
                     </div>
                     </a>
                 </div>

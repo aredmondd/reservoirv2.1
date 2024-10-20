@@ -79,6 +79,7 @@ class TMDBController extends Controller
         $movieDetails = Http::asJson()
         ->get(config('services.tmdb.endpoint'). $descriptor . $movieId .'?append_to_response=' . $append . '&api_key='.config('services.tmdb.api'))
         ->json();
+
         // edit stack for now for testing
         return view('movie-description', ['movie' => $movieDetails, 'flag' => $flag]);
     }
