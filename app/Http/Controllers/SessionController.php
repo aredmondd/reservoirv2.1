@@ -11,7 +11,6 @@ class SessionController extends Controller
         return view('register');
     }
 
-    // to create an account and put it into the database
     public function store(){
         $attributes = request()->validate([
             'name'=> 'required|max:255',

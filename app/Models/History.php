@@ -8,7 +8,7 @@ use Illuminate\Database\Eloquent\Model;
 class History extends Model {
     protected $fillable = ['user_id'];
 
-    // Cast the JSON to an array when
+    // Cast the JSON to an array
     protected $casts = [ 'history' => 'array'];
 
     public function user() {

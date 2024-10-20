@@ -4,11 +4,11 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Http\Request;
+use App\Models\Stack;
 
 class ContentController extends Controller
 {
     public function addToWatchlist(Request $request) {
-        // dd($request->all());
         $user = Auth::user();
         $contentId = $request->input('id');
         $flag = $request->input('flag');
@@ -57,4 +57,21 @@ class ContentController extends Controller
 
         return redirect()->back();
     }  
+
+    public function addToStack(Request $request) {
+        $user = Auth::user();
+        $contentId = $request->input('id');
+        $flag = $request->input('flag');
+        $stackId = 1;
+    
+        $stack = Stack::findOrFail($stackId);
+    
+        if ($stack->user_id === $user->id) {
+            $stack->addToStack($contentId, $flag);
+        } else {
+            abort(403, "You don't have permission to modify this stack.");
+        }
+    
+        return redirect()->back();
+    }    
 }

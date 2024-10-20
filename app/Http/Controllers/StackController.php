@@ -27,6 +27,7 @@ class StackController extends Controller {
         ]);
 
         $attributes['user_id'] = Auth::id();
+        $attributes['content'] = null;
 
         $stack = Stack::create($attributes);
         $stackUrl = '/stack?fresh=true&id=' . $stack->id ;
@@ -146,22 +147,17 @@ class StackController extends Controller {
         ]);
     }
 
-    // creating a movie 
-    public function movie(Request $request){
-        // dd($request->all());
-        
-        // $attributes = request()->validate([
-        //     'title' => 'required|max:255',
-        //     'poster_path' => 'required|max:255',
-        //     'description' => 'required',
-        //     'stack_id' => 'required|exists:stacks,id',
-        //     'content_id' => 'required'
-        // ]);
-        // dd($attributes);
+    public function getStackContent(Request $request) {
+        if ($request->input('id') != null) {
+            $stack = Stack::find($request->input('id'));
+            $content = Stack::find($request->input('id'))->content;
 
-        // Movie::create($attributes);
+            // dd($stack, $content, $stack->name);
 
-        // return redirect()->back();
+            return view('stack-view', ['stack' => $stack, 'content' => $content]);
+        }
+
+        return abort(404);
     }
 
 

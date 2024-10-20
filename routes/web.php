@@ -22,7 +22,7 @@ Route::get('/about', function () { return view('about'); })->name('about');
 Route::middleware('auth')->group(function () {
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
-    Route::get('/stack', [StackController::class, 'testGetStack'])->name('stack-view');
+    Route::get('/stack', [StackController::class, 'getStackContent'])->name('stack-view');
 
     // user stuff
     Route::get('/user/{username}', [UserController::class, 'display'])->name('user-profile');
@@ -40,9 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/update-visibility', [UserController::class, 'updateVisibility'])->name('profile.update-visibility');
 
-    // add to a list (watchlist or history)
+    // add to a list watchlist/history/stack
     Route::post('/watchlist', [ContentController::class, 'addTowatchlist'])->name('watchlist.add');
     Route::post('/history', [ContentController::class, 'addToHistory'])->name('history.add');
+    Route::post('/addToStack', [ContentController::class, 'addToStack'])->name('stack.add');
 
     // friends stuff
     Route::get('/search', [UserController::class, 'search'])->name('search');
@@ -55,7 +56,6 @@ Route::middleware('auth')->group(function () {
     // Stacks
     Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
     Route::get('/search/results', [TMDBController::class, 'search'])->name('search-results');
-    Route::post('/new-stack-movie', [StackController::class, 'movie'])->name('add-movie-stack');
     Route::delete('/stack', [StackController::class, 'destroy']);
 
     Route::post('/add-content', [DashboardController::class, 'add'])->name('add-content');
