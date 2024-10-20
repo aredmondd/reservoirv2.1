@@ -28,14 +28,6 @@
                         <button type="submit" class="text-midnight rounded-full bg-blue p-3 px-10 font-sans text-body bg-gradient-to-tl to-blue from-aqua from-10% bg-size-200 bg-pos-0 hover:bg-pos-100 focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue transition-[background-position] duration-500">Login</button>
                     </div>
                 </form>
-
-                <div class="text-center mt-4">
-                    @if (Route::has('password.request'))
-                        <a class="underline text-sm text-white text-opacity-50" href="{{ route('password.request') }}">
-                            Forgot your password?
-                        </a>
-                    @endif
-                </div>
             </div>
         </div>
     </div>
