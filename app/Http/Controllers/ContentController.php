@@ -8,6 +8,7 @@ use Illuminate\Http\Request;
 class ContentController extends Controller
 {
     public function addToWatchlist(Request $request) {
+        // dd($request->all());
         $user = Auth::user();
         $movieId = $request->input('id');
     

@@ -8,7 +8,9 @@ $details = Http::asJson()->get(config('services.tmdb.endpoint').'movie/' . $cont
 
 $runtime = floor($details['runtime'] / 60) . 'h ' . ($details['runtime'] % 60) . 'm';
 $addedAt = Carbon::parse($content['time'])->toFormattedDateString();
-$releaseYear = Carbon::parse($details['release_date'])->year 
+$releaseYear = Carbon::parse($details['release_date'])->year;
+$flag = isset($content['name']) ? 'tvshow' : 'movie';
+
 ?>
 
 <div class="grid grid-cols-6 mx-40 text-white text-opacity-50">
@@ -16,7 +18,7 @@ $releaseYear = Carbon::parse($details['release_date'])->year
         <p>{{ $addedAt }}</p>
         <div class="col-span-2 flex space-x-8 items-center">
             <img src="https://image.tmdb.org/t/p/w500{{ $details['poster_path'] }}" alt="" class="rounded-sm w-12">
-            <a href="{{ route('movie-description', ['movie' => $content['id']]) }}" class="font-serif text-body text-white">{{ $details['title'] }}</a>
+            <a href="{{ route('movie-description', ['movie' => $content['id'], 'flag' => $flag]) }}" class="font-serif text-body text-white">{{ $details['title'] }}</a>
         </div>
         <p>{{ $releaseYear }}</p>
         <p>{{ $runtime }}</p>

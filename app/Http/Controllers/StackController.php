@@ -147,17 +147,21 @@ class StackController extends Controller {
     }
 
     // creating a movie 
-    public function movie(){
-        $attributes = request()->validate([
-            'title' => 'required|max:255',
-            'poster_path' => 'required|max:255',
-            'description' => 'required',
-            'stack_id' => 'required|exists:stacks,id'
-        ]);
+    public function movie(Request $request){
+        // dd($request->all());
+        
+        // $attributes = request()->validate([
+        //     'title' => 'required|max:255',
+        //     'poster_path' => 'required|max:255',
+        //     'description' => 'required',
+        //     'stack_id' => 'required|exists:stacks,id',
+        //     'content_id' => 'required'
+        // ]);
+        // dd($attributes);
 
-        Movie::create($attributes);
+        // Movie::create($attributes);
 
-        return redirect('/stacks');
+        // return redirect()->back();
     }
 
 

@@ -17,6 +17,7 @@ return new class extends Migration
             $table->string('title');
             $table->string('poster_path');
             $table->string('description')->nullable();
+            $table->string('content_id');
 
             $table->timestamps();
         });

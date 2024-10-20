@@ -22,9 +22,19 @@
                     <div class="flex items-center">
                         <x-add-to-watchlist-button :id='$movie["id"]'/>
                         <x-add-to-history-button :id='$movie["id"]'/>
+                        <x-add-to-stack-button :id='$movie["id"] '/>
                     </div>
                     </a>
                 </div>
+                @if ($errors->any())
+    <div class="alert alert-danger">
+        <ul>
+            @foreach ($errors->all() as $error)
+                <li>{{ $error }}</li>
+            @endforeach
+        </ul>
+    </div>
+@endif
             @empty
                 <p class="text-white">No movies found.</p>
             @endforelse

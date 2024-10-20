@@ -23,32 +23,17 @@
         </div>
 
     </div>
-
-    <div class="mt-24"></div>
-
-    <!-- discover movie with random id's? -->
-    <div class="text-white text-center mt-6">,
+    
         @if($flag)
             @foreach($movies as $movie)
                 <x-stack-movie-poster img="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" name="{{ $movie['title'] }}" />
             @endforeach
         @else
-            <p>No movies??? Let's add some from our personal favorites</p>
-            @foreach($movies as $movie)
-            <form action="{{ route('add-movie-stack') }}" method="POST" class="inline">
-                @csrf
-                <input type="hidden" name="title" value="{{ $movie['title'] }}">
-                <input type="hidden" name="poster_path" value="{{ $movie['poster_path'] }}">
-                <input type="hidden" name="description" value="{{ $movie['overview'] }}">
-                <input type="hidden" name="stack_id" value="{{ $stackId }}">
-
-                <button type="submit">
-                    <x-stack-movie-poster img="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" name="{{ $movie['title'] }}" />
-                </button>
-            </form>
-            @endforeach
+        <div class="text-white text-center mt-24">Search for some movies to add to your stack in "Fill your Reservoir"</div>
         @endif
-    </div>
+    
+
+
 </x-layout>
 
 <script>
