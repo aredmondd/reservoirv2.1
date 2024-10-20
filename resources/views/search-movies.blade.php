@@ -16,7 +16,7 @@
             ?>
                 <div class="bg-gray-800 p-4 rounded-lg">
                     <a href="{{ route('movie-description', ['movie' => $movie['id'], 'flag' => $flag]) }}">
-                        <img src="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" alt="{{ $title }}" class="rounded-lg mb-2">
+                        <img src="{{ $movie['poster_path'] ? 'https://image.tmdb.org/t/p/w500' . $movie['poster_path'] : asset('images/no-movie-poster.jpg') }}" alt="{{ $title }}" class="rounded-lg mb-2">
                         <h2 class="text-white text-lg">{{ $title }}</h2>
                         <p class="text-white text-opacity-50">{{ $releaseDate }}</p>
                     <div class="flex items-center">
