@@ -1,7 +1,7 @@
 <x-layout>
     <div class="max-w-7xl mx-auto sm:px-6 lg:px-8 space-y-6 mt-12">
         <h2 class="text-mega text-white font-serif">
-            {{ __('Edit Profile') }}
+            Edit Profile
         </h2>
     </div>
 

@@ -1,11 +1,11 @@
-<button class="text-white border border-blue rounded-full px-4 py-2 mt-2 mr-4 hover:bg-blue transition ease-in-out duration-300" x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-content')">{{ __('Fill your Reservoir') }}</button>
+<button class="text-white border border-blue rounded-full px-4 py-2 mt-2 mr-4 hover:bg-blue transition ease-in-out duration-300" x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-content')">Fill your Reservoir</button>
 
 <x-modal name="add-content" :show="$errors->isNotEmpty()" focusable>
     <form action="{{ route('search-results') }}" method="GET" class="bg-midnight p-8">
         @csrf
 
         <h2 class="text-title font-serif text-white text-center">
-            {{ __('Search') }}
+            Search
         </h2>
         
         <div class="mt-6">

@@ -12,19 +12,19 @@
     <div class="flex justify-center items-end">
         <div class="flex justify-around space-x-24 mt-12 p-5 border border-blue rounded-lg">
             <x-nav-link :href="route('user-profile', ['username' => $user->username])" :active="request()->is('user/' . $user->username)">
-                {{ __('Profile') }}
+                Profile
             </x-nav-link>
             <x-nav-link :href="route('user-stacks', ['username' => $user->username])" :active="request()->is('user/*/stacks')">
-                {{ __('Stacks') }}
+                Stacks
             </x-nav-link>
             <x-nav-link :href="route('user-watchlist', ['username' => $user->username])" :active="request()->is('user/*/watchlist')">
-                {{ __('Watchlist') }}
+                Watchlist
             </x-nav-link>
             <x-nav-link :href="route('user-history', ['username' => $user->username])" :active="request()->is('user/*/history')">
-                {{ __('History') }}
+                History
             </x-nav-link>
             <x-nav-link :href="route('user-diary', ['username' => $user->username])" :active="request()->is('user/*/journal')">
-                {{ __('Journal') }}
+                Journal
             </x-nav-link>
         </div>
     </div>

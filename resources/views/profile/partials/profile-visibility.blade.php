@@ -1,11 +1,11 @@
 <section>
     <header>
         <h2 class="text-title font-medium text-blue">
-            {{ __('Account visibility') }}
+            Account visibility
         </h2>
 
         <p class="mt-1 text-sm text-white text-opacity-50">
-            {{ __('Allow your account to be viewed by other users') }}
+            Allow your account to be viewed by other users
         </p>
     </header>
 
@@ -25,7 +25,7 @@
         </div>
 
         <div class="flex items-center gap-4">
-            <x-primary-button>{{ __('Save') }}</x-primary-button>
+            <x-primary-button>Save</x-primary-button>
 
             @if (session('status') === 'visibility-updated')
                 <p
@@ -34,7 +34,7 @@
                     x-transition
                     x-init="setTimeout(() => show = false, 2000)"
                     class="text-sm text-gray-600"
-                >{{ __('Saved.') }}</p>
+                >Saved.</p>
             @endif
         </div>
     </form>

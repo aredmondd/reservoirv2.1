@@ -1,6 +1,6 @@
 <div>
     <h2 class="text-title font-medium text-blue">
-            {{ __('Profile Picture') }}
+            Profile Picture
         </h2>
 
     @if(session('success'))

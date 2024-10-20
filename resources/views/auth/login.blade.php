@@ -32,7 +32,7 @@
                 <div class="text-center mt-4">
                     @if (Route::has('password.request'))
                         <a class="underline text-sm text-white text-opacity-50" href="{{ route('password.request') }}">
-                            {{ __('Forgot your password?') }}
+                            Forgot your password?
                         </a>
                     @endif
                 </div>
