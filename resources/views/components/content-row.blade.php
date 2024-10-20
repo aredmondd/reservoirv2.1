@@ -16,7 +16,7 @@ $releaseYear = Carbon::parse($details['release_date'])->year
         <p>{{ $addedAt }}</p>
         <div class="col-span-2 flex space-x-8 items-center">
             <img src="https://image.tmdb.org/t/p/w500{{ $details['poster_path'] }}" alt="" class="rounded-sm w-12">
-            <a href="{{ route('movie-description', ['movie' => $content['id']]) }}" class="font-serif text-body text-white">{{ $details['title'] }}</a>
+            <a href="{{ route('movie-description', ['movie' => $content['id'], 'flag' => 'movie']) }}" class="font-serif text-body text-white">{{ $details['title'] }}</a>
         </div>
         <p>{{ $releaseYear }}</p>
         <p>{{ $runtime }}</p>
