@@ -15,11 +15,14 @@
         </div>
 
     </div>
-    
-    <div class="flex justify-around my-24">
-        @foreach($content as $item)
-            <x-stack-movie-poster :item='$item' />
-        @endforeach
-    </div>
-    <div class="text-white text-center mt-24">Search for some movies to add to your stack in "Fill your Reservoir"</div>
+
+    @if ($content == null)
+        <div class="text-white text-center mt-24">Search for some movies to add to your stack in "Fill your Reservoir"</div>
+    @else
+        <div class="flex justify-around my-24">
+            @foreach($content as $item)
+                <x-stack-movie-poster :item='$item' />
+            @endforeach
+        </div>
+    @endif
 </x-layout>

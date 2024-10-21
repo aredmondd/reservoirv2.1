@@ -9,7 +9,7 @@ class Stack extends Model {
     protected $fillable = ['name', 'description', 'user_id'];
 
     // Cast the JSON to an array
-    protected $casts = [ 'content' => 'array'];
+    protected $casts = ['content' => 'array'];
 
     public function user() {
         return $this->belongsTo(User::class);
