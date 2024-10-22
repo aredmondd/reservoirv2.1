@@ -10,61 +10,55 @@ use Illuminate\Support\Facades\Route;
 use App\Models\Stack;
 
 
-// Basic Routes
-
-Route::get('/',[TMDBController::class, 'mainMovieFunc'])->middleware('guest')->name('index'); 
+Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index'); 
 Route::get('/movie-description/{movie}/{flag}',[TMDBController::class, 'movieDetails'])->name('movie-description');
 Route::get('/about', function () { return view('about'); })->name('about');
 
 
-// Auth Routes
-
+// Routes only for authenticated users
 Route::middleware('auth')->group(function () {
-    Route::get('/discover', function () { return view('ripple'); })->name('discover');
+
+    Route::get('/dashboard', [DashboardController::class, 'display_list'])->name('dashboard');
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
     Route::get('/stack', [StackController::class, 'getStackContent'])->name('stack-view');
+    Route::get('/discover', function () { return view('ripple'); })->name('discover');
 
-    // user stuff
+    // stacks
+    Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
+    Route::get('/search/results', [TMDBController::class, 'search'])->name('search-results');
+    Route::delete('/stack', [StackController::class, 'destroy']);
+    Route::post('/favorite', [DashboardController::class, 'fav_content'])->name('favorite');
+    Route::post('/move-content', [DashboardController::class, 'move'])->name('move-content');
+    Route::delete('/delete-content', [DashboardController::class, 'delete_content_from_list'])->name('delete-content');
+
+    // user search
+    Route::get('/search', [UserController::class, 'search'])->name('search');
     Route::get('/user/{username}', [UserController::class, 'display'])->name('user-profile');
     Route::get('/user/{username}/watchlist', [UserController::class, 'display'])->name('user-watchlist');
     Route::get('/user/{username}/history', [UserController::class, 'display'])->name('user-history');
     Route::get('/user/{username}/stacks', [UserController::class, 'display'])->name('user-stacks');
     Route::get('/user/{username}/journal', [UserController::class, 'display'])->name('user-diary');
 
-    // dashboard stuff
-    Route::get('/dashboard', [DashboardController::class, 'display'])->name('dashboard');
-
-    // profile stuff
+    // edit your profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
     Route::patch('/profile', [ProfileController::class, 'update'])->name('profile.update');
     Route::delete('/profile', [ProfileController::class, 'destroy'])->name('profile.destroy');
     Route::put('/profile/update-visibility', [UserController::class, 'updateVisibility'])->name('profile.update-visibility');
 
-    // add to a list watchlist/history/stack
-    Route::post('/watchlist', [ContentController::class, 'addTowatchlist'])->name('watchlist.add');
-    Route::post('/history', [ContentController::class, 'addToHistory'])->name('history.add');
-    Route::post('/addToStack', [ContentController::class, 'addToStack'])->name('stack.add');
-
-    // friends stuff
-    Route::get('/search', [UserController::class, 'search'])->name('search');
-
-    // profile picture stuff
+    // profile pictures
     Route::get('/profile/picture/edit', [ProfileController::class, 'editProfilePicture'])->name('profile.picture.edit');
     Route::post('/profile/picture/update', [ProfileController::class, 'updateProfilePicture'])->name('profile.picture.update');
     Route::delete('/profile/picture/delete', [ProfileController::class, 'deleteProfilePicture'])->name('profile.picture.delete');
 
-    // Stacks
-    Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
-    Route::get('/search/results', [TMDBController::class, 'search'])->name('search-results');
-    Route::delete('/stack', [StackController::class, 'destroy']);
-
-    Route::post('/add-content', [DashboardController::class, 'add'])->name('add-content');
-    Route::post('/favorite', [DashboardController::class, 'fav'])->name('favorite');
-    Route::post('/move-content', [DashboardController::class, 'move'])->name('move-content');
-    Route::delete('/delete-content', [DashboardController::class, 'delete'])->name('delete-content');
+    // add content to a list watchlist/history/stack
+    Route::post('/watchlist', [ContentController::class, 'add_to_watchlist'])->name('watchlist.add');
+    Route::post('/history', [ContentController::class, 'add_to_history'])->name('history.add');
+    Route::post('/addToStack', [ContentController::class, 'add_to_stack'])->name('stack.add');
 });
 
 // Catch all route
 Route::fallback(function () { abort(404); });
 
 require __DIR__.'/auth.php';
+
+// EOF

@@ -7,70 +7,89 @@ use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
-    public function display(Request $request) {
+    /**
+     * show the user's watchlist or history
+     * 
+     * @access public
+     * @author Aiden Redmond
+     * @param Request $request
+     * @return view
+     */
+    public function display_list(Request $request) {
         $view = $request->input('view');
 
         if ($view == 'watchlist') {
             return view('dashboard', ['list' => Auth::user()->watchlist->watchlist]);
-        }
-        elseif ($view == 'history') {
+        } elseif ($view == 'history') {
             return view('dashboard', ['list' => Auth::user()->history->history]);
-        }
-        elseif ($view == null) {
+        } elseif ($view == null) {
             return view('dashboard', ['list' => Auth::user()->watchlist->watchlist]);
-        }
-        else {
+        } else {
             abort(404);
         }
     }
 
-    public function add(Request $request) {
-        dd("made it!");
-    }
-
-    public function fav(Request $request) {
+    /**
+     * favorite a piece of content on watchlist or history
+     * 
+     * @access public
+     * @author Aiden Redmond
+     * @param Request $request
+     * @return view
+     */
+    public function fav_content(Request $request) {
         $user = Auth::user();
         
-        $movieId = $request->input('id');
-        $listType = $request->input('list');
+        $movie_id = $request->input('id');
+        $list_type = $request->input('list');
     
-        if ($listType === 'watchlist') {
+        /**
+         * if we are favoriting content on watchlist, get the user's watchlist
+         * if we are favoriting content on history, get the user's history
+         */
+        if ($list_type === 'watchlist') {
             $watchlist = $user->watchlist;
-            $movies = $watchlist->watchlist ?? [];
-        } elseif ($listType === 'history') {
+            $content = $watchlist->watchlist ?? [];
+        } elseif ($list_type === 'history') {
             $history = $user->history;
-            $movies = $history->history ?? [];
+            $content = $history->history ?? [];
         } else {
             return abort(404);
         }
     
         $movieFound = false;
     
-        for($i = 0; $i < count($movies); $i++) {
-            if ($movies[$i]['id'] == $movieId) {
-                $movies[$i]['liked'] = ($movies[$i]['liked'] == false) ? true : false;
-                $movieFound = true;
-                break;
+        // find the content that is being requested as liked
+        for($i = 0; $i < count($content); $i++) {
+            // if the content is found - like it & update the list.
+            if ($content[$i]['id'] == $movie_id) {
+
+                $content[$i]['liked'] = ($content[$i]['liked'] == false) ? true : false;
+
+                if ($list_type === 'watchlist') {
+                    $watchlist->watchlist = $content;
+                    $watchlist->save();
+                } elseif ($list_type === 'history') {
+                    $history->history = $content;
+                    $history->save();
+                }
+
+                return redirect()->back();
             }
-        }
-    
-        if ($movieFound) {
-            if ($listType === 'watchlist') {
-                $watchlist->watchlist = $movies;
-                $watchlist->save();
-            } elseif ($listType === 'history') {
-                $history->history = $movies;
-                $history->save();
-            }
-        }
-        else {
-            return abort(404);
         }
 
-        return redirect()->back();
+        return abort(404);
     }
 
-    public function delete(Request $request) {
+    /**
+     * delete content from a list (watchlist or history)
+     * 
+     * @access public
+     * @author Aiden Redmond
+     * @param Request $request
+     * @return view
+     */
+    public function delete_content_from_list(Request $request) {
         $user = Auth::user();
 
         $movieId = $request->input('id');
@@ -102,6 +121,7 @@ class DashboardController extends Controller
 
         return redirect()->back();
     }
+
 
     public function move(Request $request) {
         $user = Auth::user();
@@ -150,3 +170,5 @@ class DashboardController extends Controller
     }
     
 }
+
+// EOF

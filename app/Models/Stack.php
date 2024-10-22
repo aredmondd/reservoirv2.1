@@ -15,23 +15,40 @@ class Stack extends Model {
         return $this->belongsTo(User::class);
     }
 
-    public function addToStack($contentId, $contentType) {
-        $content = $this->content ?? [];
+    /**
+     * add content to a user's stack
+     * 
+     * @access public
+     * @author Aiden Redmond
+     * @param String $content_id: ID of the content being added to stack
+     * @param String $content_type: Type of content being added to stack
+     */
+    public function add_to_stack(String $content_id, String $content_type) {
+        // check if there is content inside the stack. if there isn't, make an empty array
+        $stack_content = $this->content ?? [];
 
-        if (!in_array($contentId, array_column($content, 'id'))) {
-            $content[] = [
-                'id' => $contentId,
-                'time' => now(),
-                'contentType' => $contentType,
-                'liked' => false
+        // check if the content being added is already in the stack
+        $content_in_stack = in_array($content_id, array_column($stack_content, 'id'));
+
+        /**
+         * if the content is not inside the stack, add it & save the stack.
+         * if the content is already inside the stack, throw an error.
+         */
+        if (!$content_in_stack) {
+            $stack_content[] = [
+                'id'          => $content_id,
+                'time'        => now(),
+                'contentType' => $content_type,
+                'liked'       => false
             ];
 
-            $this->content = $content;
+            $this->content = $stack_content;
             $this->save();
         } else {
-            dump("Content ID {$contentId} is already in the stack.");
+            dump("Content ID {$content_id} is already in the stack.");
         }
     }
 
 }
-?>
+
+// EOF
