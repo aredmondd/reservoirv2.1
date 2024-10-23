@@ -7,6 +7,8 @@ use Illuminate\Http\Request;
 use App\Models\Stack;
 use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Pagination\LengthAwarePaginator;
+use Illuminate\Support\Collection;
 
 // to rememeber what is being called
 // TMDB_ENDPOINT=https://api.themoviedb.org/3/
@@ -121,35 +123,51 @@ class TMDBController extends Controller
         return $filteredMovies;
 
     }
-
-    // search for a movie by its name
-    public function search(Request $request)
-    {
-        $movieTitle = $request->input('query');
     
-        // movie requests
+    public function search(Request $request) {
+        $movieTitle = $request->input('query');
+        
         $movieDetails = Http::asJson()
             ->get(config('services.tmdb.endpoint') . 'search/movie?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
             ->json()['results'];
-
-        // tv show requests
+    
         $tvDetails = Http::asJson()
             ->get(config('services.tmdb.endpoint') . 'search/tv?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
             ->json()['results'];
-
+    
         $allResults = array_merge($movieDetails, $tvDetails);
-        // need to filter these movies by profane language and words in movie titles
-        // should sort this by vote count
+    
+        // filter the movies to remove profane content
         $filteredMovies = $this->filter($allResults);
+    
         // Sort by vote count in descending order
         usort($filteredMovies, function ($a, $b) {
             return ($b['vote_count'] ?? 0) <=> ($a['vote_count'] ?? 0);
-        });        
-
+        });
+    
+        // Pagination logic
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $perPage = 10;
+    
+        $currentResults = Collection::make($filteredMovies)->slice(($currentPage - 1) * $perPage, $perPage)->all();
+        $paginatedResults = new LengthAwarePaginator(
+            $currentResults,
+            count($filteredMovies),
+            $perPage,
+            $currentPage,
+            ['path' => LengthAwarePaginator::resolveCurrentPath()]
+        );
+    
         $user = Auth::user();
         $userStacks = Stack::where('user_id', $user->id)->get();
-        return view('search-movies', compact('filteredMovies', 'userStacks'));
+    
+        return view('search-movies', [
+            'filteredMovies' => $paginatedResults,
+            'userStacks' => $userStacks,
+            'query' => $movieTitle
+        ]);
     }
+    
 
 
     // full list of movies ??

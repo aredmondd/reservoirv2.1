@@ -30,7 +30,7 @@ if ($content_type == 'movie') {
                 <div class="flex space-x-2 text-body">
                     <p>{{ $releaseYear }}</p>
                     <p> | </p>
-                    <p>{{ $runtime ? $runtime : $numOfSeasons . ' szns' }}</p>
+                    <p>{{ $runtime ? $runtime : $numOfSeasons . ' seasons' }}</p>
                 </div>
             </div>
             <p class="text-sm">{{ Str::limit($content['overview'], 150, '...')}}</p>
