@@ -27,9 +27,9 @@ class DatabaseSeeder extends Seeder
         $user->history()->create();
 
         $attributes = [
-            'name' => 'anthony',
-            'username' => 'anthony',
-            'email' => 'anthony@gmail.com',
+            'name' => 'brandon',
+            'username' => 'brandon',
+            'email' => 'brandon@gmail.com',
             'password' => 'password',
         ];
 
