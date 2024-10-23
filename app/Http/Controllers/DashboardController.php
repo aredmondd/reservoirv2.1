@@ -9,7 +9,7 @@ use Illuminate\Http\Request;
 class DashboardController extends Controller
 {
     /**
-     * show the user's watchlist or history with partial word prefix matching
+     * Show the user's watchlist or history with partial word prefix matching
      * 
      * @access public
      * @author Aiden Redmond
@@ -21,17 +21,16 @@ class DashboardController extends Controller
         $user = Auth::user();
         $view = $request->input('view');
         $search = $request->input('search');
-        
+
         // Decide whether to show watchlist or history
-        if ($view == 'watchlist' || $view == null) {
-            $list = $user->watchlist->watchlist;
-        } elseif ($view == 'history') {
+        if ($view == 'history') {
             $list = $user->history->history;
         } else {
-            abort(404);
+            // Default to watchlist if no view is provided or view is 'watchlist'
+            $list = $user->watchlist->watchlist;
         }
 
-        // If there is a search query, filter the list by partial word prefix matching (this block of code was written by ChatGPT)
+        // If there is a search query, filter the list by partial word prefix matching
         if ($search != null) {
             $search = strtolower($search);
 
@@ -48,6 +47,7 @@ class DashboardController extends Controller
 
         return view('dashboard', ['list' => $list]);
     }
+
 
 
 
