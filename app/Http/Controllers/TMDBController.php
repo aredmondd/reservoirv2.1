@@ -4,8 +4,9 @@ namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
-
+use App\Models\Stack;
 use GuzzleHttp\Client;
+use Illuminate\Support\Facades\Auth;
 
 // to rememeber what is being called
 // TMDB_ENDPOINT=https://api.themoviedb.org/3/
@@ -141,8 +142,12 @@ class TMDBController extends Controller
         usort($filteredMovies, function ($a, $b) {
             return $b['vote_count'] <=> $a['vote_count'];
         });
-    
-        return view('search-movies', compact('filteredMovies'));
+
+        $user = Auth::user();
+        // users
+        $userStacks = Stack::where('user_id', $user->id)->get();
+        // 'userStacks'
+        return view('search-movies', compact('filteredMovies', 'userStacks'));
     }
 
 

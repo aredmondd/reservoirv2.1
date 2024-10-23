@@ -19,10 +19,12 @@
     @if ($content == null)
         <div class="text-white text-center mt-24">Search for some movies to add to your stack in "Fill your Reservoir"</div>
     @else
-        <div class="flex justify-around my-24">
-            @foreach($content as $item)
-                <x-stack-movie-poster :item='$item' />
-            @endforeach
+        <div class="container mx-auto p-8 mt-12 mx-40">
+            <div class="grid grid-cols-4 gap-6">
+                @foreach($content as $item)
+                    <x-stack-movie-poster :item='$item' />
+                @endforeach
+            </div>
         </div>
     @endif
 </x-layout>

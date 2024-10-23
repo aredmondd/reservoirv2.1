@@ -62,7 +62,7 @@ class ContentController extends Controller
         $user = Auth::user();
         $contentId = $request->input('id');
         $flag = $request->input('flag');
-        $stackId = 1;
+        $stackId = $request->input('stack_id');
     
         $stack = Stack::findOrFail($stackId);
     
