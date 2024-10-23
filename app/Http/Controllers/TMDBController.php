@@ -99,6 +99,9 @@ class TMDBController extends Controller
         $filteredMovies = [];
         // go through each movie
         foreach($unfilteredMovies as $movies){
+            // Check if vote_count exists
+            if (!isset($movies['vote_count'])) continue;
+
             $isProfane = false;
             // go through each profane word
             foreach($profanewords as $word){
@@ -140,8 +143,8 @@ class TMDBController extends Controller
         $filteredMovies = $this->filter($allResults);
         // Sort by vote count in descending order
         usort($filteredMovies, function ($a, $b) {
-            return $b['vote_count'] <=> $a['vote_count'];
-        });
+            return ($b['vote_count'] ?? 0) <=> ($a['vote_count'] ?? 0);
+        });        
 
         $user = Auth::user();
         // users
