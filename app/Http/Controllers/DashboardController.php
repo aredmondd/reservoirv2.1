@@ -2,32 +2,55 @@
 
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
 {
     /**
-     * show the user's watchlist or history
+     * show the user's watchlist or history with partial word prefix matching
      * 
      * @access public
      * @author Aiden Redmond
+     * @author ChatGPT
      * @param Request $request
      * @return view
      */
     public function display_list(Request $request) {
+        $user = Auth::user();
         $view = $request->input('view');
-
-        if ($view == 'watchlist') {
-            return view('dashboard', ['list' => Auth::user()->watchlist->watchlist]);
+        $search = $request->input('search');
+        
+        // Decide whether to show watchlist or history
+        if ($view == 'watchlist' || $view == null) {
+            $list = $user->watchlist->watchlist;
         } elseif ($view == 'history') {
-            return view('dashboard', ['list' => Auth::user()->history->history]);
-        } elseif ($view == null) {
-            return view('dashboard', ['list' => Auth::user()->watchlist->watchlist]);
+            $list = $user->history->history;
         } else {
             abort(404);
         }
+
+        // If there is a search query, filter the list by partial word prefix matching (this block of code was written by ChatGPT)
+        if ($search != null) {
+            $search = strtolower($search);
+
+            $list = array_filter($list, function($content) use ($search) {
+                $titleWords = explode(' ', strtolower($content['name']));
+                foreach ($titleWords as $word) {
+                    if (strpos($word, $search) === 0) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        }
+
+        return view('dashboard', ['list' => $list]);
     }
+
+
+
 
     /**
      * favorite a piece of content on watchlist or history

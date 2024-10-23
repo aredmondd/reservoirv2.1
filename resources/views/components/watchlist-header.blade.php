@@ -3,6 +3,6 @@
         <p>date added</p>
         <p class="col-span-2">content</p>
         <p>released</p>
-        <p>runtime</p>
+        <p>length</p>
     </div>
 </div>

@@ -3,6 +3,7 @@
 namespace App\Http\Controllers;
 
 use Illuminate\Support\Facades\Auth;
+use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use App\Models\Stack;
 
@@ -24,8 +25,14 @@ class ContentController extends Controller
         // if there is no content inside watchlist, make an empty array
         $watchlist_content = $watchlist->watchlist ?? [];
 
+        // get information about content
         $content_id = $request->input('id');
         $content_type = $request->input('content_type');
+        $content_details = $details = Http::asJson()->get(
+            config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
+            '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')
+        )->json();
+        $content_name = ($content_type == 'movie') ? $content_details['title'] : $content_details['name'];
     
         // check if the content is inside the watchlist
         $content_in_watchlist = in_array($content_id, array_column($watchlist_content, 'id'));
@@ -38,6 +45,7 @@ class ContentController extends Controller
             $watchlist_content[] = [
                 'id'          => $content_id,
                 'time'        => now(),
+                'name'        => $content_name,
                 'contentType' => $content_type,
                 'liked'       => false
             ];
@@ -67,8 +75,14 @@ class ContentController extends Controller
         // if there is no content inside history, make an empty array
         $history_content = $history->history ?? [];
 
+        // get information about content
         $content_id = $request->input('id');
         $content_type = $request->input('content_type');
+        $content_details = $details = Http::asJson()->get(
+            config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
+            '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')
+        )->json();
+        $content_name = ($content_type == 'movie') ? $content_details['title'] : $content_details['name'];
     
         // check if the content is inside the watchlist
         $content_in_history = in_array($content_id, array_column($history_content, 'id'));
@@ -81,6 +95,7 @@ class ContentController extends Controller
             $history_content[] = [
                 'id'          => $content_id,
                 'time'        => now(),
+                'name'        => $content_name,
                 'contentType' => $content_type,
                 'liked'       => false
             ];

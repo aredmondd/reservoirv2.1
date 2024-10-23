@@ -3,7 +3,7 @@
         <p>date watched</p>
         <p class="col-span-2">content</p>
         <p>released</p>
-        <p>runtime</p>
+        <p>length</p>
         <p>rating</p>
     </div>
 </div>
