@@ -69,4 +69,5 @@ if($flag == "movie"){
             <div class="flex flex-row mt-6"></div>
         </div>
     </div>
+    <div class="mb-32"></div>
 </x-layout>
