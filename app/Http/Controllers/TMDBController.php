@@ -147,9 +147,7 @@ class TMDBController extends Controller
         });        
 
         $user = Auth::user();
-        // users
         $userStacks = Stack::where('user_id', $user->id)->get();
-        // 'userStacks'
         return view('search-movies', compact('filteredMovies', 'userStacks'));
     }
 
