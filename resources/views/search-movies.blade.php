@@ -9,6 +9,7 @@
                     $flag = isset($movie['name']) ? 'tv' : 'movie';
                     $title = $movie['title'] ?? $movie['name'];
                     $releaseDate = $movie['release_date'] ?? $movie['first_air_date'];
+                    // dd($userStacks);
                 ?>
                 <div class="bg-gray-800 p-4 rounded-lg">
                     <a href="{{ route('movie-description', ['movie' => $movie['id'], 'flag' => $flag]) }}">
@@ -31,9 +32,25 @@
                         </ul>
                     </div>
                 @endif
+                <div id="message" class="text-white mt-2 hidden"></div>
                 @empty
                     <p class="text-white">No movies found.</p>
                 @endforelse
         </div>
     </div>
+
+
 </x-layout>
+
+<script>
+    function showMessage() {
+        const messageDiv = document.getElementById('message');
+        messageDiv.innerText = 'This feature is under construction!'; // Change this to whatever message you want
+        messageDiv.classList.remove('hidden');
+        
+        // Optionally hide the message after a few seconds
+        setTimeout(() => {
+            messageDiv.classList.add('hidden');
+        }, 3000); // Message will disappear after 3 seconds
+    }
+</script>
