@@ -1,7 +1,13 @@
-@props(['id', 'flag', 'userStacks'])
+@props(['id', 'flag'])
+
 <?php
+
+use App\Models\Stack;
 $prayerid = $id;
-// dd($prayerid,$id)
+
+$user = Auth::user();
+$userStacks = Stack::where('user_id', $user->id)->get();
+
 ?>
 <!-- <p>Debugging Information:</p>
 <p>Blade ID: {{ $id }}</p> -->

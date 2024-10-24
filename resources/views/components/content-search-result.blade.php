@@ -40,6 +40,7 @@ if ($content_type == 'movie') {
     <div class="flex flex-col space-y-4 items-end">
         <x-add-to-watchlist-button :id='$id' :flag="isset($movie['name']) ? 'tv' : 'movie'"/>
         <x-add-to-history-button :id='$id' :flag="isset($movie['name']) ? 'tv' : 'movie'"/>
+        <x-add-to-stack-button :id='$id' :flag="isset($movie['name']) ? 'tv' : 'movie'"/>
     </div>
 </div>
 
