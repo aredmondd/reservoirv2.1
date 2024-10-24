@@ -3,18 +3,15 @@
 <?php
 
 use App\Models\Stack;
-$prayerid = $id;
 
 $user = Auth::user();
 $userStacks = Stack::where('user_id', $user->id)->get();
 
 ?>
-<!-- <p>Debugging Information:</p>
-<p>Blade ID: {{ $id }}</p> -->
 
-<button class="border border-blue rounded-full text-sm text-blue p-2 px-3 hover:cursor-pointer" x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-content-modal')"> Add to Stack</button>
+<button class="border border-blue rounded-full text-sm text-blue p-2 px-3 hover:cursor-pointer" x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-content-modal-{{ $id }}')"> Add to Stack</button>
 
-<x-modal name="add-content-modal" :show="$errors->isNotEmpty()" focusable>
+<x-modal name="add-content-modal-{{ $id }}" :show="$errors->isNotEmpty()" focusable>
 
     <div x-data="{ selectedStackId: null }" class="bg-midnight p-8">
         <form :action="`/addToStack?id={{ $id }}&content_type={{ $flag }}&stack_id=${selectedStackId}&hardcode_id=1726`" 
@@ -32,13 +29,12 @@ $userStacks = Stack::where('user_id', $user->id)->get();
                          @click="selectedStackId = '{{ $stack['id'] }}'">
                          
                         {{ $stack['name'] ?? 'Unnamed Stack' }} - {{ $stack['description'] }}
-                        <div>Selected Movie ID: {{$id}}, {{$prayerid}}</div>
                     </div>
                 @endforeach
             </div>
             <div class="mt-6 flex justify-between items-center">
             <button type="button" 
-                        x-on:click="$dispatch('close-modal', 'add-content-modal')" 
+                        x-on:click="$dispatch('close-modal', 'add-content-modal-{{ $id }}')" 
                         class="text-midnight bg-white rounded-full px-4 p-2 font-medium tracking-wide "> 
                         <!-- focus:outline-none 
                                focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 

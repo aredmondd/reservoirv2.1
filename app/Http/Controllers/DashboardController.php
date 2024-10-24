@@ -23,10 +23,11 @@ class DashboardController extends Controller
         $search = $request->input('search');
         
         // Decide whether to show watchlist or history
+        // brandon added ?? [] to both 
         if ($view == 'history') {
-            $list = $user->history->history;
+            $list = $user->history->history ?? [];
         } else {
-            $list = $user->watchlist->watchlist;
+            $list = $user->watchlist->watchlist ?? [];
         }
     
         // If there is a search query, filter the list by partial word prefix matching
