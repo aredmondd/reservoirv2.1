@@ -22,8 +22,6 @@ $prayerid = $id;
             <!-- Displaying User Stacks -->
             <div class="text-white mb-6">
                 @foreach($userStacks as $stack)
-
-            
                     <div class="py-2 cursor-pointer" 
                          @click="selectedStackId = '{{ $stack['id'] }}'">
                          
@@ -32,9 +30,6 @@ $prayerid = $id;
                     </div>
                 @endforeach
             </div>
-                <?php
-                    // dd($stack,$id);
-                ?>
             <div class="mt-6 flex justify-between items-center">
             <button type="button" 
                         x-on:click="$dispatch('close-modal', 'add-content-modal')" 
