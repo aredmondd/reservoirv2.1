@@ -1,31 +1,23 @@
 <x-layout>
-    <div class="container mx-auto p-8">
-        <h1 class="text-white text-2xl mb-4">Search Results for "{{ request()->query('query'); }}"</h1>
+    <div class="mx-20 mt-12">
+        <h1 class="text-white text-title mb-4 text-center">Search results for '{{ $query }}'</h1>
+
+        <div class="mt-12"></div>
+
+        @empty($filteredMovies)
+            <div class="py-32 text-center text-white text-opacity-50 text-body">so empty...</div>
+        @endempty
+
+        <hr class='border-white border-opacity-25 mx-64 my-6'>
         
-        <div class="grid grid-cols-4 gap-6">
-            @foreach ($filteredMovies as $movie)
-                <?php 
-                    // it is a movie
-                    $flag = isset($movie['name']) ? 'tv' : 'movie';
-                    $title = $movie['title'] ?? $movie['name'];
-                    $releaseDate = $movie['release_date'] ?? $movie['first_air_date'];
-                    // dd($userStacks);
-                ?>
-                <div class="bg-gray-800 p-4 rounded-lg">
-                    <a href="{{ route('movie-description', ['movie' => $movie['id'], 'flag' => $flag]) }}">
-                        <img src="{{ $movie['poster_path'] ? 'https://image.tmdb.org/t/p/w500' . $movie['poster_path'] : asset('images/no-movie-poster.jpg') }}" alt="{{ $title }}" class="rounded-lg mb-2">
-                        <h2 class="text-white text-lg">{{ $title }}</h2>
-                        <p class="text-white text-opacity-50">{{ $releaseDate }}</p>
-                    </a>
-                    <div class="flex items-center">
-                        <x-add-to-watchlist-button :id='$movie["id"]' :flag='$flag'/>
-                        <x-add-to-history-button :id='$movie["id"]' :flag='$flag'/>
-                        <x-add-to-stack-button :id='$movie["id"]' :flag='$flag' :userStacks='$userStacks'/>
-                    </div>
-                </div>
-                @endforeach
+        @foreach ($filteredMovies as $movie)
+            <x-content-search-result :id='$movie["id"]' :content_type="isset($movie['name']) ? 'tv' : 'movie'"/>
+        @endforeach
+
+        <div class="mt-8">
+            {{ $filteredMovies->appends(request()->query())->links('vendor.pagination.tailwind') }}
         </div>
     </div>
 
-
+    <div class="mb-32"></div>
 </x-layout>

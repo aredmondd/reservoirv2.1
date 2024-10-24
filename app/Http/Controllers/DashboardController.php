@@ -3,7 +3,7 @@
 namespace App\Http\Controllers;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
-
+use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Http\Request;
 
 class DashboardController extends Controller
@@ -21,19 +21,18 @@ class DashboardController extends Controller
         $user = Auth::user();
         $view = $request->input('view');
         $search = $request->input('search');
-
+        
         // Decide whether to show watchlist or history
         if ($view == 'history') {
             $list = $user->history->history;
         } else {
-            // Default to watchlist if no view is provided or view is 'watchlist'
             $list = $user->watchlist->watchlist;
         }
-
+    
         // If there is a search query, filter the list by partial word prefix matching
         if ($search != null) {
             $search = strtolower($search);
-
+    
             $list = array_filter($list, function($content) use ($search) {
                 $titleWords = explode(' ', strtolower($content['name']));
                 foreach ($titleWords as $word) {
@@ -44,11 +43,16 @@ class DashboardController extends Controller
                 return false;
             });
         }
-
-        return view('dashboard', ['list' => $list]);
+    
+        // Paginate the list (15 items per page)
+        $perPage = 10;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentItems = array_slice($list, ($currentPage - 1) * $perPage, $perPage);
+        $paginatedList = new LengthAwarePaginator($currentItems, count($list), $perPage);
+        $paginatedList->withPath('/dashboard');
+    
+        return view('dashboard', ['list' => $paginatedList]);
     }
-
-
 
 
 
