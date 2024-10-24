@@ -119,9 +119,10 @@ class ContentController extends Controller
      * @return redirect
      */
     public function add_to_stack(Request $request) {
+        dd($request->all());
         // get the user's stack
         $user = Auth::user();
-        $stackId = 2;
+        $stackId = $request->input('stack_id');
         $stack = Stack::findOrFail($stackId);
 
         // get the content id and type of content from the URL
