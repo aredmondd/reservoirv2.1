@@ -34,7 +34,7 @@ elseif ($contentType == 'tv') {
             <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" class="rounded-md w-56 mx-auto mb-2 transform transition-transform duration-300 hover:scale-105" alt="{{ $name }} movie poster">
             <div class="flex justify-between items-center mb-2">
                 <h3 class="text-white text-body font-sans font-bold">{{ $name }}</h3>
-                <form action="/stack?id={{ $stackID }}&contentID={{ $item['id'] }}" method="POST" class="h-8 ml-4">
+                <form action="/stack-content?stackID={{ $stackID }}&contentID={{ $item['id'] }}" method="POST" class="h-8 ml-4">
                     @csrf
                     @method('DELETE')
                     <button type="submit">

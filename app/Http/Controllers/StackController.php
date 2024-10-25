@@ -172,32 +172,35 @@ class StackController extends Controller {
     }
 
     public function destoryContent(){
+
+        $stackID= request('stackID');
         // get user
         $user = Auth::user();
 
         // stack
         $stack = Stack::find(request('stackID'));
+        //  dd($stack);
 
         // Make sure the stack belongs to the authenticated user
         if (!$stack || $stack->user_id !== $user->id) {
             return redirect()->back();
         }
-        // decode the content
-        $content = json_decode($stack->content, true);
-        
+
         $contentID = request('contentID');
+        $content = $stack->content;
 
         // Loop through the content and remove the item with the matching ID
         $updatedContent = array_filter($content, function ($item) use ($contentID) {
             return $item['id'] !== $contentID;
         });
 
-        // Update the stack's content and save it back as a JSON string
-        $stack->content = json_encode(array_values($updatedContent));
+        $stack->content = array_values($updatedContent);
+
         $stack->save();
 
+
         // Redirect back with a success message
-        return redirect()->back()->with('success', 'Movie removed from the stack.');
+        return redirect()->back();
     }
 }
 
