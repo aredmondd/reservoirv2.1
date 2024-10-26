@@ -9,7 +9,7 @@ $userStacks = Stack::where('user_id', $user->id)->get();
 
 ?>
 
-<button class="border border-blue rounded-full text-sm text-blue p-2 px-3 hover:cursor-pointer" x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-content-modal-{{ $id }}')"> Add to Stack</button>
+<button class="text-sm text-white text-opacity-50 hover:text-aqua hover:text-opacity-100 hover:cursor-pointer transition ease-in-out duration-500" x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-content-modal-{{ $id }}')"><span class="material-symbols-outlined">layers</span></button>
 
 <x-modal name="add-content-modal-{{ $id }}" :show="$errors->isNotEmpty()" focusable>
 
@@ -60,4 +60,4 @@ $userStacks = Stack::where('user_id', $user->id)->get();
     <button type="submit" 
             class="border border-blue rounded-full text-sm text-blue p-2 px-3 hover:cursor-pointer"
             onclick="showMessage()" >Add to Stack</button>
-</form> -->
+</form>

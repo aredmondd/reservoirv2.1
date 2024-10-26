@@ -1,5 +1,7 @@
 <?php
-// dd($movie);
+use Carbon\Carbon;
+
+// dd($cast);
 // vote average
 $percent = round($movie['vote_average'] * 10);
 
@@ -41,32 +43,26 @@ if($flag == "movie"){
 
 
 <x-layout>
-    <div class="mt-14"></div>
-    <div class="mx-24 flex">
-        <img src="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" alt="" class="rounded-lg w-96">
-        
-        <div class="pl-12"></div>
-        <div>
-            <div class="flex flex-row justify-between">
-                <div>
-                    <h1 class="text-mega text-white font-serif"> {{ $title }}</h1>
-                    <!-- movie data - movie rating (pg/r) - how long movie is-->
-                    <h3 class="text-body text-white text-opacity-50 font-sans">{{ $releaseDate }} | {{ $rating }} | {{ $runtime }} </h3>
+    <div class="mx-24 mt-14 flex">
+        <img src="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" alt="" class="rounded-lg w-96 mr-12">
+
+        <div class="flex flex-col justify-between">
+            <div class="space-y-2">
+                <div class="flex flex-row justify-between">
+                    <div>
+                        <h1 class="text-mega text-white font-serif"> {{ $title }}</h1>
+                        <!-- movie data - movie rating (pg/r) - how long movie is-->
+                        <h3 class="text-body text-white text-opacity-50 font-sans">{{ Carbon::parse($releaseDate)->year }} | {{ $rating }} | {{ $runtime }} </h3>
+                    </div>
+                    <x-user-rating-circle :percent="$percent"/>
                 </div>
-                <div class="flex">
-                    <div class="border border-white border-opacity-25 text-white p-12 rounded-md"> {{ $percent }}</div>
-                    <div class="mr-6"></div>
-                    <div class="border border-white border-opacity-25 text-white p-12 rounded-md"># of watchlists</div>
-                </div>
+                <p class="text-white text-sm text-opacity-25"> {{ $movie['overview'] }}</p>
             </div>
-            <div class="mt-6"></div>
-            <p class="text-white text-sm text-opacity-50"> {{ $movie['overview'] }}</p>
-            <div class="flex flex-row mt-6">
-                @foreach ($movie['genres'] as $genre)
-                    <x-genre-tag title="{{ $genre['name'] }}"></x-genre-tag>
+            <div class="flex gap-2 overflow-x-auto max-w-4xl">
+                @foreach($cast_crew_details['cast'] as $actor)
+                    <x-cast-card :actor='$actor'/>
                 @endforeach
             </div>
-            <div class="flex flex-row mt-6"></div>
         </div>
     </div>
     <div class="mb-32"></div>
