@@ -198,8 +198,6 @@ class StackController extends Controller {
 
         $stack->save();
 
-
-        // Redirect back with a success message
         return redirect()->back();
     }
 }
