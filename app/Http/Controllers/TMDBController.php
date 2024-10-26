@@ -83,8 +83,12 @@ class TMDBController extends Controller
         ->get(config('services.tmdb.endpoint'). $descriptor . $movieId .'?append_to_response=' . $append . '&api_key='.config('services.tmdb.api'))
         ->json();
 
+        $castCrewDetails = Http::asJson()
+        ->get(config('services.tmdb.endpoint'). $descriptor . $movieId . '/credits' . '?append_to_response=' . $append . '&api_key='.config('services.tmdb.api'))
+        ->json();
+
         // edit stack for now for testing
-        return view('movie-description', ['movie' => $movieDetails, 'flag' => $flag]);
+        return view('movie-description', ['movie' => $movieDetails, 'cast_crew_details' => $castCrewDetails, 'flag' => $flag]);
     }
 
     // remove profane language from movie searches

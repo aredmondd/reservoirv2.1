@@ -4,6 +4,6 @@
     @csrf
 
     <button type="submit" 
-            class="border border-blue rounded-full text-sm text-blue p-2 px-3 hover:cursor-pointer"
-            onclick="showMessage()" >Add to Stack</button>
+            class="text-sm text-white text-opacity-50 hover:text-aqua hover:text-opacity-100 hover:cursor-pointer transition ease-in-out duration-500"
+            onclick="showMessage()" ><span class="material-symbols-outlined">layers</span></button>
 </form>

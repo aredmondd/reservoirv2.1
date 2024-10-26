@@ -3,5 +3,5 @@
 <form action="/history?id={{$id}}&content_type={{$flag}}" method="POST">
     @csrf
 
-    <button type="submit" class="border border-aqua rounded-full text-sm text-aqua p-2 px-3 hover:cursor-pointer">Add to History</button>
+    <button type="submit" class="text-white text-opacity-50 text-sm hover:text-blue hover:text-opacity-100 hover:cursor-pointer transition ease-in-out duration-500"><span class="material-symbols-outlined">history</span></button>
 </form>

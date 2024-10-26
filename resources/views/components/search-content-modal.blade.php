@@ -2,8 +2,6 @@
 
 <x-modal name="add-content" :show="$errors->isNotEmpty()" focusable>
     <form action="{{ route('search-results') }}" method="GET" class="bg-midnight p-8">
-        @csrf
-
         <h2 class="text-title font-serif text-white text-center">
             Search
         </h2>
