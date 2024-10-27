@@ -4,11 +4,9 @@
 
 use Carbon\Carbon;
 
-// dd($item);
 $contentType = $item['contentType'];
 
 $details = Http::asJson()->get(config('services.tmdb.endpoint'). $contentType .'/' . $item['id'] .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
-// dd($details);
 $posterPath = isset($details['poster_path']) ? $details['poster_path'] : null;
 
 // movie

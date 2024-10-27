@@ -1,6 +1,3 @@
-<?php
-// dd(request('id'));
-?>
 <x-layout>
     <div class="flex justify-between items-end mx-40">
         <div class="flex flex-col items-start">

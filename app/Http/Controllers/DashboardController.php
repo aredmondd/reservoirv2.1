@@ -23,7 +23,6 @@ class DashboardController extends Controller
         $search = $request->input('search');
         
         // Decide whether to show watchlist or history
-        // brandon added ?? [] to both 
         if ($view == 'history') {
             $list = $user->history->history ?? [];
         } else {

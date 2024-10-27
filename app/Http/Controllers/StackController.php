@@ -152,8 +152,6 @@ class StackController extends Controller {
             $stack = Stack::find($request->input('id'));
             $content = Stack::find($request->input('id'))->content;
 
-            // dd($stack, $content, $stack->name);
-
             return view('stack-view', ['stack' => $stack, 'content' => $content]);
         }
 
@@ -179,7 +177,6 @@ class StackController extends Controller {
 
         // stack
         $stack = Stack::find(request('stackID'));
-        //  dd($stack);
 
         // Make sure the stack belongs to the authenticated user
         if (!$stack || $stack->user_id !== $user->id) {
