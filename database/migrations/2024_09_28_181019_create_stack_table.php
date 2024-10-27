@@ -17,6 +17,7 @@ return new class extends Migration
             $table->foreignIdFor(\App\Models\User::class);
             $table->string('name');
             $table->string('description');
+            $table->boolean('isPrivate');
             $table->timestamps();
         });
     }

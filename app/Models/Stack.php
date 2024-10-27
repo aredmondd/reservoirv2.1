@@ -6,7 +6,7 @@ use Illuminate\Support\Arr;
 use Illuminate\Database\Eloquent\Model;
 
 class Stack extends Model {
-    protected $fillable = ['name', 'description', 'user_id'];
+    protected $fillable = ['name', 'description', 'user_id', 'isPrivate'];
 
     // Cast the JSON to an array
     protected $casts = ['content' => 'array'];

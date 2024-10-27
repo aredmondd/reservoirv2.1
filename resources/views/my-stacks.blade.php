@@ -44,6 +44,18 @@
 
             <div class="mt-6 flex justify-between items-center">
                 <button type="button" x-on:click="$dispatch('close')" class="text-midnight bg-white rounded-full px-4 p-2 font-medium tracking-wide focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">Cancel</button>
+
+                <div class="flex items-center space-x-4">
+                    <label class="text-white">
+                        <input type="radio" name="isPrivate" value="public" checked class="mr-2">
+                        Public
+                    </label>
+                    <label class="text-white">
+                        <input type="radio" name="isPrivate" value="private" class="mr-2">
+                        Private
+                    </label>
+                </div>
+
                 <button type="submit "class="text-white bg-blue rounded-full px-4 p-2 font-medium tracking-wide focus:outline-none focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">Create new Stack</button>
             </div>
         </form>
@@ -56,11 +68,16 @@
     @else
     <div class="text-white text-center mt-12">
         <ul>
-            @foreach ($stacks as $stack)
-                <a href="/stack?id={{ $stack->id }}">
-                    <li>{{ $stack->name }} - {{ $stack->description }}</li>
-                </a>
-            @endforeach
+        @foreach ($stacks as $stack)
+            <a href="/stack?id={{ $stack->id }}">
+                <li>
+                    {{ $stack->name }} - {{ $stack->description }}
+                    @if($stack->isPrivate)
+                        - Private
+                    @endif
+                </li>
+            </a>
+        @endforeach
         </ul>
     </div>
     @endif

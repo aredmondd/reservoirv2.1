@@ -20,15 +20,19 @@ class StackController extends Controller {
         return view('my-stacks', ['stacks' => $userStacks]);
     }
 
-    public function store() {
+    public function store(Request $request) {
+        // dump($request->all());
         $attributes = request()->validate([
             'name' => 'required|max:50',
             'description' => 'required|max:90',
+            'isPrivate' => 'required',
         ]);
-
+        // dump($attributes);
         $attributes['user_id'] = Auth::id();
         $attributes['content'] = null;
-
+        $attributes['isPrivate'] = ($attributes['isPrivate'] === 'private') ? true : false;
+        
+        // dd($attributes);
         $stack = Stack::create($attributes);
         $stackUrl = '/stack?fresh=true&id=' . $stack->id ;
 
