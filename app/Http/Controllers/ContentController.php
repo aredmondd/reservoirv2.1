@@ -6,6 +6,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Support\Facades\Http;
 use Illuminate\Http\Request;
 use App\Models\Stack;
+use Illuminate\Http\Client\Pool;
 
 class ContentController extends Controller
 {
@@ -28,10 +29,21 @@ class ContentController extends Controller
         // get information about content
         $content_id = $request->input('id');
         $content_type = $request->input('content_type');
-        $content_details = $details = Http::asJson()->get(
-            config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
-            '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')
-        )->json();
+
+        // $content_details = $details = Http::asJson()->get(
+        //     config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
+        //     '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')
+        // )->json();
+
+        $responses = Http::pool(fn (Pool $pool) => [
+            $pool->get(
+                config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
+                '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')),
+        ]);
+
+        $content_details = $details = $responses[0]->json();
+        
+
         $content_name = ($content_type == 'movie') ? $content_details['title'] : $content_details['name'];
     
         // check if the content is inside the watchlist
@@ -78,10 +90,20 @@ class ContentController extends Controller
         // get information about content
         $content_id = $request->input('id');
         $content_type = $request->input('content_type');
-        $content_details = $details = Http::asJson()->get(
-            config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
-            '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')
-        )->json();
+
+                // $content_details = $details = Http::asJson()->get(
+        //     config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
+        //     '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')
+        // )->json();
+
+        $responses = Http::pool(fn (Pool $pool) => [
+            $pool->get(
+                config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
+                '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')),
+        ]);
+
+        $content_details = $details = $responses[0]->json();
+        
         $content_name = ($content_type == 'movie') ? $content_details['title'] : $content_details['name'];
     
         // check if the content is inside the watchlist

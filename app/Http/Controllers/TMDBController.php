@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use Illuminate\Http\Client\Pool;
 
 // to rememeber what is being called
 // TMDB_ENDPOINT=https://api.themoviedb.org/3/
@@ -33,32 +34,27 @@ class TMDBController extends Controller
     // and not seperate them for if we want to show all the shit yk dog
     public function mainMovieFunc(){
 
-        // Fetch movies using the helper function
-        $popularMovies = $this->fetchMovies('popular');
-        $inTheatersMovies = $this->fetchMovies('now_playing');
-        $topRatedMovies = $this->fetchMovies('top_rated');
+        $responses = Http::pool(fn (Pool $pool) => [
+            $pool->get(config('services.tmdb.endpoint').'movie/popular?api_key='.config('services.tmdb.api')),
+            $pool->get(config('services.tmdb.endpoint').'movie/now_playing?api_key='.config('services.tmdb.api')),
+            $pool->get(config('services.tmdb.endpoint').'movie/top_rated?api_key='.config('services.tmdb.api')),
+            $pool->get(config('services.tmdb.endpoint').'tv/top_rated?api_key='.config('services.tmdb.api')),
+            // left movie
+            $pool->get(config('services.tmdb.endpoint').'movie/496243?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
+            // middle movie 
+            $pool->get(config('services.tmdb.endpoint').'movie/27205?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
+            // right movie
+            $pool->get(config('services.tmdb.endpoint').'movie/254320?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
+        ]);
 
-        //tvshows  which is actually going to be top rated lol
-        $topRatedTVShows = $this->fetchTV('top_rated');
-        // dd($topRatedTVShows);
+        $popularMovies = $responses[0]->json()['results'];
+        $inTheatersMovies = $responses[1]->json()['results'];
+        $topRatedMovies = $responses[2]->json()['results'];
+        $topRatedTVShows = $responses[3]->json()['results'];
+        $leftMovie = $responses[4]->json();
+        $middleMovie = $responses[5]->json();
+        $rightMovie = $responses[6]->json();
 
-        $leftMovieId = 496243;
-        $middleMovieId = 27205;
-        $rightMovieId = 254320;
-
-        $leftMovie = $movieDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint').'movie/' . $leftMovieId . '?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
-        ->json();
-
-        $middleMovie = $movieDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint').'movie/' . $middleMovieId . '?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
-        ->json();
-
-        $rightMovie = $movieDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint').'movie/' . $rightMovieId . '?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
-        ->json();
-
-        // dd($popularTVShows);
         // Pass all the API calls into the view
         return view('index', [
             'popularMovie' => $popularMovies,
@@ -67,7 +63,6 @@ class TMDBController extends Controller
             'leftMovie' => $leftMovie,
             'middleMovie' => $middleMovie,
             'rightMovie' => $rightMovie,
-
             'topRatedTVShows' => $topRatedTVShows
         ]);
 
@@ -79,13 +74,15 @@ class TMDBController extends Controller
         $descriptor = $flag === 'movie' ? 'movie/' : 'tv/';
         $append = $flag === 'movie' ? 'release_dates' : 'content_ratings';
 
-        $movieDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint'). $descriptor . $movieId .'?append_to_response=' . $append . '&api_key='.config('services.tmdb.api'))
-        ->json();
+        // Make asynchronous API calls using Pool
+        $responses = Http::pool(fn (Pool $pool) => [
+            $pool->get(config('services.tmdb.endpoint'). $descriptor . $movieId .'?append_to_response=' . $append . '&api_key='.config('services.tmdb.api')),
+            $pool->get(config('services.tmdb.endpoint'). $descriptor . $movieId . '/credits?api_key='.config('services.tmdb.api'))
+        ]);
 
-        $castCrewDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint'). $descriptor . $movieId . '/credits' . '?append_to_response=' . $append . '&api_key='.config('services.tmdb.api'))
-        ->json();
+        // Extracting results from responses
+        $movieDetails = $responses[0]->json();
+        $castCrewDetails = $responses[1]->json();
 
         // edit stack for now for testing
         return view('movie-description', ['movie' => $movieDetails, 'cast_crew_details' => $castCrewDetails, 'flag' => $flag]);
@@ -131,14 +128,14 @@ class TMDBController extends Controller
     public function search(Request $request) {
         $movieTitle = $request->input('query');
         
-        $movieDetails = Http::asJson()
-            ->get(config('services.tmdb.endpoint') . 'search/movie?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
-            ->json()['results'];
-    
-        $tvDetails = Http::asJson()
-            ->get(config('services.tmdb.endpoint') . 'search/tv?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
-            ->json()['results'];
-    
+        $responses = Http::pool(fn (Pool $pool) => [
+            $pool->get(config('services.tmdb.endpoint') . 'search/movie?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api')),
+            $pool->get(config('services.tmdb.endpoint') . 'search/tv?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
+        ]);
+
+        $movieDetails = $responses[0]->json()['results'];
+        $tvDetails = $responses[1]->json()['results'];
+
         $allResults = array_merge($movieDetails, $tvDetails);
     
         // filter the movies to remove profane content
@@ -171,9 +168,5 @@ class TMDBController extends Controller
             'query' => $movieTitle
         ]);
     }
-    
-
-
-    // full list of movies ??
 
 }
