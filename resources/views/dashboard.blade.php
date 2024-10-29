@@ -1,10 +1,7 @@
 <x-layout>
-
-    @if(session()->has('error'))
-        <div class="fixed top-5 inset-x-0 mx-auto w-1/6 px-3 py-2 bg-red-500 text-midnight rounded font-sans text-center animate-slide-in-out">
-            {{ session('error') }}
-        </div>
-    @endif
+    
+    <x-error-notification />
+    <x-success-notification />
 
     <h2 class="text-white font-serif text-mega text-center mt-12">
         My Reservoir

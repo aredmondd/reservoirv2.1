@@ -1,4 +1,8 @@
 <x-layout>
+
+    <x-success-notification />
+    <x-error-notification />
+
     <div class="flex justify-between items-end mx-40">
         <div class="flex flex-col items-start">
             <h1 class="text-blue text-mega font-serif mt-12 text-center max-w-5xl">{{ $stack->name }}</h1>

@@ -1,4 +1,7 @@
 <x-layout>
+    <x-success-notification />
+    <x-error-notification />
+
     <!-- Ad #1 -->
     <div class="px-40 mt-20 text-center">
         <h1 class="text-mega font-serif text-white">Create your <span class="bg-gradient-to-r from-blue to-aqua text-transparent bg-clip-text">Reservoir</span> today</h1>

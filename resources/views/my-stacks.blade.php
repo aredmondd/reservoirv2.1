@@ -1,4 +1,8 @@
 <x-layout>
+
+    <x-success-notification />
+    <x-error-notification />
+    
     <div class="flex justify-between items-end mx-20 mt-16">
         <h1 class="text-mega text-white font-serif">My Stacks</h1>
         

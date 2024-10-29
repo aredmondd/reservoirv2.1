@@ -141,12 +141,14 @@ class DashboardController extends Controller
         if ($listType === 'watchlist') {
             $watchlist->watchlist = array_values($movies);
             $watchlist->save();
+
+            return redirect()->back()->with('success', 'Deleted item from watchlist.');
         } elseif ($listType === 'history') {
             $history->history = array_values($movies);
             $history->save();
-        }
 
-        return redirect()->back();
+            return redirect()->back()->with('success', 'Deleted item from history.');
+        }
     }
 
 
@@ -190,8 +192,7 @@ class DashboardController extends Controller
             $history->history = $historyContent;
             $history->save();
         } else {
-            session()->flash('error', 'Content is already in history!');
-            return redirect()->route('dashboard');
+            return redirect()->route('dashboard')->with('error', $contentToMove['name'] . ' is already in your history');
         }
 
         // delete the content from watchlist
@@ -202,7 +203,7 @@ class DashboardController extends Controller
         $watchlist->watchlist = array_values($watchlistContent);
         $watchlist->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', $contentToMove['name'] . ' was moved to history');
     }
     
 }

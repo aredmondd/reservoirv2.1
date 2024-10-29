@@ -32,7 +32,7 @@ class StackController extends Controller {
         $stack = Stack::create($attributes);
         $stackUrl = '/stack?&id=' . $stack->id ;
 
-        return redirect($stackUrl);
+        return redirect($stackUrl)->with('success', $stack['name'] . ' has been created!');
     }
 
     private function fetchMovies($category){
@@ -145,12 +145,12 @@ class StackController extends Controller {
 
         $stack->delete();
 
-        return redirect('/stacks');
+        return redirect('/stacks')->with('success', 'Stack was deleted.');
     }
 
     public function destoryContent(){
 
-        $stackID= request('stackID');
+        $stackID = request('stackID');
         // get user
         $user = Auth::user();
 
@@ -170,11 +170,12 @@ class StackController extends Controller {
             return $item['id'] !== $contentID;
         });
 
+
         $stack->content = array_values($updatedContent);
 
         $stack->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', 'Content was deleted from stack');
     }
 }
 

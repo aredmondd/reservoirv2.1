@@ -1,4 +1,8 @@
 <x-layout>
+
+    <x-error-notification />
+    <x-success-notification />
+
     <div class="mx-20 mt-12">
         <h1 class="text-white text-title mb-4 text-center">Search results for '{{ $query }}'</h1>
 
