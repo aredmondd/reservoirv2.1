@@ -55,7 +55,6 @@ class DashboardController extends Controller
     }
 
 
-
     /**
      * favorite a piece of content on watchlist or history
      * 
@@ -108,6 +107,7 @@ class DashboardController extends Controller
         return abort(404);
     }
 
+
     /**
      * delete content from a list (watchlist or history)
      * 
@@ -150,6 +150,14 @@ class DashboardController extends Controller
     }
 
 
+    /**
+     * move content from watchlist to history
+     * 
+     * @access public
+     * @author Aiden Redmond
+     * @param Request $request
+     * @return view
+     */
     public function move(Request $request) {
         $user = Auth::user();
         $movieId = $request->input('id');
@@ -182,7 +190,8 @@ class DashboardController extends Controller
             $history->history = $historyContent;
             $history->save();
         } else {
-            dd('Movie is already in history!');
+            session()->flash('error', 'Content is already in history!');
+            return redirect()->route('dashboard');
         }
 
         // delete the content from watchlist

@@ -1,4 +1,11 @@
 <x-layout>
+
+    @if(session()->has('error'))
+        <div class="fixed top-5 inset-x-0 mx-auto w-1/6 px-3 py-2 bg-red-500 text-midnight rounded font-sans text-center animate-slide-in-out">
+            {{ session('error') }}
+        </div>
+    @endif
+
     <h2 class="text-white font-serif text-mega text-center mt-12">
         My Reservoir
     </h2>
@@ -22,8 +29,8 @@
         </form>
 
         <div class="flex items-center pb-2 space-x-4">
-            <button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150"><a href="/dashboard?view=watchlist">Watchlist</a></button>
-            <button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'history' ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150"><a href="/dashboard?view=history">History</a></button>
+            <a href="/dashboard?view=watchlist"><button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150">Watchlist</button></a>
+            <a href="/dashboard?view=history"><button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'history' ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150">History</button></a>
         </div>
     </div>
 

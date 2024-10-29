@@ -30,29 +30,10 @@ class StackController extends Controller {
         $attributes['content'] = null;
 
         $stack = Stack::create($attributes);
-        $stackUrl = '/stack?fresh=true&id=' . $stack->id ;
+        $stackUrl = '/stack?&id=' . $stack->id ;
 
         return redirect($stackUrl);
     }
-
-    // public function getStack(Request $request) {
-    //     $stackId = request('id');
-
-    //     if ($stackId == null) {
-    //         abort(404);
-    //     }
-
-    //     $stack = Stack::find($stackId);
-
-    //     if ($stack->user_id != Auth::id()) {
-    //         abort(403);
-    //     }
-
-    //     // lets see if this works
-    //     $movies = $stack->movies;
-    //     // added this 'movies' => $movies
-    //     return view('stack-view', ['stackTitle' => $stack->name, 'stackDescription' => $stack->description, 'fresh' => request('fresh') !== null ? true : false ,'movies' => $movies ]);
-    // }
 
     private function fetchMovies($category){
         // Make the API call for the provided category
@@ -129,7 +110,6 @@ class StackController extends Controller {
             return view('stack-view', [
                 'stackTitle' => $stack->name,
                 'stackDescription' => $stack->description,
-                'fresh' => request('fresh') !== null,
                 'movies' => $moviesCollection,
                 'stackId' => $stackId,
                 'flag' => False, // there are no movies in the stack so add some
@@ -140,7 +120,6 @@ class StackController extends Controller {
         return view('stack-view', [
             'stackTitle' => $stack->name,
             'stackDescription' => $stack->description,
-            'fresh' => request('fresh') !== null,
             'movies' => $movies, // Pass the movies to the view
             'stackId' => $stackId,
             'flag' => True, // there are movies already in the stack
