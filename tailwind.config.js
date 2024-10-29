@@ -53,7 +53,7 @@ export default {
                 },
             },
             boxShadow: {
-                'glow': '0px 0px 25px 0px #6AE1EB',
+                'glow': '2px 0px 10px 0px aqua',
             },
             screens: {
                 '3xl' : '1900px',

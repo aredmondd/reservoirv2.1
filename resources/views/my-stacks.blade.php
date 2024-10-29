@@ -11,7 +11,7 @@
 
 
     <x-modal name="new-stack" :show="$errors->isNotEmpty()" focusable>
-        <form method="POST" action="{{ route('new-stack') }}" class="p-6 bg-midnight">
+        <form method="POST" action="{{ route('new-stack') }}" class="p-6 bg-midnight z-[10000]">
             @csrf
 
             <h2 class="text-title font-medium text-white text-center">
@@ -58,14 +58,10 @@
         so empty...
     </div>
     @else
-    <div class="text-white text-center mt-12">
-        <ul>
-            @foreach ($stacks as $stack)
-                <a href="/stack?id={{ $stack->id }}">
-                    <li>{{ $stack->name }} - {{ $stack->description }}</li>
-                </a>
-            @endforeach
-        </ul>
+    <div class="mt-12 grid grid-cols-3 mx-20">
+        @foreach ($stacks as $stack)
+            <x-content-stack :stack='$stack'/>
+        @endforeach
     </div>
     @endif
 
