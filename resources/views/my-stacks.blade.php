@@ -53,19 +53,17 @@
         </form>
     </x-modal>
 
+    <hr class='border-white border-opacity-25 mx-20 my-3'>
+
     @if($stacks->isEmpty())
     <div class="py-32 text-center text-white text-opacity-50 text-body">
         so empty...
     </div>
     @else
-    <div class="mt-12 grid grid-cols-3 mx-20">
+    <div class="mt-12 flex justify-between mx-20 mr-40">
         @foreach ($stacks as $stack)
             <x-content-stack :stack='$stack'/>
         @endforeach
     </div>
     @endif
-
-    
-
-
 </x-layout>
