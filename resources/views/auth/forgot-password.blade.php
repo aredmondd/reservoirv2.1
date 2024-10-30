@@ -2,9 +2,6 @@
     <h1 class="text-white text-mega font-serif text-center mt-14">Forgot Password</h1>
     <p class="text-white text-sm text-opacity-50 text-center mb-14">Enter your email below to recieve a password reset email</p>
 
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
-
     <form method="POST" action="{{ route('password.email') }}">
         @csrf
 

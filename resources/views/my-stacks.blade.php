@@ -6,7 +6,7 @@
     <div class="flex justify-between items-end mx-20 mt-16">
         <h1 class="text-mega text-white font-serif">My Stacks</h1>
         
-        <button class="text-white border border-blue rounded-full px-4 p-2 mb-6 hover:bg-blue transition ease-in-out duration-300" x-data="" x-on:click.prevent="$dispatch('open-modal', 'new-stack')">Create new Stack</button>
+        <button class="text-white border border-blue rounded-full px-4 p-2 mb-6 hover:bg-blue transition ease-in-out duration-300" x-data="" x-on:click.prevent="$dispatch('open-modal', 'new-stack')">New Stack</button>
     </div>
 
 
@@ -60,10 +60,17 @@
         so empty...
     </div>
     @else
-    <div class="mt-12 flex justify-between mx-20 mr-40">
+    <div class="mt-12 grid grid-cols-3 mx-20 mr-[-85px]">
         @foreach ($stacks as $stack)
-            <x-content-stack :stack='$stack'/>
+            <div class="mb-12">
+                <x-content-stack :stack='$stack'/>
+            </div>
         @endforeach
+    </div>
+
+    <!-- Pagination Links -->
+    <div class="mt-6 mb-12 flex">
+        {{ $stacks->links() }}
     </div>
     @endif
 </x-layout>

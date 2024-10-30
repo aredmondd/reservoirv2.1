@@ -26,11 +26,11 @@ for ($i = 0; $i < 5; $i++) {
 <div class="flex flex-col">
     <div class="rounded-md flex">
         @foreach ($items as $index => $itemPoster)
-            <img src="{{ $itemPoster }}" class="border border-[0.25px] border-midnight rounded-md h-48 z-{{ 50 - ($index * 10) }} mr-[-75px]">
+            <img src="{{ $itemPoster }}" class="border border-[0.25px] border-midnight rounded-md h-48 z-{{ 40 - ($index * 10) }} mr-[-75px]">
         @endforeach
     </div>
     <a href="/stack?id={{ $stack->id }}">
-        <p class="text-title text-blue font-medium mt-2">{{ $stack->name }}</p>
+        <p class="text-title text-white font-medium mt-2">{{ $stack->name }}</p>
     </a>
     @if (!Route::is('my-stacks'))
         <p class="text-sm text-white text-opacity-50">by {{ $author }}</p>

@@ -15,7 +15,9 @@ class StackController extends Controller {
     public function display(Request $request) {
         $userId = Auth::id();
     
-        $userStacks = Stack::where('user_id', $userId)->get();
+        $userStacks = Stack::where('user_id', $userId)
+                      ->orderBy('created_at', 'desc')
+                      ->paginate(9);
 
         return view('my-stacks', ['stacks' => $userStacks]);
     }

@@ -17,16 +17,16 @@
     <x-hr />
     <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">Discover your favorites, explore trending films, and dive into a world of <span class="text-aqua">cinematic gems</span>.</p>
     <div class="flex mx-36 justify-around 3xl:mx-56">
-        <x-add-movie-ad :movieData='$leftMovie'></x-add-movie-ad>
-        <x-add-movie-ad :movieData='$middleMovie'></x-add-movie-ad>
-        <x-add-movie-ad :movieData='$rightMovie'></x-add-movie-ad>
+        <x-add-content-ad :movieData='$leftMovie'></x-add-content-ad>
+        <x-add-content-ad :movieData='$middleMovie'></x-add-content-ad>
+        <x-add-content-ad :movieData='$rightMovie'></x-add-content-ad>
     </div>
 
     <!-- Discover -->
     <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Discover more with <span class="text-blue">Ripple</span></h2>
     <x-hr />
     <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">As you rate movies, <span class="text-aqua">Ripple</span>, an advanced AI model, creates a personalized recommendation list based on what you like and dislike.</p>
-    <x-baloons></x-baloons>
+    <x-ripple-ad />
 
     <!-- Rate & Organize -->
     <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Organize with <span class="text-aqua">Stacks</span></h2>

@@ -1,6 +1,4 @@
 <x-layout>
-    <!-- Session Status -->
-    <x-auth-session-status class="mb-4" :status="session('status')" />
     <div class="mt-14">
         <h1 class="text-center font-serif text-mega text-blue mb-10">Back to the flow</h1>
         <div class="flex flex-col justify-center">
