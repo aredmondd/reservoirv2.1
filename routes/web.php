@@ -5,6 +5,7 @@ use Illuminate\Support\Facades\Route;
 use App\Http\Controllers\TMDBController;
 use App\Http\Controllers\StackController;
 use App\Models\Stack;
+use App\Http\Controllers\FastAPIController;
 
 
 Route::get('/',[TMDBController::class, 'mainMovieFunc'])->middleware('guest')->name('index');
@@ -48,6 +49,12 @@ Route::get('/new-stack', function () {
     abort(404);
 });
 Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
+
+#ai routes
+Route::get('/fastapi-data', [FastAPIController::class, 'getDataFromFastAPI']);
+Route::post('/fastapi-data', [FastAPIController::class, 'createUserInFastAPI']);
+Route::get('/user', [App\Http\Controllers\FastAPIController::class, 'showUser']);
+
 
 
 
