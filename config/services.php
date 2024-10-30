@@ -41,4 +41,11 @@ return [
         'api' => env('TMDB_APP_KEY'),
     ],
 
+    // Brandon added for tmdb movie api
+    'lastfm' => [
+        'endpoint' => env('LASTFM_ENDPOINT'),
+        'api' => env('LASTFM_APP_KEY'),
+        'secret' => env('LASTFM_SHARED_SECRET'),
+    ],
+
 ];
