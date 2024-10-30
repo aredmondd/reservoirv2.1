@@ -21,7 +21,6 @@
                     <input type="text" name="search" id="simple-search" value="{{ request()->input('search') }}" class="pl-10 text-small text-white rounded-full w-full py-2 px-20 bg-white bg-opacity-25 placeholder:pl-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"/>
                 </div>
                 <input type="hidden" name="view" value="{{ request()->input('view') ?? 'watchlist' }}" />
-                <button class="py-2 px-6 rounded-full bg-white bg-opacity-75 text-midnight font-semibold text-center tracking-widest">CLEAR</button>
             </div>
         </form>
 
