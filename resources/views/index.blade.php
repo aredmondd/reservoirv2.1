@@ -34,9 +34,9 @@
     <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">Create custom stacks to highlight your favorite movies by genre, decade, or any theme you choose, showcasing your unique cinematic tastes.</p>
     <div class="flex justify-center ml-[-50px]">
         <div class="grid grid-cols-3 gap-x-32">
-            <x-content-stack :stack='$aiden_stack' />
-            <x-content-stack :stack='$brandon_stack' />
-            <x-content-stack :stack='$axel_stack' />
+            <x-content-stack-friend-view :stack='$aiden_stack' />
+            <x-content-stack-friend-view :stack='$brandon_stack' />
+            <x-content-stack-friend-view :stack='$axel_stack' />
         </div>
     </div>
 

@@ -1,4 +1,4 @@
-<button class="text-white border border-blue rounded-full px-4 py-2 mt-2 mr-4 hover:bg-blue transition ease-in-out duration-300" x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-content')">Fill your Reservoir</button>
+<button class="text-white border border-blue rounded-full px-4 py-2 mt-2 mr-4 hover:bg-blue transition ease-in-out duration-300 focus-visible:outline focus-visible:outline-1 focus-visible:outline-offset-2 focus-visible:outline-blue" x-data="" x-on:click.prevent="$dispatch('open-modal', 'add-content')">Fill your Reservoir</button>
 
 <x-modal name="add-content" :show="$errors->isNotEmpty()" focusable>
     <form action="{{ route('search-results') }}" method="GET" class="bg-midnight p-8">

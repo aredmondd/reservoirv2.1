@@ -19,6 +19,8 @@ class DatabaseSeeder extends Seeder
             'username' => 'aredmond',
             'email' => 'aiden@gmail.com',
             'password' => 'password',
+            'bio' => 'the UI guy',
+            'profile_picture' => 'profile_pictures/redmond.jpg'
         ];
 
         $user = User::create($attributes);
@@ -67,6 +69,8 @@ class DatabaseSeeder extends Seeder
             'username' => 'bwilson',
             'email' => 'brandon@gmail.com',
             'password' => 'password',
+            'bio' => 'the database guy',
+            'profile_picture' => 'profile_pictures/wilson.jpg'
         ];
 
         $user = User::create($attributes);
@@ -115,6 +119,8 @@ class DatabaseSeeder extends Seeder
             'username' => 'abeaver',
             'email' => 'axel@gmail.com',
             'password' => 'password',
+            'bio' => 'the AI guy',
+            'profile_picture' => 'profile_pictures/beaver.jpg'
         ];
 
         $user = User::create($attributes);

@@ -139,18 +139,35 @@ class TMDBController extends Controller
     
     public function search(Request $request) {
         $movieTitle = $request->input('query');
-        
-        $movieDetails = Http::asJson()
-            ->get(config('services.tmdb.endpoint') . 'search/movie?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
-            ->json()['results'];
+        $type = $request->input('type'); // Retrieve the selected type (movie or tv)
     
-        $tvDetails = Http::asJson()
-            ->get(config('services.tmdb.endpoint') . 'search/tv?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
-            ->json()['results'];
+        $movieDetails = [];
+        $tvDetails = [];
+    
+        if ($type === 'movie' || !$type) {
+            $movieDetails = Http::asJson()
+                ->get(config('services.tmdb.endpoint') . 'search/movie', [
+                    'query' => $movieTitle,
+                    'include_adult' => false,
+                    'language' => 'en-US',
+                    'page' => 1,
+                    'api_key' => config('services.tmdb.api'),
+                ])->json()['results'];
+        }
+    
+        if ($type === 'tv' || !$type) {
+            $tvDetails = Http::asJson()
+                ->get(config('services.tmdb.endpoint') . 'search/tv', [
+                    'query' => $movieTitle,
+                    'include_adult' => false,
+                    'language' => 'en-US',
+                    'page' => 1,
+                    'api_key' => config('services.tmdb.api'),
+                ])->json()['results'];
+        }
     
         $allResults = array_merge($movieDetails, $tvDetails);
     
-        // filter the movies to remove profane content
         $filteredMovies = $this->filter($allResults);
     
         // Sort by vote count in descending order
@@ -161,7 +178,6 @@ class TMDBController extends Controller
         // Pagination logic
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $perPage = 10;
-    
         $currentResults = Collection::make($filteredMovies)->slice(($currentPage - 1) * $perPage, $perPage)->all();
         $paginatedResults = new LengthAwarePaginator(
             $currentResults,
@@ -179,10 +195,5 @@ class TMDBController extends Controller
             'userStacks' => $userStacks,
             'query' => $movieTitle
         ]);
-    }
-    
-
-
-    // full list of movies ??
-
+    }    
 }
