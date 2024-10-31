@@ -6,7 +6,7 @@
     <h2 class="text-mega text-center text-white font-serif">Search Content</h2>
 
     <div class="mx-20 mt-6">
-        <form action="{{ route('search-results') }}" method="GET" class="bg-midnight mx-80 flex items-center space-x-4">
+        <form action="{{ route('search-results') }}" method="GET" x-data class="bg-midnight mx-80 flex items-center space-x-4">
             <div class="flex-1">
                 <x-text-input
                     name="query"
@@ -19,7 +19,9 @@
             </div>
 
             <div class="relative">
-                <select name="type" class="appearance-none bg-blue text-white rounded-full p-3 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">
+                <select name="type" 
+                        class="appearance-none bg-blue text-white rounded-full p-3 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"
+                        @change="document.querySelector('form').submit()">
                     <option value="">All</option>
                     <option value="movie" {{ request('type') === 'movie' ? 'selected' : '' }}>Movies</option>
                     <option value="tv" {{ request('type') === 'tv' ? 'selected' : '' }}>TV</option>
@@ -31,8 +33,8 @@
                     </svg>
                 </div>
             </div>
-
         </form>
+
 
 
         <div class="mt-12"></div>

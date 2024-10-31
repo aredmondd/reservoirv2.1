@@ -21,7 +21,8 @@ class DashboardController extends Controller
         $user = Auth::user();
         $view = $request->input('view');
         $search = $request->input('search');
-        
+        $type = $request->input('type');
+    
         // Decide whether to show watchlist or history
         if ($view == 'history') {
             $list = $user->history->history ?? [];
@@ -29,11 +30,20 @@ class DashboardController extends Controller
             $list = $user->watchlist->watchlist ?? [];
         }
     
-        // If there is a search query, filter the list by partial word prefix matching
-        if ($search != null) {
-            $search = strtolower($search);
+        // Apply filters if provided
+        $filtered = collect($list);
     
-            $list = array_filter($list, function($content) use ($search) {
+        // Filter by content type if a type is selected
+        if ($type) {
+            $filtered = $filtered->filter(function ($content) use ($type) {
+                return $content['contentType'] === $type;
+            });
+        }
+    
+        // Apply search filter for title word prefix matching
+        if ($search) {
+            $search = strtolower($search);
+            $filtered = $filtered->filter(function ($content) use ($search) {
                 $titleWords = explode(' ', strtolower($content['name']));
                 foreach ($titleWords as $word) {
                     if (strpos($word, $search) === 0) {
@@ -44,11 +54,11 @@ class DashboardController extends Controller
             });
         }
     
-        // Paginate the list (15 items per page)
+        // Paginate the filtered list (10 items per page)
         $perPage = 10;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentItems = array_slice($list, ($currentPage - 1) * $perPage, $perPage);
-        $paginatedList = new LengthAwarePaginator($currentItems, count($list), $perPage);
+        $currentItems = $filtered->slice(($currentPage - 1) * $perPage, $perPage)->values();
+        $paginatedList = new LengthAwarePaginator($currentItems, $filtered->count(), $perPage);
         $paginatedList->withPath('/dashboard');
     
         return view('dashboard', ['list' => $paginatedList]);

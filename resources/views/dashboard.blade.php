@@ -11,7 +11,7 @@
 
     <div class="flex justify-between mx-40 items-center">
         <form action="/dashboard" method="GET" class="text-white">
-            <div class="flex space-x-4">
+            <div class="flex items-center space-x-4">
                 <div class="relative">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
@@ -21,6 +21,19 @@
                     <input type="text" name="search" id="simple-search" value="{{ request()->input('search') }}" class="pl-10 text-small text-white rounded-full w-full py-2 px-20 bg-white bg-opacity-25 placeholder:pl-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"/>
                 </div>
                 <input type="hidden" name="view" value="{{ request()->input('view') ?? 'watchlist' }}" />
+                <div class="relative">
+                    <select name="type" class="appearance-none bg-blue text-white rounded-full p-2 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">
+                        <option value="">All</option>
+                        <option value="movie" {{ request('type') === 'movie' ? 'selected' : '' }}>Movies</option>
+                        <option value="tv" {{ request('type') === 'tv' ? 'selected' : '' }}>TV</option>
+                    </select>
+                    <!-- Custom Dropdown Icon -->
+                    <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-midnight">
+                        <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
+                            <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
+                        </svg>
+                    </div>
+                </div>
             </div>
         </form>
 
