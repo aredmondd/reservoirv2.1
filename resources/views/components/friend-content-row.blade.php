@@ -6,7 +6,16 @@ use Carbon\Carbon;
 
 $contentType = $content['contentType'];
 
-$details = Http::asJson()->get(config('services.tmdb.endpoint'). $contentType .'/' . $content['id'] .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
+// $details = Http::asJson()->get(config('services.tmdb.endpoint'). $contentType .'/' . $content['id'] .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
+
+$responses = Http::pool(fn (Pool $pool) => [
+    $pool->get(
+        config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
+        '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')),
+]);
+
+$details = $responses[0]->json();
+
 
 $addedAt = Carbon::parse($content['time'])->toFormattedDateString();
 $posterPath = isset($details['poster_path']) ? $details['poster_path'] : null;

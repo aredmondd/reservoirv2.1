@@ -10,6 +10,7 @@ use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
 use App\Models\User;
+use Illuminate\Http\Client\Pool;
 
 // to rememeber what is being called
 // TMDB_ENDPOINT=https://api.themoviedb.org/3/
@@ -38,29 +39,26 @@ class TMDBController extends Controller
     // and not seperate them for if we want to show all the shit yk dog
     public function mainMovieFunc(){
 
-        // Fetch movies using the helper function
-        $popularMovies = $this->fetchMovies('popular');
-        $inTheatersMovies = $this->fetchMovies('now_playing');
-        $topRatedMovies = $this->fetchMovies('top_rated');
+        $responses = Http::pool(fn (Pool $pool) => [
+            $pool->get(config('services.tmdb.endpoint').'movie/popular?api_key='.config('services.tmdb.api')),
+            $pool->get(config('services.tmdb.endpoint').'movie/now_playing?api_key='.config('services.tmdb.api')),
+            $pool->get(config('services.tmdb.endpoint').'movie/top_rated?api_key='.config('services.tmdb.api')),
+            $pool->get(config('services.tmdb.endpoint').'tv/top_rated?api_key='.config('services.tmdb.api')),
+            // left movie
+            $pool->get(config('services.tmdb.endpoint').'movie/496243?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
+            // middle movie 
+            $pool->get(config('services.tmdb.endpoint').'movie/27205?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
+            // right movie
+            $pool->get(config('services.tmdb.endpoint').'movie/254320?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
+        ]);
 
-        //tvshows  which is actually going to be top rated lol
-        $topRatedTVShows = $this->fetchTV('top_rated');
-
-        $leftMovieId = 496243;
-        $middleMovieId = 27205;
-        $rightMovieId = 254320;
-
-        $leftMovie = $movieDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint').'movie/' . $leftMovieId . '?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
-        ->json();
-
-        $middleMovie = $movieDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint').'movie/' . $middleMovieId . '?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
-        ->json();
-
-        $rightMovie = $movieDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint').'movie/' . $rightMovieId . '?append_to_response=release_dates&api_key='.config('services.tmdb.api'))
-        ->json();
+        $popularMovies = $responses[0]->json()['results'];
+        $inTheatersMovies = $responses[1]->json()['results'];
+        $topRatedMovies = $responses[2]->json()['results'];
+        $topRatedTVShows = $responses[3]->json()['results'];
+        $leftMovie = $responses[4]->json();
+        $middleMovie = $responses[5]->json();
+        $rightMovie = $responses[6]->json();
 
         $aiden_stack = User::find(1)->stack[0];
         $brandon_stack = User::find(2)->stack[0];
@@ -88,13 +86,15 @@ class TMDBController extends Controller
         $descriptor = $flag === 'movie' ? 'movie/' : 'tv/';
         $append = $flag === 'movie' ? 'release_dates' : 'content_ratings';
 
-        $movieDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint'). $descriptor . $movieId .'?append_to_response=' . $append . '&api_key='.config('services.tmdb.api'))
-        ->json();
+        // Make asynchronous API calls using Pool
+        $responses = Http::pool(fn (Pool $pool) => [
+            $pool->get(config('services.tmdb.endpoint'). $descriptor . $movieId .'?append_to_response=' . $append . '&api_key='.config('services.tmdb.api')),
+            $pool->get(config('services.tmdb.endpoint'). $descriptor . $movieId . '/credits?api_key='.config('services.tmdb.api'))
+        ]);
 
-        $castCrewDetails = Http::asJson()
-        ->get(config('services.tmdb.endpoint'). $descriptor . $movieId . '/credits' . '?append_to_response=' . $append . '&api_key='.config('services.tmdb.api'))
-        ->json();
+        // Extracting results from responses
+        $movieDetails = $responses[0]->json();
+        $castCrewDetails = $responses[1]->json();
 
         // edit stack for now for testing
         return view('movie-description', ['movie' => $movieDetails, 'cast_crew_details' => $castCrewDetails, 'flag' => $flag]);

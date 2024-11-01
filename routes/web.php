@@ -6,6 +6,7 @@ use App\Http\Controllers\StackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MusicController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Stack;
 
@@ -13,6 +14,7 @@ use App\Models\Stack;
 Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index'); 
 Route::get('/movie-description/{movie}/{flag}',[TMDBController::class, 'movieDetails'])->name('movie-description');
 Route::get('/about', function () { return view('about'); })->name('about');
+Route::get('/movie-api-demo',[MusicController::class, 'main'])->name('main');
 
 
 // Routes only for authenticated users
