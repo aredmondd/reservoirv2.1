@@ -60,7 +60,8 @@ class DatabaseSeeder extends Seeder
                     'contentType' => 'movie',
                     'liked'       => false
                 ]
-            ]
+            ],
+            'isPrivate' => false
         ]);        
 
         // brandon account
@@ -110,7 +111,8 @@ class DatabaseSeeder extends Seeder
                     'contentType' => 'movie',
                     'liked'       => false
                 ]
-            ]
+            ],
+            'isPrivate' => false
         ]); 
 
         // axel account
@@ -160,7 +162,8 @@ class DatabaseSeeder extends Seeder
                     'contentType' => 'movie',
                     'liked'       => false
                 ]
-            ]
+            ],
+            'isPrivate' => false
         ]); 
     }
 }

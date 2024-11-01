@@ -19,8 +19,7 @@
             </div>
 
             <div class="relative">
-                <select name="type" 
-                        class="appearance-none bg-blue text-white rounded-full p-3 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">
+                <select name="type" class="appearance-none bg-blue text-white rounded-full p-3 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">
                     <option value="">All</option>
                     <option value="movie" {{ request('type') === 'movie' ? 'selected' : '' }}>Movies</option>
                     <option value="tv" {{ request('type') === 'tv' ? 'selected' : '' }}>TV</option>
