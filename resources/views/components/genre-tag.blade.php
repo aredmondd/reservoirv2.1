@@ -1,1 +1,0 @@
-<div class="border border-white border-opacity-50 rounded-full p-1 px-3 text-white text-opacity-50 text-sm mr-2 hover:text-blue transition-all duration-500">{{ $title }}</div>

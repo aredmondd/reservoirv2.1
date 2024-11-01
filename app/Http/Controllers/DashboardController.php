@@ -21,20 +21,29 @@ class DashboardController extends Controller
         $user = Auth::user();
         $view = $request->input('view');
         $search = $request->input('search');
-        
+        $type = $request->input('type');
+    
         // Decide whether to show watchlist or history
-        // brandon added ?? [] to both 
         if ($view == 'history') {
             $list = $user->history->history ?? [];
         } else {
             $list = $user->watchlist->watchlist ?? [];
         }
     
-        // If there is a search query, filter the list by partial word prefix matching
-        if ($search != null) {
-            $search = strtolower($search);
+        // Apply filters if provided
+        $filtered = collect($list);
     
-            $list = array_filter($list, function($content) use ($search) {
+        // Filter by content type if a type is selected
+        if ($type) {
+            $filtered = $filtered->filter(function ($content) use ($type) {
+                return $content['contentType'] === $type;
+            });
+        }
+    
+        // Apply search filter for title word prefix matching
+        if ($search) {
+            $search = strtolower($search);
+            $filtered = $filtered->filter(function ($content) use ($search) {
                 $titleWords = explode(' ', strtolower($content['name']));
                 foreach ($titleWords as $word) {
                     if (strpos($word, $search) === 0) {
@@ -45,16 +54,15 @@ class DashboardController extends Controller
             });
         }
     
-        // Paginate the list (15 items per page)
+        // Paginate the filtered list (10 items per page)
         $perPage = 10;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
-        $currentItems = array_slice($list, ($currentPage - 1) * $perPage, $perPage);
-        $paginatedList = new LengthAwarePaginator($currentItems, count($list), $perPage);
+        $currentItems = $filtered->slice(($currentPage - 1) * $perPage, $perPage)->values();
+        $paginatedList = new LengthAwarePaginator($currentItems, $filtered->count(), $perPage);
         $paginatedList->withPath('/dashboard');
     
         return view('dashboard', ['list' => $paginatedList]);
     }
-
 
 
     /**
@@ -109,6 +117,7 @@ class DashboardController extends Controller
         return abort(404);
     }
 
+
     /**
      * delete content from a list (watchlist or history)
      * 
@@ -142,15 +151,25 @@ class DashboardController extends Controller
         if ($listType === 'watchlist') {
             $watchlist->watchlist = array_values($movies);
             $watchlist->save();
+
+            return redirect()->back()->with('success', 'Deleted item from watchlist.');
         } elseif ($listType === 'history') {
             $history->history = array_values($movies);
             $history->save();
-        }
 
-        return redirect()->back();
+            return redirect()->back()->with('success', 'Deleted item from history.');
+        }
     }
 
 
+    /**
+     * move content from watchlist to history
+     * 
+     * @access public
+     * @author Aiden Redmond
+     * @param Request $request
+     * @return view
+     */
     public function move(Request $request) {
         $user = Auth::user();
         $movieId = $request->input('id');
@@ -183,7 +202,7 @@ class DashboardController extends Controller
             $history->history = $historyContent;
             $history->save();
         } else {
-            dd('Movie is already in history!');
+            return redirect()->route('dashboard')->with('error', $contentToMove['name'] . ' is already in your history');
         }
 
         // delete the content from watchlist
@@ -194,7 +213,7 @@ class DashboardController extends Controller
         $watchlist->watchlist = array_values($watchlistContent);
         $watchlist->save();
 
-        return redirect()->back();
+        return redirect()->back()->with('success', $contentToMove['name'] . ' was moved to history');
     }
     
 }

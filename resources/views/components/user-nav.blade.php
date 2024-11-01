@@ -38,7 +38,12 @@
                 <x-dropdown align="right" width="48">
                     <x-slot name="trigger">
                         <button class="inline-flex items-center px-3 py-2 text-white focus:outline-none transition ease-in-out duration-150 mt-1">
-                            <div><img src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/default.png') }}" alt="" class="w-12 h-12 rounded-full"></div>
+                            <div>
+                                <img 
+                                src="{{ Auth::user()->profile_picture ? asset('storage/' . Auth::user()->profile_picture) : asset('images/default.png') }}" 
+                                alt="Profile Picture" 
+                                class="w-12 h-12 rounded-full object-cover object-center">
+                            </div>
 
                             <div class="ms-1">
                                 <svg class="fill-current h-4 w-4" xmlns="http://www.w3.org/2000/svg" viewBox="0 0 20 20">

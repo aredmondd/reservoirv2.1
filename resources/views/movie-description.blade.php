@@ -1,7 +1,6 @@
 <?php
 use Carbon\Carbon;
 
-// dd($cast);
 // vote average
 $percent = round($movie['vote_average'] * 10);
 

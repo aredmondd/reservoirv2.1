@@ -9,6 +9,7 @@ use GuzzleHttp\Client;
 use Illuminate\Support\Facades\Auth;
 use Illuminate\Pagination\LengthAwarePaginator;
 use Illuminate\Support\Collection;
+use App\Models\User;
 use Illuminate\Http\Client\Pool;
 
 // to rememeber what is being called
@@ -24,12 +25,16 @@ class TMDBController extends Controller
         ->get(config('services.tmdb.endpoint').'movie/'.$category.'?api_key='.config('services.tmdb.api'))
         ->json()['results'];
     }
+
+
     private function fetchTV($category){
         // Make the API call for the provided category
         return Http::asJson()
         ->get(config('services.tmdb.endpoint').'tv/'.$category.'?api_key='.config('services.tmdb.api'))
         ->json()['results'];
     }
+
+
     // I am adding this here so we can make all the calls to the api in one function
     // and not seperate them for if we want to show all the shit yk dog
     public function mainMovieFunc(){
@@ -55,6 +60,10 @@ class TMDBController extends Controller
         $middleMovie = $responses[5]->json();
         $rightMovie = $responses[6]->json();
 
+        $aiden_stack = User::find(1)->stack[0];
+        $brandon_stack = User::find(2)->stack[0];
+        $axel_stack = User::find(3)->stack[0];
+        
         // Pass all the API calls into the view
         return view('index', [
             'popularMovie' => $popularMovies,
@@ -63,7 +72,10 @@ class TMDBController extends Controller
             'leftMovie' => $leftMovie,
             'middleMovie' => $middleMovie,
             'rightMovie' => $rightMovie,
-            'topRatedTVShows' => $topRatedTVShows
+            'topRatedTVShows' => $topRatedTVShows,
+            'aiden_stack' => $aiden_stack,
+            'brandon_stack' => $brandon_stack,
+            'axel_stack' => $axel_stack
         ]);
 
     }
@@ -127,18 +139,35 @@ class TMDBController extends Controller
     
     public function search(Request $request) {
         $movieTitle = $request->input('query');
-        
-        $responses = Http::pool(fn (Pool $pool) => [
-            $pool->get(config('services.tmdb.endpoint') . 'search/movie?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api')),
-            $pool->get(config('services.tmdb.endpoint') . 'search/tv?query=' . $movieTitle . '&include_adult=false&language=en-US&page=1&api_key=' . config('services.tmdb.api'))
-        ]);
-
-        $movieDetails = $responses[0]->json()['results'];
-        $tvDetails = $responses[1]->json()['results'];
-
+        $type = $request->input('type'); // Retrieve the selected type (movie or tv)
+    
+        $movieDetails = [];
+        $tvDetails = [];
+    
+        if ($type === 'movie' || !$type) {
+            $movieDetails = Http::asJson()
+                ->get(config('services.tmdb.endpoint') . 'search/movie', [
+                    'query' => $movieTitle,
+                    'include_adult' => false,
+                    'language' => 'en-US',
+                    'page' => 1,
+                    'api_key' => config('services.tmdb.api'),
+                ])->json()['results'];
+        }
+    
+        if ($type === 'tv' || !$type) {
+            $tvDetails = Http::asJson()
+                ->get(config('services.tmdb.endpoint') . 'search/tv', [
+                    'query' => $movieTitle,
+                    'include_adult' => false,
+                    'language' => 'en-US',
+                    'page' => 1,
+                    'api_key' => config('services.tmdb.api'),
+                ])->json()['results'];
+        }
+    
         $allResults = array_merge($movieDetails, $tvDetails);
     
-        // filter the movies to remove profane content
         $filteredMovies = $this->filter($allResults);
     
         // Sort by vote count in descending order
@@ -149,7 +178,6 @@ class TMDBController extends Controller
         // Pagination logic
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
         $perPage = 10;
-    
         $currentResults = Collection::make($filteredMovies)->slice(($currentPage - 1) * $perPage, $perPage)->all();
         $paginatedResults = new LengthAwarePaginator(
             $currentResults,
@@ -167,6 +195,5 @@ class TMDBController extends Controller
             'userStacks' => $userStacks,
             'query' => $movieTitle
         ]);
-    }
-
+    }    
 }

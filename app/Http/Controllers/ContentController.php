@@ -64,11 +64,9 @@ class ContentController extends Controller
             $watchlist->watchlist = $watchlist_content;
             $watchlist->save();
 
-            return redirect()->back();
+            return redirect()->back()->with('success', $content_name . ' added to watchlist');
         } else {
-            dump("Movie ID {$content_id} is already in watchlist.");
-
-            return redirect()->back();
+            return redirect()->back()->with('error', $content_name . ' is already in your watchlist');
         }
     }  
 
@@ -124,11 +122,9 @@ class ContentController extends Controller
             $history->history = $history_content;
             $history->save();
 
-            return redirect()->back();
+            return redirect()->back()->with('success', $content_name . ' added to history');
         } else {
-            dump("Movie ID {$content_id} is already in history.");
-
-            return redirect()->back();
+            return redirect()->back()->with('error', $content_name . ' is already in your history');
         }
     }  
 
@@ -160,11 +156,9 @@ class ContentController extends Controller
         if ($stack_owner_is_active_user) {
             $stack->add_to_stack($content_id, $content_type);
 
-            return redirect()->back();
+            return redirect()->back()->with('success', 'Content added to ' . $stack['name']);
         } else {
-            abort(403, "You don't have permission to modify this stack.");
-
-            return redirect()->back();
+            return redirect()->back()->with('error', 'you do not have permission to add content to' . $stack['name'] . '... how did you get here?');
         }
     }
 }

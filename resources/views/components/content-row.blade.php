@@ -37,7 +37,7 @@ elseif ($contentType == 'tv') {
             <a href="{{ route('movie-description', ['movie' => $content['id'], 'flag' => $flag]) }}" class="font-serif text-body text-white">{{ $name }}</a>
         </div>
         <p>{{ $releaseYear }}</p>
-        <p>{{ $runtime ? $runtime : $numOfSeasons . ' szns' }}</p>
+        <p>{{ $runtime ? $runtime : $numOfSeasons . ' seasons' }}</p>
         @if (request()->view == 'history')
         <p>☆☆☆☆☆</p>
         @endif

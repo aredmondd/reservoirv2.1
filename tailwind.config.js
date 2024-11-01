@@ -38,15 +38,22 @@ export default {
             },
             animation : {
               "loop-scroll": "loop-scroll 200s linear infinite",
+              'slide-in-out': 'slideInOut 4s ease-in-out forwards'
             },
             keyframes: {
               "loop-scroll": {
-                  from: { transform: "translateX(0)" },
-                  to: { transform: "translateX(-100%)" },
-              },
+                from: { transform: "translateX(0)" },
+                to: { transform: "translateX(-100%)" },
+                },
+                slideInOut: {
+                    '0%': { transform: 'translateY(-100%)', opacity: '0' },
+                    '10%': { transform: 'translateY(0)', opacity: '1' },
+                    '90%': { transform: 'translateY(0)', opacity: '1' },
+                    '100%': { transform: 'translateY(-100%)', opacity: '0' },
+                },
             },
             boxShadow: {
-                'glow': '0px 0px 25px 0px #6AE1EB',
+                'glow': '2px 0px 10px 0px aqua',
             },
             screens: {
                 '3xl' : '1900px',

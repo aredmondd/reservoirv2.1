@@ -3,12 +3,6 @@
             Profile Picture
         </h2>
 
-    @if(session('success'))
-        <div class="text-white text-opacity-50">
-            {{ session('success') }}
-        </div>
-    @endif
-
     <div class="flex">
         <form action="{{ route('profile.picture.update') }}" method="POST" enctype="multipart/form-data" class="mt-6">
             @csrf

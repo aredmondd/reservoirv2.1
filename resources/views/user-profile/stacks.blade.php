@@ -3,7 +3,7 @@
     <div class="mx-40 flex justify-between mt-12 mb-24">
         @foreach ($stacks as $stack) 
             @if(!$stack['isPrivate'])
-                <x-dynamic-stack :stack='$stack'/>
+                <x-content-stack-friend-view :stack='$stack'/>
             @endif
         @endforeach
     </div>

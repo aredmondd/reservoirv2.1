@@ -1,13 +1,17 @@
 <x-layout>
+
+    <x-success-notification />
+    <x-error-notification />
+    
     <div class="flex justify-between items-end mx-20 mt-16">
         <h1 class="text-mega text-white font-serif">My Stacks</h1>
         
-        <button class="text-white border border-blue rounded-full px-4 p-2 mb-6 hover:bg-blue transition ease-in-out duration-300" x-data="" x-on:click.prevent="$dispatch('open-modal', 'new-stack')">Create new Stack</button>
+        <button class="text-white border border-blue rounded-full px-4 p-2 mb-6 hover:bg-blue transition ease-in-out duration-300" x-data="" x-on:click.prevent="$dispatch('open-modal', 'new-stack')">New Stack</button>
     </div>
 
 
     <x-modal name="new-stack" :show="$errors->isNotEmpty()" focusable>
-        <form method="POST" action="{{ route('new-stack') }}" class="p-6 bg-midnight">
+        <form method="POST" action="{{ route('new-stack') }}" class="p-6 bg-midnight z-[10000]">
             @csrf
 
             <h2 class="text-title font-medium text-white text-center">
@@ -61,28 +65,24 @@
         </form>
     </x-modal>
 
+    <hr class='border-white border-opacity-25 mx-20 my-3'>
+
     @if($stacks->isEmpty())
     <div class="py-32 text-center text-white text-opacity-50 text-body">
         so empty...
     </div>
     @else
-    <div class="text-white text-center mt-12">
-        <ul>
+    <div class="mt-12 grid grid-cols-3 mx-20 mr-[-85px]">
         @foreach ($stacks as $stack)
-            <a href="/stack?id={{ $stack->id }}">
-                <li>
-                    {{ $stack->name }} - {{ $stack->description }}
-                    @if($stack->isPrivate)
-                        - Private
-                    @endif
-                </li>
-            </a>
+            <div class="mb-12">
+                <x-content-stack :stack='$stack'/>
+            </div>
         @endforeach
-        </ul>
+    </div>
+
+    <!-- Pagination Links -->
+    <div class="mt-6 mb-12 flex">
+        {{ $stacks->links() }}
     </div>
     @endif
-
-    
-
-
 </x-layout>

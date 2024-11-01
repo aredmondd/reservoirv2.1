@@ -22,8 +22,8 @@
     </div>
 
     <div class="flex flex-row-reverse">
-        <a href="https://github.com/axbeaver" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../../images/beaver.JPG" alt="axel beaver headshot"></a>
-        <a href="https://github.com/bdubbs11" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../../images/wilson.JPG" alt="brandon wilson headshot"></a>
-        <a href="https://github.com/aredmondd" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../../images/redmond.JPG" alt="aiden redmond headshot"></a>
+        <a href="https://github.com/axbeaver" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../../images/beaver.JPG" loading="lazy" alt="axel beaver headshot"></a>
+        <a href="https://github.com/bdubbs11" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../../images/wilson.JPG" loading="lazy" alt="brandon wilson headshot"></a>
+        <a href="https://github.com/aredmondd" target="_blank"><img class="w-16 h-16 rounded-full ml-3"src="../../images/redmond.JPG" loading="lazy" alt="aiden redmond headshot"></a>
     </div>
 </div>
