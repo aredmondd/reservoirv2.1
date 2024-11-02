@@ -32,7 +32,7 @@ class ContentController extends Controller
         $content_type = $request->input('content_type');
     
         // check if the content is inside the watchlist
-        $content_in_watchlist = in_array($content_id, array_column($watchlist_content, 'id'));
+        $content_in_watchlist = collect($watchlist_content)->contains('id', $content_id);
 
         /**
          * if the content is not inside the watchlist, add it & save the watchlist.
@@ -76,7 +76,7 @@ class ContentController extends Controller
         $content_type = $request->input('content_type');
     
         // check if the content is inside the watchlist
-        $content_in_history = in_array($content_id, array_column($history_content, 'id'));
+        $content_in_history = collect($history_content)->contains('id', $content_id);
 
         /**
          * if the content is not inside the history, add it & save the history.
