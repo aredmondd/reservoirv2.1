@@ -7,6 +7,10 @@ use App\Models\User;
 use App\Models\Stack;
 
 class UserController extends Controller {
+    public function show_my_profile(Request $request) {
+        return view('profile');
+    }
+
     public function updateVisibility(Request $request) {
         $request->validate([
             'visibility' => 'required|in:public,private',

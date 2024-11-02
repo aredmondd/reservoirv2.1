@@ -6,7 +6,13 @@
                 <!-- Navigation Links -->
                 <div class="hidden ml-8 sm:flex">
                     <x-nav-link :href="route('dashboard')" :active="request()->is('dashboard')">
-                        Dashboard
+                        Reservoir
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden ml-8 sm:flex">
+                    <x-nav-link :href="route('my-profile')" :active="request()->is('my-profile')">
+                        Profile
                     </x-nav-link>
                 </div>
 

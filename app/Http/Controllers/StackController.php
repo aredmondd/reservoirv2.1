@@ -25,7 +25,7 @@ class StackController extends Controller {
     public function store(Request $request) {
         // dump($request->all());
         $attributes = request()->validate([
-            'name' => 'required|max:50',
+            'name' => 'required|max:30',
             'description' => 'required|max:90',
             'isPrivate' => 'required',
         ]);

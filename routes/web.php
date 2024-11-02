@@ -20,6 +20,7 @@ Route::get('/movie-api-demo',[MusicController::class, 'main'])->name('main');
 // Routes only for authenticated users
 Route::middleware('auth')->group(function () {
 
+    Route::get('/my-profile', [UserController::class, 'show_my_profile'])->name('my-profile');
     Route::get('/dashboard', [DashboardController::class, 'display_list'])->name('dashboard');
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
     Route::get('/stack', [StackController::class, 'getStackContent'])->name('stack-view');
