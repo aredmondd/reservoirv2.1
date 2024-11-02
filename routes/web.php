@@ -22,6 +22,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
     Route::get('/stack', [StackController::class, 'getStackContent'])->name('stack-view');
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
+    Route::get('/friends', [UserController::class, 'displayFriends'])->name('my-friends');
 
     // stacks
     Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
@@ -39,6 +40,10 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{username}/history', [UserController::class, 'display'])->name('user-history');
     Route::get('/user/{username}/stacks', [UserController::class, 'display'])->name('user-stacks');
     Route::get('/user/{username}/journal', [UserController::class, 'display'])->name('user-diary');
+    
+    Route::post('/search/sendFriendRequest', [UserController::class, 'sendFriendRequest'])->name('friend.add');
+    Route::post('/search/acceptFriendRequest', [UserController::class, 'acceptFriendRequest'])->name('friend.accept');
+    
 
     // edit your profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');

@@ -20,6 +20,8 @@ class User extends Authenticatable
         'bio',
         'profile_picture',
         'is_private',
+        'pending_friend_requests',
+        'current_friends',
     ];
 
     protected $guarded = [];
@@ -34,6 +36,8 @@ class User extends Authenticatable
         return [
             'email_verified_at' => 'datetime',
             'password' => 'hashed',
+            'pending_friend_requests' => 'array',
+            'current_friends' => 'array',
         ];
     }
 
@@ -51,6 +55,28 @@ class User extends Authenticatable
 
     public function getProfilePictureUrl(){
         return $this->profile_picture ? Storage::url($this->profile_picture) : 'public/images/default.png';
+    }
+
+    public function addFriendRequest(int $requestID){
+
+        $friendRequest = $this->pending_friend_requests ?? [];
+
+        $alreadyRequested = in_array($requestID, array_column($friendRequest, 'id'));
+
+
+        if(!$alreadyRequested){
+            $friendRequest[] = [
+                'id' => $requestID,
+                'time' => now(),
+            ];
+
+            $this->pending_friend_requests = $friendRequest;
+            $this->save(); 
+            return true;
+        } else {
+            dump("User ID {$requestID} has already sent a friend request.");
+            return false;
+        }
     }
 }
 

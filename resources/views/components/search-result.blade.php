@@ -6,11 +6,15 @@
             <p class="text-white text-opacity-50 font-sans text-sm">{{ $user->username }}</p>
         </div>
     </a>
-
     <!-- if the current user is already friends with user they are viewing -->
 
     <!-- if the current user is not already friends with the user they are viewing -->
-    <button class="text-white border border-blue rounded-full px-6 p-2 hover:bg-blue transition ease-in-out duration-300">Add Friend</button>
+    <form action="{{ route('friend.add') }}" method="POST">
+        @csrf
+        <input type="hidden" name="requested_user_id" value="{{ $user->id }}">
+        <button class="text-white border border-blue rounded-full px-6 p-2 hover:bg-blue transition ease-in-out duration-300">Add Friend</button>
+    </form>
+
 </div>
 
 <hr class='border-white border-opacity-25 mx-12 my-6'>

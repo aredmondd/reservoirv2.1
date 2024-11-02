@@ -93,4 +93,83 @@ class UserController extends Controller {
         
     }
 
+    public function sendFriendRequest(Request $request){
+    //    dd(request()->all(), auth()->user()['id']);
+
+        $request->validate([
+            'requested_user_id' => 'required|integer|exists:users,id',
+        ]);
+
+        $requestedUserId = $request->input('requested_user_id');
+        $currentUser = auth()->user();
+
+        // dd($currentUser->addFriendRequest($requestedUserId));
+
+        if ($currentUser->addFriendRequest($requestedUserId)) {
+
+            return redirect()->back(); 
+
+        }
+
+        return redirect()->back();
+
+
+    }
+
+    // view friend requests
+
+    public function displayFriends (){
+        $currentUser = Auth::user();
+
+        $friendRequests = $currentUser->pending_friend_requests;
+        $currentFriends = $currentUser->current_Friends;
+
+        return view ('friends',[
+            'friendRequests' => $friendRequests,
+            'currentFriends' => $currentFriends,
+        ]);
+    }
+
+    public function acceptFriendRequest(Request $request){
+        $currentUser = Auth::user();
+        // dd(request()->all(),$currentUser);
+
+        $request->validate([
+            'requested_user_id' => 'required|integer|exists:users,id',
+        ]);
+
+        $requestedUserId = $request->input('requested_user_id');        
+        
+        $currentFriends = $this->current_friends ?? [];
+
+        // add to current friends
+        
+        $alreadyFriends = in_array($requestedUserId, array_column($currentFriends, 'id'));
+
+        if(!$alreadyFriends){
+            $currentFriends[] = [
+                'id' => $requestedUserId,
+                'time' => now(),
+            ];
+
+            $currentUser->current_friends = $currentFriends;
+            $currentUser->save(); 
+        }
+
+        // remove from requests
+        $pending = $this->pending_friend_requests ?? [];
+
+        $pending = array_filter($pending, function($request) use ($requestedUserId) {
+            return $request['requested_user_id'] !== $requestedUserId;
+        });
+
+
+        $currentUser->pending_friend_requests = array_values($pending);
+        $currentUser->save();        
+
+        return redirect()->back();
+    }
+
+    // view list of friends
+
 }
