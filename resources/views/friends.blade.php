@@ -36,7 +36,6 @@ use App\Models\User;
     @endif
   @endforeach
 @endif
-
 @if(empty($currentFriends))
   <h1 class="text-white text-center font-serif text-mega my-12">You currently have no friends... add some!</h1>
 @else

@@ -94,18 +94,15 @@ class UserController extends Controller {
     }
 
     public function sendFriendRequest(Request $request){
-    //    dd(request()->all(), auth()->user()['id']);
-
         $request->validate([
             'requested_user_id' => 'required|integer|exists:users,id',
         ]);
 
         $requestedUserId = $request->input('requested_user_id');
-        $currentUser = auth()->user();
+        $requestedUser =  User::find($requestedUserId);
+        $currentUserID = auth()->user()['id'];
 
-        // dd($currentUser->addFriendRequest($requestedUserId));
-
-        if ($currentUser->addFriendRequest($requestedUserId)) {
+        if ($requestedUser->addFriendRequest($currentUserID)) {
 
             return redirect()->back(); 
 
@@ -122,7 +119,7 @@ class UserController extends Controller {
         $currentUser = Auth::user();
 
         $friendRequests = $currentUser->pending_friend_requests;
-        $currentFriends = $currentUser->current_Friends;
+        $currentFriends = $currentUser->current_friends;
 
         return view ('friends',[
             'friendRequests' => $friendRequests,
@@ -132,15 +129,19 @@ class UserController extends Controller {
 
     public function acceptFriendRequest(Request $request){
         $currentUser = Auth::user();
-        // dd(request()->all(),$currentUser);
+        
+        // dd($currentUser->id, $request->input('requested_user_id'));
 
         $request->validate([
             'requested_user_id' => 'required|integer|exists:users,id',
         ]);
 
         $requestedUserId = $request->input('requested_user_id');        
-        
-        $currentFriends = $this->current_friends ?? [];
+        $requestedUser =  User::find($requestedUserId);
+        $currentFriends = $currentUser->current_friends ?? [];
+        $requestedCurrentFriends = $requestedUser->current_friends ?? [];
+
+        // dd($currentUser ,$requestedUser  );
 
         // add to current friends
         
@@ -151,16 +152,26 @@ class UserController extends Controller {
                 'id' => $requestedUserId,
                 'time' => now(),
             ];
+            $requestedCurrentFriends[] = [
+                'id' => $currentUser->id,
+                'time' => now(),
+            ];
 
             $currentUser->current_friends = $currentFriends;
             $currentUser->save(); 
+
+            $requestedUser->current_friends = $requestedCurrentFriends;
+            $requestedUser->save();
+
+            // dd($requestedUser,$currentUser);
         }
 
         // remove from requests
-        $pending = $this->pending_friend_requests ?? [];
+        $pending = $currentUser->pending_friend_requests ?? [];
 
         $pending = array_filter($pending, function($request) use ($requestedUserId) {
-            return $request['requested_user_id'] !== $requestedUserId;
+            // return $request['requested_user_id'] !== $requestedUserId;
+            return is_array($request) && isset($request['requested_user_id']) && $request['requested_user_id'] !== $requestedUserId;
         });
 
 
