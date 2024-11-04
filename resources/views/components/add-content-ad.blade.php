@@ -10,8 +10,8 @@
             </div>
     </div>
     <div class="flex mx-auto mt-6">
-        <x-add-to-watchlist-button :id='$movieData["id"]' flag='movie' />
+        <x-add-to-watchlist-button :id='$movieData["id"]' flag='movie' :name='$movieData["title"]'/>
         <div class="mr-6"></div>
-        <x-add-to-history-button :id='$movieData["id"]' flag='movie' />
+        <x-add-to-history-button :id='$movieData["id"]' flag='movie' :name='$movieData["title"]' />
     </div>
 </div>
