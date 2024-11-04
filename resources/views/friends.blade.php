@@ -24,11 +24,26 @@ use App\Models\User;
             <p class="text-white text-opacity-50 font-sans text-sm">{{ $requestedUser->username }}</p>
           </div>
         </a>
-        <form action="{{ route('friend.accept') }}" method="POST">
-          @csrf
-          <input type="hidden" name="requested_user_id" value="{{ $requestedUser->id }}">
-          <button class="text-white border border-blue rounded-full px-6 p-2 hover:bg-blue transition ease-in-out duration-300">Accept Request</button>
-        </form>
+        <div class="flex items-center space-x-2">
+
+          <form action="{{ route('friend.accept') }}" method="POST" class="inline-block">
+              @csrf
+              <input type="hidden" name="requested_user_id" value="{{ $requestedUser->id }}">
+              <button class="text-white border border-blue rounded-full px-6 p-2 hover:bg-blue transition ease-in-out duration-300">
+                  Accept Request
+              </button>
+          </form>
+
+          <form action="{{ route('friend.decline') }}" method="POST" class="inline-block ml-2">
+              @csrf
+              @method('DELETE')
+              <input type="hidden" name="requested_user_id" value="{{ $requestedUser->id }}">
+              <button type="submit">
+                  <img src="images/delete.png" alt="Delete" class="w-8 hover:opacity-75 transition ease-in-out duration-300">
+              </button>
+          </form>
+        </div>
+        
       </div>
       <hr class='border-white border-opacity-25 mx-12 my-6'>
     @else

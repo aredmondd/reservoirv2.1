@@ -181,6 +181,30 @@ class UserController extends Controller {
         return redirect()->back();
     }
 
-    // view list of friends
+    public function declineFriendRequest(Request $request){
+        $currentUser = Auth::user();
+
+        $request->validate([
+            'requested_user_id' => 'required|integer|exists:users,id',
+        ]);
+
+        $requestedUserId = $request->input('requested_user_id'); 
+        $deleteRequests = $currentUser->pending_friend_requests ?? [];
+
+        $deleteRequests = array_filter($deleteRequests, function($request) use ($requestedUserId) {
+            // return $request['requested_user_id'] !== $requestedUserId;
+            return is_array($request) && isset($request['requested_user_id']) && $request['requested_user_id'] !== $requestedUserId;
+        });
+
+        $currentUser->pending_friend_requests = array_values($deleteRequests);
+        $currentUser->save();        
+
+        return redirect()->back();
+
+    }
+
+    public function deleteFriend(){
+
+    }
 
 }

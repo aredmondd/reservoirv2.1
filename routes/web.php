@@ -43,6 +43,8 @@ Route::middleware('auth')->group(function () {
     
     Route::post('/search/sendFriendRequest', [UserController::class, 'sendFriendRequest'])->name('friend.add');
     Route::post('/search/acceptFriendRequest', [UserController::class, 'acceptFriendRequest'])->name('friend.accept');
+    Route::delete('/search/declineFriendRequest', [UserController::class, 'declineFriendRequest'])->name('friend.decline');
+    Route::delete('/search/deleteFriend', [UserController::class, 'deleteFriend'])->name('friend.delete');
     
 
     // edit your profile
