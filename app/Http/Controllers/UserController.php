@@ -8,7 +8,46 @@ use App\Models\Stack;
 
 class UserController extends Controller {
     public function show_my_profile(Request $request) {
-        return view('profile');
+        $user = Auth::user();
+        $watchlist = Auth::user()->watchlist->watchlist;
+        $history = Auth::user()->history->history;
+
+        $numWatchlisted = count($watchlist);
+        $numWatched = count($history);
+
+        $numMovies = 0;
+        $numShows = 0;
+
+        $numMoviesWatchlisted = 0;
+        $numShowsWatchlisted = 0;
+
+        foreach($history as $content) {
+            if ($content['contentType'] == 'movie') {
+                $numMovies += 1;
+            }
+            elseif ($content['contentType'] == 'tv') {
+                $numShows += 1;
+            }
+        }
+
+        foreach($watchlist as $content) {
+            if ($content['contentType'] == 'movie') {
+                $numMoviesWatchlisted += 1;
+            }
+            elseif ($content['contentType'] == 'tv') {
+                $numShowsWatchlisted += 1;
+            }
+        }
+
+        $totalContent = $numMovies + $numShows;
+        $moviePercentage = $totalContent > 0 ? ($numMovies / $totalContent) * 100 : 0;
+        $showPercentage = $totalContent > 0 ? ($numShows / $totalContent) * 100 : 0;
+
+        $totalContentWatchlisted = $numMoviesWatchlisted + $numShowsWatchlisted;
+        $moviePercentageWatchlisted = $totalContentWatchlisted > 0 ? ($numMoviesWatchlisted / $totalContentWatchlisted) * 100 : 0;
+        $showPercentageWatchlisted = $totalContentWatchlisted > 0 ? ($numShowsWatchlisted / $totalContentWatchlisted) * 100 : 0;
+
+        return view('profile', compact('numWatchlisted', 'numWatched', 'numMovies', 'numShows', 'numMoviesWatchlisted', 'numShowsWatchlisted', 'totalContent', 'moviePercentage', 'showPercentage', 'totalContentWatchlisted', 'moviePercentageWatchlisted', 'showPercentageWatchlisted'));
     }
 
     public function updateVisibility(Request $request) {
