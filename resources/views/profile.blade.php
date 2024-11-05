@@ -1,20 +1,28 @@
 <x-layout>
 
-    <div class="flex flex-col items-center justify-center">
-        <h1 class="text-white"># of items watchlisted: {{ $numWatchlisted }}</h1>
-        <h1 class="text-white"># of items watched: {{ $numWatched }}</h1>
-        <h1 class="text-white"># of movies watched: {{ $numMovies }}</h1>
-        <h1 class="text-white"># of tv watched: {{ $numShows }}</h1>
-        <h1 class="text-white"># of movies watchlisted: {{ $numShowsWatchlisted }}</h1>
-        <h1 class="text-white"># of tv watchlisted: {{ $numMoviesWatchlisted }}</h1>
+
+
+    <div class="flex justify-between mx-20 m-12">
+        <div class="flex flex-col items-center">
+            <img src="storage/{{ $user['profile_picture'] }}" alt="" class="w-64 rounded-full">
+            <p class="mt-4 text-white text-title">{{ $user->username }} \ {{ $user->name }}</p>
+        </div>
+        <div class="flex space-x-4">
+            <div class="bg-white bg-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
+            <div class="bg-white bg-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
+            <div class="bg-white bg-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
+            <div class="bg-white bg-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
+            <div class="bg-white bg-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
+        </div>
     </div>
 
-    <div class="text-white p-4 rounded-lg max-w-md mx-auto">
+    <div class="mx-20 mb-8 text-white rounded-lg max-w-md">
         <div class="flex justify-between mb-2">
             <h1 class="text-white text-sm">History</h1>
             <p class="text-white text-sm">Total Entries: {{ $totalContent }}</p>
         </div>
         <div class="flex w-full h-4 rounded relative">
+            <div class="bg-white bg-opacity-50 h-full rounded-lg" style="width: 100%"></div>
             <div class="bg-blue h-full rounded-l" style="width: {{ $moviePercentage }}%;"></div>
             <div class="bg-aqua h-full rounded-r" style="width: {{ $showPercentage }}%;"></div>
         </div>
@@ -24,9 +32,13 @@
         </div>
     </div>
 
-    <div class="text-white p-4 rounded-lg max-w-md mx-auto">
-    <h1 class="text-white mb-2">Watchlist</h1>
+    <div class="mx-20 text-white rounded-lg max-w-md">
+        <div class="flex justify-between mb-2">
+            <h1 class="text-white text-sm">History</h1>
+            <p class="text-white text-sm">Total Entries: {{ $totalContentWatchlisted }}</p>
+        </div>
         <div class="flex w-full h-4 rounded relative">
+            <div class="bg-white bg-opacity-50 h-full rounded-lg" style="width: 100%"></div>
             <div class="bg-blue h-full rounded-l" style="width: {{ $moviePercentageWatchlisted }}%;"></div>
             <div class="bg-aqua h-full rounded-r" style="width: {{ $showPercentageWatchlisted }}%;"></div>
         </div>
@@ -34,12 +46,9 @@
             <span>Movies: {{ $numMoviesWatchlisted }}</span>
             <span>Shows: {{ $numShowsWatchlisted }}</span>
         </div>
-        <div class="flex justify-between mt-4">
-            <span>Total Entries: {{ $totalContentWatchlisted }}</span>
-        </div>
     </div>
 
-
+    <div class="mb-24"></div>
 
 
 </x-layout>

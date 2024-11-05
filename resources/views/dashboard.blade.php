@@ -22,7 +22,7 @@
                 </div>
                 <input type="hidden" name="view" value="{{ request()->input('view') ?? 'watchlist' }}" />
                 <div class="relative">
-                    <select name="type" class="appearance-none bg-blue text-white rounded-full p-2 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">
+                    <select name="type" class="appearance-none bg-blue text-white rounded-full pl-3 p-2 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">
                         <option value="">All</option>
                         <option value="movie" {{ request('type') === 'movie' ? 'selected' : '' }}>Movies</option>
                         <option value="tv" {{ request('type') === 'tv' ? 'selected' : '' }}>TV</option>
