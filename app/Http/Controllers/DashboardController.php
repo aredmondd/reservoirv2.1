@@ -26,8 +26,12 @@ class DashboardController extends Controller
         // Decide whether to show watchlist or history
         if ($view == 'history') {
             $list = $user->history->history ?? [];
-        } else {
+        } 
+        elseif ($view == 'watchlist') {
             $list = $user->watchlist->watchlist ?? [];
+        }
+        elseif ($view == 'currently-watching') {
+            $list = $user->currentlyWatching->currently_watching ?? [];
         }
     
         // Apply filters if provided

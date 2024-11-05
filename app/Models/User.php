@@ -49,6 +49,10 @@ class User extends Authenticatable
         return $this->hasOne(History::class);
     }
 
+    public function currentlyWatching() {
+        return $this->hasOne(currentlyWatching::class);
+    }
+
     public function getProfilePictureUrl(){
         return $this->profile_picture ? Storage::url($this->profile_picture) : 'public/images/default.png';
     }

@@ -39,6 +39,7 @@
 
         <div class="flex items-center pb-2 space-x-4">
             <a href="/dashboard?view=watchlist"><button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150">Watchlist</button></a>
+            <a href="/dashboard?view=currently-watching"><button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'currently-watching' ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150">Currently Watching</button></a>
             <a href="/dashboard?view=history"><button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'history' ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150">History</button></a>
         </div>
     </div>

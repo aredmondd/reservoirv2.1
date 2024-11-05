@@ -57,6 +57,7 @@ Route::middleware('auth')->group(function () {
     // add content to a list watchlist/history/stack
     Route::post('/watchlist', [ContentController::class, 'add_to_watchlist'])->name('watchlist.add');
     Route::post('/history', [ContentController::class, 'add_to_history'])->name('history.add');
+    Route::post('/currently-watching', [ContentController::class, 'add_to_currently_watching'])->name('currently-watching.add');
     Route::post('/addToStack', [ContentController::class, 'add_to_stack'])->name('stack.add');
 });
 
