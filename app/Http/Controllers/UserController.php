@@ -32,6 +32,8 @@ class UserController extends Controller {
         $numMoviesWatchlisted = 0;
         $numShowsWatchlisted = 0;
 
+        $totalTimeWatched = 0;
+
         if ($numWatched != 0) {
             foreach($history as $content) {
                 if ($content['contentType'] == 'movie') {
