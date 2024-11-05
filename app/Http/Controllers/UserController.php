@@ -149,11 +149,11 @@ class UserController extends Controller {
 
         if(!$alreadyFriends){
             $currentFriends[] = [
-                'id' => $requestedUserId,
+                'id' => (int) $requestedUserId,
                 'time' => now(),
             ];
             $requestedCurrentFriends[] = [
-                'id' => $currentUser->id,
+                'id' => (int) $currentUser->id,
                 'time' => now(),
             ];
 
@@ -163,18 +163,15 @@ class UserController extends Controller {
             $requestedUser->current_friends = $requestedCurrentFriends;
             $requestedUser->save();
 
-            // dd($requestedUser,$currentUser);
         }
 
         // remove from requests
         $pending = $currentUser->pending_friend_requests ?? [];
 
         $pending = array_filter($pending, function($request) use ($requestedUserId) {
-            // return $request['requested_user_id'] !== $requestedUserId;
-            return is_array($request) && isset($request['requested_user_id']) && $request['requested_user_id'] !== $requestedUserId;
+            return isset($request['id']) && (int) $request['id'] !== (int) $requestedUserId;
         });
-
-
+        
         $currentUser->pending_friend_requests = array_values($pending);
         $currentUser->save();        
 
@@ -192,8 +189,7 @@ class UserController extends Controller {
         $deleteRequests = $currentUser->pending_friend_requests ?? [];
 
         $deleteRequests = array_filter($deleteRequests, function($request) use ($requestedUserId) {
-            // return $request['requested_user_id'] !== $requestedUserId;
-            return is_array($request) && isset($request['requested_user_id']) && $request['requested_user_id'] !== $requestedUserId;
+            return isset($request['id']) && (int) $request['id'] !== (int) $requestedUserId;
         });
 
         $currentUser->pending_friend_requests = array_values($deleteRequests);
