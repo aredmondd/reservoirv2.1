@@ -43,7 +43,7 @@ use App\Models\User;
               </button>
           </form>
         </div>
-        
+
       </div>
       <hr class='border-white border-opacity-25 mx-12 my-6'>
     @else
@@ -68,6 +68,20 @@ use App\Models\User;
             <p class="text-white text-opacity-50 font-sans text-sm">{{ $requestedUser->username }}</p>
           </div>
         </a>
+
+        <div class="flex items-center space-x-2">
+          <form action="{{ route('friend.delete') }}" method="POST" class="inline-block ml-2">
+              @csrf
+              @method('DELETE')
+              <input type="hidden" name="requested_user_id" value="{{ $requestedUser->id }}">
+              <button type="submit">
+                  <img src="images/delete.png" alt="Delete" class="w-8 hover:opacity-75 transition ease-in-out duration-300">
+              </button>
+          </form>
+        </div>
+
+
+
       </div>
       <hr class='border-white border-opacity-25 mx-12 my-6'>
     @else
