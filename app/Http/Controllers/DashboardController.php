@@ -33,6 +33,9 @@ class DashboardController extends Controller
         elseif ($view == 'currently-watching') {
             $list = $user->currentlyWatching->currently_watching ?? [];
         }
+        else {
+            $list = $user->watchlist->watchlist ?? [];
+        }
     
         // Apply filters if provided
         $filtered = collect($list);
@@ -178,6 +181,8 @@ class DashboardController extends Controller
         $user = Auth::user();
         $movieId = $request->input('id');
         $contentToMove = null;
+
+        dd($movieId);
 
         $watchlist = $user->watchlist;
         $history = $user->history;

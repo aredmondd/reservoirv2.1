@@ -46,7 +46,7 @@
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>
 
-    @if (request()->input('view') == 'watchlist' || !request()->input('view'))
+    @if (request()->input('view') == 'watchlist' || !request()->input('view')|| request()->input('view') == 'currently-watching')
     <x-watchlist-header />
     @else
     <x-history-header />
