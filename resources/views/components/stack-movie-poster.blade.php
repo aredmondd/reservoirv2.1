@@ -1,4 +1,3 @@
-
 @props(['item','stackID'])
 
 <?php

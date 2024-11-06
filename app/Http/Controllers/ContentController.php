@@ -28,26 +28,11 @@ class ContentController extends Controller
 
         // get information about content
         $content_id = $request->input('id');
+        $content_name = $request->input('name');
         $content_type = $request->input('content_type');
-
-        // $content_details = $details = Http::asJson()->get(
-        //     config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
-        //     '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')
-        // )->json();
-
-        $responses = Http::pool(fn (Pool $pool) => [
-            $pool->get(
-                config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
-                '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')),
-        ]);
-
-        $content_details = $details = $responses[0]->json();
-        
-
-        $content_name = ($content_type == 'movie') ? $content_details['title'] : $content_details['name'];
     
         // check if the content is inside the watchlist
-        $content_in_watchlist = in_array($content_id, array_column($watchlist_content, 'id'));
+        $content_in_watchlist = collect($watchlist_content)->contains('id', $content_id);
 
         /**
          * if the content is not inside the watchlist, add it & save the watchlist.
@@ -87,25 +72,11 @@ class ContentController extends Controller
 
         // get information about content
         $content_id = $request->input('id');
+        $content_name = $request->input('name');
         $content_type = $request->input('content_type');
-
-                // $content_details = $details = Http::asJson()->get(
-        //     config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
-        //     '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')
-        // )->json();
-
-        $responses = Http::pool(fn (Pool $pool) => [
-            $pool->get(
-                config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
-                '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')),
-        ]);
-
-        $content_details = $details = $responses[0]->json();
-        
-        $content_name = ($content_type == 'movie') ? $content_details['title'] : $content_details['name'];
     
         // check if the content is inside the watchlist
-        $content_in_history = in_array($content_id, array_column($history_content, 'id'));
+        $content_in_history = collect($history_content)->contains('id', $content_id);
 
         /**
          * if the content is not inside the history, add it & save the history.
@@ -161,6 +132,50 @@ class ContentController extends Controller
             return redirect()->back()->with('error', 'you do not have permission to add content to' . $stack['name'] . '... how did you get here?');
         }
     }
+
+    /**
+     * add content to the user's currently-watching list
+     * 
+     * @access public
+     * @author Aiden Redmond
+     * @param Request $request
+     * @return redirect
+     */
+    public function add_to_currently_watching(Request $request) {
+        $user = Auth::user();
+        $currently_watching = $user->currentlyWatching;
+    
+        // if there is no content inside watchlist, make an empty array
+        $currently_watching_content = $currently_watching->currently_watching ?? [];
+
+        // get information about content
+        $content_id = $request->input('id');
+        $content_name = $request->input('name');
+        $content_type = $request->input('content_type');
+    
+        // check if the content is inside the watchlist
+        $content_in_watchlist = collect($currently_watching_content)->contains('id', $content_id);
+
+        /**
+         * if the content is not inside the watchlist, add it & save the watchlist.
+         * if the content is inside the watchlist, throw an error.
+         */
+        if (!$content_in_watchlist) {
+            $currently_watching_content[] = [
+                'id'          => $content_id,
+                'time'        => now(),
+                'name'        => $content_name,
+                'contentType' => $content_type,
+                'liked'       => false
+            ];
+            $currently_watching->currently_watching = $currently_watching_content;
+            $currently_watching->save();
+
+            return redirect()->back()->with('success', $content_name . ' added to currently watching');
+        } else {
+            return redirect()->back()->with('error', 'You are already watching ' . $content_name);
+        }
+    }  
 }
 
 // EOF

@@ -29,6 +29,6 @@ for ($i = 0; $i < 5; $i++) {
         @endforeach
     </div>
     <a href="/stack?id={{ $stack->id }}">
-        <p class="text-title text-white font-medium mt-2">{{ $stack->name }}</p>
+        <p class="text-title text-white font-medium mt-2">{{ \Illuminate\Support\Str::limit($stack->name, 21, '...') }}</p>
     </a>
 </div>

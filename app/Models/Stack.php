@@ -45,7 +45,7 @@ class Stack extends Model {
             $this->content = $stack_content;
             $this->save();
         } else {
-            dump("Content ID {$content_id} is already in the stack.");
+            return redirect()->back()->with('error', 'this content is already in this stack');
         }
     }
 

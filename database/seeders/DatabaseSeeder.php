@@ -28,6 +28,7 @@ class DatabaseSeeder extends Seeder
         $user = User::create($attributes);
         $user->watchlist()->create();
         $user->history()->create();
+        $user->currentlyWatching()->create();
         $user->stack()->create([
             'name'        => 'all i know is pain.',
             'description' => 'all i know is pain',
@@ -81,6 +82,7 @@ class DatabaseSeeder extends Seeder
         $user = User::create($attributes);
         $user->watchlist()->create();
         $user->history()->create();
+        $user->currentlyWatching()->create();
         $user->stack()->create([
             'name'        => 'Best Anime of 2024',
             'description' => 'THE best anime of 2024',
@@ -134,6 +136,7 @@ class DatabaseSeeder extends Seeder
         $user = User::create($attributes);
         $user->watchlist()->create();
         $user->history()->create();
+        $user->currentlyWatching()->create();
         $user->stack()->create([
             'name'        => 'Best Horror Movies',
             'description' => 'The best horror movies of ALL TIME',

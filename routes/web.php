@@ -6,6 +6,7 @@ use App\Http\Controllers\StackController;
 use App\Http\Controllers\UserController;
 use App\Http\Controllers\ContentController;
 use App\Http\Controllers\DashboardController;
+use App\Http\Controllers\MusicController;
 use Illuminate\Support\Facades\Route;
 use App\Models\Stack;
 
@@ -13,11 +14,13 @@ use App\Models\Stack;
 Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index'); 
 Route::get('/movie-description/{movie}/{flag}',[TMDBController::class, 'movieDetails'])->name('movie-description');
 Route::get('/about', function () { return view('about'); })->name('about');
+Route::get('/movie-api-demo',[MusicController::class, 'main'])->name('main');
 
 
 // Routes only for authenticated users
 Route::middleware('auth')->group(function () {
 
+    Route::get('/my-profile', [UserController::class, 'show_my_profile'])->name('my-profile');
     Route::get('/dashboard', [DashboardController::class, 'display_list'])->name('dashboard');
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
     Route::get('/stack', [StackController::class, 'getStackContent'])->name('stack-view');
@@ -34,7 +37,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/delete-content', [DashboardController::class, 'delete_content_from_list'])->name('delete-content');
 
     // user search
-    Route::get('/search', [UserController::class, 'search'])->name('search');
+    Route::get('/friends', [UserController::class, 'search'])->name('search');
     Route::get('/user/{username}', [UserController::class, 'display'])->name('user-profile');
     Route::get('/user/{username}/watchlist', [UserController::class, 'display'])->name('user-watchlist');
     Route::get('/user/{username}/history', [UserController::class, 'display'])->name('user-history');
@@ -61,6 +64,7 @@ Route::middleware('auth')->group(function () {
     // add content to a list watchlist/history/stack
     Route::post('/watchlist', [ContentController::class, 'add_to_watchlist'])->name('watchlist.add');
     Route::post('/history', [ContentController::class, 'add_to_history'])->name('history.add');
+    Route::post('/currently-watching', [ContentController::class, 'add_to_currently_watching'])->name('currently-watching.add');
     Route::post('/addToStack', [ContentController::class, 'add_to_stack'])->name('stack.add');
 });
 

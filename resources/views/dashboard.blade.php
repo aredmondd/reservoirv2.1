@@ -22,7 +22,7 @@
                 </div>
                 <input type="hidden" name="view" value="{{ request()->input('view') ?? 'watchlist' }}" />
                 <div class="relative">
-                    <select name="type" class="appearance-none bg-blue text-white rounded-full p-2 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">
+                    <select name="type" class="appearance-none bg-blue text-white rounded-full pl-3 p-2 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">
                         <option value="">All</option>
                         <option value="movie" {{ request('type') === 'movie' ? 'selected' : '' }}>Movies</option>
                         <option value="tv" {{ request('type') === 'tv' ? 'selected' : '' }}>TV</option>
@@ -39,13 +39,14 @@
 
         <div class="flex items-center pb-2 space-x-4">
             <a href="/dashboard?view=watchlist"><button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150">Watchlist</button></a>
+            <a href="/dashboard?view=currently-watching"><button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'currently-watching' ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150">Currently Watching</button></a>
             <a href="/dashboard?view=history"><button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'history' ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150">History</button></a>
         </div>
     </div>
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>
 
-    @if (request()->input('view') == 'watchlist' || !request()->input('view'))
+    @if (request()->input('view') == 'watchlist' || !request()->input('view')|| request()->input('view') == 'currently-watching')
     <x-watchlist-header />
     @else
     <x-history-header />
@@ -66,6 +67,6 @@
         </div>
     @endif
 
-    <div class="mb-24"></div>
+    <div class="mb-32"></div>
 
 </x-layout>

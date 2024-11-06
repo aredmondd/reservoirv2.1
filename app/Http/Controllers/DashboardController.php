@@ -26,7 +26,14 @@ class DashboardController extends Controller
         // Decide whether to show watchlist or history
         if ($view == 'history') {
             $list = $user->history->history ?? [];
-        } else {
+        } 
+        elseif ($view == 'watchlist') {
+            $list = $user->watchlist->watchlist ?? [];
+        }
+        elseif ($view == 'currently-watching') {
+            $list = $user->currentlyWatching->currently_watching ?? [];
+        }
+        else {
             $list = $user->watchlist->watchlist ?? [];
         }
     
@@ -173,47 +180,80 @@ class DashboardController extends Controller
     public function move(Request $request) {
         $user = Auth::user();
         $movieId = $request->input('id');
+        $view = $request->input('view') ?? 'watchlist';
         $contentToMove = null;
 
         $watchlist = $user->watchlist;
         $history = $user->history;
+        $currently_watching = $user->currentlyWatching;
 
         $historyContent = $history->history ?? [];
         $watchlistContent = $watchlist->watchlist ?? [];
+        $currentlyWatchingContent = $currently_watching->currently_watching ?? [];
 
-        // find the piece of content from the watchlist
-        foreach ($watchlistContent as $content) {
-            if ($content['id'] == $movieId) {
-                $contentToMove = $content;
+
+        // move content from watchlist to currently watching
+        if ($view == 'watchlist') {
+            $contentToMove = collect($watchlistContent)->firstWhere('id', $movieId);
+
+            // if the movie wasn't found
+            if ($contentToMove == null) {
+                return abort(404);
             }
+
+            $contentToMove['time'] = now();
+
+            // add the content to currently watching
+            if (!in_array($movieId, array_column($currentlyWatchingContent, 'id'))) {
+                $currentlyWatchingContent[] = $contentToMove;
+                $currently_watching->currently_watching = $currentlyWatchingContent;
+                $currently_watching->save();
+            } else {
+                return redirect()->route('dashboard')->with('error', 'You are already watching ' . $contentToMove['name']);
+            }
+
+            // delete the content from watchlist
+            $watchlistContent = array_filter($watchlistContent, function ($movie) use ($movieId) {
+                return $movie['id'] != $movieId; 
+            });
+
+            $watchlist->watchlist = array_values($watchlistContent);
+            $watchlist->save();
+
+            return redirect()->back()->with('success', $contentToMove['name'] . ' was moved to currently watching');
         }
 
-        // if the movie wasn't found
-        if ($contentToMove == null) {
-            return abort(404);
+        // move content from currently watching to history
+        elseif ($view == 'currently-watching') {
+            $contentToMove = collect($currentlyWatchingContent)->firstWhere('id', $movieId);
+
+            // if the movie wasn't found
+            if ($contentToMove == null) {
+                return abort(404);
+            }
+
+            $contentToMove['time'] = now();
+
+            // add the content to history
+            if (!in_array($movieId, array_column($historyContent, 'id'))) {
+                $historyContent[] = $contentToMove;
+                $history->history = $historyContent;
+                $history->save();
+            } else {
+                return redirect()->route('dashboard')->with('error', $contentToMove['name'] . ' is already in your history');
+            }
+
+            // delete the content from currently watching
+            $currentlyWatchingContent = array_filter($currentlyWatchingContent, function ($movie) use ($movieId) {
+                return $movie['id'] != $movieId; 
+            });
+
+            $currently_watching->currently_watching = array_values($currentlyWatchingContent);
+            $currently_watching->save();
+
+            return redirect()->back()->with('success', $contentToMove['name'] . ' was moved to history');
         }
 
-        // edit the content to have the time be the date it was 'watched' or added to history
-        $contentToMove['time'] = now();
-
-        // add the content to history
-        if (!in_array($movieId, array_column($historyContent, 'id'))) {
-            $historyContent[] = $contentToMove;
-            $history->history = $historyContent;
-            $history->save();
-        } else {
-            return redirect()->route('dashboard')->with('error', $contentToMove['name'] . ' is already in your history');
-        }
-
-        // delete the content from watchlist
-        $watchlistContent = array_filter($watchlistContent, function ($movie) use ($movieId) {
-            return $movie['id'] != $movieId; 
-        });
-
-        $watchlist->watchlist = array_values($watchlistContent);
-        $watchlist->save();
-
-        return redirect()->back()->with('success', $contentToMove['name'] . ' was moved to history');
     }
     
 }
