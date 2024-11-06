@@ -67,6 +67,6 @@
         </div>
     @endif
 
-    <div class="mb-24"></div>
+    <div class="mb-32"></div>
 
 </x-layout>

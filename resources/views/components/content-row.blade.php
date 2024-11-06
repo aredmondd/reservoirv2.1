@@ -53,8 +53,12 @@ elseif ($contentType == 'tv') {
             </button>
         </form>
         @if (request()->input('view') != 'history')
-        <form method="POST" action="/move-content?id={{ $content['id'] }}"> @csrf
-            <button type="submit" class="material-symbols-outlined hover:text-blue hover:cursor-pointer" title="Move content from watchlist to history">check_circle</button>
+        <form method="POST" action="/move-content?id={{ $content['id'] }}&view={{ request()->input('view') }}"> @csrf
+            @if (request()->input('view') == 'watchlist')
+            <button type="submit" class="material-symbols-outlined hover:text-blue hover:cursor-pointer" title="Move content from watchlist to currently watching">visibility</button>
+            @else
+            <button type="submit" class="material-symbols-outlined hover:text-blue hover:cursor-pointer" title="Move content from currently watching to history">check_circle</button>
+            @endif
         </form>
         @endif
         <form method="POST" action="/delete-content?id={{ $content['id'] }}&list={{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'watchlist' : 'history' }}"> @csrf @method('DELETE')
