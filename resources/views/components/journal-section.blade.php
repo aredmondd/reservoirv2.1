@@ -25,7 +25,15 @@ elseif ($content['contentType'] == 'tv') {
 
 <hr class='border-white border-opacity-25 mx-40 my-3'>
 <div class="text-white text-opacity-50 grid grid-cols-7 mx-40 items-center">
-    <p class="material-symbols-outlined">visibility</p>
+
+    @if ($content['action'] == 'watchlist')
+        <p class="material-symbols-outlined">collections_bookmark</p>
+    @elseif ($content['action'] == 'currently_watching')
+        <p class="material-symbols-outlined">visibility</p>
+    @else
+        <p class="material-symbols-outlined">history</p>
+    @endif
+
     <p>{{ Carbon::parse($content['time'])->toFormattedDateString(); }}</p>
     <div class="flex col-span-2 space-x-8 items-center">
         <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="" class="rounded-sm w-12">

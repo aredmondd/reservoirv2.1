@@ -188,6 +188,16 @@ class ContentController extends Controller
         $watchlist_content = $watchlist->watchlist ?? [];
         $currently_watching_content = $currently_watching->currently_watching ?? [];
 
+        for ($i = 0; $i < count($history_content); $i++) {
+            $history_content[$i]['action'] = 'history';
+        }
+        for ($i = 0; $i < count($watchlist_content); $i++) {
+            $watchlist_content[$i]['action'] = 'watchlist';
+        }
+        for ($i = 0; $i < count($currently_watching_content); $i++) {
+            $currently_watching_content[$i]['action'] = 'currently_watching';
+        }
+
         $entries = array_merge($history_content, $watchlist_content, $currently_watching_content);
 
         // sort the entries array from oldest to newest
