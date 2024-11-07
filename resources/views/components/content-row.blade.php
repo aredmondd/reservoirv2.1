@@ -11,6 +11,12 @@ $details = Http::asJson()->get(config('services.tmdb.endpoint'). $contentType .'
 $addedAt = Carbon::parse($content['time'])->toFormattedDateString();
 $posterPath = isset($details['poster_path']) ? $details['poster_path'] : null;
 
+if(isset($content['rating'])){
+    $stars = $content['rating'];
+} else {
+    $stars = 0;
+}
+ 
 // movie
 if ($contentType == 'movie') {
     $name = $details['title'];
@@ -38,9 +44,25 @@ elseif ($contentType == 'tv') {
         </div>
         <p>{{ $releaseYear }}</p>
         <p>{{ $runtime ? $runtime : $numOfSeasons . ' seasons' }}</p>
+
+
         @if (request()->view == 'history')
-        <p>☆☆☆☆☆</p>
+
+        <x-add-stars :stars="$stars" />
+        <!-- ☆☆☆☆☆ -->
+        <!-- <p><span class="material-symbols-outlined"><img src="images/star_filled.png" alt="" class="w-6"></span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span></p>  -->
+        <!-- <p>
+            <span class="material-symbols-outlined">star</span>
+            <img src="images/star_filled.png" alt="" class="w-6">
+        </p> -->
+        
         @endif
+
+
+
+
+
+        
     </div>
     <div class="flex justify-end space-x-6 items-center">
         <form method="POST" action="/favorite?id={{ $content['id'] }}&list={{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'watchlist' : 'history' }}"> @csrf

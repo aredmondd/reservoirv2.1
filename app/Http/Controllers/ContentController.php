@@ -64,6 +64,7 @@ class ContentController extends Controller
      * @return redirect
      */
     public function add_to_history(Request $request) {
+        // dd($request->all());
         $user = Auth::user();
         $history = $user->history;
     
@@ -74,6 +75,12 @@ class ContentController extends Controller
         $content_id = $request->input('id');
         $content_name = $request->input('name');
         $content_type = $request->input('content_type');
+        if($request->input('stars') == '1'){
+            $content_rating = $request->input('stars');
+        }else {
+            $content_rating = $request->input('rating');
+        }
+  
     
         // check if the content is inside the watchlist
         $content_in_history = collect($history_content)->contains('id', $content_id);
@@ -88,7 +95,8 @@ class ContentController extends Controller
                 'time'        => now(),
                 'name'        => $content_name,
                 'contentType' => $content_type,
-                'liked'       => false
+                'liked'       => false,
+                'rating'      => $content_rating,
             ];
             $history->history = $history_content;
             $history->save();
