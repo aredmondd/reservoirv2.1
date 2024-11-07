@@ -25,6 +25,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/stacks', [StackController::class, 'display'])->name('my-stacks');
     Route::get('/stack', [StackController::class, 'getStackContent'])->name('stack-view');
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
+    Route::get('/diary', [ContentController::class, 'get_journal_entries'])->name('diary');
 
     // stacks
     Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');

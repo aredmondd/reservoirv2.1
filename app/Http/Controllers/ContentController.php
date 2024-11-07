@@ -176,6 +176,25 @@ class ContentController extends Controller
             return redirect()->back()->with('error', 'You are already watching ' . $content_name);
         }
     }  
+
+
+    public function get_journal_entries(Request $request) {
+        $user = Auth::user();
+        $history = $user->history;
+        $watchlist = $user->watchlist;
+        $currently_watching = $user->currentlyWatching;
+
+        $history_content = $history->history ?? [];
+        $watchlist_content = $watchlist->watchlist ?? [];
+        $currently_watching_content = $currently_watching->currently_watching ?? [];
+
+        $entries = array_merge($history_content, $watchlist_content, $currently_watching_content);
+
+        // sort the entries array from oldest to newest
+        usort($entries, fn($a, $b) => $b['time'] <=> $a['time']);
+
+        return view('journal', ['entries' => $entries]);
+    }
 }
 
 // EOF
