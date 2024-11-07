@@ -1,18 +1,15 @@
 <x-layout>
-
-
-
     <div class="flex justify-between mx-20 mt-12 mb-12">
         <div class="flex flex-col items-center">
             <img src="storage/{{ $user['profile_picture'] }}" alt="" class="w-64 rounded-full">
             <p class="mt-4 text-white text-title">{{ $user->username }} \ {{ $user->name }}</p>
         </div>
         <div class="flex space-x-4">
-            <div class="bg-white bg-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
-            <div class="bg-white bg-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
-            <div class="bg-white bg-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
-            <div class="bg-white bg-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
-            <div class="bg-white bg-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
+            <div class="border border-2 border-white border-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
+            <div class="border border-2 border-white border-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
+            <div class="border border-2 border-white border-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
+            <div class="border border-2 border-white border-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
+            <div class="border border-2 border-white border-opacity-50 p-24 py-32 rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"></div>
         </div>
     </div>
 
