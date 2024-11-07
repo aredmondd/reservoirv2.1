@@ -18,11 +18,11 @@
                             <path stroke="currentColor" stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="m19 19-4-4m0-7A7 7 0 1 1 1 8a7 7 0 0 1 14 0Z"/>
                         </svg>
                     </div>
-                    <input type="text" name="search" id="simple-search" value="{{ request()->input('search') }}" class="pl-10 text-small text-white rounded-full w-full py-2 px-20 bg-white bg-opacity-25 placeholder:pl-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"/>
+                    <input type="text" name="search" id="simple-search" value="{{ request()->input('search') }}" class="pl-10 text-small text-white rounded-full w-full py-2 pr-5 bg-white bg-opacity-25 placeholder:pl-2 focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue"/>
                 </div>
                 <input type="hidden" name="view" value="{{ request()->input('view') ?? 'watchlist' }}" />
                 <div class="relative">
-                    <select name="type" class="appearance-none bg-blue text-white rounded-full pl-3 p-2 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">
+                    <select name="type" onchange="this.form.submit()" class="appearance-none bg-blue text-white rounded-full pl-3 p-2 pr-10 w-full focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 focus-visible:outline-blue">
                         <option value="">All</option>
                         <option value="movie" {{ request('type') === 'movie' ? 'selected' : '' }}>Movies</option>
                         <option value="tv" {{ request('type') === 'tv' ? 'selected' : '' }}>TV</option>
@@ -36,6 +36,7 @@
                 </div>
             </div>
         </form>
+
 
         <div class="flex items-center pb-2 space-x-4">
             <a href="/dashboard?view=watchlist"><button class="mt-2 inline-flex items-center px-4 py-2 {{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'bg-blue' : 'bg-white bg-opacity-75'}} rounded-md font-semibold text-sm text-midnight uppercase tracking-widest hover:bg-blue focus:outline focus:outline-2 transition ease-in-out duration-150">Watchlist</button></a>
