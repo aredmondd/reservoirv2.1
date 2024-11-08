@@ -1,4 +1,4 @@
-<p class="text-center text-white opacity-50 font-sans text-sm mb-10">Reservoir is a project created, designed, and developed by Aiden Redmond, Brandon Wilson, and Axel Beaver under the supervision of Dr. Roberson at Florida Southern College for Senior Project 24-25.</p>
+<p class="text-center text-white opacity-50 font-sans text-sm mb-10">Reservoir is a project created, designed, and developed by Aiden Redmond, Brandon Wilson, and Axel Beaver under the supervision of Dr. Roberson at Florida Southern College for Senior Project Fall 2025.</p>
 
 <hr class="border-white border-opacity-25 mx-12">
 
