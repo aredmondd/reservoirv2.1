@@ -4,6 +4,7 @@
 
 use Carbon\Carbon;
 
+$id = $content['id'];
 $contentType = $content['contentType'];
 
 $details = Http::asJson()->get(config('services.tmdb.endpoint'). $contentType .'/' . $content['id'] .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
@@ -44,25 +45,9 @@ elseif ($contentType == 'tv') {
         </div>
         <p>{{ $releaseYear }}</p>
         <p>{{ $runtime ? $runtime : $numOfSeasons . ' seasons' }}</p>
-
-
         @if (request()->view == 'history')
-
-        <x-add-stars :stars="$stars" />
-        <!-- ☆☆☆☆☆ -->
-        <!-- <p><span class="material-symbols-outlined"><img src="images/star_filled.png" alt="" class="w-6"></span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span><span class="material-symbols-outlined">star</span></p>  -->
-        <!-- <p>
-            <span class="material-symbols-outlined">star</span>
-            <img src="images/star_filled.png" alt="" class="w-6">
-        </p> -->
-        
+            <x-add-stars :stars="$stars" />        
         @endif
-
-
-
-
-
-        
     </div>
     <div class="flex justify-end space-x-6 items-center">
         <form method="POST" action="/favorite?id={{ $content['id'] }}&list={{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'watchlist' : 'history' }}"> @csrf
@@ -75,11 +60,13 @@ elseif ($contentType == 'tv') {
             </button>
         </form>
         @if (request()->input('view') != 'history')
-        <form method="POST" action="/move-content?id={{ $content['id'] }}&view={{ request()->input('view') }}"> @csrf
+        <form method="POST" id="rating-form-dashboard-{{ $id }}" action="/move-content?id={{ $content['id'] }}&view={{ request()->input('view') }}"> 
+            @csrf
             @if (request()->input('view') == 'watchlist')
-            <button type="submit" class="material-symbols-outlined hover:text-blue hover:cursor-pointer" title="Move content from watchlist to currently watching">visibility</button>
+                <button type="submit" class="material-symbols-outlined hover:text-blue hover:cursor-pointer" title="Move content from watchlist to currently watching">visibility</button>
             @else
-            <button type="submit" class="material-symbols-outlined hover:text-blue hover:cursor-pointer" title="Move content from currently watching to history">check_circle</button>
+                <!-- add the modal link here -->
+                <x-content-modal-rating :name='$name' :id='$id'/>
             @endif
         </form>
         @endif

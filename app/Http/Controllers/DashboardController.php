@@ -225,6 +225,14 @@ class DashboardController extends Controller
 
         // move content from currently watching to history
         elseif ($view == 'currently-watching') {
+
+            if($request->input('stars') == '1'){
+                $content_rating = $request->input('stars');
+            }else {
+                $content_rating = $request->input('rating');
+            }
+
+
             $contentToMove = collect($currentlyWatchingContent)->firstWhere('id', $movieId);
 
             // if the movie wasn't found
@@ -232,6 +240,7 @@ class DashboardController extends Controller
                 return abort(404);
             }
 
+            $contentToMove['rating'] = $content_rating;
             $contentToMove['time'] = now();
 
             // add the content to history
