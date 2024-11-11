@@ -18,10 +18,13 @@ class DashboardController extends Controller
      * @return view
      */
     public function display_list(Request $request) {
+        // dump($request->all());
         $user = Auth::user();
         $view = $request->input('view');
         $search = $request->input('search');
         $type = $request->input('type');
+        $filterBy = $request->input('filterBy');
+        // $sortOrder = $request->input('sortOrder', 'normal');
     
         // Decide whether to show watchlist or history
         if ($view == 'history') {
@@ -60,6 +63,23 @@ class DashboardController extends Controller
                 return false;
             });
         }
+
+        //filtering by button
+        if ($filterBy) {
+            if ($filterBy === 'time') {
+                // Sort by time if available
+                $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+            } elseif ($filterBy === 'length') {
+                // Sort movies and TV shows separately by length
+                $movies = $filtered->where('contentType', 'movie')->sortBy('length');
+                $tvShows = $filtered->where('contentType', 'tv')->sortBy('length');
+                $filtered = $movies->concat($tvShows);
+            } else {
+                // Sort by any other attribute in ascending order
+                $filtered = $filtered->sortBy($filterBy);
+            }
+        }
+    
     
         // Paginate the filtered list (10 items per page)
         $perPage = 10;

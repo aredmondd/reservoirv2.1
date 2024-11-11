@@ -53,7 +53,6 @@
     @endif
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>
-
     @if ($list->isEmpty())
         <x-empty />
     @else

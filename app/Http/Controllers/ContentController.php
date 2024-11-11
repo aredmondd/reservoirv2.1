@@ -20,6 +20,8 @@ class ContentController extends Controller
      * @return redirect
      */
     public function add_to_watchlist(Request $request) {
+
+        // dd($request->all());
         $user = Auth::user();
         $watchlist = $user->watchlist;
     
@@ -30,6 +32,8 @@ class ContentController extends Controller
         $content_id = $request->input('id');
         $content_name = $request->input('name');
         $content_type = $request->input('content_type');
+        $content_release = $request->input('released');
+        $content_length = $request->input('length');
     
         // check if the content is inside the watchlist
         $content_in_watchlist = collect($watchlist_content)->contains('id', $content_id);
@@ -44,8 +48,10 @@ class ContentController extends Controller
                 'time'        => now(),
                 'name'        => $content_name,
                 'contentType' => $content_type,
-                'liked'       => false
-            ];
+                'liked'       => false,
+                'released'    => $content_release,
+                'length'      => $content_length,
+             ];
             $watchlist->watchlist = $watchlist_content;
             $watchlist->save();
 
@@ -184,6 +190,60 @@ class ContentController extends Controller
             return redirect()->back()->with('error', 'You are already watching ' . $content_name);
         }
     }  
+
+    public function filterContent (Request $request){
+        // dump($request->all());
+
+        $user = Auth::user();
+
+        // dump($user);
+        // if the view is for watchlist u have these titles to search through
+        if($request->input('view') == 'watchlist'){
+            // what am i filtering by
+            $filterBy = $request->input('filterBy');
+            $watchingTable = $user->watchlist['watchlist'];
+            // dump($watchingTable);
+
+            if($filterBy == 'time'){
+                usort($watchingTable, function ($a, $b) {
+                    return strtotime($a['time']) <=> strtotime($b['time']);
+                });
+            } elseif($filterBy == 'length'){
+
+
+            // Separate movies and TV shows
+            $movies = array_filter($watchingTable, fn($item) => $item['contentType'] === 'movie');
+            $tvShows = array_filter($watchingTable, fn($item) => $item['contentType'] === 'tv');
+
+            // Sort each group by length
+            usort($movies, fn($a, $b) => $a['length'] <=> $b['length']);
+            usort($tvShows, fn($a, $b) => $a['length'] <=> $b['length']);
+
+            // Combine movies first, then TV shows
+            $watchingTable = array_merge($movies, $tvShows);
+                
+            }
+            
+            else {
+                usort($watchingTable, function ($a, $b) use ($filterBy) {
+                    return ($a[$filterBy]) <=> ($b[$filterBy]);
+                });
+            }
+
+            // if($filterBy == 'date added'){
+            //     $filterBy = 'time';
+            // };
+            // if filtering by length have movies be ranked higher than tv shows
+
+            // dd($watchingTable);
+
+
+            
+        }
+
+
+        return redirect()->back();
+    }
 }
 
 // EOF
