@@ -35,7 +35,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/favorite', [DashboardController::class, 'fav_content'])->name('favorite');
     Route::post('/move-content', [DashboardController::class, 'move'])->name('move-content');
     Route::delete('/delete-content', [DashboardController::class, 'delete_content_from_list'])->name('delete-content');
-    Route::get('/dashboard/filter', [DashboardController::class, 'display_list'])->name('display_list');
+    Route::get('/dashboard/filter', [DashboardController::class, 'filter_list'])->name('display_list');
 
     // user search
     Route::get('/friends', [UserController::class, 'search'])->name('search');

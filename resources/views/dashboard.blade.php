@@ -1,5 +1,4 @@
-<x-layout>
-    
+<x-layout>    
     <x-error-notification />
     <x-success-notification />
 
@@ -47,9 +46,9 @@
     <hr class='border-white border-opacity-25 mx-40 my-3'>
 
     @if (request()->input('view') == 'watchlist' || !request()->input('view')|| request()->input('view') == 'currently-watching')
-    <x-watchlist-header />
+    <x-watchlist-header :sortOrder='$sortOrder' />
     @else
-    <x-history-header />
+    <x-history-header :sortOrder='$sortOrder' />
     @endif
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>

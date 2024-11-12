@@ -24,7 +24,7 @@ class DashboardController extends Controller
         $search = $request->input('search');
         $type = $request->input('type');
         $filterBy = $request->input('filterBy');
-        // $sortOrder = $request->input('sortOrder', 'normal');
+        $sortOrder = 'normal';
     
         // Decide whether to show watchlist or history
         if ($view == 'history') {
@@ -62,25 +62,73 @@ class DashboardController extends Controller
                 }
                 return false;
             });
-        }
+        }    
 
-        //filtering by button
-        if ($filterBy) {
-            if ($filterBy === 'time') {
-                // Sort by time if available
-                $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
-            } elseif ($filterBy === 'length') {
-                // Sort movies and TV shows separately by length
-                $movies = $filtered->where('contentType', 'movie')->sortBy('length');
-                $tvShows = $filtered->where('contentType', 'tv')->sortBy('length');
-                $filtered = $movies->concat($tvShows);
-            } else {
-                // Sort by any other attribute in ascending order
-                $filtered = $filtered->sortBy($filterBy);
-            }
-        }
-    
-    
+
+
+        // //filtering by button
+        // if ($filterBy) {
+        //     if ($filterBy === 'time' && $sortOrder === 'normal') {
+        //         // Sort by time if available
+        //         $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+        //         $sortOrder = 'desc';
+
+        //     } elseif($filterBy === 'time' && $sortOrder === 'desc'){
+        //         // Sort by time if available
+        //         $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''))->reverse();
+        //         $sortOrder = 'asc';
+
+        //     } elseif ($filterBy === 'time' && $sortOrder === 'asc') { // sort by time lol to get back to normal
+
+        //         $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+        //         $sortOrder = 'normal';
+        //     } elseif ($filterBy === 'released' && $sortOrder === 'normal') {
+        //         // Sort movies and TV shows separately by length
+        //         $filtered = $filtered->sortBy($filterBy);
+        //         $sortOrder = 'desc';
+        //     } elseif ($filterBy === 'released' && $sortOrder === 'desc') {
+        //         // Sort movies and TV shows separately by length
+        //         $filtered = $filtered->sortBy($filterBy)->reverse();
+        //         $sortOrder = 'asc';
+               
+        //     } elseif ($filterBy === 'released' && $sortOrder === 'asc'){
+        //         $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+        //         $sortOrder = 'normal';
+        //     } elseif ($filterBy === 'length' && $sortOrder === 'normal') {
+        //         // Sort movies and TV shows separately by length
+        //         $movies = $filtered->where('contentType', 'movie')->sortBy('length');
+        //         $tvShows = $filtered->where('contentType', 'tv')->sortBy('length');
+        //         $filtered = $movies->concat($tvShows);
+        //         $sortOrder = 'desc';
+        //     } elseif ($filterBy === 'length' && $sortOrder === 'desc') {
+        //         // Sort movies and TV shows separately by length
+        //         $movies = $filtered->where('contentType', 'movie')->sortBy('length')->reverse();
+        //         $tvShows = $filtered->where('contentType', 'tv')->sortBy('length')->reverse();
+        //         $filtered = $movies->concat($tvShows);
+        //         $sortOrder = 'asc';
+               
+        //     } elseif ($filterBy === 'length' && $sortOrder === 'asc'){
+
+        //         $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+        //         $sortOrder = 'normal';
+        //     }else {
+        //         if($view == 'history' && $sortOrder === 'normal'){
+        //             $filtered = $filtered->sortBy($filterBy);
+        //             $sortOrder = 'desc';
+        //         } elseif($view == 'history' && $sortOrder === 'desc'){
+        //             $filtered = $filtered->sortBy($filterBy)->reverse();
+        //             $sortOrder = 'asc';
+        //         }else{
+        //             $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+        //             $sortOrder = 'normal';
+        //         }
+        //     }
+
+        // }
+
+
+
+
         // Paginate the filtered list (10 items per page)
         $perPage = 10;
         $currentPage = LengthAwarePaginator::resolveCurrentPage();
@@ -88,7 +136,154 @@ class DashboardController extends Controller
         $paginatedList = new LengthAwarePaginator($currentItems, $filtered->count(), $perPage);
         $paginatedList->withPath('/dashboard');
     
-        return view('dashboard', ['list' => $paginatedList]);
+        return view('dashboard', [
+            'list' => $paginatedList,
+            'sortOrder' => $sortOrder,
+        ]);
+    }
+
+    public function filter_list(Request $request){
+        $sortOrder = $request->input('sortOrder');
+        // dd($request->all(), $sortOrder);
+    
+        $user = Auth::user();
+        $view = $request->input('view');
+        $search = $request->input('search');
+        $type = $request->input('type');
+        $filterBy = $request->input('filterBy');
+        
+    
+        // Decide whether to show watchlist or history
+        if ($view == 'history') {
+            $list = $user->history->history ?? [];
+        } 
+        elseif ($view == 'watchlist') {
+            $list = $user->watchlist->watchlist ?? [];
+        }
+        elseif ($view == 'currently-watching') {
+            $list = $user->currentlyWatching->currently_watching ?? [];
+        }
+        else {
+            $list = $user->watchlist->watchlist ?? [];
+        }
+    
+        // Apply filters if provided
+        $filtered = collect($list);
+    
+        // Filter by content type if a type is selected
+        if ($type) {
+            $filtered = $filtered->filter(function ($content) use ($type) {
+                return $content['contentType'] === $type;
+            });
+        }
+    
+        // Apply search filter for title word prefix matching
+        if ($search) {
+            $search = strtolower($search);
+            $filtered = $filtered->filter(function ($content) use ($search) {
+                $titleWords = explode(' ', strtolower($content['name']));
+                foreach ($titleWords as $word) {
+                    if (strpos($word, $search) === 0) {
+                        return true;
+                    }
+                }
+                return false;
+            });
+        }    
+        //filtering by button
+        if ($filterBy) {
+            if ($filterBy === 'time' && $sortOrder === 'normal') {
+                // Sort by time if available
+                $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+                $sortOrder = 'desc';
+
+            } elseif($filterBy === 'time' && $sortOrder === 'desc'){
+                // Sort by time if available
+                $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''))->reverse();
+                $sortOrder = 'asc';
+
+            } elseif ($filterBy === 'time' && $sortOrder === 'asc') { // sort by time lol to get back to normal
+
+                $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+                $sortOrder = 'normal';
+            } elseif ($filterBy === 'released' && $sortOrder === 'normal') {
+                // Sort movies and TV shows separately by length
+                $filtered = $filtered->sortBy($filterBy);
+                $sortOrder = 'desc';
+            } elseif ($filterBy === 'released' && $sortOrder === 'desc') {
+                // Sort movies and TV shows separately by length
+                $filtered = $filtered->sortBy($filterBy)->reverse();
+                $sortOrder = 'asc';
+               
+            } elseif ($filterBy === 'released' && $sortOrder === 'asc'){
+                $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+                $sortOrder = 'normal';
+            } elseif ($filterBy === 'length' && $sortOrder === 'normal') {
+                dump($filtered);
+                // Sort movies and TV shows separately by length
+                $movies = $filtered->where('contentType', 'movie')->sortBy('length');
+                $tvShows = $filtered->where('contentType', 'tv')->sortBy('length');
+                // Check which collection is empty
+                if ($movies->isNotEmpty() && $tvShows->isNotEmpty()) {
+                    // If both are not empty, concatenate them
+                    $filtered = $movies->concat($tvShows);
+                } elseif ($movies->isNotEmpty()) {
+                    // If only movies are non-empty
+                    $filtered = $movies;
+                } elseif ($tvShows->isNotEmpty()) {
+                    // If only tvShows are non-empty
+                    $filtered = $tvShows;
+                }
+                dd($filtered);
+                $sortOrder = 'desc';
+            } elseif ($filterBy === 'length' && $sortOrder === 'desc') {
+                dump($filtered);
+                // Sort movies and TV shows separately by length
+                $movies = $filtered->where('contentType', 'movie')->sortBy('length')->reverse();
+                $tvShows = $filtered->where('contentType', 'tv')->sortBy('length')->reverse();
+                // Check which collection is empty
+                if ($movies->isNotEmpty() && $tvShows->isNotEmpty()) {
+                    // If both are not empty, concatenate them
+                    $filtered = $tvShows->concat($movies);
+                } elseif ($movies->isNotEmpty()) {
+                    // If only movies are non-empty
+                    $filtered = $movies;
+                } elseif ($tvShows->isNotEmpty()) {
+                    // If only tvShows are non-empty
+                    $filtered = $tvShows;
+                }
+                dd($filtered);
+                $sortOrder = 'asc';
+               
+            } elseif ($filterBy === 'length' && $sortOrder === 'asc'){
+
+                $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+                $sortOrder = 'normal';
+            }else {
+                if($view == 'history' && $sortOrder === 'normal'){
+                    $filtered = $filtered->sortBy($filterBy);
+                    $sortOrder = 'desc';
+                } elseif($view == 'history' && $sortOrder === 'desc'){
+                    $filtered = $filtered->sortBy($filterBy)->reverse();
+                    $sortOrder = 'asc';
+                }else{
+                    $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+                    $sortOrder = 'normal';
+                }
+            }
+
+        }
+        // Paginate the filtered list (10 items per page)
+        $perPage = 10;
+        $currentPage = LengthAwarePaginator::resolveCurrentPage();
+        $currentItems = $filtered->slice(($currentPage - 1) * $perPage, $perPage)->values();
+        $paginatedList = new LengthAwarePaginator($currentItems, $filtered->count(), $perPage);
+        $paginatedList->withPath('/dashboard');
+    
+        return view('dashboard', [
+            'list' => $paginatedList,
+            'sortOrder' => $sortOrder,
+        ]);
     }
 
 
