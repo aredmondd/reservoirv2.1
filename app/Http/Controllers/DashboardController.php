@@ -219,7 +219,7 @@ class DashboardController extends Controller
                 $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
                 $sortOrder = 'normal';
             } elseif ($filterBy === 'length' && $sortOrder === 'normal') {
-                dump($filtered);
+                // dump($filtered);
                 // Sort movies and TV shows separately by length
                 $movies = $filtered->where('contentType', 'movie')->sortBy('length');
                 $tvShows = $filtered->where('contentType', 'tv')->sortBy('length');
@@ -234,10 +234,10 @@ class DashboardController extends Controller
                     // If only tvShows are non-empty
                     $filtered = $tvShows;
                 }
-                dd($filtered);
+                // dd($filtered);
                 $sortOrder = 'desc';
             } elseif ($filterBy === 'length' && $sortOrder === 'desc') {
-                dump($filtered);
+                // dump($filtered);
                 // Sort movies and TV shows separately by length
                 $movies = $filtered->where('contentType', 'movie')->sortBy('length')->reverse();
                 $tvShows = $filtered->where('contentType', 'tv')->sortBy('length')->reverse();
@@ -252,7 +252,7 @@ class DashboardController extends Controller
                     // If only tvShows are non-empty
                     $filtered = $tvShows;
                 }
-                dd($filtered);
+                // dd($filtered);
                 $sortOrder = 'asc';
                
             } elseif ($filterBy === 'length' && $sortOrder === 'asc'){

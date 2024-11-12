@@ -39,8 +39,8 @@ if ($content_type == 'movie') {
     </div>
     <div class="flex flex-col space-y-4 items-end">
         <x-add-to-watchlist-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'" />
-        <x-add-to-currently-watching-button :id='$id' :name='$name' :flag="isset($content['name']) ? 'tv' : 'movie'"/>
-        <x-add-to-history-button :id='$id' :name='$name' :flag="isset($content['name']) ? 'tv' : 'movie'"/>
+        <x-add-to-currently-watching-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'"/>
+        <x-add-to-history-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'"/>
         <x-add-to-stack-button :id='$id' :name='$name' :flag="isset($content['name']) ? 'tv' : 'movie'"/>
     </div>
 </div>

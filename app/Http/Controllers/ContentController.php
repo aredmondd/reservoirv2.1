@@ -81,6 +81,8 @@ class ContentController extends Controller
         $content_id = $request->input('id');
         $content_name = $request->input('name');
         $content_type = $request->input('content_type');
+        $content_release = $request->input('released');
+        $content_length = $request->input('length');
         if($request->input('stars') == '1'){
             $content_rating = $request->input('stars');
         }else {
@@ -103,6 +105,8 @@ class ContentController extends Controller
                 'contentType' => $content_type,
                 'liked'       => false,
                 'rating'      => $content_rating,
+                'released'    => $content_release,
+                'length'      => $content_length,
             ];
             $history->history = $history_content;
             $history->save();
@@ -166,6 +170,8 @@ class ContentController extends Controller
         $content_id = $request->input('id');
         $content_name = $request->input('name');
         $content_type = $request->input('content_type');
+        $content_release = $request->input('released');
+        $content_length = $request->input('length');
     
         // check if the content is inside the watchlist
         $content_in_watchlist = collect($currently_watching_content)->contains('id', $content_id);
@@ -180,7 +186,9 @@ class ContentController extends Controller
                 'time'        => now(),
                 'name'        => $content_name,
                 'contentType' => $content_type,
-                'liked'       => false
+                'liked'       => false,
+                'released'    => $content_release,
+                'length'      => $content_length,
             ];
             $currently_watching->currently_watching = $currently_watching_content;
             $currently_watching->save();

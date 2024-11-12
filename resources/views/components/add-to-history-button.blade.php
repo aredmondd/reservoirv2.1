@@ -1,7 +1,7 @@
-@props(['id', 'name', 'flag'])
+@props(['id', 'name', 'flag', 'released', 'length'])
 
 <div class="relative group">
-    <form id="rating-form-{{ $id }}" action="/history?id={{ $id }}&name={{ $name }}&content_type={{ $flag }}" method="POST">
+    <form id="rating-form-{{ $id }}" action="/history?id={{ $id }}&name={{ $name }}&content_type={{ $flag }}&released={{$released}}&length={{$length}}" method="POST">
         @csrf
 
         <!-- Add to History Button -->
