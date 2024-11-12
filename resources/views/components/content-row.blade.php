@@ -4,6 +4,14 @@
 
 use Carbon\Carbon;
 
+if (request()->view == null || request()->view === 'watchlist') {
+    $request = 'watchlist';
+} elseif (request()->view === 'currently-watching') {
+    $request = 'currently-watching';
+} elseif (request()->view === 'history') {
+    $request = 'history';
+}
+
 $contentType = $content['contentType'];
 
 $details = Http::asJson()->get(config('services.tmdb.endpoint'). $contentType .'/' . $content['id'] .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
@@ -61,7 +69,7 @@ elseif ($contentType == 'tv') {
             @endif
         </form>
         @endif
-        <form method="POST" action="/delete-content?id={{ $content['id'] }}&list={{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'watchlist' : 'history' }}"> @csrf @method('DELETE')
+        <form method="POST" action="/delete-content?id={{ $content['id'] }}&list={{ $request }}"> @csrf @method('DELETE')
             <button type="submit" class="material-symbols-outlined text-opacity-100 hover:text-red-600 hover:cursor-pointer" title="Delete content">delete</button>
         </form>
     </div>

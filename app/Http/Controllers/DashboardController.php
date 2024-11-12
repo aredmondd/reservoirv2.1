@@ -142,6 +142,9 @@ class DashboardController extends Controller
         if ($listType === 'watchlist') {
             $watchlist = $user->watchlist;
             $movies = $watchlist->watchlist ?? [];
+        } elseif ($listType === 'currently-watching') {
+            $currently_watching = $user->currentlyWatching;
+            $movies = $currently_watching->currently_watching;
         } elseif ($listType === 'history') {
             $history = $user->history;
             $movies = $history->history ?? [];
@@ -160,6 +163,11 @@ class DashboardController extends Controller
             $watchlist->save();
 
             return redirect()->back()->with('success', 'Deleted item from watchlist.');
+        } elseif ($listType === 'currently-watching') {
+            $currently_watching->currently_watching = array_values($movies);
+            $currently_watching->save();
+
+            return redirect()->back()->with('success', 'Deleted item from currently watching.');
         } elseif ($listType === 'history') {
             $history->history = array_values($movies);
             $history->save();
@@ -234,14 +242,9 @@ class DashboardController extends Controller
 
             $contentToMove['time'] = now();
 
-            // add the content to history
-            if (!in_array($movieId, array_column($historyContent, 'id'))) {
-                $historyContent[] = $contentToMove;
-                $history->history = $historyContent;
-                $history->save();
-            } else {
-                return redirect()->route('dashboard')->with('error', $contentToMove['name'] . ' is already in your history');
-            }
+            $historyContent[] = $contentToMove;
+            $history->history = $historyContent;
+            $history->save();
 
             // delete the content from currently watching
             $currentlyWatchingContent = array_filter($currentlyWatchingContent, function ($movie) use ($movieId) {

@@ -74,29 +74,18 @@ class ContentController extends Controller
         $content_id = $request->input('id');
         $content_name = $request->input('name');
         $content_type = $request->input('content_type');
-    
-        // check if the content is inside the watchlist
-        $content_in_history = collect($history_content)->contains('id', $content_id);
 
-        /**
-         * if the content is not inside the history, add it & save the history.
-         * if the content is inside the history, throw an error.
-         */
-        if (!$content_in_history) {
-            $history_content[] = [
-                'id'          => $content_id,
-                'time'        => now(),
-                'name'        => $content_name,
-                'contentType' => $content_type,
-                'liked'       => false
-            ];
-            $history->history = $history_content;
-            $history->save();
+        $history_content[] = [
+            'id'          => $content_id,
+            'time'        => now(),
+            'name'        => $content_name,
+            'contentType' => $content_type,
+            'liked'       => false
+        ];
+        $history->history = $history_content;
+        $history->save();
 
-            return redirect()->back()->with('success', $content_name . ' added to history');
-        } else {
-            return redirect()->back()->with('error', $content_name . ' is already in your history');
-        }
+        return redirect()->back()->with('success', $content_name . ' added to history');
     }  
 
     /**

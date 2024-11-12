@@ -38,19 +38,20 @@ if($flag == "movie"){
     }
 }
 
+$posterPath = isset($movie['poster_path']) ? $movie['poster_path'] : null;
+
 ?>
 
 
 <x-layout>
     <div class="mx-24 mt-14 flex">
-        <img src="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}" alt="" class="rounded-lg w-96 mr-12">
+        <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="" class="rounded-lg w-96 mr-12">
 
         <div class="flex flex-col justify-between">
             <div class="space-y-2">
                 <div class="flex flex-row justify-between">
                     <div>
-                        <h1 class="text-mega text-white font-serif"> {{ $title }}</h1>
-                        <!-- movie data - movie rating (pg/r) - how long movie is-->
+                        <h1 class="text-mega text-white font-serif"> {{ Str::limit($title, 45, '...') }}</h1>
                         <h3 class="text-body text-white text-opacity-50 font-sans">{{ Carbon::parse($releaseDate)->year }} | {{ $rating }} | {{ $runtime }} </h3>
                     </div>
                     <x-user-rating-circle :percent="$percent"/>
