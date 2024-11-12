@@ -3,10 +3,10 @@
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>
 
-    @if ($history == null)
+    @if ($currently_watching == null)
         <x-empty />
     @else
-        @foreach ($history as $content)
+        @foreach ($currently_watching as $content)
             <x-friend-content-row :content='$content'/>
         @endforeach
     @endif

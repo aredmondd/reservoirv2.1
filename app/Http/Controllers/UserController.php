@@ -127,6 +127,10 @@ class UserController extends Controller {
 
             return view('user-profile/watchlist', ['user' => $user, 'watchlist' => $user->watchlist->watchlist]);
         }
+        elseif ($profilePage == 'currently-watching') {
+
+            return view('user-profile/currently-watching', ['user' => $user, 'currently_watching' => $user->currentlyWatching->currently_watching]);
+        }
         elseif ($profilePage == 'history') {
 
             return view('user-profile/history', ['user' => $user, 'history' => $user->history->history]);

@@ -43,6 +43,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/user/{username}/history', [UserController::class, 'display'])->name('user-history');
     Route::get('/user/{username}/stacks', [UserController::class, 'display'])->name('user-stacks');
     Route::get('/user/{username}/journal', [UserController::class, 'display'])->name('user-diary');
+    Route::get('/user/{username}/currently-watching', [UserController::class, 'display'])->name('user-currently-watching');
 
     // edit your profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
