@@ -8,7 +8,6 @@
     <div class="{{ Auth::guest() ? '' : 'col-span-2'; }}">
         <div class="flex text-center text-white text-body">
             @if(Auth::guest())
-                <a href="/" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Home</a>
                 <a href="/register" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Register</a>
                 <a href="/login" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Sign In</a>
             @else
