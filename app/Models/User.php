@@ -78,7 +78,6 @@ class User extends Authenticatable
             $this->save(); 
             return true;
         } else {
-            dump("User ID {$requestID} has already sent a friend request.");
             return false;
         }
     }
