@@ -25,7 +25,7 @@
     <!-- Discover -->
     <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Discover more with <span class="text-blue">Ripple</span></h2>
     <x-hr />
-    <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">As you rate movies, <span class="text-aqua">Ripple</span>, an advanced AI model, creates a personalized recommendation list based on what you like and dislike.</p>
+    <p class="text-white text-body font-sans text-opacity-50 text-center mb-[-25px]">As you rate movies, <span class="text-aqua">Ripple</span>, an advanced AI model, creates a personalized recommendation list based on what you like and dislike.</p>
     <x-ripple-ad />
 
     <!-- Rate & Organize -->

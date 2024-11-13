@@ -1,14 +1,10 @@
 <x-layout>
-    <div class="mt-20">
-        <h1 class="text-white text-mega font-serif text-center">What is Reservoir?</h1>
-        <p class="text-white text-opacity-50 text-body text-sans text-center mx-40">Reservoir is a social platform for multimedia enthusiasts to track, rate, and review content. <br><br> With our custom-built AI recommendation system, users receive personalized suggestions <br> on what to watch, listen to, or explore next, based on their preferences and dislikes.</p>
-    </div>
-    <div class="mt-20">
+    <div class="mt-3">
         <h1 class="text-white text-mega font-serif text-center">Meet the team</h1>
         <div class="mt-2"></div>
         <p class="text-white text-opacity-50 text-body text-sans text-center mx-40">Reservoir was designed and developed to deliver a personalized, user-friendly media-tracking experience. <br>It’s the result of the hard work and dedication of the three creators below.</p>
     </div>
-    <div class="grid grid-cols-3 text-white text-center mt-20 3xl:mx-64">
+    <div class="grid grid-cols-3 text-white text-center mt-20 mx-10">
         <x-about-me path="images/redmond.jpg" name="Aiden Redmond" title="UI/UX Designer & Full Stack Developer"></x-about-me>
         <x-about-me path="images/wilson.jpg" name="Brandon Wilson" title="Database Engineer & Full Stack Developer"></x-about-me>
         <x-about-me path="images/beaver.jpg" name="Axel Beaver" title="AI Engineer & Machine Learning Specialist"></x-about-me>
