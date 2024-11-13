@@ -37,6 +37,8 @@
         </div>
     @endif
 
+    <div class="mb-40"></div>
+
     <script>
         document.getElementById('editButton').addEventListener('click', function() {
             const deleteButtons = document.querySelectorAll('.delete-button');

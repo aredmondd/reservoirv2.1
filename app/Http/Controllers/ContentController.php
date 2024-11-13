@@ -110,12 +110,10 @@ class ContentController extends Controller
             ];
             $history->history = $history_content;
             $history->save();
-
-            return redirect()->back()->with('success', $content_name . ' added to history');
-        } else {
-            return redirect()->back()->with('error', $content_name . ' is already in your history');
         }
-    }  
+
+        return redirect()->back()->with('success', $content_name . ' added to history');
+    } 
 
     /**
      * add content to a user's stack
@@ -199,9 +197,36 @@ class ContentController extends Controller
         }
     }  
 
-    public function filterContent (Request $request){
-        // dump($request->all());
 
+    public function get_journal_entries(Request $request) {
+        $user = Auth::user();
+        $history = $user->history;
+        $watchlist = $user->watchlist;
+        $currently_watching = $user->currentlyWatching;
+
+        $history_content = $history->history ?? [];
+        $watchlist_content = $watchlist->watchlist ?? [];
+        $currently_watching_content = $currently_watching->currently_watching ?? [];
+
+        for ($i = 0; $i < count($history_content); $i++) {
+            $history_content[$i]['action'] = 'history';
+        }
+        for ($i = 0; $i < count($watchlist_content); $i++) {
+            $watchlist_content[$i]['action'] = 'watchlist';
+        }
+        for ($i = 0; $i < count($currently_watching_content); $i++) {
+            $currently_watching_content[$i]['action'] = 'currently_watching';
+        }
+
+        $entries = array_merge($history_content, $watchlist_content, $currently_watching_content);
+
+        // sort the entries array from oldest to newest
+        usort($entries, fn($a, $b) => $b['time'] <=> $a['time']);
+
+        return view('journal', ['entries' => $entries]);
+    }  
+
+    public function filterContent (Request $request){
         $user = Auth::user();
 
         // dump($user);
@@ -236,19 +261,8 @@ class ContentController extends Controller
                 usort($watchingTable, function ($a, $b) use ($filterBy) {
                     return ($a[$filterBy]) <=> ($b[$filterBy]);
                 });
-            }
-
-            // if($filterBy == 'date added'){
-            //     $filterBy = 'time';
-            // };
-            // if filtering by length have movies be ranked higher than tv shows
-
-            // dd($watchingTable);
-
-
-            
+            } 
         }
-
 
         return redirect()->back();
     }

@@ -3,14 +3,13 @@
 <?php
 
 use Carbon\Carbon;
+use Illuminate\Http\Client\Pool;
 
 $contentType = $content['contentType'];
 
-// $details = Http::asJson()->get(config('services.tmdb.endpoint'). $contentType .'/' . $content['id'] .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
-
 $responses = Http::pool(fn (Pool $pool) => [
     $pool->get(
-        config('services.tmdb.endpoint') . $content_type . '/' . $content_id . 
+        config('services.tmdb.endpoint') . $contentType . '/' . $content['id'] . 
         '?append_to_response=release_dates&api_key=' . config('services.tmdb.api')),
 ]);
 
@@ -43,7 +42,7 @@ elseif ($contentType == 'tv') {
         <p>{{ $addedAt }}</p>
         <div class="col-span-2 flex space-x-8 items-center">
             <img src="https://image.tmdb.org/t/p/w500{{ $details['poster_path'] }}" alt="" class="rounded-sm w-12">
-            <a href="{{ route('movie-description', ['movie' => $content['id'], 'flag' => $content['contentType']]) }}" class="font-serif text-body text-white">{{ $name }}</a>
+            <a href="{{ route('movie-description', ['movie' => $content['id'], 'flag' => $content['contentType']]) }}" class="font-serif text-body text-white">{{ Str::limit($name, 22, '...')  }}</a>
         </div>
         <p>{{ $releaseYear }}</p>
         <p>{{ $runtime ? $runtime : $numOfSeasons . ' szns' }}</p>

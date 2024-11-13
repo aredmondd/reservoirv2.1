@@ -1,6 +1,4 @@
 <x-profile-wrapper :user='$user'>
-    <div class="mt-24"></div>
-
     <x-watchlist-header />
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>

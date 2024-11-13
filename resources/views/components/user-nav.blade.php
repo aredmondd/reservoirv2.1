@@ -29,8 +29,14 @@
                 </div>
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('search')" :active="request()->is('search')">
-                        Search
+                    <x-nav-link :href="route('search')" :active="request()->is('friends')">
+                        Friends
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('diary')" :active="request()->is('diary')">
+                        Diary
                     </x-nav-link>
                 </div>
 

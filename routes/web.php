@@ -26,6 +26,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/stack', [StackController::class, 'getStackContent'])->name('stack-view');
     Route::get('/discover', function () { return view('ripple'); })->name('discover');
     Route::get('/my-friends', [UserController::class, 'displayFriends'])->name('my-friends');
+    Route::get('/diary', [ContentController::class, 'get_journal_entries'])->name('diary');
 
     // stacks
     Route::post('/new-stack', [StackController::class, 'store'])->name('new-stack');
@@ -50,6 +51,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/search/declineFriendRequest', [UserController::class, 'declineFriendRequest'])->name('friend.decline');
     Route::delete('/search/deleteFriend', [UserController::class, 'deleteFriend'])->name('friend.delete');
     
+    Route::get('/user/{username}/currently-watching', [UserController::class, 'display'])->name('user-currently-watching');
 
     // edit your profile
     Route::get('/profile', [ProfileController::class, 'edit'])->name('profile.edit');
