@@ -1,6 +1,6 @@
 <x-layout>
     <h1 class="text-white text-center font-serif text-mega my-12">Search</h1>
-    <div class="px-96">
+    <div class="px-96 mb-24">
         <form action="{{ route('search') }}" method="GET" class="flex justify-center">
             <div class="relative text-white">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
