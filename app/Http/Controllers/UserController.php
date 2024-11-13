@@ -145,36 +145,20 @@ class UserController extends Controller {
         }
         elseif ($profilePage == 'watchlist') {
 
-            return view('user-profile/watchlist', ['user' => $user, 'watchlist' => $user->watchlist->watchlist]);
+            return view('user-profile/watchlist', ['user' => $user, 'watchlist' => $user->watchlist->watchlist ?? []]);
         }
         elseif ($profilePage == 'currently-watching') {
 
-            return view('user-profile/currently-watching', ['user' => $user, 'currently_watching' => $user->currentlyWatching->currently_watching]);
+            return view('user-profile/currently-watching', ['user' => $user, 'currently_watching' => $user->currentlyWatching->currently_watching ?? []]);
         }
         elseif ($profilePage == 'history') {
 
-            return view('user-profile/history', ['user' => $user, 'history' => $user->history->history]);
+            return view('user-profile/history', ['user' => $user, 'history' => $user->history->history ?? []]);
         }
         elseif ($profilePage == 'journal') {
 
             return view('user-profile/journal', ['user' => $user]);
         }
-    }
-
-    public function watchlist(Request $request) {
-
-    }
-
-    public function history(Request $request) {
-        
-    }
-
-    public function stacks(Request $request) {
-        
-    }
-
-    public function diary(Request $request) {
-        
     }
 
     public function sendFriendRequest(Request $request){
