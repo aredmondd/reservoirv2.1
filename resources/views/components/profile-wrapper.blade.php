@@ -1,5 +1,5 @@
 <x-layout>
-    <div class="flex justify-between mx-40 mt-12">
+    <div class="flex justify-between mx-40 mt-20">
         <div class="flex">
             <img src="{{ $user->profile_picture != null ? asset('storage/' . $user->profile_picture) : asset('images/default.png') }}" class="rounded-full mr-12" width='175' height='175'>
             <div class="flex flex-col justify-around">
@@ -9,11 +9,11 @@
             </div>
         </div>
         <div class="flex flex-col justify-around text-right">
-            <a href="{{ route('user-profile', ['username' => $user->username]) }}" class="text-white text-right text-opacity-50 hover:text-opacity-100 {{ request()->routeIs('user-profile') ? 'text-blue' : '' }}">Profile</a>
-            <a href="{{ route('user-stacks', ['username' => $user->username]) }}" class="text-white text-right text-opacity-50 hover:text-opacity-100 {{ request()->routeIs('user-stacks') ? 'text-blue' : '' }}">Stacks</a>
-            <a href="{{ route('user-watchlist', ['username' => $user->username]) }}" class="text-white text-right text-opacity-50 hover:text-opacity-100 {{ request()->routeIs('user-watchlist') ? 'text-blue' : '' }}">Watchlist</a>
-            <a href="{{ route('user-currently-watching', ['username' => $user->username]) }}" class="text-white text-right text-opacity-50 hover:text-opacity-100 {{ request()->routeIs('user-currently-watching') ? 'text-blue' : '' }}">Currently Watching</a>
-            <a href="{{ route('user-history', ['username' => $user->username]) }}" class="text-white text-right text-opacity-50 hover:text-opacity-100 {{ request()->routeIs('user-history') ? 'text-blue' : '' }}">History</a>
+            <a href="{{ route('user-profile', ['username' => $user->username]) }}" class="text-right hover:text-opacity-100 {{ request()->routeIs('user-profile') ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Profile</a>
+            <a href="{{ route('user-stacks', ['username' => $user->username]) }}" class="text-right hover:text-opacity-100 {{ request()->routeIs('user-stacks') ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Stacks</a>
+            <a href="{{ route('user-watchlist', ['username' => $user->username]) }}" class="text-right hover:text-opacity-100 {{ request()->routeIs('user-watchlist') ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Watchlist</a>
+            <a href="{{ route('user-currently-watching', ['username' => $user->username]) }}" class="text-right hover:text-opacity-100 {{ request()->routeIs('user-currently-watching') ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Currently Watching</a>
+            <a href="{{ route('user-history', ['username' => $user->username]) }}" class="text-right hover:text-opacity-100 {{ request()->routeIs('user-history') ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">History</a>
         </div>
     </div>
 

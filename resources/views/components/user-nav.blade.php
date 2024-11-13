@@ -30,7 +30,7 @@
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('search')" :active="request()->is('friends')">
-                        Search
+                        Friends
                     </x-nav-link>
                 </div>
 

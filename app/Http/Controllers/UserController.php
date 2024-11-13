@@ -9,21 +9,41 @@ use App\Models\Stack;
 class UserController extends Controller {
     public function show_my_profile(Request $request) {
         $user = Auth::user();
-        $watchlist = Auth::user()->watchlist->watchlist;
-        $history = Auth::user()->history->history;
+        $watchlist = $user->watchlist;
+        $history = $user->history;
+        $currently_watching = $user->currentlyWatching;
+
+        $history_content = $history->history ?? [];
+        $watchlist_content = $watchlist->watchlist ?? [];
+        $currently_watching_content = $currently_watching->currently_watching ?? [];
+
+        for ($i = 0; $i < count($history_content); $i++) {
+            $history_content[$i]['action'] = 'history';
+        }
+        for ($i = 0; $i < count($watchlist_content); $i++) {
+            $watchlist_content[$i]['action'] = 'watchlist';
+        }
+        for ($i = 0; $i < count($currently_watching_content); $i++) {
+            $currently_watching_content[$i]['action'] = 'currently_watching';
+        }
+
+        $entries = array_merge($history_content, $watchlist_content, $currently_watching_content);
+
+        // sort the entries array from oldest to newest
+        usort($entries, fn($a, $b) => $b['time'] <=> $a['time']);
 
         if ($watchlist == null) {
             $numWatchlisted = 0;
         }
         else {
-            $numWatchlisted = count($watchlist);
+            $numWatchlisted = count($watchlist_content);
         }
 
         if ($history == null) {
             $numWatched = 0;
         }
         else {
-            $numWatched = count($history);
+            $numWatched = count($history_content);
         }
 
         $numMovies = 0;
@@ -35,7 +55,7 @@ class UserController extends Controller {
         $totalTimeWatched = 0;
 
         if ($numWatched != 0) {
-            foreach($history as $content) {
+            foreach($history_content as $content) {
                 if ($content['contentType'] == 'movie') {
                     $numMovies += 1;
                 }
@@ -46,7 +66,7 @@ class UserController extends Controller {
         }
         
         if ($numWatchlisted != 0) {
-            foreach($watchlist as $content) {
+            foreach($watchlist_content as $content) {
                 if ($content['contentType'] == 'movie') {
                     $numMoviesWatchlisted += 1;
                 }
@@ -64,7 +84,7 @@ class UserController extends Controller {
         $moviePercentageWatchlisted = $totalContentWatchlisted > 0 ? ($numMoviesWatchlisted / $totalContentWatchlisted) * 100 : 0;
         $showPercentageWatchlisted = $totalContentWatchlisted > 0 ? ($numShowsWatchlisted / $totalContentWatchlisted) * 100 : 0;
 
-        return view('profile', compact('user', 'numWatchlisted', 'numWatched', 'numMovies', 'numShows', 'numMoviesWatchlisted', 'numShowsWatchlisted', 'totalContent', 'moviePercentage', 'showPercentage', 'totalContentWatchlisted', 'moviePercentageWatchlisted', 'showPercentageWatchlisted'));
+        return view('profile', compact('user', 'numWatchlisted', 'numWatched', 'numMovies', 'numShows', 'numMoviesWatchlisted', 'numShowsWatchlisted', 'totalContent', 'moviePercentage', 'showPercentage', 'totalContentWatchlisted', 'moviePercentageWatchlisted', 'showPercentageWatchlisted', 'entries'));
     }
 
     public function updateVisibility(Request $request) {
