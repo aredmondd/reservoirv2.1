@@ -1,3 +1,11 @@
+<?php
+
+use Illuminate\Support\Facades\Auth;
+
+$friendRequests = Auth::user()->pending_friend_requests;
+
+?>
+
 <nav x-data="{ open: false }" class="bg-midnight">
     <!-- Primary Navigation Menu -->
     <div class="mx-12">
@@ -30,7 +38,7 @@
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('search')" :active="request()->is('friends')">
-                        Friends
+                        User Search
                     </x-nav-link>
                 </div>
 
@@ -41,9 +49,13 @@
                 </div>
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('my-friends')" :active="request()->is('my-friends')">
-                        Friends
-                    </x-nav-link>
+                    <a href="route('my-friends')" class="inline-flex items-center px-1 pt-1 border-b-2 border-aqua text-sm leading-5 text-white focus:outline-none focus:border-aqua transition duration-150 ease-in-out">
+                    Friends
+                    <span class="relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
+                        </span>
+                    </a>
                 </div>
             </div>
 
