@@ -1,7 +1,7 @@
 <x-layout>
     <div class="grid grid-cols-3 gap-12 mx-20 mt-12 mb-12">
         <div class="flex flex-col items-center">
-            <img src="storage/{{ $user['profile_picture'] }}" alt="" class="w-56 rounded-full">
+            <img src="{{ $user->profile_picture != null ? asset('storage/' . $user->profile_picture) : asset('images/default.png') }}" alt="" class="w-56 rounded-full">
             <p class="mt-8 text-white text-title">{{ $user->username }} \ {{ $user->name }}</p>
         </div>
         <div>
