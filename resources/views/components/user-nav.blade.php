@@ -49,13 +49,15 @@ $friendRequests = Auth::user()->pending_friend_requests;
                 </div>
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <a href="route('my-friends')" class="inline-flex items-center px-1 pt-1 border-b-2 border-aqua text-sm leading-5 text-white focus:outline-none focus:border-aqua transition duration-150 ease-in-out">
+                    <a href="{{ route('my-friends') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm leading-5 text-white text-opacity-50 hover:border-white hover:border-opacity-50 focus:outline-none focus:text-white focus:border-white focus:border-opacity-50 transition duration-150 ease-in-out">
                     Friends
-                    <span class="relative flex h-3 w-3">
-                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-sky-400 opacity-75"></span>
-                        <span class="relative inline-flex rounded-full h-3 w-3 bg-sky-500"></span>
-                        </span>
                     </a>
+                    @if ($friendRequests != null)
+                    <span class="mt-4 relative flex h-3 w-3">
+                        <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-aqua opacity-75"></span>
+                        <span class="relative inline-flex rounded-full h-3 w-3 bg-aqua"></span>
+                    </span>
+                    @endif
                 </div>
             </div>
 
