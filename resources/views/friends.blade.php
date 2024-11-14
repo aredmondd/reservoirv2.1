@@ -10,9 +10,9 @@ $num_requests = count(Auth::user()->pending_friend_requests);
     <h1 class="text-white font-serif text-mega text-center my-12 mb-6">Friends</h1>
 
     <div class="flex justify-center space-x-12">
-        <a href="/my-friends?view=add" class="{{ request()->input('view') == 'add' || request()->input('query') != null ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Add Friends</a>
+        <a href="/my-friends?view=add" class="{{ request()->input('view') == 'add' || request()->input('query') != null || request()->input('view') == null ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Add Friends</a>
         <a href="/my-friends?view=current-friends" class="{{ request()->input('view') == 'current-friends' ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">My Friends</a>
-        <a href="/my-friends?view=requests" class="{{ request()->input('view') == 'requests' ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Requests ({{ $num_requests }})</a>
+        <a href="/my-friends?view=requests" class="{{ request()->input('view') == 'requests' ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Requests {{ $num_requests > 0 ? '(' . $num_requests . ')' : '' }}</a>
     </div>
 
     @if (!request()->input('view') || request()->input('view') == 'add')

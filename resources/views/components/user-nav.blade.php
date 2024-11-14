@@ -31,18 +31,6 @@ $friendRequests = Auth::user()->pending_friend_requests;
                 </div>
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('discover')" :active="request()->is('discover')">
-                        Discover
-                    </x-nav-link>
-</div>
-
-                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('diary')" :active="request()->is('diary')">
-                        Diary
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <a href="{{ route('my-friends') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->is('my-friends') ? 'border-aqua' : 'border-transparent hover:border-white hover:border-opacity-50 focus:outline-none focus:text-white focus:border-white focus:border-opacity-50 text-opacity-50' }} text-sm leading-5 text-white transition duration-150 ease-in-out">
                     Friends
                     </a>
@@ -52,6 +40,18 @@ $friendRequests = Auth::user()->pending_friend_requests;
                         <span class="relative inline-flex rounded-full h-3 w-3 bg-aqua"></span>
                     </span>
                     @endif
+                </div>
+
+                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('diary')" :active="request()->is('diary')">
+                        Diary
+                    </x-nav-link>
+                </div>
+
+                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
+                    <x-nav-link :href="route('discover')" :active="request()->is('discover')">
+                        Discover
+                    </x-nav-link>
                 </div>
             </div>
             <!-- Add Content Button -->
