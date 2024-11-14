@@ -3,7 +3,7 @@
 <button type="submit" class="material-symbols-outlined hover:text-blue hover:cursor-pointer" title="Move content from currently watching to history" x-on:click.prevent="$dispatch('open-modal', 'add-history-rating-dashboard-{{ $id }}')" x-data="{ stars: null }">check_circle</button>
 
 <x-modal name="add-history-rating-dashboard-{{ $id }}" :show="$errors->isNotEmpty()" focusable>
-    <div class="bg-midnight p-8 rounded-md shadow-lg max-w-md mx-auto" x-data="{ stars: null, hovered: 0 }">
+    <div class="bg-midnight p-8 rounded-md shadow-lg mx-auto" x-data="{ stars: null, hovered: 0 }">
         <h2 class="text-title font-serif text-center text-blue mb-4">Rate {{ $name }}</h2>
 
         <div class="flex justify-center mb-6">
