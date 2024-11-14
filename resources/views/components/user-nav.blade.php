@@ -37,7 +37,7 @@ $friendRequests = Auth::user()->pending_friend_requests;
                 </div>
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('search')" :active="request()->is('friends')">
+                    <x-nav-link :href="route('user-search')" :active="request()->is('user-search')">
                         User Search
                     </x-nav-link>
                 </div>
@@ -49,7 +49,7 @@ $friendRequests = Auth::user()->pending_friend_requests;
                 </div>
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <a href="{{ route('my-friends') }}" class="inline-flex items-center px-1 pt-1 border-b-2 border-transparent text-sm leading-5 text-white text-opacity-50 hover:border-white hover:border-opacity-50 focus:outline-none focus:text-white focus:border-white focus:border-opacity-50 transition duration-150 ease-in-out">
+                    <a href="{{ route('my-friends') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->is('my-friends') ? 'border-aqua' : 'border-transparent hover:border-white hover:border-opacity-50 focus:outline-none focus:text-white focus:border-white focus:border-opacity-50 text-opacity-50' }} text-sm leading-5 text-white transition duration-150 ease-in-out">
                     Friends
                     </a>
                     @if ($friendRequests != null)
@@ -60,7 +60,6 @@ $friendRequests = Auth::user()->pending_friend_requests;
                     @endif
                 </div>
             </div>
-
             <!-- Add Content Button -->
             <div class="hidden sm:flex sm:items-center mr-8">
 

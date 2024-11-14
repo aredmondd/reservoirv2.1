@@ -1,7 +1,7 @@
 <x-layout>
     <h1 class="text-white text-center font-serif text-mega my-12">Search</h1>
     <div class="px-96 mb-24">
-        <form action="{{ route('search') }}" method="GET" class="flex justify-center">
+        <form action="{{ route('user-search') }}" method="GET" class="flex justify-center">
             <div class="relative text-white">
                 <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                     <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">

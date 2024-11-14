@@ -6,11 +6,11 @@ use App\Models\User;
 
     <div class="grid grid-cols-2">
         <div>
-            <!-- friend requests -->
+            <h1 class="text-white text-center font-serif text-title mt-12">Friend Requests</h1>
+            <hr class='border-white border-opacity-25 mx-12 my-3'>
             @if(empty($friendRequests))
-            <h1 class="text-white text-center font-sans text-body my-12">You currently have no friend requests...</h1>
+            <div class="mt-12 text-center text-white text-opacity-50 text-body">so empty... find some <a href="/user-search" class="text-aqua underline" >friends</a>?</div>
             @else
-            <h1 class="text-white text-center font-sans text-body my-12">These users want to add you as a friend:</h1>
             @foreach($friendRequests as $friends)
                 <?php $requestedUser = User::find($friends['id']); ?>
             
@@ -48,11 +48,11 @@ use App\Models\User;
         </div>
 
         <div>
-            <!-- current friends -->
+            <h1 class="text-white text-center font-serif text-title mt-12">Your Friends</h1>
+            <hr class='border-white border-opacity-25 mx-12 my-3'>
             @if(empty($currentFriends))
-            <h1 class="text-white text-center font-sans text-body my-12">You currently have no friends... add some!</h1>
+            <div class="mt-12 text-center text-white text-opacity-50 text-body">so empty... find some <a href="/user-search" class="text-aqua underline" >friends</a>?</div>
             @else
-            <h1 class="text-white text-center font-sans text-body my-12">Your current list of friends: </h1>
             @foreach($currentFriends as $friends)
                 <?php $requestedUser = User::find($friends['id']); ?>
             

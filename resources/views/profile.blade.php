@@ -38,14 +38,20 @@
                 </div>
             </div>
         </div>
-        <div class="mt-12 flex flex-col flex-auto items-center">
-            <p class="text-white">Average Rating</p>
-            <div class="flex">
-                <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
-                <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
-                <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
-                <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
-                <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
+        <div class="mt-12 flex flex-col items-center justify-around">
+            <div>
+                <p class="text-center text-white">Average Rating</p>
+                <div class="flex">
+                    <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
+                    <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
+                    <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
+                    <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
+                    <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
+                </div>
+            </div>
+            <div>
+                <p class="text-white text-center">Friends</p>
+                <p class="text-white text-center text-opacity-50">0</p>
             </div>
         </div>
     </div>

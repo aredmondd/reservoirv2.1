@@ -39,7 +39,7 @@ Route::middleware('auth')->group(function () {
     Route::get('/dashboard/filter', [DashboardController::class, 'filter_list'])->name('display_list');
 
     // user search
-    Route::get('/friends', [UserController::class, 'search'])->name('search');
+    Route::get('/user-search', [UserController::class, 'search'])->name('user-search');
     Route::get('/user/{username}', [UserController::class, 'display'])->name('user-profile');
     Route::get('/user/{username}/watchlist', [UserController::class, 'display'])->name('user-watchlist');
     Route::get('/user/{username}/history', [UserController::class, 'display'])->name('user-history');
