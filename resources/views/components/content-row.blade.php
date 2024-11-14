@@ -70,7 +70,7 @@ elseif ($contentType == 'tv') {
         @if (request()->input('view') != 'history')
         <form method="POST" id="rating-form-dashboard-{{ $id }}" action="/move-content?id={{ $content['id'] }}&view={{ request()->input('view') }}"> 
             @csrf
-            @if (request()->input('view') == 'watchlist')
+            @if (request()->input('view') == 'watchlist' || request()->input('view') == null)
                 <button type="submit" class="material-symbols-outlined hover:text-blue hover:cursor-pointer" title="Move content from watchlist to currently watching">visibility</button>
             @else
                 <!-- add the modal link here -->

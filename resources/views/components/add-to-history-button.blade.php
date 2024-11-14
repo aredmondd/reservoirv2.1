@@ -14,12 +14,12 @@
 
         <!-- Modal for Rating -->
         <x-modal name="add-history-rating-{{ $id }}" :show="$errors->isNotEmpty()" focusable>
-            <div class="bg-midnight p-8 rounded-md shadow-lg max-w-md mx-auto text-white" x-data="{ stars: null }">
-                <h2 class="text-xl font-semibold text-center mb-4">Rate {{ $name }} </h2>
+            <div class="bg-midnight mb-12 p-8 rounded-md shadow-lg max-w-md mx-auto text-white" x-data="{ stars: null }">
+                <h2 class="text-mega font-semibold text-center mb-4">Rate {{ $name }}? </h2>
 
                 <div class="flex justify-center mb-6">
                     <label class="mr-4 text-lg">Rating:</label>
-                    <select name="stars" x-model="stars" id="stars" class="px-4 py-2 rounded bg-white text-midnight text-lg shadow" required>
+                    <select name="stars" x-model="stars" id="stars" class="px-4 py-2 rounded text-midnight text-lg shadow" required>
                         <option value="1">1 Star</option>
                         <option value="2">2 Stars</option>
                         <option value="3">3 Stars</option>

@@ -36,7 +36,7 @@
                     </div>
                 </div>
             </form>
-            <a href="/dashboard"><button class="bg-white text-midnight bg-opacity-50 px-4 py-2 font-semibold tracking-wider rounded-full hover:bg-opacity-75">CLEAR</button></a>
+            <a href="/dashboard?view={{ request()->input('view') == null ? '' : request()->input('view')}}"><button class="bg-white text-midnight bg-opacity-50 px-4 py-2 font-semibold tracking-wider rounded-full hover:bg-opacity-75">CLEAR</button></a>
         </div>
 
 
@@ -57,7 +57,7 @@
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>
     @if ($list->isEmpty())
-        <x-empty />
+        <div class="py-32 text-center text-white text-opacity-50 text-body">so empty... <a href="/search/results" class="text-aqua underline">fill your reservoir</a>?</div>
     @else
         @foreach ($list as $content)
             <x-content-row :content='$content'/>

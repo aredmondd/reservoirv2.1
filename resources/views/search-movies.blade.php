@@ -3,7 +3,7 @@
     <x-error-notification />
     <x-success-notification />
 
-    <h2 class="text-mega text-center text-white font-serif">Search Content</h2>
+    <h2 class="text-mega text-center text-white font-serif mt-12">Search Content</h2>
 
     <div class="mx-20 mt-6">
         <form action="/search/results" method="GET" x-data class="bg-midnight mx-80 flex items-center space-x-4">

@@ -21,6 +21,12 @@ elseif ($content['contentType'] == 'tv') {
     $flag = 'tv';
 }
 
+if(isset($content['rating'])){
+    $stars = $content['rating'];
+} else {
+    $stars = 0;
+}
+
 ?>
 
 <hr class='border-white border-opacity-25 mx-40 my-3'>
@@ -41,11 +47,7 @@ elseif ($content['contentType'] == 'tv') {
     </div>
     <p>{{ $releaseYear }}</p>
     <p>{{ $runtime ? $runtime : $numOfSeasons . ' seasons' }}</p>
-    <div class="flex">
-        <span class="material-symbols-outlined">star</span>
-        <span class="material-symbols-outlined">star</span>
-        <span class="material-symbols-outlined">star</span>
-        <span class="material-symbols-outlined">star</span>
-        <span class="material-symbols-outlined">star</span>
-    </div>
+    @if (isset($content['rating']))
+        <x-add-stars :stars="$stars" />  
+    @endif     
 </div>
