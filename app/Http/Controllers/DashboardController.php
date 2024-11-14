@@ -144,7 +144,6 @@ class DashboardController extends Controller
 
     public function filter_list(Request $request){
         $sortOrder = $request->input('sortOrder');
-        // dd($request->all(), $sortOrder);
     
         $user = Auth::user();
         $view = $request->input('view');
@@ -166,9 +165,11 @@ class DashboardController extends Controller
         else {
             $list = $user->watchlist->watchlist ?? [];
         }
-    
+
         // Apply filters if provided
         $filtered = collect($list);
+
+
     
         // Filter by content type if a type is selected
         if ($type) {
@@ -204,6 +205,18 @@ class DashboardController extends Controller
 
             } elseif ($filterBy === 'time' && $sortOrder === 'asc') { // sort by time lol to get back to normal
 
+                $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
+                $sortOrder = 'normal';
+            } elseif ($filterBy === 'name' && $sortOrder === 'normal') {
+                // Sort movies and TV shows separately by length
+                $filtered = $filtered->sortBy($filterBy);
+                $sortOrder = 'desc';
+            } elseif ($filterBy === 'name' && $sortOrder === 'desc') {
+                // Sort movies and TV shows separately by length
+                $filtered = $filtered->sortBy($filterBy)->reverse();
+                $sortOrder = 'asc';
+               
+            } elseif ($filterBy === 'name' && $sortOrder === 'asc'){
                 $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
                 $sortOrder = 'normal';
             } elseif ($filterBy === 'released' && $sortOrder === 'normal') {
