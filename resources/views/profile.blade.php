@@ -1,4 +1,17 @@
 <x-layout>
+    <?php
+    $ratings = $user->history->history ?? [];
+    $avg = 0;
+    $count = 0;
+    foreach ($ratings as $star){
+        if(isset($star['rating'])){
+            $avg += (int) $star['rating'];
+            $count ++;
+        }
+    }
+
+    $avg = round($avg / $count);
+    ?>
     <div class="grid grid-cols-3 gap-12 mx-20 mt-12 mb-12">
         <div class="flex flex-col items-center">
             <img src="{{ $user->profile_picture != null ? asset('storage/' . $user->profile_picture) : asset('images/default.png') }}" alt="" class="w-56 rounded-full">
@@ -42,16 +55,17 @@
             <div>
                 <p class="text-center text-white">Average Rating</p>
                 <div class="flex">
+                    <x-add-stars :stars="$avg" />
+                    <!-- <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
                     <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
                     <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
                     <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
-                    <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
-                    <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span>
+                    <span class="text-title text-white text-opacity-25 material-symbols-outlined">star</span> -->
                 </div>
             </div>
             <div>
                 <p class="text-white text-center">Friends</p>
-                <p class="text-white text-center text-opacity-50">0</p>
+                <p class="text-white text-center text-opacity-50">{{ count($user->current_friends) }}</p>
             </div>
         </div>
     </div>
