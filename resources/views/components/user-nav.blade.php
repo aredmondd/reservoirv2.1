@@ -34,13 +34,7 @@ $friendRequests = Auth::user()->pending_friend_requests;
                     <x-nav-link :href="route('discover')" :active="request()->is('discover')">
                         Discover
                     </x-nav-link>
-                </div>
-
-                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('user-search')" :active="request()->is('user-search')">
-                        User Search
-                    </x-nav-link>
-                </div>
+</div>
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('diary')" :active="request()->is('diary')">

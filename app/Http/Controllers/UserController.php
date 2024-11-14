@@ -104,7 +104,7 @@ class UserController extends Controller {
         $searchTerm = $request->input('query');
 
         if (empty($searchTerm)) {
-            return view('search');
+            return view('friends');
         }
 
         $users = User::where('is_private', false)
@@ -114,7 +114,7 @@ class UserController extends Controller {
                     })
                     ->get();
 
-        return view('search', compact('users'));
+        return view('friends', compact('users'));
     }
 
     public function display(Request $request, $username) {
@@ -184,6 +184,23 @@ class UserController extends Controller {
     // view friend requests
 
     public function displayFriends (){
+        $searchTerm = request()->input('query');
+
+        if ($searchTerm != null) {
+            if (empty($searchTerm)) {
+                return view('friends');
+            }
+    
+            $users = User::where('is_private', false)
+                        ->where('id', '!=', auth()->id())
+                        ->where(function ($query) use ($searchTerm) {
+                            $query->where('name', 'LIKE', '%' . $searchTerm . '%')->orWhere('username', 'LIKE', '%' . $searchTerm . '%');
+                        })
+                        ->get();
+    
+            return view('friends', compact('users'));
+        }
+
         $currentUser = Auth::user();
 
         $friendRequests = $currentUser->pending_friend_requests;
