@@ -14,8 +14,6 @@ use App\Models\Stack;
 Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index'); 
 Route::get('/movie-description/{movie}/{flag}',[TMDBController::class, 'movieDetails'])->name('movie-description');
 Route::get('/about', function () { return view('about'); })->name('about');
-Route::get('/movie-api-demo',[MusicController::class, 'main'])->name('main');
-
 
 // Routes only for authenticated users
 Route::middleware('auth')->group(function () {

@@ -1,5 +1,5 @@
 <x-layout>
-    <h1 class="text-white text-center font-serif text-mega mt-12 mb-24">Journal</h1>
+    <h1 class="text-white text-center font-serif text-mega my-12">Journal</h1>
 
     <hr class='border-white border-opacity-25 mx-40 my-3'>
 
