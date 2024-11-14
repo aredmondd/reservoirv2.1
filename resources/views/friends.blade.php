@@ -1,7 +1,7 @@
 <?php
 use App\Models\User;
 
-$num_requests = count(Auth::user()->pending_friend_requests);
+$num_requests = count(Auth::user()->pending_friend_requests ?? []);
 
 ?>
 
