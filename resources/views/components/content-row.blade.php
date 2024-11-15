@@ -37,6 +37,7 @@ if ($contentType == 'movie') {
 elseif ($contentType == 'tv') {
     $name = $details['name'];
     $numOfSeasons = $details['number_of_seasons'];
+    $season_s = $numOfSeasons == 1 ? ' season' : ' seasons';
     $runtime = null;
     $releaseYear = Carbon::parse($details['first_air_date'])->year;
     $flag = 'tv';
@@ -52,7 +53,7 @@ elseif ($contentType == 'tv') {
             <a href="{{ route('movie-description', ['movie' => $content['id'], 'flag' => $flag]) }}" class="font-serif text-body text-white">{{ Str::limit($name, 22, '...')  }}</a>
         </div>
         <p>{{ $releaseYear }}</p>
-        <p>{{ $runtime ? $runtime : $numOfSeasons . ' seasons' }}</p>
+        <p>{{ $runtime ? $runtime : $numOfSeasons . $season_s }}</p>
         @if (request()->view == 'history')
             <x-add-stars :stars="$stars" />        
         @endif

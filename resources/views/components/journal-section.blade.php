@@ -48,6 +48,8 @@ if(isset($content['rating'])){
     <p>{{ $releaseYear }}</p>
     <p>{{ $runtime ? $runtime : $numOfSeasons . ' seasons' }}</p>
     @if (isset($content['rating']))
-        <x-add-stars :stars="$stars" />  
+        <x-add-stars :stars="$stars" />
+    @else
+        <p class="text-white text-opacity-50">not rated yet...</p>  
     @endif     
 </div>
