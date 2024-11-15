@@ -2,10 +2,12 @@
     <div class="flex justify-between mx-40 mt-20">
         <div class="flex">
             <img src="{{ $user->profile_picture != null ? asset('storage/' . $user->profile_picture) : asset('images/default.png') }}" class="rounded-full mr-12" width='175' height='175'>
-            <div class="flex flex-col justify-around">
+            <div class="flex flex-col justify-between">
                 <h1 class="text-blue text-mega font-serif">{{ $user->username }}</h1>
-                <p class="text-white font-sans text-body">{{ $user->bio }}</p>
-                <p class="text-white text-opacity-50 font-sans text-sm">Joined {{ Carbon\Carbon::parse($user->created_at)->toFormattedDateString() }}</p>
+                <div class="flex flex-col space-y-2">
+                    <p class="text-white font-sans text-body">{{ $user->bio }}</p>
+                    <p class="text-white text-opacity-50 font-sans text-sm">Joined {{ Carbon\Carbon::parse($user->created_at)->toFormattedDateString() }}</p>
+                </div>
             </div>
         </div>
         <div class="flex flex-col justify-around text-right">
