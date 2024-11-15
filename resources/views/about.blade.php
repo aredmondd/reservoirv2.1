@@ -5,9 +5,9 @@
         <p class="text-white text-opacity-50 text-body text-sans text-center mx-40">Reservoir was designed and developed to deliver a personalized, user-friendly media-tracking experience. <br>It’s the result of the hard work and dedication of the three creators below.</p>
     </div>
     <div class="grid grid-cols-3 text-white text-center mt-20 mx-10">
-        <x-about-me path="images/redmond.jpg" name="Aiden Redmond" title="UI/UX Designer & Full Stack Developer"></x-about-me>
-        <x-about-me path="images/wilson.jpg" name="Brandon Wilson" title="Database Engineer & Full Stack Developer"></x-about-me>
-        <x-about-me path="images/beaver.jpg" name="Axel Beaver" title="AI Engineer & Machine Learning Specialist"></x-about-me>
+        <x-about-me path="images/redmond.jpg" name="Aiden Redmond" title="UI/UX Designer & Full Stack Developer" username="aredmondd"></x-about-me>
+        <x-about-me path="images/wilson.jpg" name="Brandon Wilson" title="Database Engineer & Full Stack Developer" username="bdubbs11"></x-about-me>
+        <x-about-me path="images/beaver.jpg" name="Axel Beaver" title="AI Engineer & Machine Learning Specialist" username="axbeaver"></x-about-me>
     </div>
     
     

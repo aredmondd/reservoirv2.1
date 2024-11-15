@@ -23,13 +23,13 @@
     </div>
 
     <!-- Discover -->
-    <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Discover more with <span class="text-blue">Ripple</span></h2>
+    <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Discover more with <span class="text-aqua">Ripple</span></h2>
     <x-hr />
     <p class="text-white text-body font-sans text-opacity-50 text-center mb-[-25px]">As you rate movies, <span class="text-aqua">Ripple</span>, an advanced AI model, creates a personalized recommendation list based on what you like and dislike.</p>
     <x-ripple-ad />
 
     <!-- Rate & Organize -->
-    <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Organize with <span class="text-aqua">Stacks</span></h2>
+    <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Organize with <span class="text-blue">Stacks</span></h2>
     <x-hr />
     <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">Create custom stacks to highlight your favorite movies by genre, decade, or any theme you choose, showcasing your unique cinematic tastes.</p>
     <div class="flex justify-center ml-[-50px]">

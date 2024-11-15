@@ -23,7 +23,7 @@ if ($content_type == 'movie') {
 
 <div class="flex justify-between items-center text-white text-opacity-50 mx-64">
     <div class="flex">
-        <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="" class="rounded-sm w-24">
+        <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="" class="rounded-lg w-28">
         <div class="flex flex-col justify-between mx-12">
             <div>
                 <a href="{{ route('movie-description', ['movie' => $content['id'], 'flag' => $content_type]) }}" class="font-serif text-title text-white hover:text-blue">{{ $name }}</a>

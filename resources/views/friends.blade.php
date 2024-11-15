@@ -17,7 +17,8 @@ $num_requests = count(Auth::user()->pending_friend_requests ?? []);
 
     @if (!request()->input('view') || request()->input('view') == 'add')
         <div class="px-96 mb-24 mt-12">
-            <form action="/my-friends?view=add" method="GET" class="flex justify-center">
+            <hr class='border-white border-opacity-25 mx-12 mt-6'>
+            <form action="/my-friends?view=add" method="GET" class="flex justify-center mt-6">
                 <div class="relative text-white">
                     <div class="absolute inset-y-0 start-0 flex items-center ps-3 pointer-events-none">
                         <svg class="w-4 h-4" aria-hidden="true" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 20 20">
