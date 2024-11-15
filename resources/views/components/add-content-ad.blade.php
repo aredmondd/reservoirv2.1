@@ -5,7 +5,7 @@
                 <img src="https://image.tmdb.org/t/p/w500{{ $movieData['poster_path'] }}" class="rounded-md w-72 mx-auto mb-6 transform transition-transform duration-300 hover:scale-105" alt="{{ $movieData['title'] }} movie poster">
             </a>
             <div class="flex flex-col">
-                <h3 class="text-white text-title font-sans mb-2 font-bold">{{ $movieData['title'] }}</h3>
+                <a href="{{ route('movie-description', ['movie' => $movieData['id'], 'flag' => 'movie']) }}" class="text-white text-title font-sans mb-2 font-bold">{{ $movieData['title'] }}</a>
                 <p class="text-white text-sm text-opacity-50 mx-14">{{ Str::limit($movieData['overview'], 100, '...') }}</p>
             </div>
     </div>
