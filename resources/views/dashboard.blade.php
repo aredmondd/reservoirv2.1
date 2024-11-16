@@ -59,6 +59,7 @@
     @if ($list->isEmpty())
         <div class="py-32 text-center text-white text-opacity-50 text-body">so empty... <a href="/search/results" class="text-aqua underline">fill your reservoir</a>?</div>
     @else
+        {{ dd($list) }}
         @foreach ($list as $content)
             <x-content-row :content='$content'/>
         @endforeach

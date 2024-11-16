@@ -26,7 +26,7 @@ if ($content_type == 'movie') {
         <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="" class="rounded-lg w-28">
         <div class="flex flex-col justify-between mx-12">
             <div>
-                <a href="{{ route('movie-description', ['movie' => $content['id'], 'flag' => $content_type]) }}" class="font-serif text-title text-white hover:text-blue">{{ $name }}</a>
+                <a href="{{ route('content', ['movie' => $content['id'], 'flag' => $content_type]) }}" class="font-serif text-title text-white hover:text-blue">{{ $name }}</a>
                 <div class="flex space-x-2 text-body">
                     <p>{{ $releaseYear }}</p>
                     <p> | </p>

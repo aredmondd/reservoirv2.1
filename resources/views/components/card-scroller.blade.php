@@ -9,7 +9,7 @@
 <div class="w-full inline-flex flex-nowrap overflow-x-hidden [mask-image:_linear-gradient(to_right,transparent_0,white,blue,transparent_100%)] group">
     <ul class="flex animate-loop-scroll group-hover:paused">
         @foreach ($movieData as $movie) <!-- Renamed variable to $movie to avoid confusion -->
-        <a href="{{ route('movie-description', ['movie' => $movie['id'], 'flag' => $flag]) }}">
+        <a href="{{ route('content', ['movie' => $movie['id'], 'flag' => $flag]) }}">
             <x-movie-card img="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}"/>
         </a>
         @endforeach
@@ -17,7 +17,7 @@
 
     <ul class="flex animate-loop-scroll group-hover:paused" aria-hidden="true">
         @foreach ($movieData as $movie) <!-- Again, use a new iteration over $movieData -->
-        <a href="{{ route('movie-description', ['movie' => $movie['id'], 'flag' => $flag]) }}">
+        <a href="{{ route('content', ['movie' => $movie['id'], 'flag' => $flag]) }}">
             <x-movie-card img="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}"/>
         </a>
         @endforeach

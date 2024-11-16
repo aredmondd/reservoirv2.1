@@ -12,7 +12,7 @@ use App\Models\Stack;
 
 
 Route::get('/',[TMDBController::class, 'mainMovieFunc'])->name('index'); 
-Route::get('/movie-description/{movie}/{flag}',[TMDBController::class, 'movieDetails'])->name('movie-description');
+Route::get('/content/{movie}/{flag}',[TMDBController::class, 'movieDetails'])->name('content');
 Route::get('/about', function () { return view('about'); })->name('about');
 
 // Routes only for authenticated users

@@ -10,11 +10,11 @@ $length = isset($movieData['runtime']) ? $movieData['runtime'] : $movieData['num
 ?>
 <div class="flex flex-col mb-8">
     <div class="text-center justify-center">
-            <a href="{{ route('movie-description', ['movie' => $movieData['id'], 'flag' => '$content_type']) }}">
+            <a href="{{ route('content', ['movie' => $movieData['id'], 'flag' => $content_type]) }}">
                 <img src="https://image.tmdb.org/t/p/w500{{ $movieData['poster_path'] }}" class="rounded-md w-72 mx-auto mb-6 transform transition-transform duration-300 hover:scale-105" alt="movie poster">
             </a>
             <div class="flex flex-col">
-                <a href="{{ route('movie-description', ['movie' => $movieData['id'], 'flag' => '$content_type']) }}" class="text-white text-title font-sans mb-2 font-bold">{{ $name }}</a>
+                <a href="{{ route('content', ['movie' => $movieData['id'], 'flag' => $content_type]) }}" class="text-white text-title font-sans mb-2 font-bold">{{ $name }}</a>
                 <p class="text-white text-sm text-opacity-50 mx-14">{{ Str::limit($movieData['overview'], 100, '...') }}</p>
             </div>
     </div>

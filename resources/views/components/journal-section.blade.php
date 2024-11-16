@@ -43,7 +43,7 @@ if(isset($content['rating'])){
     <p>{{ Carbon::parse($content['time'])->toFormattedDateString(); }}</p>
     <div class="flex col-span-2 space-x-8 items-center">
         <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="" class="rounded-sm w-12">
-        <a href="{{ route('movie-description', ['movie' => $content['id'], 'flag' => $content['contentType']]) }}" class="text-white font-serif text-body">{{ Str::limit($content['name'], 22, '...')  }}</a>
+        <a href="{{ route('content', ['movie' => $content['id'], 'flag' => $content['contentType']]) }}" class="text-white font-serif text-body">{{ Str::limit($content['name'], 22, '...')  }}</a>
     </div>
     <p>{{ $releaseYear }}</p>
     <p>{{ $runtime ? $runtime : $numOfSeasons . ' seasons' }}</p>

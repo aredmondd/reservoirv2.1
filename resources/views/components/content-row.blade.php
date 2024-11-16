@@ -50,7 +50,7 @@ elseif ($contentType == 'tv') {
         <p>{{ $addedAt }}</p>
         <div class="col-span-2 flex space-x-8 items-center">
             <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="" class="rounded-sm w-12">
-            <a href="{{ route('movie-description', ['movie' => $content['id'], 'flag' => $flag]) }}" class="font-serif text-body text-white">{{ Str::limit($name, 22, '...')  }}</a>
+            <a href="{{ route('content', ['movie' => $content['id'], 'flag' => $flag]) }}" class="font-serif text-body text-white">{{ Str::limit($name, 22, '...')  }}</a>
         </div>
         <p>{{ $releaseYear }}</p>
         <p>{{ $runtime ? $runtime : $numOfSeasons . $season_s }}</p>
