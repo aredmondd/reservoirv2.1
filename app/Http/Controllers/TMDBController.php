@@ -44,12 +44,11 @@ class TMDBController extends Controller
             $pool->get(config('services.tmdb.endpoint').'movie/now_playing?api_key='.config('services.tmdb.api')),
             $pool->get(config('services.tmdb.endpoint').'movie/top_rated?api_key='.config('services.tmdb.api')),
             $pool->get(config('services.tmdb.endpoint').'tv/top_rated?api_key='.config('services.tmdb.api')),
-            // left movie
+
+            // add content ad movies
+            $pool->get(config('services.tmdb.endpoint').'tv/65495?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
             $pool->get(config('services.tmdb.endpoint').'movie/496243?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
-            // middle movie 
-            $pool->get(config('services.tmdb.endpoint').'movie/27205?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
-            // right movie
-            $pool->get(config('services.tmdb.endpoint').'movie/254320?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
+            $pool->get(config('services.tmdb.endpoint').'tv/240411?append_to_response=release_dates&api_key='.config('services.tmdb.api')),
         ]);
 
         $popularMovies = $responses[0]->json()['results'];

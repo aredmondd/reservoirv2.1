@@ -40,15 +40,22 @@
         </div>
     </div>
 
+    <!-- Friends -->
+    <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Share Content with Friends</h2>
+    <x-hr />
+    <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">Add friends to see what they’re watching, and share personalized content recommendations that match or expand their taste.</p>
+
+
+
+    <!-- Card Scrollers -->
     <h1 class="text-white font-serif text-mega text-center mb-12 mt-32">Popular Movies</h1>
     <x-card-scroller :movieData="$popularMovie" :flag=" 'movie' "></x-card-scroller>
 
     <h1 class="text-white font-serif text-mega text-center mb-12 mt-32">Popular TV Shows</h1>
-    <!-- in theater movies  -->
     <x-card-scroller :movieData="$topRatedTVShows" :flag=" 'tv' "></x-card-scroller>
    
 
-    <!-- Ad #2 -->
+    <!-- C2A -->
     <div class="px-40 my-32 text-center">
         <h1 class="text-mega font-serif text-white">Ready to dive in?</h1>
         <div class="mt-6"></div>
