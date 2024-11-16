@@ -43,8 +43,11 @@
     <!-- Friends -->
     <h2 class="font-serif text-mega text-center text-white mb-6 mt-32">Share Content with Friends</h2>
     <x-hr />
-    <p class="text-white text-body font-sans text-opacity-50 text-center mb-12">Add friends to see what they’re watching, and share personalized content recommendations that match or expand their taste.</p>
-
+    <p class="text-white text-body font-sans text-opacity-50 text-center">Add friends to see what they’re watching, and share personalized content recommendations that match or expand their taste.</p>
+    
+    <div class="flex justify-center">
+        <img src="images/friends-ad.jpg" alt="" class="w-[75%]">
+    </div>
 
 
     <!-- Card Scrollers -->
