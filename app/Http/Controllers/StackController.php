@@ -23,18 +23,15 @@ class StackController extends Controller {
     }
 
     public function store(Request $request) {
-        // dump($request->all());
         $attributes = request()->validate([
             'name' => 'required|max:30',
             'description' => 'required|max:90',
             'isPrivate' => 'required',
         ]);
-        // dump($attributes);
         $attributes['user_id'] = Auth::id();
         $attributes['content'] = null;
         $attributes['isPrivate'] = ($attributes['isPrivate'] === 'private') ? true : false;
         
-        // dd($attributes);
         $stack = Stack::create($attributes);
         $stackUrl = '/stack?&id=' . $stack->id ;
 

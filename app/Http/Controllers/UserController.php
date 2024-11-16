@@ -214,8 +214,6 @@ class UserController extends Controller {
 
     public function acceptFriendRequest(Request $request){
         $currentUser = Auth::user();
-        
-        // dd($currentUser->id, $request->input('requested_user_id'));
 
         $request->validate([
             'requested_user_id' => 'required|integer|exists:users,id',
@@ -226,10 +224,7 @@ class UserController extends Controller {
         $currentFriends = $currentUser->current_friends ?? [];
         $requestedCurrentFriends = $requestedUser->current_friends ?? [];
 
-        // dd($currentUser ,$requestedUser  );
-
         // add to current friends
-        
         $alreadyFriends = in_array($requestedUserId, array_column($currentFriends, 'id'));
 
         if(!$alreadyFriends){

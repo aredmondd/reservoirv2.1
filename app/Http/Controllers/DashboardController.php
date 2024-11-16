@@ -247,7 +247,6 @@ class DashboardController extends Controller
                     // If only tvShows are non-empty
                     $filtered = $tvShows;
                 }
-                // dd($filtered);
                 $sortOrder = 'desc';
             } elseif ($filterBy === 'length' && $sortOrder === 'desc') {
                 // dump($filtered);
@@ -265,7 +264,6 @@ class DashboardController extends Controller
                     // If only tvShows are non-empty
                     $filtered = $tvShows;
                 }
-                // dd($filtered);
                 $sortOrder = 'asc';
                
             } elseif ($filterBy === 'length' && $sortOrder === 'asc'){

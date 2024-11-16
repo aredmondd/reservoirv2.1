@@ -20,8 +20,6 @@ class ContentController extends Controller
      * @return redirect
      */
     public function add_to_watchlist(Request $request) {
-
-        // dd($request->all());
         $user = Auth::user();
         $watchlist = $user->watchlist;
     
@@ -70,7 +68,6 @@ class ContentController extends Controller
      * @return redirect
      */
     public function add_to_history(Request $request) {
-        // dd($request->all());
         $user = Auth::user();
         $history = $user->history;
     

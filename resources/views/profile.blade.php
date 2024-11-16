@@ -9,7 +9,13 @@ foreach ($ratings as $star){
     }
 }
 
-$avg = round($avg / $count);
+if ($count > 0) {
+    $avg = round($avg / $count);
+}
+else {
+    $avg = 0;
+}
+
 ?>
 <x-layout>
     <div class="flex justify-between mx-40 my-12">
