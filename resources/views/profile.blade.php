@@ -15,7 +15,7 @@ if ($count > 0) {
 else {
     $avg = 0;
 }
-
+// dd($user->profile_content_favorites);
 ?>
 <x-layout>
     <div class="flex justify-between mx-40 my-12">
@@ -35,11 +35,21 @@ else {
     <hr class='border-white border-opacity-25 mx-40'>
 
     <div class="flex justify-between mx-40 mt-12">
-        <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"><img src="https://image.tmdb.org/t/p/w500/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg" alt="" class="rounded-md"></div>
+        @php
+            $favorites = $user->profile_content_favorites ?? [];
+            $remainingSlots = 5 - count($favorites);
+        @endphp
+        @foreach ( $favorites as $favorite)
+             <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"><img src="https://image.tmdb.org/t/p/w500{{$favorite['posterPath']}}"  alt="" class="rounded-md"></div>
+        @endforeach 
+        @for ($i = 0; $i < $remainingSlots; $i++)
+            <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out">add your <br> fav content <br>here</div>
+        @endfor
+        <!-- <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"><img src="https://image.tmdb.org/t/p/w500/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg"  
         <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out">add your <br> fav content <br>here</div>
         <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out">add your <br> fav content <br>here</div>
         <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"><img src="https://image.tmdb.org/t/p/w500/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg" alt="" class="rounded-md"></div>
-        <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"><img src="https://image.tmdb.org/t/p/w500/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg" alt="" class="rounded-md"></div>
+        <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"><img src="https://image.tmdb.org/t/p/w500/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg" alt="" class="rounded-md"></div> -->
     </div>
 
     <div class="mb-24"></div>

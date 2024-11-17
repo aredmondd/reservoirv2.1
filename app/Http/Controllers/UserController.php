@@ -87,6 +87,39 @@ class UserController extends Controller {
         return view('profile', compact('user', 'numWatchlisted', 'numWatched', 'numMovies', 'numShows', 'numMoviesWatchlisted', 'numShowsWatchlisted', 'totalContent', 'moviePercentage', 'showPercentage', 'totalContentWatchlisted', 'moviePercentageWatchlisted', 'showPercentageWatchlisted', 'entries'));
     }
 
+    public function showProfileFavorites(Request $request){
+        $user = Auth::user();
+
+        $profile_fav = $user->profile_content_favorites;
+
+        $profile_fav_content = $profile_fav ?? []; 
+
+        $content_id = $request->input('id');
+        $content_name = $request->input('name');
+        $content_poster = $request->input('posterPath');
+
+        $content_in_profile_fav = collect($profile_fav_content)->contains('id', $content_id);
+
+        if(!$content_in_profile_fav && count($profile_fav_content) < 5){
+            $profile_fav_content[] = [
+                'id' => $content_id,
+                'name' => $content_name,
+                'posterPath' => $content_poster,
+                'time' => now(),
+            ];
+        }else{
+            return redirect()->back()->with('error', 'You can only have up to 5 items in your favorites.');
+        }
+
+        $user->profile_content_favorites = $profile_fav_content;
+        $user->save();
+
+        return redirect()->back()->with('success', 'You added ' . $content_name . ' to your profile. You have ' . 5 - count($profile_fav_content) . ' slots left');
+        
+
+
+    }
+
     public function updateVisibility(Request $request) {
         $request->validate([
             'visibility' => 'required|in:public,private',

@@ -20,8 +20,9 @@ return new class extends Migration
             $table->string('password');
             $table->string('bio')->default('I like long walks on the beach.');
             $table->boolean('is_private')->default(false);
-            $table->json('pending_friend_requests')->nullable(); // not enough space for this 
-            $table->json('current_friends')->nullable(); // not enough space for this 
+            $table->json('pending_friend_requests')->nullable();
+            $table->json('current_friends')->nullable(); 
+            $table->json('profile_content_favorites')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

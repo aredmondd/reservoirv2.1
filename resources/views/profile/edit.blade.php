@@ -22,6 +22,16 @@
                 </div>
             </div>
 
+
+            <div class="p-4 sm:p-8 border border-white border-opacity-50 bg-opacity-50 rounded-md">
+                <div class="max-w-xl">
+                    @include('profile.partials.edit-favorite-content')
+                </div>
+            </div>
+
+
+
+
             <div class="p-4 sm:p-8 border border-white border-opacity-50 bg-opacity-50 rounded-md">
                 <div class="max-w-xl">
                     @include('profile.partials.profile-visibility')

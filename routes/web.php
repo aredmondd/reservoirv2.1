@@ -66,6 +66,8 @@ Route::middleware('auth')->group(function () {
     Route::post('/history', [ContentController::class, 'add_to_history'])->name('history.add');
     Route::post('/currently-watching', [ContentController::class, 'add_to_currently_watching'])->name('currently-watching.add');
     Route::post('/addToStack', [ContentController::class, 'add_to_stack'])->name('stack.add');
+    Route::post('/profile/addToFavorite', [UserController::class, 'showProfileFavorites'])->name('profile.addFav');
+
 });
 
 // Catch all route
