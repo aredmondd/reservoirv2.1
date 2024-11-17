@@ -110,4 +110,23 @@ class ProfileController extends Controller
 
         return redirect()->back()->with('error', 'No profile picture to delete.');
     }
+
+    // remove favorite content from profile
+    public function deleteContent (Request $request){
+        $user = Auth::user();
+
+        $content_id = $request->input('id');
+        $content_name = $request->input('name');
+        $fav_content = $user->profile_content_favorites ?? [];
+
+        $fav_content = array_filter($fav_content, function ($content) use ($content_id) {
+            return $content['id'] != $content_id; 
+        });
+
+        $user->profile_content_favorites = array_values($fav_content);
+        $user->save();
+
+        return redirect()->back()->with('success', '' . $content_name . ' was deleted from profile favorites.');
+
+    }
 }

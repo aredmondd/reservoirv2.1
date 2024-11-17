@@ -67,6 +67,7 @@ Route::middleware('auth')->group(function () {
     Route::post('/currently-watching', [ContentController::class, 'add_to_currently_watching'])->name('currently-watching.add');
     Route::post('/addToStack', [ContentController::class, 'add_to_stack'])->name('stack.add');
     Route::post('/profile/addToFavorite', [UserController::class, 'showProfileFavorites'])->name('profile.addFav');
+    Route::delete('/profile/deleteFromFavorite', [ProfileController::class, 'deleteContent'])->name('profile.deleteFav');
 
 });
 
