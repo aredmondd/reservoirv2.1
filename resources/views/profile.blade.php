@@ -62,7 +62,7 @@ else {
         </div>
         <div>
             <p class="text-white text-center">Friends</p>
-            <p class="text-white text-center text-opacity-50">{{ count($user->current_friends) }}</p>
+            <p class="text-white text-center text-opacity-50">{{ $user->current_friends != null ? count($user->current_friends) : 0 }}</p>
         </div>
     </div>
 </x-layout>
