@@ -7,6 +7,4 @@
         <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"><img src="https://image.tmdb.org/t/p/w500/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg" alt="" class="rounded-md"></div>
         <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"><img src="https://image.tmdb.org/t/p/w500/cMD9Ygz11zjJzAovURpO75Qg7rT.jpg" alt="" class="rounded-md"></div>
     </div>
-
-    <h1 class="text-white font-serif">Just Watched</h1>
 </x-profile-wrapper>

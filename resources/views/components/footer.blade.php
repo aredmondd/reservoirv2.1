@@ -15,7 +15,6 @@
                 <a href="/stacks" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Profile</a>
                 <a href="/stacks" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Stacks</a>
                 <a href="/my-friends" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Friends</a>
-                <a href="/diary" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Diary</a>
                 <a href="/discover" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">Discover</a>
             @endif
             <a href="/about" class="grow transition duration-150 ease-in-out focus:outline-none focus:text-blue hover:text-blue">About</a>

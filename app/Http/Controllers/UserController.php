@@ -188,10 +188,6 @@ class UserController extends Controller {
 
             return view('user-profile/history', ['user' => $user, 'history' => $user->history->history ?? []]);
         }
-        elseif ($profilePage == 'journal') {
-
-            return view('user-profile/journal', ['user' => $user]);
-        }
     }
 
     public function sendFriendRequest(Request $request){

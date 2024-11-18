@@ -195,35 +195,6 @@ class ContentController extends Controller
         }
     }  
 
-
-    public function get_journal_entries(Request $request) {
-        $user = Auth::user();
-        $history = $user->history;
-        $watchlist = $user->watchlist;
-        $currently_watching = $user->currentlyWatching;
-
-        $history_content = $history->history ?? [];
-        $watchlist_content = $watchlist->watchlist ?? [];
-        $currently_watching_content = $currently_watching->currently_watching ?? [];
-
-        for ($i = 0; $i < count($history_content); $i++) {
-            $history_content[$i]['action'] = 'history';
-        }
-        for ($i = 0; $i < count($watchlist_content); $i++) {
-            $watchlist_content[$i]['action'] = 'watchlist';
-        }
-        for ($i = 0; $i < count($currently_watching_content); $i++) {
-            $currently_watching_content[$i]['action'] = 'currently_watching';
-        }
-
-        $entries = array_merge($history_content, $watchlist_content, $currently_watching_content);
-
-        // sort the entries array from oldest to newest
-        usort($entries, fn($a, $b) => $b['time'] <=> $a['time']);
-
-        return view('journal', ['entries' => $entries]);
-    }  
-
     public function filterContent (Request $request){
         $user = Auth::user();
 

@@ -43,12 +43,6 @@ $friendRequests = Auth::user()->pending_friend_requests;
                 </div>
 
                 <div class="hidden sm:-my-px sm:ms-10 sm:flex">
-                    <x-nav-link :href="route('diary')" :active="request()->is('diary')">
-                        Diary
-                    </x-nav-link>
-                </div>
-
-                <div class="hidden sm:-my-px sm:ms-10 sm:flex">
                     <x-nav-link :href="route('discover')" :active="request()->is('discover')">
                         Discover
                     </x-nav-link>
