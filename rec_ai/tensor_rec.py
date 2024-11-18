@@ -13,11 +13,15 @@ import tensorflow as tf
 import tensorflow_datasets as tfds
 import tensorflow_recommenders as tfrs
 
+import pdb
+
 
 # Ratings data.
 ratings = tfds.load("movielens/100k-ratings", split="train")
 # Features of all the available movies.
 movies = tfds.load("movielens/100k-movies", split="train")
+
+pdb.set_trace()
 
 
 # get a single user and movie
