@@ -23,6 +23,7 @@ return new class extends Migration
             $table->json('pending_friend_requests')->nullable();
             $table->json('current_friends')->nullable(); 
             $table->json('profile_content_favorites')->nullable();
+            $table->json('recommended_content')->nullable();
             $table->rememberToken();
             $table->timestamps();
         });

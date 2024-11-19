@@ -337,6 +337,30 @@ class UserController extends Controller {
     
         return redirect()->back();
     }
+
+    public function recommendContent (Request $request){
+        $user = Auth::user();
+        $recommendContent = $user->recommended_content ?? [];
+        
+
+        $content_id = $request->input('content_id');
+        $content_recommended_user_id = $request->input('recommended_user_id');
+        $message = $request->input('message') ?? 'no message';
+
+        $recommendedContent[] = [
+            'id' => $content_recommended_user_id,
+            'recommender' => User::where('id', $content_recommended_user_id)->get()[0]['name'],
+            'content_id' => $content_id,
+            'message' =>  $message,
+            'time' => now(),
+        ];
+
+        $user->recommended_content = $recommendedContent;
+        $user->save();
+
+
+        return redirect()->back()->with('success','Your cotent was recommended!');
+    }
     
 
 }

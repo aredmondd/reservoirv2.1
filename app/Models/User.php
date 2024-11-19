@@ -38,7 +38,8 @@ class User extends Authenticatable
             'password' => 'hashed',
             'pending_friend_requests' => 'array',
             'current_friends' => 'array',
-            'profile_content_favorites' => 'array'
+            'profile_content_favorites' => 'array',
+            'recommended_content' => 'array',
         ];
     }
 
