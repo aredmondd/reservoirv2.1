@@ -37,12 +37,12 @@ $userStacks = Stack::where('user_id', $user->id)->get();
             <div class="text-white mb-6">
                 @foreach($current_friends as $friend)
                 <?php
-                $otherFriend = User::where('id', $friend['id'])->get();
+                $otherFriend =  User::find($friend['id']);
                 ?>
                     <div class="py-2 cursor-pointer" 
                          @click="selectedFriendId = '{{ $friend['id'] }}'">
                          
-                        {{ $otherFriend[0]['name'] }} - {{ $otherFriend[0]['username'] }}
+                        {{ $otherFriend->name }} - {{ $otherFriend->username }}
                     </div>
                 @endforeach
             </div>
@@ -66,7 +66,7 @@ $userStacks = Stack::where('user_id', $user->id)->get();
                 <button type="submit" 
                         class="text-white bg-blue rounded-full px-4 p-2 font-medium tracking-wide" 
                         :disabled="!selectedFriendId">
-                    Add to Stack
+                    Send
                 </button>
             </div>
         </form>

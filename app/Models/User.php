@@ -22,6 +22,7 @@ class User extends Authenticatable
         'is_private',
         'pending_friend_requests',
         'current_friends',
+        'recommended_content',
     ];
 
     protected $guarded = [];

@@ -339,24 +339,33 @@ class UserController extends Controller {
     }
 
     public function recommendContent (Request $request){
+
         $user = Auth::user();
-        $recommendContent = $user->recommended_content ?? [];
-        
+        $recommender_user_id = $request->input('recommended_user_id');
+        $recommendedUser = User::find($recommender_user_id);
+
+        $recommendContent = $recommendedUser->recommended_content ?? [];
 
         $content_id = $request->input('content_id');
-        $content_recommended_user_id = $request->input('recommended_user_id');
         $message = $request->input('message') ?? 'no message';
 
-        $recommendedContent[] = [
-            'id' => $content_recommended_user_id,
-            'recommender' => User::where('id', $content_recommended_user_id)->get()[0]['name'],
+        // Check if the same recommendation already exists
+        foreach ($recommendContent as $recommendation) {
+            if ($recommendation['content_id'] == $content_id && $recommendation['id'] == $user->id) {
+                return redirect()->back()->with('error', 'You have already recommended this content to this user.');
+            }
+        }
+
+        $recommendContent[] = [
+            'id' => $user->id,
+            'recommender' => $user->name,
             'content_id' => $content_id,
             'message' =>  $message,
             'time' => now(),
         ];
 
-        $user->recommended_content = $recommendedContent;
-        $user->save();
+        $recommendedUser->recommended_content = $recommendContent;
+        $recommendedUser->save();
 
 
         return redirect()->back()->with('success','Your cotent was recommended!');
