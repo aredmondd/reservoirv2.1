@@ -43,7 +43,7 @@ else {
              <div class="w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out"><img src="https://image.tmdb.org/t/p/w500{{$favorite['posterPath']}}"  alt="" class="rounded-md"></div>
         @endforeach 
         @for ($i = 0; $i < $remainingSlots; $i++)
-            <div class="text-white w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out">add your <br> fav content <br>here</div>
+            <a href="/search/results" class="text-white w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center flex items-center justify-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out">use '<span class="material-symbols-outlined">heart_plus</span>' to display your favorite content</a>
         @endfor
     </div>
 
