@@ -1,7 +1,9 @@
 <?php
 use App\Models\User;
+use Carbon\Carbon;
 
 $num_requests = count(Auth::user()->pending_friend_requests ?? []);
+// $num_recommended = count(Auth::user()->recommended_content ?? []);
 
 ?>
 
@@ -13,6 +15,7 @@ $num_requests = count(Auth::user()->pending_friend_requests ?? []);
         <a href="/my-friends?view=add" class="{{ request()->input('view') == 'add' || request()->input('query') != null || request()->input('view') == null ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Add Friends</a>
         <a href="/my-friends?view=current-friends" class="{{ request()->input('view') == 'current-friends' ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">My Friends</a>
         <a href="/my-friends?view=requests" class="{{ request()->input('view') == 'requests' ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Requests {{ $num_requests > 0 ? '(' . $num_requests . ')' : '' }}</a>
+        <a href="/my-friends?view=recommended" class="{{ request()->input('view') == 'recommended' ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Recommended</a>
     </div>
 
     @if (!request()->input('view') || request()->input('view') == 'add')
@@ -120,6 +123,53 @@ $num_requests = count(Auth::user()->pending_friend_requests ?? []);
             @endforeach
             @endif
         </div>
+        @elseif(request()->input('view') == 'recommended')
+    <div class="mt-12 mx-96">
+        <hr class="border-white border-opacity-25 mx-12 my-3">
+        @if(Auth::user()->recommended_content && count(Auth::user()->recommended_content) > 0)
+            @foreach(Auth::user()->recommended_content as $content)
+                <?php
+                    $posterPath = $content['posterPath'];
+                    $content_type = $content['content_type'];
+                    $content_message = $content['message'];
+                    $content_id = $content['content_id'];
+                    $content_recommender = $content['recommender'];
+                    $content_name = $content['content_name'];
+                    $addedAt = Carbon::parse($content['time'])->toFormattedDateString();
+                ?>
+                
+                <div class="flex justify-between items-center mx-20 my-6">
+                    <div class="flex">
+                        <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="Poster" class="rounded-lg w-32">
+                        <div class="flex flex-col justify-between mx-12">
+                            <div>
+                                <a href="{{ route('content', ['movie' => $content_id, 'flag' => $content_type]) }}" class="font-serif text-title text-white hover:text-blue transition-all ease-in-out duration-500">{{ $content_name }}</a>
+                                <div class="flex space-x-2 text-body text-white text-opacity-50">
+                                    <p>{{ $content_recommender }}</p>
+                                    <p>|</p>
+                                    <p>{{ $addedAt }}</p>
+                                </div>
+                            </div>
+                            <p class="text-body text-white text-opacity-50">{{ Str::limit($content_message, 200, '...') }}</p>
+                        </div>
+                    </div>
+                    <div class="flex flex-col items-end space-y-2">
+                        <form action="{{ route('friend.decline') }}" method="POST">
+                            @csrf
+                            @method('DELETE')
+                            <button type="submit" class="w-8 hover:opacity-75 transition ease-in-out duration-300">
+                                <img src="{{ asset('images/delete.png') }}" alt="Delete">
+                            </button>
+                        </form>
+                    </div>
+                </div>
+                <hr class="border-white border-opacity-25 mx-12 my-6">
+            @endforeach
+        @else
+            <div class="mt-12 text-center text-white text-opacity-50 text-body">You have no recommended content...</div>
+        @endif
+    </div>
+
     @endif
 
 </x-layout>
