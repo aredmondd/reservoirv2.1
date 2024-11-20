@@ -129,6 +129,7 @@ $num_requests = count(Auth::user()->pending_friend_requests ?? []);
         @if(Auth::user()->recommended_content && count(Auth::user()->recommended_content) > 0)
             @foreach(Auth::user()->recommended_content as $content)
                 <?php
+                
                     $posterPath = $content['posterPath'];
                     $content_type = $content['content_type'];
                     $content_message = $content['message'];
@@ -136,6 +137,14 @@ $num_requests = count(Auth::user()->pending_friend_requests ?? []);
                     $content_recommender = $content['recommender'];
                     $content_name = $content['content_name'];
                     $addedAt = Carbon::parse($content['time'])->toFormattedDateString();
+                    $content = Http::asJson()->get(config('services.tmdb.endpoint'). $content_type . '/' . $content_id .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
+                    if ($content_type == 'movie') {
+                        $runtime = floor($content['runtime'] / 60) . 'h ' . ($content['runtime'] % 60) . 'm';
+                        $releaseYear = Carbon::parse($content['release_date'])->year;
+                    } elseif ($content_type == 'tv') {
+                        $numOfSeasons = $content['number_of_seasons'];
+                        $releaseYear = Carbon::parse($content['first_air_date'])->year;
+                    }
                 ?>
                 
                 <div class="flex justify-between items-center mx-20 my-6">
@@ -154,6 +163,7 @@ $num_requests = count(Auth::user()->pending_friend_requests ?? []);
                         </div>
                     </div>
                     <div class="flex flex-col items-end space-y-2">
+                    <x-add-to-watchlist-button :id='$content_id' :name='$content_name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="$content_type"/>
                         <form action="{{ route('friend.decline') }}" method="POST">
                             @csrf
                             @method('DELETE')
