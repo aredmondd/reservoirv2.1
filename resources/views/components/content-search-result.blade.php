@@ -23,7 +23,7 @@ if ($content_type == 'movie') {
 
 <div class="flex justify-between items-center text-white text-opacity-50 mx-64">
     <div class="flex">
-        <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="" class="rounded-lg w-28">
+        <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="" class="rounded-lg w-32">
         <div class="flex flex-col justify-between mx-12">
             <div>
                 <a href="{{ route('content', ['movie' => $content['id'], 'flag' => $content_type]) }}" class="font-serif text-title text-white hover:text-blue">{{ $name }}</a>
@@ -33,15 +33,14 @@ if ($content_type == 'movie') {
                     <p>{{ $runtime ? $runtime : $numOfSeasons . ' seasons' }}</p>
                 </div>
             </div>
-            <p class="text-sm">{{ Str::limit($content['overview'], 150, '...')}}</p>
+            <p class="text-sm">{{ Str::limit($content['overview'], 200, '...')}}</p>
         </div>
 
     </div>
-    <div class="flex flex-col space-y-4 items-end">
+    <div class="flex flex-col space-y-2 items-end">
         <x-add-to-watchlist-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'"/>
         <x-add-to-currently-watching-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'"/>
         <x-add-to-history-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'"/>
-        <x-add-to-stack-button :id='$id' :name='$name' :flag="isset($content['name']) ? 'tv' : 'movie'"/>
         <x-add-to-profile-favorite :id='$id' :name='$name' :posterPath='$posterPath' />
         <x-send-to-friend :id='$id'/>  
     </div>

@@ -6,7 +6,7 @@
     <form action="/profile/addToFavorite?id={{$id}}&name={{$name}}&posterPath={{$posterPath}}" method="POST">
         @csrf
 
-        <button type="submit" class="text-sm text-white text-opacity-50 hover:text-opacity-100 hover:cursor-pointer transition ease-in-out duration-500">
+        <button type="submit" class="text-sm text-white text-opacity-50 hover:text-opacity-100 hover:text-blue hover:cursor-pointer transition ease-in-out duration-300">
           <span class="material-symbols-outlined">heart_plus</span></button>
     </form>
 

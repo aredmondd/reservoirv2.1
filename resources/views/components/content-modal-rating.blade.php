@@ -1,6 +1,6 @@
 @props(['name', 'id'])
 
-<button type="submit" class="material-symbols-outlined hover:text-blue hover:cursor-pointer" title="Move content from currently watching to history" x-on:click.prevent="$dispatch('open-modal', 'add-history-rating-dashboard-{{ $id }}')" x-data="{ stars: null }">check_circle</button>
+<button type="submit" class="material-symbols-outlined text-white text-opacity-50 hover:text-opacity-100 transition ease-in-out duration-500" title="Move content from currently watching to history" x-on:click.prevent="$dispatch('open-modal', 'add-history-rating-dashboard-{{ $id }}')" x-data="{ stars: null }">check_circle</button>
 
 <x-modal name="add-history-rating-dashboard-{{ $id }}" :show="$errors->isNotEmpty()" focusable>
     <div class="bg-midnight p-8 rounded-md shadow-lg mx-auto" x-data="{ stars: null, hovered: 0 }">
