@@ -11,11 +11,7 @@
         </div>
         <div class="flex flex-col space-y-6 mt-6 items-end">
             <span id="editButton" class="material-symbols-outlined text-white text-title cursor-pointer">edit</span>
-            <form action="/stack?id={{ request('id') }}" method="POST" class="h-8">
-                @csrf
-                @method('DELETE')
-                <button type="submit"><img src="images/delete.png" alt="Delete" class="w-8"></button>
-            </form>
+            <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-stack-deletion')"><img src="images/delete.png" alt="Delete" class="w-8"></button>
         </div>
     </div>
     @else
@@ -24,6 +20,32 @@
         <p class="text-white text-center text-body">{{ $stack->description }}</p>
     </div>
     @endif
+
+    <!-- Modal for Delete Confirmation -->
+    <x-modal name="confirm-stack-deletion" focusable>
+        <form action="/stack?id={{ request('id') }}" method="POST" class="bg-midnight text-white p-8">
+            @csrf
+            @method('DELETE')
+
+            <h2 class="text-title font-medium">
+                Are you sure?
+            </h2>
+
+            <p class="mt-1 text-sm text-opacity-50">
+                Once you delete this stack, <span class="text-red-500 text-opacity-100">all of its content will be permanently lost.</span>
+            </p>
+
+            <div class="mt-6 flex justify-between">
+                <x-secondary-button x-on:click="$dispatch('close')">
+                    Cancel
+                </x-secondary-button>
+
+                <x-danger-button class="ms-3">
+                    Delete Stack
+                </x-danger-button>
+            </div>
+        </form>
+    </x-modal>
 
     @if ($content == null)
         <div class="text-white text-center mt-24">Search for some movies to add to your stack in "Fill your Reservoir"</div>
