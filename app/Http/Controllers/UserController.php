@@ -338,7 +338,11 @@ class UserController extends Controller {
         return redirect()->back();
     }
 
-    public function recommendContent (Request $request){
+    public function recommendContent(Request $request) {
+        if ($request->has('error') && $request->query('error') == 'no-friends') {
+            return back()->with('error', "That's awkward... You have no friends");
+        }
+
         $user = Auth::user();
         $recommender_user_id = $request->input('recommended_user_id');
         $recommendedUser = User::find($recommender_user_id);
@@ -350,7 +354,6 @@ class UserController extends Controller {
         $content_poster = $request->input('posterPath');
         $content_type = $request->input('content_type');
         $content_name = $request->input('content_name');
-        
 
         // Check if the same recommendation already exists
         foreach ($recommendContent as $recommendation) {
@@ -362,6 +365,7 @@ class UserController extends Controller {
         $recommendContent[] = [
             'id' => $user->id,
             'recommender' => $user->name,
+            'reccomender_id' => $user->id,
             'content_id' => $content_id,
             'message' =>  $message,
             'posterPath' => $content_poster,
@@ -373,9 +377,41 @@ class UserController extends Controller {
         $recommendedUser->recommended_content = $recommendContent;
         $recommendedUser->save();
 
-
-        return redirect()->back()->with('success','Your cotent was recommended!');
+        return redirect()->back()->with('success','Your content was recommended!');
     }
+
+
+    public function deleteRecommendedContent(Request $request) {
+        // get user & content ID
+        $user = Auth::user();
+        $content_id = $request->input('content_id');
+    
+        // Retrieve the recommended content list
+        $recommendContent = $recommendedUser->recommended_content ?? [];
+    
+        // Find the index of the content to delete
+        $indexToRemove = null;
+        foreach ($recommendContent as $index => $recommendation) {
+            if ($recommendation['content_id'] == $content_id && $recommendation['id'] == $user->id) {
+                $indexToRemove = $index;
+                break;
+            }
+        }
+    
+        // If the content was found, remove it
+        if ($indexToRemove !== null) {
+            unset($recommendContent[$indexToRemove]);
+            // Reindex the array to fix keys after removal
+            $recommendContent = array_values($recommendContent);
+            $recommendedUser->recommended_content = $recommendContent;
+            $recommendedUser->save();
+    
+            return redirect()->back()->with('success', 'The content has been deleted from the recommendations.');
+        } else {
+            return redirect()->back()->with('error', 'Content not found in recommendations.');
+        }
+    }
+    
     
 
 }

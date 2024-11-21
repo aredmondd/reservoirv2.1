@@ -16,10 +16,23 @@ $userStacks = Stack::where('user_id', $user->id)->get();
 
 
 <div class="relative group">
-    <button class="text-sm text-white text-opacity-50 hover:text-blue hover:text-opacity-100 hover:cursor-pointer transition ease-in-out duration-300" x-data="" x-on:click.prevent="$dispatch('open-modal', 'send-friend-modal-{{ $id }}')"><span class="material-symbols-outlined"> send </span></button>
+    <button 
+        class="text-sm text-white text-opacity-50 hover:text-blue hover:text-opacity-100 hover:cursor-pointer transition ease-in-out duration-300" 
+        x-data=""
+        x-on:click.prevent=" 
+            @if($current_friends == null)
+                window.location.href = '{{ route('recommend.content') }}' + '?error=no-friends'; 
+            @else
+                $dispatch('open-modal', 'send-friend-modal-{{ $id }}');
+            @endif
+        "
+    >
+        <span class="material-symbols-outlined"> send </span>
+    </button>
 
     <x-hover-tooltip text='Recommend to friend' />
 </div>
+
 
 <x-modal name="send-friend-modal-{{ $id }}" :show="$errors->isNotEmpty()" focusable>
 
