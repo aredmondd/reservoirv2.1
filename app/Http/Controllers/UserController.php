@@ -339,7 +339,6 @@ class UserController extends Controller {
     }
 
     public function recommendContent (Request $request){
-
         $user = Auth::user();
         $recommender_user_id = $request->input('recommended_user_id');
         $recommendedUser = User::find($recommender_user_id);
@@ -348,6 +347,10 @@ class UserController extends Controller {
 
         $content_id = $request->input('content_id');
         $message = $request->input('message') ?? 'no message';
+        $content_poster = $request->input('posterPath');
+        $content_type = $request->input('content_type');
+        $content_name = $request->input('content_name');
+        
 
         // Check if the same recommendation already exists
         foreach ($recommendContent as $recommendation) {
@@ -361,6 +364,9 @@ class UserController extends Controller {
             'recommender' => $user->name,
             'content_id' => $content_id,
             'message' =>  $message,
+            'posterPath' => $content_poster,
+            'content_type' => $content_type,
+            'content_name' => $content_name,
             'time' => now(),
         ];
 

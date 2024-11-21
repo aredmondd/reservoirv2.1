@@ -7,7 +7,6 @@ use Carbon\Carbon;
 $content = Http::asJson()->get(config('services.tmdb.endpoint'). $content_type . '/' . $id .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
 $posterPath = isset($content['poster_path']) ? $content['poster_path'] : null;
 
-
 if ($content_type == 'movie') {
     $name = $content['title'];
     $runtime = floor($content['runtime'] / 60) . 'h ' . ($content['runtime'] % 60) . 'm';
@@ -42,7 +41,7 @@ if ($content_type == 'movie') {
         <x-add-to-currently-watching-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'"/>
         <x-add-to-history-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'"/>
         <x-add-to-profile-favorite :id='$id' :name='$name' :posterPath='$posterPath' />
-        <x-send-to-friend :id='$id'/>  
+        <x-send-to-friend :id='$id' :name='$name' :posterPath='$posterPath' :content_type='$content_type'/>  
     </div>
 </div>
 

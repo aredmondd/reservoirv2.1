@@ -1,7 +1,7 @@
 
 
 
-@props(['id'])
+@props(['id', 'posterPath', 'content_type', 'name'])
 
 <?php
 
@@ -10,7 +10,6 @@ use App\Models\User;
 
 $user = Auth::user();
 $current_friends = $user->current_friends;
-// dump($current_friends, User::where('id', $user->current_friends[0]['id'])->get());
 $userStacks = Stack::where('user_id', $user->id)->get();
 
 ?>
@@ -25,7 +24,7 @@ $userStacks = Stack::where('user_id', $user->id)->get();
 <x-modal name="send-friend-modal-{{ $id }}" :show="$errors->isNotEmpty()" focusable>
 
     <div x-data="{ selectedFriendId: null}" class="bg-midnight p-8">
-        <form :action="`/recommendToFriend?recommended_user_id=${selectedFriendId}&content_id={{$id}}`" 
+        <form :action="`/recommendToFriend?recommended_user_id=${selectedFriendId}&content_id={{$id}}&posterPath={{$posterPath}}&content_type={{$content_type}}&content_name={{$name}}`" 
               method="POST">
             @csrf
 
