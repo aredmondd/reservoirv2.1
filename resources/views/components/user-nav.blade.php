@@ -3,6 +3,7 @@
 use Illuminate\Support\Facades\Auth;
 
 $friendRequests = Auth::user()->pending_friend_requests;
+$reccomendations = Auth::user()->recommended_content;
 
 ?>
 
@@ -34,7 +35,7 @@ $friendRequests = Auth::user()->pending_friend_requests;
                     <a href="{{ route('my-friends') }}" class="inline-flex items-center px-1 pt-1 border-b-2 {{ request()->is('my-friends') ? 'border-aqua' : 'border-transparent hover:border-white hover:border-opacity-50 focus:outline-none focus:text-white focus:border-white focus:border-opacity-50 text-opacity-50' }} text-sm leading-5 text-white transition duration-150 ease-in-out">
                     Friends
                     </a>
-                    @if ($friendRequests != null)
+                    @if ($friendRequests != null || $reccomendations != null)
                     <span class="mt-4 relative flex h-3 w-3">
                         <span class="animate-ping absolute inline-flex h-full w-full rounded-full bg-aqua opacity-75"></span>
                         <span class="relative inline-flex rounded-full h-3 w-3 bg-aqua"></span>

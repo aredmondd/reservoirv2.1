@@ -3,7 +3,7 @@ use App\Models\User;
 use Carbon\Carbon;
 
 $num_requests = count(Auth::user()->pending_friend_requests ?? []);
-// $num_recommended = count(Auth::user()->recommended_content ?? []);
+$num_reccs = count(Auth::user()->recommended_content ?? []);
 
 ?>
 
@@ -15,7 +15,7 @@ $num_requests = count(Auth::user()->pending_friend_requests ?? []);
         <a href="/my-friends?view=add" class="{{ request()->input('view') == 'add' || request()->input('query') != null || request()->input('view') == null ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Add Friends</a>
         <a href="/my-friends?view=current-friends" class="{{ request()->input('view') == 'current-friends' ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">My Friends</a>
         <a href="/my-friends?view=requests" class="{{ request()->input('view') == 'requests' ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Requests {{ $num_requests > 0 ? '(' . $num_requests . ')' : '' }}</a>
-        <a href="/my-friends?view=recommended" class="{{ request()->input('view') == 'recommended' ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Recommended</a>
+        <a href="/my-friends?view=recommended" class="{{ request()->input('view') == 'recommended' ? 'text-blue text-opacity-100' : 'text-white text-opacity-50' }}">Reccomendations {{ $num_reccs > 0 ? '(' . $num_reccs . ')' : '' }}</a>
     </div>
 
     @if (!request()->input('view') || request()->input('view') == 'add')
@@ -123,63 +123,20 @@ $num_requests = count(Auth::user()->pending_friend_requests ?? []);
             @endforeach
             @endif
         </div>
-        @elseif(request()->input('view') == 'recommended')
-    <div class="mt-12 mx-96">
-        <hr class="border-white border-opacity-25 mx-12 my-3">
-        @if(Auth::user()->recommended_content && count(Auth::user()->recommended_content) > 0)
-            @foreach(Auth::user()->recommended_content as $content)
-                <?php
-                
-                    $posterPath = $content['posterPath'];
-                    $content_type = $content['content_type'];
-                    $content_message = $content['message'];
-                    $content_id = $content['content_id'];
-                    $content_recommender = $content['recommender'];
-                    $content_name = $content['content_name'];
-                    $addedAt = Carbon::parse($content['time'])->toFormattedDateString();
-                    $content = Http::asJson()->get(config('services.tmdb.endpoint'). $content_type . '/' . $content_id .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
-                    if ($content_type == 'movie') {
-                        $runtime = floor($content['runtime'] / 60) . 'h ' . ($content['runtime'] % 60) . 'm';
-                        $releaseYear = Carbon::parse($content['release_date'])->year;
-                    } elseif ($content_type == 'tv') {
-                        $numOfSeasons = $content['number_of_seasons'];
-                        $releaseYear = Carbon::parse($content['first_air_date'])->year;
-                    }
-                ?>
-                
-                <div class="flex justify-between items-center mx-20 my-6">
-                    <div class="flex">
-                        <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="Poster" class="rounded-lg w-32">
-                        <div class="flex flex-col justify-between mx-12">
-                            <div>
-                                <a href="{{ route('content', ['movie' => $content_id, 'flag' => $content_type]) }}" class="font-serif text-title text-white hover:text-blue transition-all ease-in-out duration-500">{{ $content_name }}</a>
-                                <div class="flex space-x-2 text-body text-white text-opacity-50">
-                                    <p>{{ $content_recommender }}</p>
-                                    <p>|</p>
-                                    <p>{{ $addedAt }}</p>
-                                </div>
-                            </div>
-                            <p class="text-body text-white text-opacity-50">{{ Str::limit($content_message, 200, '...') }}</p>
-                        </div>
-                    </div>
-                    <div class="flex flex-col items-end space-y-2">
-                    <x-add-to-watchlist-button :id='$content_id' :name='$content_name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="$content_type"/>
-                        <form action="{{ route('friend.decline') }}" method="POST">
-                            @csrf
-                            @method('DELETE')
-                            <button type="submit" class="w-8 hover:opacity-75 transition ease-in-out duration-300">
-                                <img src="{{ asset('images/delete.png') }}" alt="Delete">
-                            </button>
-                        </form>
-                    </div>
-                </div>
-                <hr class="border-white border-opacity-25 mx-12 my-6">
-            @endforeach
-        @else
-            <div class="mt-12 text-center text-white text-opacity-50 text-body">You have no recommended content...</div>
-        @endif
-    </div>
 
-    @endif
+        @elseif(request()->input('view') == 'recommended')
+        <div class="mt-12 mx-96">
+            <hr class="border-white border-opacity-25 mx-12 my-6">
+            @if(Auth::user()->recommended_content && count(Auth::user()->recommended_content) > 0)
+                @foreach(Auth::user()->recommended_content as $content)
+                    <x-recc-content :content="$content"/>
+                @endforeach
+            @else
+                <div class="mt-12 text-center text-white text-opacity-50 text-body">so empty...</div>
+            @endif
+        </div>
+        @endif
+
+        <div class="mb-32"></div>
 
 </x-layout>
