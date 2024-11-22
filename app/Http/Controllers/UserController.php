@@ -107,8 +107,14 @@ class UserController extends Controller {
                 'posterPath' => $content_poster,
                 'time' => now(),
             ];
-        }else{
-            return redirect()->back()->with('error', 'You can only have up to 5 items in your favorites.');
+        }
+        else{
+            if ($content_in_profile_fav) {
+                return redirect()->back()->with('error', 'You already have ' . $content_name . ' in your favorites.');
+            }
+            else if (count($profile_fav_content) < 5) {
+                return redirect()->back()->with('error', 'You already have 5 items in your favorites.');
+            }
         }
 
         $user->profile_content_favorites = $profile_fav_content;

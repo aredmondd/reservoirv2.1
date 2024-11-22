@@ -126,7 +126,7 @@ class ProfileController extends Controller
         $user->profile_content_favorites = array_values($fav_content);
         $user->save();
 
-        return redirect()->back()->with('success', '' . $content_name . ' was deleted from profile favorites.');
+        return redirect()->back()->with('success', $content_name . ' was deleted from your favorites.');
 
     }
 }

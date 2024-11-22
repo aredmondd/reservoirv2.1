@@ -38,6 +38,9 @@ $avg = $count > 0 ? round($avg / $count) : 0;
 
 ?>
 <x-layout>
+    <x-error-notification />
+    <x-success-notification />
+    
     <div class="flex justify-between mx-40 my-12">
         <div class="flex">
             <img src="{{ $user->profile_picture != null ? asset('storage/' . $user->profile_picture) : asset('images/default.png') }}" class="rounded-full mr-12" width='175' height='175'>
