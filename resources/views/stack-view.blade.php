@@ -9,9 +9,24 @@
             <h1 class="text-blue text-mega font-serif mt-12 text-center max-w-5xl">{{ $stack->name }}</h1>
             <p class="text-white text-center text-body">{{ $stack->description }}</p>
         </div>
-        <div class="flex flex-col space-y-6 mt-6 items-end">
-            <span id="editButton" class="material-symbols-outlined text-white text-title cursor-pointer">edit</span>
-            <button x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-stack-deletion')"><img src="images/delete.png" alt="Delete" class="w-8"></button>
+        <div class="flex flex-col">
+            <span class="material-symbols-outlined text-white text-title cursor-pointer">add</span>
+
+            <x-dropdown align="left" width="w-32">
+                <x-slot name="trigger">
+                    <button class="material-symbols-outlined text-white text-title cursor-pointer">more_horiz</button>
+                </x-slot>
+
+                <x-slot name="content">
+                    <x-dropdown-link class="hover:cursor-pointer" id="editButton">
+                        Edit
+                    </x-dropdown-link>
+
+                    <x-dropdown-link x-data="" x-on:click.prevent="$dispatch('open-modal', 'confirm-stack-deletion')" class="hover:cursor-pointer">
+                        Delete Stack
+                    </x-dropdown-link>
+                </x-slot>
+            </x-dropdown>
         </div>
     </div>
     @else
@@ -48,7 +63,7 @@
     </x-modal>
 
     @if ($content == null)
-        <div class="text-white text-center mt-24">Search for some movies to add to your stack in "Fill your Reservoir"</div>
+        <div class="text-white text-opacity-50 text-center mt-24">so empty...</div>
     @else
         <div class="container mx-auto p-8 mt-12 mx-40">
             <div class="grid grid-cols-5 gap-6">

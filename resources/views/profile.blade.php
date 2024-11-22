@@ -63,26 +63,25 @@ $avg = $count > 0 ? round($avg / $count) : 0;
             $remainingSlots = 5 - count($favorites);
         @endphp
         @foreach ( $favorites as $favorite)
-        <div class="w-56 border border-2 border-white bg-black bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer transition duration-500 ease-in-out relative group">
-            <!-- Black background that appears on hover -->
-            <div class="rounded-lg w-full h-full bg-black bg-opacity-0 group-hover:bg-opacity-50 absolute top-0 left-0 z-0 transition-opacity duration-500 ease-in-out"></div>
+            <div class="w-56 border border-2 border-white bg-black bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer transition duration-500 ease-in-out relative group">
+                <!-- Black background that appears on hover -->
+                <div class="rounded-lg w-full h-full bg-black bg-opacity-0 group-hover:bg-opacity-50 absolute top-0 left-0 z-0 transition-opacity duration-500 ease-in-out">
+                    <!-- Heart Minus Icon (on top of the background) -->
+                    <form action="{{ route('profile.deleteFav') }}" method="POST">
+                        @csrf
+                        @method('DELETE')
+                        <input type="hidden" name="id" value="{{ $favorite['id'] }}">
+                        <input type="hidden" name="name" value="{{ $favorite['name'] }}">
+                        <button type="submit" class="material-symbols-outlined absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-mega text-red-500 px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out z-10">
+                            heart_minus
+                        </button>
+                    </form>
+                </div>
 
-            <!-- Image -->
-            <img src="https://image.tmdb.org/t/p/w500{{ $favorite['posterPath'] }}" alt="" class="rounded-md">
-
-            <!-- Heart Minus Icon (on top of the background) -->
-            <form action="{{ route('profile.deleteFav') }}" method="POST">
-                @csrf
-                @method('DELETE')
-                <input type="hidden" name="id" value="{{ $favorite['id'] }}">
-                <input type="hidden" name="name" value="{{ $favorite['name'] }}">
-                <button type="submit" class="material-symbols-outlined absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-mega text-red-500 px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-300 ease-in-out z-10">
-                    heart_minus
-                </button>
-            </form>
-        </div>
-
-        @endforeach 
+                <!-- Image -->
+                <img src="https://image.tmdb.org/t/p/w500{{ $favorite['posterPath'] }}" alt="" class="rounded-md h-full w-full object-cover">
+            </div>
+        @endforeach
         @for ($i = 0; $i < $remainingSlots; $i++)
         <a href="/search/results" class="text-white py-[140px] w-56 border border-2 border-white bg-white bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer hover:bg-opacity-25 transition duration-300 ease-in-out">
             use '<span class="material-symbols-outlined inline align-middle">heart_plus</span>' to display your favorite content
@@ -90,24 +89,10 @@ $avg = $count > 0 ? round($avg / $count) : 0;
         @endfor
     </div>
 
-    <div class="mb-12"></div>
+    <div class="mb-20"></div>
 
-    <div class="mx-40 mb-24 grid grid-cols-3">
-        <div>
-            <x-history-graph :numMovies='$numMovies' :numShows='$numShows' :moviePercentage='$moviePercentage' :showPercentage='$showPercentage'/>
-            <x-watchlist-graph :numMoviesWatchlisted='$numMoviesWatchlisted' :numShowsWatchlisted='$numShowsWatchlisted' :moviePercentageWatchlisted='$moviePercentageWatchlisted' :showPercentageWatchlisted='$showPercentageWatchlisted'/>
-        </div>
-        <div class="flex flex-col justify-between">
-            <div class="flex flex-col items-center">
-                <p class="text-center text-white">Average Rating</p>
-                <div class="mt-3 flex">
-                    <x-add-stars :stars="$avg" />
-                </div>
-            </div>
-            <div>
-                <p class="text-white text-center">Friends</p>
-                <p class="text-white text-center text-opacity-50">{{ $user->current_friends != null ? count($user->current_friends) : 0 }}</p>
-            </div>
-        </div>
+    <div class="grid grid-cols-2 mx-40 gap-24 place-items-center mb-32">
+        <x-history-graph :numMovies='$numMovies' :numShows='$numShows' :moviePercentage='$moviePercentage' :showPercentage='$showPercentage'/>
+        <x-watchlist-graph :numMoviesWatchlisted='$numMoviesWatchlisted' :numShowsWatchlisted='$numShowsWatchlisted' :moviePercentageWatchlisted='$moviePercentageWatchlisted' :showPercentageWatchlisted='$showPercentageWatchlisted'/>
     </div>
 </x-layout>
