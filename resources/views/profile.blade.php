@@ -65,14 +65,14 @@ $avg = $count > 0 ? round($avg / $count) : 0;
         @foreach ( $favorites as $favorite)
             <div class="w-56 border border-2 border-white bg-black bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer transition duration-500 ease-in-out relative group">
                 <!-- Black background that appears on hover -->
-                <div class="rounded-lg w-full h-full bg-black bg-opacity-0 group-hover:bg-opacity-50 absolute top-0 left-0 z-0 transition-opacity duration-500 ease-in-out">
+                <div class="rounded-md w-full h-full bg-black bg-opacity-0 group-hover:bg-opacity-50 absolute top-0 left-0 z-0 transition-opacity duration-500 ease-in-out">
                     <!-- Heart Minus Icon (on top of the background) -->
                     <form action="{{ route('profile.deleteFav') }}" method="POST">
                         @csrf
                         @method('DELETE')
                         <input type="hidden" name="id" value="{{ $favorite['id'] }}">
                         <input type="hidden" name="name" value="{{ $favorite['name'] }}">
-                        <button type="submit" class="material-symbols-outlined absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-mega text-red-500 px-2 py-1 rounded-full opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out z-10">
+                        <button type="submit" class="material-symbols-outlined absolute top-1/2 left-1/2 transform -translate-x-1/2 -translate-y-1/2 text-mega text-red-500 px-2 py-1 opacity-0 group-hover:opacity-100 transition-opacity duration-500 ease-in-out z-10">
                             heart_minus
                         </button>
                     </form>
@@ -91,8 +91,9 @@ $avg = $count > 0 ? round($avg / $count) : 0;
 
     <div class="mb-20"></div>
 
-    <div class="grid grid-cols-2 mx-40 gap-24 place-items-center mb-32">
+    <div class="grid grid-cols-3 mx-40 gap-24 place-items-center mb-32">
         <x-history-graph :numMovies='$numMovies' :numShows='$numShows' :moviePercentage='$moviePercentage' :showPercentage='$showPercentage'/>
+        <x-cw-graph :numMovies='$numMoviesWatching' :numShows='$numShowsWatching' :moviePercentage='$moviePercentageWatching' :showPercentage='$showPercentageWatching'/>
         <x-watchlist-graph :numMoviesWatchlisted='$numMoviesWatchlisted' :numShowsWatchlisted='$numShowsWatchlisted' :moviePercentageWatchlisted='$moviePercentageWatchlisted' :showPercentageWatchlisted='$showPercentageWatchlisted'/>
     </div>
 </x-layout>

@@ -39,6 +39,7 @@ class UserController extends Controller {
             $numWatchlisted = count($watchlist_content);
         }
 
+
         if ($history == null) {
             $numWatched = 0;
         }
@@ -46,11 +47,22 @@ class UserController extends Controller {
             $numWatched = count($history_content);
         }
 
+
+        if ($currently_watching == null) {
+            $numWatching = 0;
+        }
+        else {
+            $numWatching = count($currently_watching_content);
+        }
+
         $numMovies = 0;
         $numShows = 0;
 
         $numMoviesWatchlisted = 0;
         $numShowsWatchlisted = 0;
+
+        $numMoviesWatching = 0;
+        $numShowsWatching = 0;
 
         $totalTimeWatched = 0;
 
@@ -76,6 +88,17 @@ class UserController extends Controller {
             }
         }
 
+        if ($numWatching != 0) {
+            foreach($currently_watching_content as $content) {
+                if ($content['contentType'] == 'movie') {
+                    $numMoviesWatching += 1;
+                }
+                elseif ($content['contentType'] == 'tv') {
+                    $numShowsWatching += 1;
+                }
+            }
+        }
+
         $totalContent = $numMovies + $numShows;
         $moviePercentage = $totalContent > 0 ? ($numMovies / $totalContent) * 100 : 0;
         $showPercentage = $totalContent > 0 ? ($numShows / $totalContent) * 100 : 0;
@@ -84,7 +107,11 @@ class UserController extends Controller {
         $moviePercentageWatchlisted = $totalContentWatchlisted > 0 ? ($numMoviesWatchlisted / $totalContentWatchlisted) * 100 : 0;
         $showPercentageWatchlisted = $totalContentWatchlisted > 0 ? ($numShowsWatchlisted / $totalContentWatchlisted) * 100 : 0;
 
-        return view('profile', compact('user', 'numWatchlisted', 'numWatched', 'numMovies', 'numShows', 'numMoviesWatchlisted', 'numShowsWatchlisted', 'totalContent', 'moviePercentage', 'showPercentage', 'totalContentWatchlisted', 'moviePercentageWatchlisted', 'showPercentageWatchlisted', 'entries'));
+        $totalContentWatching = $numMoviesWatching + $numShowsWatching;
+        $moviePercentageWatching = $totalContentWatching > 0 ? ($numMoviesWatching / $totalContentWatching) * 100 : 0;
+        $showPercentageWatching = $totalContentWatching > 0 ? ($numShowsWatching / $totalContentWatching) * 100 : 0;
+
+        return view('profile', compact('user', 'numWatchlisted', 'numWatched', 'numMovies', 'numShows', 'numMoviesWatchlisted', 'numShowsWatchlisted', 'totalContent', 'moviePercentage', 'showPercentage', 'totalContentWatchlisted', 'moviePercentageWatchlisted', 'showPercentageWatchlisted', 'entries', 'totalContentWatching', 'numMoviesWatching', 'numShowsWatching', 'moviePercentageWatching', 'showPercentageWatching'));
     }
 
     public function showProfileFavorites(Request $request){
