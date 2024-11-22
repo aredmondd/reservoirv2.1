@@ -85,8 +85,6 @@ class ContentController extends Controller
         }else {
             $content_rating = $request->input('rating');
         }
-        
-        dd(gettype($history_content));
     
         // check if the content is inside the watchlist
         $content_in_history = collect($history_content)->contains('id', $content_id);

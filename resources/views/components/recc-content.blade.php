@@ -3,8 +3,6 @@
 <?php
     use App\Models\User;
     use Carbon\Carbon;
-
-    dd($content);
                 
     $posterPath = $content['posterPath'];
     $content_type = $content['content_type'];

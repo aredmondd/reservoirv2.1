@@ -24,7 +24,6 @@
                     <option value="movie" {{ request('type') === 'movie' ? 'selected' : '' }}>Movies</option>
                     <option value="tv" {{ request('type') === 'tv' ? 'selected' : '' }}>TV</option>
                 </select>
-                <!-- Custom Dropdown Icon -->
                 <div class="pointer-events-none absolute inset-y-0 right-0 flex items-center pr-4 text-midnight">
                     <svg class="w-4 h-4" xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" stroke="currentColor">
                         <path stroke-linecap="round" stroke-linejoin="round" stroke-width="2" d="M19 9l-7 7-7-7" />
