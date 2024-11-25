@@ -43,6 +43,7 @@ elseif ($contentType == 'tv') {
     $flag = 'tv';
 }
 
+$user_favorites = Auth::user()->profile_content_favorites ?? [];
 ?>
 
 <div class="grid grid-cols-6 mx-40 text-white text-opacity-50">
@@ -59,15 +60,6 @@ elseif ($contentType == 'tv') {
         @endif
     </div>
     <div class="flex justify-end space-x-6 items-center">
-        <form method="POST" action="/favorite?id={{ $content['id'] }}&list={{ request()->input('view') == 'watchlist' || !request()->input('view') ? 'watchlist' : 'history' }}"> @csrf
-            <button type="submit" class="material-symbols-outlined hover:text-red-400 hover:cursor-pointer {{ $content['liked'] == true ? 'text-red-400' : '' }}" title="Like content">
-                @if ($content['liked'] == true)
-                    <img src="images/liked-content.png" alt="" class="w-6">
-                @else
-                    favorite
-                @endif
-            </button>
-        </form>
         @if (request()->input('view') != 'history')
         <form method="POST" id="rating-form-dashboard-{{ $id }}" action="/move-content?id={{ $content['id'] }}&view={{ request()->input('view') }}"> 
             @csrf
