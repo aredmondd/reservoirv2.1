@@ -43,7 +43,7 @@ if ($content_type == 'movie') {
         <x-add-to-currently-watching-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'"/>
         <x-add-to-history-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'"/>
         <x-add-to-stack-button :id='$id' :name='$name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="isset($content['name']) ? 'tv' : 'movie'"/>
-        <x-add-to-profile-favorite :id='$id' :name='$name' :posterPath='$posterPath' />
+        <x-add-to-profile-favorite :id='$id' :name='$name' :flag="isset($content['name']) ? 'tv' : 'movie'" :posterPath='$posterPath' />
         <x-send-to-friend :id='$id' :name='$name' :posterPath='$posterPath' :content_type='$content_type'/> 
     </div>
 </div>

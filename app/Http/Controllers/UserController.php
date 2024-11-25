@@ -122,6 +122,7 @@ class UserController extends Controller {
         $profile_fav_content = $profile_fav ?? []; 
 
         $content_id = $request->input('id');
+        $content_type = $request->input('flag');
         $content_name = $request->input('name');
         $content_poster = $request->input('posterPath');
 
@@ -130,6 +131,7 @@ class UserController extends Controller {
         if(!$content_in_profile_fav && count($profile_fav_content) < 5){
             $profile_fav_content[] = [
                 'id' => $content_id,
+                'content_type' => $content_type,
                 'name' => $content_name,
                 'posterPath' => $content_poster,
                 'time' => now(),

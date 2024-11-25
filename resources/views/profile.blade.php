@@ -6,27 +6,6 @@ $history = $user->history->history ?? [];
 $avg = 0;
 $count = 0;
 
-$last_watched = end($history);
-$contentType = $last_watched['contentType'];
-
-$details = Http::asJson()->get(config('services.tmdb.endpoint'). $contentType .'/' . $last_watched['id'] .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
-$posterPath = isset($details['poster_path']) ? $details['poster_path'] : null;
- 
-// movie
-if ($contentType == 'movie') {
-    $name = $details['title'];
-    $runtime = floor($details['runtime'] / 60) . 'h ' . ($details['runtime'] % 60) . 'm';
-    $releaseYear = Carbon::parse($details['release_date'])->year;
-}
-// show
-elseif ($contentType == 'tv') {
-    $name = $details['name'];
-    $numOfSeasons = $details['number_of_seasons'];
-    $season_s = $numOfSeasons == 1 ? ' season' : ' seasons';
-    $runtime = null;
-    $releaseYear = Carbon::parse($details['first_air_date'])->year;
-}
-
 foreach ($history as $star){
     if(isset($star['rating'])){
         $avg += (int) $star['rating'];
