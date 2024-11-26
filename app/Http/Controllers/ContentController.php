@@ -192,50 +192,6 @@ class ContentController extends Controller
             return redirect()->back()->with('error', 'You are already watching ' . $content_name);
         }
     }  
-
-    public function filterContent (Request $request){
-        $user = Auth::user();
-
-        // dump($user);
-        // if the view is for watchlist u have these titles to search through
-        if($request->input('view') == 'watchlist'){
-            // what am i filtering by
-            $filterBy = $request->input('filterBy');
-            $watchingTable = $user->watchlist['watchlist'];
-            // dump($watchingTable);
-
-            if($filterBy == 'time'){
-                usort($watchingTable, function ($a, $b) {
-                    return strtotime($a['time']) <=> strtotime($b['time']);
-                });
-            } elseif($filterBy == 'length'){
-
-
-            // Separate movies and TV shows
-            $movies = array_filter($watchingTable, fn($item) => $item['contentType'] === 'movie');
-            $tvShows = array_filter($watchingTable, fn($item) => $item['contentType'] === 'tv');
-
-            // Sort each group by length
-            usort($movies, fn($a, $b) => $a['length'] <=> $b['length']);
-            usort($tvShows, fn($a, $b) => $a['length'] <=> $b['length']);
-
-            // Combine movies first, then TV shows
-            $watchingTable = array_merge($movies, $tvShows);
-                
-            }
-            
-            else {
-                usort($watchingTable, function ($a, $b) use ($filterBy) {
-                    return ($a[$filterBy]) <=> ($b[$filterBy]);
-                });
-            } 
-        }
-
-        return redirect()->back();
-    }
-
-
-
 }
 
 // EOF
