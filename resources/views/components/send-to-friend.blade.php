@@ -42,29 +42,36 @@ $userStacks = Stack::where('user_id', $user->id)->get();
                 Reccomend to a friend:
             </h2>
 
-            <!-- Displaying User Stacks -->
-            <div class="text-white mb-6">
+            <!-- Displaying Users -->
+            <div class="text-white mb-6 mx-24 flex flex-col space-y-2 max-h-60 overflow-y-scroll">
                 @foreach($current_friends as $friend)
                 <?php
                 $otherFriend = User::find($friend['id']);
                 ?>
-                    <div 
-                        class="py-2 cursor-pointer" 
-                        :class="selectedFriendId === '{{ $friend['id'] }}' ? 'text-blue' : ''"
-                        @click="selectedFriendId = '{{ $friend['id'] }}'">
-                        
-                        {{ $otherFriend->name }} - {{ $otherFriend->username }}
+                    <div class="flex">
+                        <img src="{{ $otherFriend->profile_picture != null ? asset('storage/' . $otherFriend->profile_picture) : asset('images/default.png') }}" class="w-12 h-12 rounded-full mr-6" alt="">
+                        <div>
+                            <div
+                                class="cursor-pointer text-body"
+                                :class="selectedFriendId === '{{ $friend['id'] }}' ? 'text-blue' : ''"
+                                @click="selectedFriendId = '{{ $friend['id'] }}'">
+                                {{ $otherFriend->name }}
+                            </div>
+                            <p class="text-sm text-white text-opacity-50">{{ '@' . $otherFriend->username }}</p>
+                        </div>
                     </div>
+                    <hr class='border-white border-opacity-25 my-6'>
                 @endforeach
             </div>
 
+
+
             <div class="relative text-white mb-6" x-data="{ message: '', maxChars: 115 }">
-                <label for="message" class="text-sm mb-3 block">Why should they watch it?</label>
-                
                 <!-- Textarea -->
                 <textarea 
                     id="message" 
-                    name="message" 
+                    name="message"
+
                     rows="4" 
                     class="w-full p-2 bg-white bg-opacity-10 text-white border border-white border-opacity-25 rounded-lg resize-none"
                     x-model="message"
@@ -86,11 +93,7 @@ $userStacks = Stack::where('user_id', $user->id)->get();
                         class="text-midnight bg-white rounded-full px-4 p-2 font-medium tracking-wide "> 
                     Cancel
                 </button>
-                <button type="submit" 
-                        class="text-white bg-blue rounded-full px-4 p-2 font-medium tracking-wide" 
-                        :disabled="!selectedFriendId">
-                    Send
-                </button>
+                <button type="submit" class="text-white bg-blue rounded-full pl-5 px-4 p-2 font-medium tracking-wide material-symbols-outlined disabled:opacity-50" :disabled="!selectedFriendId">send</button>
             </div>
         </form>
     </div>
