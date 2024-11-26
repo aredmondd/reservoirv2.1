@@ -31,7 +31,7 @@ Route::middleware('auth')->group(function () {
     Route::delete('/stack', [StackController::class, 'destroy']);
     Route::delete('/stack-content', [StackController::class, 'destoryContent']);
     Route::post('/favorite', [DashboardController::class, 'fav_content'])->name('favorite');
-    Route::post('/move-content', [DashboardController::class, 'move'])->name('move-content');
+    Route::post('/move-content', [DashboardController::class, 'move_content'])->name('move-content');
     Route::delete('/delete-content', [DashboardController::class, 'delete_content_from_list'])->name('delete-content');
     Route::get('/dashboard/filter', [DashboardController::class, 'filter_list'])->name('display_list');
 

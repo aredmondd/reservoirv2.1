@@ -18,7 +18,6 @@ class DashboardController extends Controller
      * @return view
      */
     public function display_list(Request $request) {
-        // dump($request->all());
         $user = Auth::user();
         $view = $request->input('view');
         $search = $request->input('search');
@@ -63,71 +62,6 @@ class DashboardController extends Controller
                 return false;
             });
         }    
-
-
-
-        // //filtering by button
-        // if ($filterBy) {
-        //     if ($filterBy === 'time' && $sortOrder === 'normal') {
-        //         // Sort by time if available
-        //         $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
-        //         $sortOrder = 'desc';
-
-        //     } elseif($filterBy === 'time' && $sortOrder === 'desc'){
-        //         // Sort by time if available
-        //         $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''))->reverse();
-        //         $sortOrder = 'asc';
-
-        //     } elseif ($filterBy === 'time' && $sortOrder === 'asc') { // sort by time lol to get back to normal
-
-        //         $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
-        //         $sortOrder = 'normal';
-        //     } elseif ($filterBy === 'released' && $sortOrder === 'normal') {
-        //         // Sort movies and TV shows separately by length
-        //         $filtered = $filtered->sortBy($filterBy);
-        //         $sortOrder = 'desc';
-        //     } elseif ($filterBy === 'released' && $sortOrder === 'desc') {
-        //         // Sort movies and TV shows separately by length
-        //         $filtered = $filtered->sortBy($filterBy)->reverse();
-        //         $sortOrder = 'asc';
-               
-        //     } elseif ($filterBy === 'released' && $sortOrder === 'asc'){
-        //         $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
-        //         $sortOrder = 'normal';
-        //     } elseif ($filterBy === 'length' && $sortOrder === 'normal') {
-        //         // Sort movies and TV shows separately by length
-        //         $movies = $filtered->where('contentType', 'movie')->sortBy('length');
-        //         $tvShows = $filtered->where('contentType', 'tv')->sortBy('length');
-        //         $filtered = $movies->concat($tvShows);
-        //         $sortOrder = 'desc';
-        //     } elseif ($filterBy === 'length' && $sortOrder === 'desc') {
-        //         // Sort movies and TV shows separately by length
-        //         $movies = $filtered->where('contentType', 'movie')->sortBy('length')->reverse();
-        //         $tvShows = $filtered->where('contentType', 'tv')->sortBy('length')->reverse();
-        //         $filtered = $movies->concat($tvShows);
-        //         $sortOrder = 'asc';
-               
-        //     } elseif ($filterBy === 'length' && $sortOrder === 'asc'){
-
-        //         $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
-        //         $sortOrder = 'normal';
-        //     }else {
-        //         if($view == 'history' && $sortOrder === 'normal'){
-        //             $filtered = $filtered->sortBy($filterBy);
-        //             $sortOrder = 'desc';
-        //         } elseif($view == 'history' && $sortOrder === 'desc'){
-        //             $filtered = $filtered->sortBy($filterBy)->reverse();
-        //             $sortOrder = 'asc';
-        //         }else{
-        //             $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
-        //             $sortOrder = 'normal';
-        //         }
-        //     }
-
-        // }
-
-
-
 
         // Paginate the filtered list (10 items per page)
         $perPage = 10;
@@ -232,7 +166,6 @@ class DashboardController extends Controller
                 $filtered = $filtered->sortBy(fn($content) => strtotime($content['time'] ?? ''));
                 $sortOrder = 'normal';
             } elseif ($filterBy === 'length' && $sortOrder === 'normal') {
-                // dump($filtered);
                 // Sort movies and TV shows separately by length
                 $movies = $filtered->where('contentType', 'movie')->sortBy('length');
                 $tvShows = $filtered->where('contentType', 'tv')->sortBy('length');
@@ -249,7 +182,6 @@ class DashboardController extends Controller
                 }
                 $sortOrder = 'desc';
             } elseif ($filterBy === 'length' && $sortOrder === 'desc') {
-                // dump($filtered);
                 // Sort movies and TV shows separately by length
                 $movies = $filtered->where('contentType', 'movie')->sortBy('length')->reverse();
                 $tvShows = $filtered->where('contentType', 'tv')->sortBy('length')->reverse();
@@ -299,6 +231,7 @@ class DashboardController extends Controller
 
 
     /**
+     * !DEPRECATED
      * favorite a piece of content on watchlist or history
      * 
      * @access public
@@ -352,7 +285,7 @@ class DashboardController extends Controller
 
 
     /**
-     * delete content from a list (watchlist or history)
+     * delete content from a list
      * 
      * @access public
      * @author Aiden Redmond
@@ -404,14 +337,14 @@ class DashboardController extends Controller
 
 
     /**
-     * move content from watchlist to history
+     * move content from watchlist to CW or CW to history
      * 
      * @access public
      * @author Aiden Redmond
      * @param Request $request
      * @return view
      */
-    public function move(Request $request) {
+    public function move_content(Request $request) {
         $user = Auth::user();
         $movieId = $request->input('id');
         $view = $request->input('view') ?? 'watchlist';

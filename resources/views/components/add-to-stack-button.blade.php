@@ -38,20 +38,14 @@ $userStacks = Stack::where('user_id', $user->id)->get();
                 @endforeach
             </div>
             <div class="mt-6 flex justify-between items-center">
-            <button type="button" 
+                <button type="button" 
                         x-on:click="$dispatch('close-modal', 'add-content-modal-{{ $id }}')" 
                         class="text-midnight bg-white rounded-full px-4 p-2 font-medium tracking-wide "> 
-                        <!-- focus:outline-none 
-                               focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
-                               focus-visible:outline-blue -->
                     Cancel
                 </button>
                 <button type="submit" 
                         class="text-white bg-blue rounded-full px-4 p-2 font-medium tracking-wide" 
                         :disabled="!selectedStackId">
-                        <!--  focus:outline-none 
-                               focus-visible:outline focus-visible:outline-2 focus-visible:outline-offset-2 
-                               focus-visible:outline-blue -->
                     Add to Stack
                 </button>
             </div>

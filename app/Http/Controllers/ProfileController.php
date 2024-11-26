@@ -111,7 +111,6 @@ class ProfileController extends Controller
         return redirect()->back()->with('error', 'No profile picture to delete.');
     }
 
-    // remove favorite content from profile
     public function deleteContent (Request $request){
         $user = Auth::user();
 

@@ -42,7 +42,7 @@ $userStacks = Stack::where('user_id', $user->id)->get();
             @csrf
 
             <h2 class="text-title font-serif text-white text-center mb-4">
-                Select a Friend to Send it Too:
+                Select a Friend to Send it To:
             </h2>
 
             <!-- Displaying User Stacks -->
