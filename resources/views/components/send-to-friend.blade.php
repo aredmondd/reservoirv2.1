@@ -1,6 +1,3 @@
-
-
-
 @props(['id', 'posterPath', 'content_type', 'name'])
 
 <?php
@@ -42,33 +39,47 @@ $userStacks = Stack::where('user_id', $user->id)->get();
             @csrf
 
             <h2 class="text-title font-serif text-white text-center mb-4">
-                Select a Friend to Send it To:
+                Reccomend to a friend:
             </h2>
 
             <!-- Displaying User Stacks -->
             <div class="text-white mb-6">
                 @foreach($current_friends as $friend)
                 <?php
-                $otherFriend =  User::find($friend['id']);
+                $otherFriend = User::find($friend['id']);
                 ?>
-                    <div class="py-2 cursor-pointer" 
-                         @click="selectedFriendId = '{{ $friend['id'] }}'">
-                         
+                    <div 
+                        class="py-2 cursor-pointer" 
+                        :class="selectedFriendId === '{{ $friend['id'] }}' ? 'text-blue' : ''"
+                        @click="selectedFriendId = '{{ $friend['id'] }}'">
+                        
                         {{ $otherFriend->name }} - {{ $otherFriend->username }}
                     </div>
                 @endforeach
             </div>
-                <!-- Message Input -->
-            <div class="text-white mb-6">
-                <label for="message" class="block text-sm mb-2">Add a Message:</label>
+
+            <div class="relative text-white mb-6" x-data="{ message: '', maxChars: 115 }">
+                <label for="message" class="text-sm mb-3 block">Why should they watch it?</label>
+                
+                <!-- Textarea -->
                 <textarea 
                     id="message" 
                     name="message" 
                     rows="4" 
-                    class="w-full p-2 bg-gray-800 text-white border border-gray-600 rounded-lg" 
-                    placeholder="Hey yk this shit is peak.">
-                  </textarea>
+                    class="w-full p-2 bg-white bg-opacity-10 text-white border border-white border-opacity-25 rounded-lg resize-none"
+                    x-model="message"
+                ></textarea>
+                
+                <!-- Character Counter -->
+                <div 
+                    class="absolute bottom-2 right-2 text-sm" 
+                    :class="(maxChars - message.length) < 0 ? 'text-red-500' : 'text-white text-opacity-50'"
+                >
+                    <span x-text="maxChars - message.length"></span>
+                </div>
             </div>
+
+
             <div class="mt-6 flex justify-between items-center">
             <button type="button" 
                         x-on:click="$dispatch('close-modal', 'send-friend-modal-{{ $id }}')" 
