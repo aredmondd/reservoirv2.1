@@ -21,7 +21,7 @@ ratings = tfds.load("movielens/100k-ratings", split="train")
 # Features of all the available movies.
 movies = tfds.load("movielens/100k-movies", split="train")
 
-pdb.set_trace()
+#pdb.set_trace()
 
 
 # get a single user and movie
