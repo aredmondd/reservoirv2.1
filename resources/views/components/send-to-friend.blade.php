@@ -42,6 +42,7 @@ $userStacks = Stack::where('user_id', $user->id)->get();
                 Reccomend to a friend:
             </h2>
 
+            @if($current_friends != null)
             <!-- Displaying Users -->
             <div class="text-white mb-6 mx-24 flex flex-col space-y-2 max-h-60 overflow-y-scroll">
                 @foreach($current_friends as $friend)
@@ -63,6 +64,7 @@ $userStacks = Stack::where('user_id', $user->id)->get();
                     <hr class='border-white border-opacity-25 my-6'>
                 @endforeach
             </div>
+            @endif
 
 
 
