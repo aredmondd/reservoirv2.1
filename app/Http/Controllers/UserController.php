@@ -423,12 +423,10 @@ class UserController extends Controller {
     
         // Retrieve the recommended content list
         $recommendContent = $user->recommended_content ?? [];
-        // dump($user,$recommendContent);
     
         // Find the index of the content to delete
         $indexToRemove = null;
         foreach ($recommendContent as $index => $recommendation) {
-            // dd($recommendation);
             if ($recommendation['content_id'] == $content_id) {
                 $indexToRemove = $index;
                 break;

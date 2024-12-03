@@ -4,22 +4,25 @@
 @props(['movieData', 'flag'])
 
 
-
 <!-- loop over all the movies per category -->
 <div class="w-full inline-flex flex-nowrap overflow-x-hidden [mask-image:_linear-gradient(to_right,transparent_0,white,blue,transparent_100%)] group">
     <ul class="flex animate-loop-scroll group-hover:paused">
-        @foreach ($movieData as $movie) <!-- Renamed variable to $movie to avoid confusion -->
-        <a href="{{ route('content', ['movie' => $movie['id'], 'flag' => $flag]) }}">
-            <x-movie-card img="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}"/>
-        </a>
+        @foreach ($movieData as $item) <!-- Using $item for clarity -->
+            @if (!($flag === 'movie' && $item['original_title'] === 'Heavenly Touch') && !($flag === 'tv' && $item['original_name'] === 'Heavenly Touch'))
+                <a href="{{ route('content', ['movie' => $item['id'], 'flag' => $flag]) }}">
+                    <x-movie-card img="https://image.tmdb.org/t/p/w500{{ $item['poster_path'] }}"/>
+                </a>
+            @endif
         @endforeach
     </ul>
 
     <ul class="flex animate-loop-scroll group-hover:paused" aria-hidden="true">
-        @foreach ($movieData as $movie) <!-- Again, use a new iteration over $movieData -->
-        <a href="{{ route('content', ['movie' => $movie['id'], 'flag' => $flag]) }}">
-            <x-movie-card img="https://image.tmdb.org/t/p/w500{{ $movie['poster_path'] }}"/>
-        </a>
+        @foreach ($movieData as $item)
+            @if (!($flag === 'movie' && $item['original_title'] === 'Heavenly Touch') && !($flag === 'tv' && $item['original_name'] === 'Heavenly Touch'))
+                <a href="{{ route('content', ['movie' => $item['id'], 'flag' => $flag]) }}">
+                    <x-movie-card img="https://image.tmdb.org/t/p/w500{{ $item['poster_path'] }}"/>
+                </a>
+            @endif
         @endforeach
     </ul>
 </div>
