@@ -108,7 +108,7 @@ class TMDBController extends Controller
             'dick', 'vagina', 'pussy', 'anal', 'blowjob', 'masturbation', 
             'orgasm', 'intercourse', 'fetish', 'bdsm', 'explicit', 
             'slut', 'whore', 'stripper', 'escort', 'lust', 'genital', 
-            'incest', 'orgy' , 'Big Tit Monastery'
+            'incest', 'orgy' , 'Big Tit Monastery', 'Heavenly Touch'
         ];
         $filteredMovies = [];
         // go through each movie

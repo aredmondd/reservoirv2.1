@@ -422,12 +422,14 @@ class UserController extends Controller {
         $content_id = $request->input('content_id');
     
         // Retrieve the recommended content list
-        $recommendContent = $recommendedUser->recommended_content ?? [];
+        $recommendContent = $user->recommended_content ?? [];
+        // dump($user,$recommendContent);
     
         // Find the index of the content to delete
         $indexToRemove = null;
         foreach ($recommendContent as $index => $recommendation) {
-            if ($recommendation['content_id'] == $content_id && $recommendation['id'] == $user->id) {
+            // dd($recommendation);
+            if ($recommendation['content_id'] == $content_id) {
                 $indexToRemove = $index;
                 break;
             }
@@ -438,8 +440,8 @@ class UserController extends Controller {
             unset($recommendContent[$indexToRemove]);
             // Reindex the array to fix keys after removal
             $recommendContent = array_values($recommendContent);
-            $recommendedUser->recommended_content = $recommendContent;
-            $recommendedUser->save();
+            $user->recommended_content = $recommendContent;
+            $user->save();
     
             return redirect()->back()->with('success', 'The content has been deleted from the recommendations.');
         } else {
