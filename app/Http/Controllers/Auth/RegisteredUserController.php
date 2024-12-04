@@ -45,6 +45,7 @@ class RegisteredUserController extends Controller
 
         $user->watchlist()->create();
         $user->history()->create();
+        $user->currentlyWatching()->create();
 
         event(new Registered($user));
 
