@@ -450,6 +450,93 @@ class UserController extends Controller {
             return redirect()->back()->with('error', 'Content not found in recommendations.');
         }
     }
+
+    // redo of function for add and delete from recommended content for currently watching and watchlist
+    public function watchlistRecAddDelete(Request $request){
+        $user = Auth::user();
+        $watchlist = $user->watchlist;
+    
+        $watchlist_content = $watchlist->watchlist ?? [];
+    
+        $recommended_content = $user->recommended_content ?? [];
+    
+        $content_id = $request->input('id');
+        $content_name = $request->input('name');
+        $content_type = $request->input('content_type');
+        $content_release = $request->input('released');
+        $content_length = $request->input('length');
+
+    
+        $content_in_watchlist = collect($watchlist_content)->contains('id', $content_id);
+    
+        if (!$content_in_watchlist) {
+            $watchlist_content[] = [
+                'id'          => $content_id,
+                'time'        => now(),
+                'name'        => $content_name,
+                'contentType' => $content_type,
+                'liked'       => false,
+                'released'    => $content_release,
+                'length'      => $content_length,
+            ];
+            $watchlist->watchlist = $watchlist_content;
+            $watchlist->save();
+    
+
+            $recommended_content = array_filter($recommended_content, function ($recommendation) use ($content_id) {
+                return $recommendation['content_id'] != $content_id;
+            });
+            $user->recommended_content = array_values($recommended_content);
+            $user->save();
+    
+            return redirect()->back()->with('success', $content_name . 'has been added to your watchlist.');
+        } else {
+            return redirect()->back()->with('error', "$content_name is already in your watchlist.");
+        }
+    }
+
+    public function currentlyRecAddDelete(Request $request){
+        $user = Auth::user();
+        $currently_watching = $user->currentlyWatching;
+    
+        $currently_watching_content = $currently_watching->currently_watching ?? [];
+    
+        $recommended_content = $user->recommended_content ?? [];
+    
+        $content_id = $request->input('id');
+        $content_name = $request->input('name');
+        $content_type = $request->input('content_type');
+        $content_release = $request->input('released');
+        $content_length = $request->input('length');
+
+    
+        $content_in_watchlist = collect($currently_watching_content)->contains('id', $content_id);
+    
+        if (!$content_in_watchlist) {
+            $currently_watching_content[] = [
+                'id'          => $content_id,
+                'time'        => now(),
+                'name'        => $content_name,
+                'contentType' => $content_type,
+                'liked'       => false,
+                'released'    => $content_release,
+                'length'      => $content_length,
+            ];
+            $currently_watching->currently_watching = $currently_watching_content;
+            $currently_watching->save();
+    
+
+            $recommended_content = array_filter($recommended_content, function ($recommendation) use ($content_id) {
+                return $recommendation['content_id'] != $content_id;
+            });
+            $user->recommended_content = array_values($recommended_content);
+            $user->save();
+    
+            return redirect()->back()->with('success', $content_name . 'has been added to your watchlist.');
+        } else {
+            return redirect()->back()->with('error', "$content_name is already in your watchlist.");
+        }
+    }
     
     
 

@@ -15,6 +15,8 @@ if (request()->view == null || request()->view === 'watchlist') {
 $id = $content['id'];
 $contentType = $content['contentType'];
 
+// dd($contentType);
+
 $details = Http::asJson()->get(config('services.tmdb.endpoint'). $contentType .'/' . $content['id'] .'?append_to_response=release_dates&api_key='.config('services.tmdb.api')) ->json();
 
 $addedAt = Carbon::parse($content['time'])->toFormattedDateString();

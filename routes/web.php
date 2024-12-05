@@ -69,6 +69,8 @@ Route::middleware('auth')->group(function () {
     Route::get('/recommendToFriend', [UserController::class, 'recommendContent'])->name('recommend.content');
     Route::post('/recommendToFriend', [UserController::class, 'recommendContent'])->name('recommend.content');
     Route::delete('/recc-content/delete', [UserController::class, 'deleteRecommendedContent'])->name('recc-content.delete');
+    Route::post('/watchlist/rec/add_delete', [UserController::class, 'watchlistRecAddDelete'])->name('watchlist.add&delete');
+    Route::post('/currently/rec/add_delete', [UserController::class, 'currentlyRecAddDelete'])->name('currently.add&delete');
 
 
 });
