@@ -37,8 +37,45 @@
 
     <!-- buttons -->
     <div class="flex flex-col justify-between">
-        <x-add-to-watchlist-button :id='$content_id' :name='$content_name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="$content_type"/>
-        <x-add-to-currently-watching-button :id='$content_id' :name='$content_name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="$content_type"/>
+        <!-- <x-add-to-watchlist-button :id='$content_id' :name='$content_name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="$content_type"/> -->
+         <!-- add to watchlist -->
+        <div class="relative group">
+            <form method="POST" action="{{ route('watchlist.add&delete') }}">
+                @csrf
+
+                <input type="hidden" name="id" value="{{ $content_id }}">
+                <input type="hidden" name="name" value="{{ $content_name }}">
+                <input type="hidden" name="content_type" value="{{ $content_type }}">
+                <input type="hidden" name="released" value="{{ $releaseYear }}">
+                <input type="hidden" name="length" value="{{ $content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime'] }}">
+
+                <button type="submit" class="text-white text-opacity-50 text-sm hover:text-opacity-100 hover:cursor-pointer transition ease-in-out duration-500">
+                    <span class="material-symbols-outlined">collections_bookmark</span>
+                </button>
+            </form>
+
+            <x-hover-tooltip text="Add to Watchlist" />
+        </div>
+        <!-- <x-add-to-currently-watching-button :id='$content_id' :name='$content_name' :released='$releaseYear' :length="$content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime']" :flag="$content_type"/> -->
+         <!-- currently watching -->
+        <div class="relative group">
+            <form method="POST" action="{{ route('currently.add&delete') }}">
+                @csrf
+
+                <input type="hidden" name="id" value="{{ $content_id }}">
+                <input type="hidden" name="name" value="{{ $content_name }}">
+                <input type="hidden" name="content_type" value="{{ $content_type }}">
+                <input type="hidden" name="released" value="{{ $releaseYear }}">
+                <input type="hidden" name="length" value="{{ $content_type === 'tv' ? $content['number_of_seasons'] : $content['runtime'] }}">
+
+                <button type="submit" class="text-white text-opacity-50 text-sm hover:text-opacity-100 hover:cursor-pointer transition ease-in-out duration-500">
+                    <span class="material-symbols-outlined">visibility</span>
+                </button>
+            </form>
+
+            <x-hover-tooltip text="Add to Currently Watching" />
+        </div>
+        
         <form action="{{ route('recc-content.delete') }}" method="POST">
             @csrf
             @method('DELETE')
