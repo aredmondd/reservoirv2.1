@@ -373,6 +373,10 @@ class DashboardController extends Controller
             // add the content to currently watching
             if (!in_array($movieId, array_column($currentlyWatchingContent, 'id'))) {
                 $currentlyWatchingContent[] = $contentToMove;
+                if ($currently_watching == null) {
+                    $user->currentlyWatching->currently_watching = [];
+                    $currently_watching = $user->$currentlyWatching;
+                }
                 $currently_watching->currently_watching = $currentlyWatchingContent;
                 $currently_watching->save();
             } else {
