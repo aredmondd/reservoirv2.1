@@ -42,7 +42,7 @@ $avg = $count > 0 ? round($avg / $count) : 0;
             $remainingSlots = 5 - count($favorites);
         @endphp
         @foreach ( $favorites as $favorite)
-            <div class="w-56 border border-2 border-white bg-black bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer transition duration-500 ease-in-out relative group">
+            <div class="3xl:w-72 w-56 border border-2 border-white bg-black bg-opacity-0 border-opacity-50 text-center rounded-lg hover:cursor-pointer transition duration-500 ease-in-out relative group">
                 <!-- Black background that appears on hover -->
                 <div class="rounded-md w-full h-full bg-black bg-opacity-0 group-hover:bg-opacity-50 absolute top-0 left-0 z-0 transition-opacity duration-500 ease-in-out">
                     <!-- Heart Minus Icon (on top of the background) -->

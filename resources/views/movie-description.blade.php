@@ -47,7 +47,7 @@ $posterPath = isset($movie['poster_path']) ? $movie['poster_path'] : null;
     <div class="mx-24 mt-14 flex">
         <img src="{{ $posterPath ? 'https://image.tmdb.org/t/p/w500' . $posterPath : asset('images/no-movie-poster.jpg') }}" alt="" class="rounded-lg w-96 mr-12">
 
-        <div class="flex flex-col justify-between">
+        <div class="flex flex-col justify-between 3xl:grow">
             <div class="space-y-2">
                 <div class="flex flex-row justify-between">
                     <div>
@@ -58,7 +58,7 @@ $posterPath = isset($movie['poster_path']) ? $movie['poster_path'] : null;
                 </div>
                 <p class="text-white text-sm text-opacity-25"> {{ $movie['overview'] }}</p>
             </div>
-            <div class="flex gap-2 overflow-x-auto max-w-4xl">
+            <div class="flex gap-2 overflow-x-auto sm:max-w-4xl 3xl:max-w-[1320px]">
                 @foreach($cast_crew_details['cast'] as $actor)
                     <x-cast-card :actor='$actor'/>
                 @endforeach
