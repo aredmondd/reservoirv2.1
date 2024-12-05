@@ -121,6 +121,10 @@ class UserController extends Controller {
 
         $profile_fav_content = $profile_fav ?? []; 
 
+        if (count($profile_fav_content) >= 5) {
+            return redirect()->back()->with('error', 'You have no favorite slots left! Delete some to make room.');
+        }
+
         $content_id = $request->input('id');
         $content_type = $request->input('flag');
         $content_name = $request->input('name');
