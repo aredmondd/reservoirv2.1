@@ -4,6 +4,17 @@ from typing import List
 import pandas as pd
 from sklearn.metrics.pairwise import cosine_similarity
 
+"""
+Example API Calls:
+
+POST
+http://127.0.0.1:8001/set-movies/
+{ "movies": ["Toy Story", "Clueless"] }
+
+GET
+http://127.0.0.1:8001/get-recommendations/?top_n=5
+"""
+
 app = FastAPI()
 
 # Global storage for movies and dataset path

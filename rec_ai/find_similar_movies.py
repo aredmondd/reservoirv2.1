@@ -13,6 +13,10 @@ def find_similar_movies_combined(csv_path, movie_titles, top_n=5):
 
     Returns:
         list: A single list of unique similar movies with similarity scores.
+
+    Example:
+        python find_similar_movies.py ml-latest-small/movies.csv 
+        "toy story" "clueless" "Star Wars: Episode IV - A New Hope" --top_n 3
     """
     try:
         # Load the dataset
