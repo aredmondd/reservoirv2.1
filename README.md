@@ -9,7 +9,7 @@ Reservoir is a web app that helps you organize and track your media, connect wit
 - Make custom 'stacks' of content based on a theme, interest, or collection
 - Search through a massive database of hundreds of thousands of movies & TV shows. [API via TMDB](https://developer.themoviedb.org/reference/intro/getting-started)
 - Create your social profile with stats based on your habits, favorite pieces of content, and friends.
-- Reccomend friends content based on what you think they would like (or just keep reccomending them one piece)
+- Reccomend friends content based on what you think they would like (or keep reccomending them one piece)
 
 ## Tech Stack
 - Laravel
