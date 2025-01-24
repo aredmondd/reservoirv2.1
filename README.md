@@ -18,6 +18,9 @@ Reservoir is a web app that helps you organize and track your media, connect wit
 - Tailwind CSS
 - Figma
 
+## Why is Reservoir Important?
+Reservoir is the most complex, rewarding, and long-term project I've ever worked on. It involved weekly sprints, presenting progress to project managers, and dedicating 15-20 hours per week. As the team leader, I not only guided the project but also managed the responsibilities of others, which significantly enhanced my leadership and project management skills.
+
 ## Contributors
 - Aiden Redmond: UI/UX Designer & Full-Stack Developer  
     - [LinkedIn](https://www.linkedin.com/in/aidenredmondd/)
