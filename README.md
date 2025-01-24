@@ -1,27 +1,34 @@
 # Reservoir 
 
-Reservoir is a cutting-edge media tracker, organizer, and recommendation system designed to enhance your media experience. With a seamless user interface, robust databases, and a custom-built AI engine, it offers personalized recommendations that evolve with your tastes. Whether managing films, TV shows, music, and more, Reservoir creates a dynamic space for all your media, unlike any other.
+Reservoir is a web app that helps you organize and track your media, connect with friends, share recommendations, and receive personalized AI suggestions.
 
-<br>
+## Features
+- Add & track movies, TV shows, & anime in multiple different lists (watchlist, currently watching, history)
+- Make custom 'stacks' of content based on a theme, interest, or collection
+- Search through a massive database of hundreds of thousands of movies & TV shows. [API via TMDB](https://developer.themoviedb.org/reference/intro/getting-started)
+- Create your social profile with stats based on your habits, favorite pieces of content, and friends.
+- Reccomend friends content based on what you think they would like (or just keep reccomending them one piece)
 
-## Roadmap
+## Tech Stack
+- Laravel
+- PHP
+- SQLite
+- Tailwind CSS
+- Figma
 
-so empty...
+## Contributors
+- Aiden Redmond: UI/UX Designer & Full-Stack Developer
+    - [LinkedIn](https://www.linkedin.com/in/aidenredmondd/)
+    - [Github](https://github.com/aredmondd)
+    - [Portfolio](https://www.aidenredmond.com)
+- Brandon Wilson: Database Engineer & Full-Stack Developer
+    - [LinkedIn](https://www.linkedin.com/in/brandon-wilson-635598254/)
+    - [Github](https://github.com/bdubbs11)
+- Axel Beaver: AI Engineer
+    - [LinkedIn](https://www.linkedin.com/in/axel-beaver/)
+    - [Github](https://github.com/axbeaver)
 
-<br>
-
-## Authors & Acknowledgements
-**Aiden Redmond** <br>
-*UI/UX Designer & Full Stack Developer* <br>
-[LinkedIn](https://www.linkedin.com/in/aidenredmondd/)
-
-**Brandon Wilson** <br>
-*Database Engineer & Full Stack Developer* <br>
-[LinkedIn](https://www.linkedin.com/in/brandon-wilson-635598254/)
-
-**Axel Beaver** <br>
-*AI Engineer & Machine Learning Specialist* <br>
-[LinkedIn](https://www.linkedin.com/in/axel-beaver/)
-
-
-
+## More about Reservoir
+- [Post-Mortem](https://docs.google.com/document/d/1XIFI7onxGWdw0SLZ6SEtdY6FLiq0UCBnwIayAnlKPnc/edit?usp=sharing)
+- [Final Presentation](https://youtu.be/e20L53hcuYY?si=14aoeWX9wZYJ1TF3&t=4660)
+- [Some Visual Aid](https://aidenredmond.com/Reservoir)
