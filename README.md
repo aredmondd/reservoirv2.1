@@ -1,6 +1,8 @@
 # Reservoir 
 
-Reservoir is a web app that helps you organize and track your media, connect with friends, share recommendations, and receive personalized AI suggestions.
+Reservoir is a web app that helps you organize and track your media, connect with friends, share recommendations, and receive personalized AI suggestions.  
+  
+  *Reservoir was built for Senior Project (CSC4899) under the supervision of Dr. Roberson in Fall of 2024*
 
 ## Features
 - Add & track movies, TV shows, & anime in multiple different lists (watchlist, currently watching, history)
@@ -17,18 +19,18 @@ Reservoir is a web app that helps you organize and track your media, connect wit
 - Figma
 
 ## Contributors
-- Aiden Redmond: UI/UX Designer & Full-Stack Developer
+- Aiden Redmond: UI/UX Designer & Full-Stack Developer  
     - [LinkedIn](https://www.linkedin.com/in/aidenredmondd/)
     - [Github](https://github.com/aredmondd)
     - [Portfolio](https://www.aidenredmond.com)
-- Brandon Wilson: Database Engineer & Full-Stack Developer
+- Brandon Wilson: Database Engineer & Full-Stack Developer  
     - [LinkedIn](https://www.linkedin.com/in/brandon-wilson-635598254/)
-    - [Github](https://github.com/bdubbs11)
-- Axel Beaver: AI Engineer
+    - [Github](https://github.com/bdubbs11)  
+- Axel Beaver: AI Engineer  
     - [LinkedIn](https://www.linkedin.com/in/axel-beaver/)
     - [Github](https://github.com/axbeaver)
 
 ## More about Reservoir
-- [Post-Mortem](https://docs.google.com/document/d/1XIFI7onxGWdw0SLZ6SEtdY6FLiq0UCBnwIayAnlKPnc/edit?usp=sharing)
-- [Final Presentation](https://youtu.be/e20L53hcuYY?si=14aoeWX9wZYJ1TF3&t=4660)
-- [Some Visual Aid](https://aidenredmond.com/Reservoir)
+[Post-Mortem](https://docs.google.com/document/d/1XIFI7onxGWdw0SLZ6SEtdY6FLiq0UCBnwIayAnlKPnc/edit?usp=sharing)  
+[Final Presentation](https://youtu.be/e20L53hcuYY?si=14aoeWX9wZYJ1TF3&t=4660)  
+[Some Visual Aid](https://aidenredmond.com/Reservoir)  
